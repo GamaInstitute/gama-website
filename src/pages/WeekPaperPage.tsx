@@ -15,6 +15,7 @@ import { Modal }          from '@/components/ui/Modal'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
 import { SOCIAL_LINKS }   from '@/constants'
+import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
 import type { TagVariant } from '@/types/course'
 
 // TODO: hidden pending real episodes — restore along with the EPISODES + FILTERS section below
@@ -26,7 +27,7 @@ import type { TagVariant } from '@/types/course'
 //   tagVariant: string
 //   tag: string
 //   title: string
-//   date: string
+//   date_iso: string
 //   duration: string
 //   video_url: string
 // }
@@ -40,7 +41,7 @@ type PlaylistItem = {
 }
 
 export default function WeekPaperPage() {
-  const { t } = useTranslation('weekpaper')
+  const { t, i18n } = useTranslation('weekpaper')
   const { t: tCommon } = useTranslation('common')
   const [newsletterOpen, setNewsletterOpen] = useState(false)
 
@@ -93,7 +94,13 @@ export default function WeekPaperPage() {
                   {t('featured.title')}
                 </h2>
                 <p className="text-ink-soft text-base leading-[1.6] m-0">{t('featured.body')}</p>
-                <time className="text-ink-muted text-[0.85rem]">{t('featured.date')}</time>
+                <time
+                  dateTime={t('featured.date_iso')}
+                  title={formatEpisodeDate(t('featured.date_iso'), i18n.language)}
+                  className="text-ink-muted text-[0.85rem]"
+                >
+                  {t('featured.date_prefix')} {formatRelativeEpisodeDate(t('featured.date_iso'), i18n.language)}
+                </time>
                 <div className="pt-1">
                   <Button as="a" href="#" variant="accent">
                     {t('featured.cta')} <span aria-hidden="true">→</span>
@@ -152,7 +159,7 @@ export default function WeekPaperPage() {
                       tag={ep.tag}
                       tagVariant={ep.tagVariant as TagVariant}
                       title={ep.title}
-                      date={ep.date}
+                      date={formatRelativeEpisodeDate(ep.date_iso, i18n.language)}
                       duration={ep.duration}
                       videoUrl={ep.video_url}
                       playLabel={t('episodes.play_label')}
