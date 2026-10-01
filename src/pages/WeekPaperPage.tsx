@@ -83,7 +83,6 @@ export default function WeekPaperPage() {
                 duration={t('featured.duration')}
                 placeholder={tCommon('video_placeholder')}
                 gradient
-                autoplay
               />
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2 flex-wrap">
@@ -102,7 +101,7 @@ export default function WeekPaperPage() {
                   {t('featured.date_prefix')} {formatRelativeEpisodeDate(t('featured.date_iso'), i18n.language)}
                 </time>
                 <div className="pt-1">
-                  <Button as="a" href="#" variant="accent">
+                  <Button as="a" href={t('featured.video_url')} target="_blank" rel="noopener noreferrer" variant="accent">
                     {t('featured.cta')} <span aria-hidden="true">→</span>
                   </Button>
                 </div>
