@@ -7,13 +7,13 @@ _Last verified: 2026-09-09_
 - **i18n namespace:** `weekpaper` → [src/i18n/locales/{fr,en}/weekpaper.json](../../src/i18n/locales/fr/weekpaper.json)
 - **Shared components used:** see [README.md](README.md) for `SectionWrapper`, `Eyebrow`, `Tag`, `Button`, `VideoPlayer`, `Modal`, `NewsletterForm`, `NewsletterPerks`, `useTurnstileToken` — only what's specific to WeekPaper is covered below.
 
-WeekPaper is Gama Institute's video series. This page is the one place on the site that combines an autoplaying video, a modal, and the newsletter form together, so it's worth reading [README.md](README.md#video) and [README.md](README.md#modal) alongside this doc.
+WeekPaper is Gama Institute's video series. This page is the one place on the site that combines a featured episode video, a modal, and the newsletter form together, so it's worth reading [README.md](README.md#video) and [README.md](README.md#modal) alongside this doc.
 
 ## Section-by-section (rendering order)
 
 | # | Section | Anchor id | Component(s) | Data |
 |---|---|---|---|---|
-| 1 | Featured hero | — | inline JSX + `VideoPlayer` (`autoplay`) | `featured.*` |
+| 1 | Featured hero | — | inline JSX + `VideoPlayer` | `featured.*` |
 | 2 | Playlists | — | inline cards | `playlists.items[]` |
 | 3 | Subscribe | `#subscribe` | inline + opens the newsletter `Modal` | `subscribe.*` |
 | — | Newsletter modal | — | `Modal` + `NewsletterPerks` + `NewsletterForm` | reuses `subscribe.h2` as the modal title |
@@ -31,13 +31,12 @@ A fourth section, an episodes grid with filter chips, exists as complete comment
   duration={t('featured.duration')}
   placeholder={tCommon('video_placeholder')}
   gradient
-  autoplay
 />
 ```
 
-`autoplay` here means the video plays muted and looped immediately, with no click-to-play thumbnail step (see [README.md](README.md#video) for exactly what that changes). Per the component's own intent, this is meant for a temporary "coming soon" loop — when a real episode video is ready, drop the `autoplay` prop so it goes back to the normal click-to-play thumbnail flow (and consider whether it still needs `gradient`).
+The video uses the standard click-to-play thumbnail flow. Don't add `autoplay` back for a real episode: per the component's own intent it's only for a temporary muted "coming soon" loop (see [README.md](README.md#video)).
 
-The text side has two `Tag`s (episode number, then category), a heading, body, date, and a CTA button whose `href="#"` is a placeholder — there's no real per-episode destination page yet.
+The text side has two `Tag`s (episode number, then category), a heading, body, date, and a CTA button that opens `featured.video_url` on YouTube in a new tab (there's no per-episode page on the site).
 
 ### 2. Playlists
 
@@ -79,13 +78,13 @@ A full episodes grid (filter chips by topic, `EpisodeCard` per episode) exists a
 
 Before shipping, replace the placeholder `episodes.items` entries in **both** `fr/weekpaper.json` and `en/weekpaper.json` with real episodes — each needs `{ no, topic, tagVariant, tag, title, date, duration, video_url }`.
 
-**`EpisodeCard`** ([src/components/weekpaper/EpisodeCard.tsx](../../src/components/weekpaper/EpisodeCard.tsx)) is already fully built and waiting: props `no, tag, tagVariant, title, date, duration, videoUrl, playLabel`. It renders a `VideoPlayer` (`small`) with the fixed placeholder text "vidéo · épisode" (hardcoded, not per-language — worth fixing if this section ships before that's addressed) and a title that's currently a dead `href="#"` link, same as the Featured hero's CTA above.
+**`EpisodeCard`** ([src/components/weekpaper/EpisodeCard.tsx](../../src/components/weekpaper/EpisodeCard.tsx)) is already fully built and waiting: props `no, tag, tagVariant, title, date, duration, videoUrl, playLabel`. It renders a `VideoPlayer` (`small`) with the fixed placeholder text "vidéo · épisode" (hardcoded, not per-language — worth fixing if this section ships before that's addressed) and a title that's currently a dead `href="#"` link (unlike the Featured hero CTA, which now links to the video on YouTube).
 
 ## How-to recipes
 
 **Add a new episode:** see [Hidden section: episodes](#hidden-section-episodes--filters) above — this section isn't live yet, so "adding an episode" first means shipping the section.
 
-**Change the Featured hero video:** edit `featured.video_url` (and `featured.duration`, `featured.title`, etc.) in both locale files. Once it's a real recording rather than a placeholder loop, remove the `autoplay` prop in `WeekPaperPage.tsx` so visitors get the standard click-to-play thumbnail instead of an auto-looping muted clip.
+**Change the Featured hero video (e.g. when a new episode goes live):** edit `featured.video_url`, `featured.duration`, `featured.ep`, `featured.title`, `featured.body` and `featured.date_iso` in both locale files. The CTA button follows `video_url` automatically.
 
 **Add a playlist:** add `{ label, title, count, duration, icon }` to `playlists.items` in both locale files — no code change needed, the grid maps over the array generically. Remember every card links to the same YouTube channel URL regardless of content, since there's no per-playlist link field.
 

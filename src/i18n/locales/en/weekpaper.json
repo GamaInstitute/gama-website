@@ -14,11 +14,12 @@
     "tagVariant": "copper",
     "title": "Toward a new vision for software engineering",
     "body": "We analyse a recent paper on the emerging vision for software engineering and its implications for the future of the software engineering profession.",
-    "date": "Aired October 1, 2026",
-    "duration": "",
+    "date_prefix": "Aired",
+    "date_iso": "2026-10-01",
+    "duration": "23:31",
     "cta": "Watch the episode",
     "video_label": "Play featured episode",
-    "video_url": "https://www.youtube.com/watch?v=Y-x0efG1seA"
+    "video_url": "https://youtu.be/lFz45XSy_dk"
   },
   "episodes": {
     "eyebrow": "Recent episodes",
@@ -26,12 +27,12 @@
     "play_label": "Play",
     "empty": "No episodes in this category yet.",
     "items": [
-      { "no": "EP. 23", "topic": "ai",    "tagVariant": "teal",    "tag": "AI",             "title": "Verifying continuous learning pipelines",                   "date": "May 21, 2026",   "duration": "26:10", "video_url": "https://www.youtube.com/watch?v=8MUfv497OSA" },
-      { "no": "EP. 22", "topic": "se",    "tagVariant": "copper",  "tag": "Software eng.",  "title": "Formal methods at scale: promises and limits",             "date": "May 14, 2026",   "duration": "1:29:05", "video_url": "https://www.youtube.com/watch?v=IR_JOaYJnVE" },
-      { "no": "EP. 21", "topic": "sec",   "tagVariant": "default", "tag": "Security",       "title": "Attacks on the software supply chain",                     "date": "May 7, 2026",    "duration": "26:47", "video_url": "https://www.youtube.com/watch?v=OqyO8VbWpkA" },
-      { "no": "EP. 20", "topic": "cloud", "tagVariant": "teal",    "tag": "Cloud",          "title": "Elastic compute for large-model training",                 "date": "April 30, 2026", "duration": "12:42", "video_url": "https://www.youtube.com/watch?v=jDU2OI1gjiA" },
-      { "no": "EP. 19", "topic": "respai","tagVariant": "teal",    "tag": "Responsible AI", "title": "Measuring bias in generative models",                      "date": "April 23, 2026", "duration": "2:27", "video_url": "https://www.youtube.com/watch?v=j7_A_FKCsVc" },
-      { "no": "EP. 18", "topic": "se",    "tagVariant": "copper",  "tag": "Software eng.",  "title": "Technical debt in the age of code assistants",             "date": "April 16, 2026", "duration": "30:46", "video_url": "https://www.youtube.com/watch?v=exo0OkamCnc" }
+      { "no": "EP. 23", "topic": "ai",    "tagVariant": "teal",    "tag": "AI",             "title": "Verifying continuous learning pipelines",                   "date_iso": "2026-05-21", "duration": "26:10", "video_url": "https://www.youtube.com/watch?v=8MUfv497OSA" },
+      { "no": "EP. 22", "topic": "se",    "tagVariant": "copper",  "tag": "Software eng.",  "title": "Formal methods at scale: promises and limits",             "date_iso": "2026-05-14", "duration": "1:29:05", "video_url": "https://www.youtube.com/watch?v=IR_JOaYJnVE" },
+      { "no": "EP. 21", "topic": "sec",   "tagVariant": "default", "tag": "Security",       "title": "Attacks on the software supply chain",                     "date_iso": "2026-05-07", "duration": "26:47", "video_url": "https://www.youtube.com/watch?v=OqyO8VbWpkA" },
+      { "no": "EP. 20", "topic": "cloud", "tagVariant": "teal",    "tag": "Cloud",          "title": "Elastic compute for large-model training",                 "date_iso": "2026-04-30", "duration": "12:42", "video_url": "https://www.youtube.com/watch?v=jDU2OI1gjiA" },
+      { "no": "EP. 19", "topic": "respai","tagVariant": "teal",    "tag": "Responsible AI", "title": "Measuring bias in generative models",                      "date_iso": "2026-04-23", "duration": "2:27", "video_url": "https://www.youtube.com/watch?v=j7_A_FKCsVc" },
+      { "no": "EP. 18", "topic": "se",    "tagVariant": "copper",  "tag": "Software eng.",  "title": "Technical debt in the age of code assistants",             "date_iso": "2026-04-16", "duration": "30:46", "video_url": "https://www.youtube.com/watch?v=exo0OkamCnc" }
     ]
   },
   "filters": {

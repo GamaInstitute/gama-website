@@ -14,11 +14,12 @@
     "tagVariant": "copper",
     "title": "Vers une nouvelle vision du génie logiciel",
     "body": "Nous analysons un article récent sur la nouvelle vision du génie logiciel et ses implications sur la profession du futur ingénieur logiciel.",
-    "date": "Diffusé le 1 octobre 2026",
-    "duration": "",
+    "date_prefix": "Diffusé",
+    "date_iso": "2026-10-01",
+    "duration": "23:31",
     "cta": "Regarder l'épisode",
     "video_label": "Lire la vidéo, épisode vedette",
-    "video_url": "https://www.youtube.com/watch?v=Y-x0efG1seA"
+    "video_url": "https://youtu.be/lFz45XSy_dk"
   },
   "episodes": {
     "eyebrow": "Épisodes récents",
@@ -26,12 +27,12 @@
     "play_label": "Lire",
     "empty": "Aucun épisode dans cette catégorie pour l'instant.",
     "items": [
-      { "no": "EP. 23", "topic": "ai",    "tagVariant": "teal",    "tag": "IA",             "title": "Vérifier les pipelines d'apprentissage en continu",         "date": "21 mai 2026",   "duration": "26:10", "video_url": "https://www.youtube.com/watch?v=8MUfv497OSA" },
-      { "no": "EP. 22", "topic": "se",    "tagVariant": "copper",  "tag": "Génie logiciel", "title": "Méthodes formelles à grande échelle : promesses et limites","date": "14 mai 2026",   "duration": "1:29:05", "video_url": "https://www.youtube.com/watch?v=IR_JOaYJnVE" },
-      { "no": "EP. 21", "topic": "sec",   "tagVariant": "default", "tag": "Sécurité",       "title": "Attaques sur la chaîne d'approvisionnement logicielle",     "date": "7 mai 2026",    "duration": "26:47", "video_url": "https://www.youtube.com/watch?v=OqyO8VbWpkA" },
-      { "no": "EP. 20", "topic": "cloud", "tagVariant": "teal",    "tag": "Infonuagique",   "title": "Calcul élastique pour l'entraînement de grands modèles",    "date": "30 avril 2026", "duration": "12:42", "video_url": "https://www.youtube.com/watch?v=jDU2OI1gjiA" },
-      { "no": "EP. 19", "topic": "respai","tagVariant": "teal",    "tag": "IA responsable", "title": "Mesurer le biais des modèles génératifs",                   "date": "23 avril 2026", "duration": "2:27", "video_url": "https://www.youtube.com/watch?v=j7_A_FKCsVc" },
-      { "no": "EP. 18", "topic": "se",    "tagVariant": "copper",  "tag": "Génie logiciel", "title": "Dette technique à l'ère des assistants de code",           "date": "16 avril 2026", "duration": "30:46", "video_url": "https://www.youtube.com/watch?v=exo0OkamCnc" }
+      { "no": "EP. 23", "topic": "ai",    "tagVariant": "teal",    "tag": "IA",             "title": "Vérifier les pipelines d'apprentissage en continu",         "date_iso": "2026-05-21", "duration": "26:10", "video_url": "https://www.youtube.com/watch?v=8MUfv497OSA" },
+      { "no": "EP. 22", "topic": "se",    "tagVariant": "copper",  "tag": "Génie logiciel", "title": "Méthodes formelles à grande échelle : promesses et limites","date_iso": "2026-05-14", "duration": "1:29:05", "video_url": "https://www.youtube.com/watch?v=IR_JOaYJnVE" },
+      { "no": "EP. 21", "topic": "sec",   "tagVariant": "default", "tag": "Sécurité",       "title": "Attaques sur la chaîne d'approvisionnement logicielle",     "date_iso": "2026-05-07", "duration": "26:47", "video_url": "https://www.youtube.com/watch?v=OqyO8VbWpkA" },
+      { "no": "EP. 20", "topic": "cloud", "tagVariant": "teal",    "tag": "Infonuagique",   "title": "Calcul élastique pour l'entraînement de grands modèles",    "date_iso": "2026-04-30", "duration": "12:42", "video_url": "https://www.youtube.com/watch?v=jDU2OI1gjiA" },
+      { "no": "EP. 19", "topic": "respai","tagVariant": "teal",    "tag": "IA responsable", "title": "Mesurer le biais des modèles génératifs",                   "date_iso": "2026-04-23", "duration": "2:27", "video_url": "https://www.youtube.com/watch?v=j7_A_FKCsVc" },
+      { "no": "EP. 18", "topic": "se",    "tagVariant": "copper",  "tag": "Génie logiciel", "title": "Dette technique à l'ère des assistants de code",           "date_iso": "2026-04-16", "duration": "30:46", "video_url": "https://www.youtube.com/watch?v=exo0OkamCnc" }
     ]
   },
   "filters": {

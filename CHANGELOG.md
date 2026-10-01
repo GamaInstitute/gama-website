@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
+- WeekPaper featured episode now plays the real Episode 1 video (`youtu.be/lFz45XSy_dk`, 23:31) instead of a placeholder loop. It no longer autoplays (click-to-play thumbnail), and the "Watch the episode" button now opens the video on YouTube instead of going nowhere
 - Homepage "News & events" Research card now links to the published Empirical Software Engineering article (Springer, `doi.org/10.1007/s10664-025-10656-8`) instead of the arXiv preprint, and its date line now reads "EMSE Journal · April 2025" to show the venue
 - Home page "Notre vision" video updated to the real vision video (`youtu.be/4ZHByQvt1Uk`) and no longer autoplays — shows the YouTube thumbnail with a click-to-play button instead
 - Home page "Notre vision" intro copy updated to "Découvrez la vision qui guide GAMA Institute" / "Discover the vision that guides GAMA Institute"
