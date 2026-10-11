@@ -9,8 +9,8 @@ import { Tag }            from '@/components/ui/Tag'
 import { SectionWrapper } from '@/components/ui/SectionWrapper'
 import { Reveal, revealContainer, revealItem } from '@/components/ui/Reveal'
 import { VideoPlayer }    from '@/components/ui/VideoPlayer'
-// TODO: hidden pending real episodes — restore along with the EPISODES + FILTERS section below
-// import { EpisodeCard }    from '@/components/weekpaper/EpisodeCard'
+import { DateWithTooltip } from '@/components/ui/DateWithTooltip'
+import { EpisodeCard }    from '@/components/weekpaper/EpisodeCard'
 import { Modal }          from '@/components/ui/Modal'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
@@ -18,19 +18,16 @@ import { SOCIAL_LINKS }   from '@/constants'
 import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
 import type { TagVariant } from '@/types/course'
 
-// TODO: hidden pending real episodes — restore along with the EPISODES + FILTERS section below
-// type FilterKey = 'all' | 'ai' | 'respai' | 'se' | 'cloud' | 'sec'
-//
-// type EpisodeItem = {
-//   no: string
-//   topic: string
-//   tagVariant: string
-//   tag: string
-//   title: string
-//   date_iso: string
-//   duration: string
-//   video_url: string
-// }
+type EpisodeItem = {
+  no: string
+  topic: string
+  tagVariant: string
+  tag: string
+  title: string
+  date_iso: string
+  duration: string
+  video_url: string
+}
 
 type PlaylistItem = {
   label: string
@@ -45,11 +42,11 @@ export default function WeekPaperPage() {
   const { t: tCommon } = useTranslation('common')
   const [newsletterOpen, setNewsletterOpen] = useState(false)
 
-  // TODO: hidden pending real episodes — restore along with the EPISODES + FILTERS section below
-  // const [filter, setFilter] = useState<FilterKey>('all')
-  // const episodes  = t('episodes.items',   { returnObjects: true }) as EpisodeItem[]
-  // const filters   = t('filters',          { returnObjects: true }) as Record<string, string>
-  // const visible = episodes.filter(ep => filter === 'all' || ep.topic === filter)
+  // Filter keys come from `filters` in weekpaper.json ('all' plus one per episode topic)
+  const [filter, setFilter] = useState('all')
+  const episodes  = t('episodes.items',   { returnObjects: true }) as EpisodeItem[]
+  const filters   = t('filters',          { returnObjects: true }) as Record<string, string>
+  const visible = episodes.filter(ep => filter === 'all' || ep.topic === filter)
   const playlists = t('playlists.items',  { returnObjects: true }) as PlaylistItem[]
 
   return (
@@ -93,13 +90,13 @@ export default function WeekPaperPage() {
                   {t('featured.title')}
                 </h2>
                 <p className="text-ink-soft text-base leading-[1.6] m-0">{t('featured.body')}</p>
-                <time
+                <DateWithTooltip
                   dateTime={t('featured.date_iso')}
-                  title={formatEpisodeDate(t('featured.date_iso'), i18n.language)}
-                  className="text-ink-muted text-[0.85rem]"
+                  full={formatEpisodeDate(t('featured.date_iso'), i18n.language)}
+                  className="text-ink-muted text-[0.85rem] self-start"
                 >
                   {t('featured.date_prefix')} {formatRelativeEpisodeDate(t('featured.date_iso'), i18n.language)}
-                </time>
+                </DateWithTooltip>
                 <div className="pt-1">
                   <Button as="a" href={t('featured.video_url')} target="_blank" rel="noopener noreferrer" variant="accent">
                     {t('featured.cta')} <span aria-hidden="true">→</span>
@@ -110,9 +107,7 @@ export default function WeekPaperPage() {
           </div>
         </SectionWrapper>
 
-        {/* TODO: EPISODES + FILTERS hidden pending real episodes to list — `episodes.items` in
-            weekpaper.json is placeholder data. Restore this section (and the episodes/filters
-            hooks, EpisodeCard import, and FilterKey/EpisodeItem types above) once real episodes exist.
+        {/* ── EPISODES + FILTERS ────────────────────────────── */}
         <SectionWrapper alt id="episodes">
           <div className="wrap">
             <Reveal className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(28px,3.5vw,44px)]">
@@ -123,9 +118,9 @@ export default function WeekPaperPage() {
                 </h2>
               </div>
 
-              {/* Filter chips *}
-              <div role="group" aria-label="Filtres par thème" className="flex flex-wrap gap-2">
-                {(Object.keys(filters) as FilterKey[]).map(key => (
+              {/* Filter chips */}
+              <div role="group" aria-label={t('episodes.filters_label')} className="flex flex-wrap gap-2">
+                {Object.keys(filters).map(key => (
                   <button
                     key={key}
                     onClick={() => setFilter(key)}
@@ -145,23 +140,26 @@ export default function WeekPaperPage() {
             {visible.length > 0 ? (
               <motion.div
                 key={filter}
-                className="grid grid-cols-3 gap-[clamp(18px,2.5vw,32px)] max-[900px]:grid-cols-2 max-[560px]:grid-cols-1"
+                className="grid grid-cols-3 auto-rows-fr gap-[clamp(18px,2.5vw,32px)] max-[900px]:grid-cols-2 max-[560px]:grid-cols-1"
                 variants={revealContainer}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-8% 0px' }}
               >
                 {visible.map(ep => (
-                  <motion.div key={ep.no} variants={revealItem}>
+                  <motion.div key={ep.no} variants={revealItem} className="h-full">
                     <EpisodeCard
                       no={ep.no}
                       tag={ep.tag}
                       tagVariant={ep.tagVariant as TagVariant}
                       title={ep.title}
                       date={formatRelativeEpisodeDate(ep.date_iso, i18n.language)}
+                      dateIso={ep.date_iso}
+                      dateFull={formatEpisodeDate(ep.date_iso, i18n.language)}
                       duration={ep.duration}
                       videoUrl={ep.video_url}
                       playLabel={t('episodes.play_label')}
+                      placeholder={tCommon('video_placeholder')}
                     />
                   </motion.div>
                 ))}
@@ -171,7 +169,6 @@ export default function WeekPaperPage() {
             )}
           </div>
         </SectionWrapper>
-        */}
 
         {/* ── PLAYLISTS ─────────────────────────────────────── */}
         <SectionWrapper>

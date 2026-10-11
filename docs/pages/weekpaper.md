@@ -1,6 +1,6 @@
 # WeekPaper page
 
-_Last verified: 2026-09-09_
+_Last verified: 2026-10-11_
 
 - **Route:** `/week-paper`
 - **File:** [src/pages/WeekPaperPage.tsx](../../src/pages/WeekPaperPage.tsx)
@@ -14,11 +14,10 @@ WeekPaper is Gama Institute's video series. This page is the one place on the si
 | # | Section | Anchor id | Component(s) | Data |
 |---|---|---|---|---|
 | 1 | Featured hero | — | inline JSX + `VideoPlayer` | `featured.*` |
-| 2 | Playlists | — | inline cards | `playlists.items[]` |
-| 3 | Subscribe | `#subscribe` | inline + opens the newsletter `Modal` | `subscribe.*` |
+| 2 | Episodes + filters | `#episodes` | filter chips + `EpisodeCard` grid | `episodes.*`, `filters` |
+| 3 | Playlists | — | inline cards | `playlists.items[]` |
+| 4 | Subscribe | `#subscribe` | inline + opens the newsletter `Modal` | `subscribe.*` |
 | — | Newsletter modal | — | `Modal` + `NewsletterPerks` + `NewsletterForm` | reuses `subscribe.h2` as the modal title |
-
-A fourth section, an episodes grid with filter chips, exists as complete commented-out JSX — see [Hidden section: episodes](#hidden-section-episodes--filters) below.
 
 ### 1. Featured hero
 
@@ -67,24 +66,17 @@ Rendered unconditionally at the bottom of the page's `<main>` (the `Modal` compo
 
 Note the modal's `title` reuses `subscribe.h2` — the same heading text shown in the Subscribe section itself — rather than having its own separate copy. `NewsletterPerks` and `NewsletterForm` are the *exact same components and copy* as Home's own newsletter section (`NewsletterPerks` always reads from `home.json`, regardless of which page renders it — see [home.md](home.md)).
 
-## Hidden section: episodes + filters
+## Episodes + filters
 
-A full episodes grid (filter chips by topic, `EpisodeCard` per episode) exists as working JSX, commented out because `weekpaper.json`'s `episodes.items` is still placeholder data. To restore it, uncomment **four** spots together in `WeekPaperPage.tsx` (all marked with the same `TODO`):
+`SectionWrapper alt id="episodes"`. Every published episode as an `EpisodeCard` grid, newest first, including the one currently featured above. Filter chips above the grid narrow it by `topic`.
 
-1. The `FilterKey`/`EpisodeItem` type definitions near the top of the file.
-2. The derived-data hooks: `filter` state, and the `episodes`/`filters`/`visible` computed values.
-3. The `EpisodeCard` import.
-4. The JSX block itself (filter chips + card grid).
-
-Before shipping, replace the placeholder `episodes.items` entries in **both** `fr/weekpaper.json` and `en/weekpaper.json` with real episodes — each needs `{ no, topic, tagVariant, tag, title, date, duration, video_url }`.
-
-**`EpisodeCard`** ([src/components/weekpaper/EpisodeCard.tsx](../../src/components/weekpaper/EpisodeCard.tsx)) is already fully built and waiting: props `no, tag, tagVariant, title, date, duration, videoUrl, playLabel`. It renders a `VideoPlayer` (`small`) with the fixed placeholder text "vidéo · épisode" (hardcoded, not per-language — worth fixing if this section ships before that's addressed) and a title that's currently a dead `href="#"` link (unlike the Featured hero CTA, which now links to the video on YouTube).
+- **Episodes** come from `episodes.items` in both locale files, each `{ no, topic, tagVariant, tag, title, date_iso, duration, video_url }`. Order in the array is display order, so put the newest first.
+- **Filter chips** are generated from the `filters` object: `all` plus one key per topic. Each episode's `topic` must match one of those keys. Only add a filter key once at least one episode uses it, or visitors get a chip that always shows the `episodes.empty` message.
+- **`EpisodeCard`** ([src/components/weekpaper/EpisodeCard.tsx](../../src/components/weekpaper/EpisodeCard.tsx)) renders a `small` `VideoPlayer` (click-to-play) and a title that opens `video_url` on YouTube in a new tab. Its `placeholder` comes from `common.video_placeholder`, like every other `VideoPlayer`.
 
 ## How-to recipes
 
-**Add a new episode:** see [Hidden section: episodes](#hidden-section-episodes--filters) above — this section isn't live yet, so "adding an episode" first means shipping the section.
-
-**Change the Featured hero video (e.g. when a new episode goes live):** edit `featured.video_url`, `featured.duration`, `featured.ep`, `featured.title`, `featured.body` and `featured.date_iso` in both locale files. The CTA button follows `video_url` automatically.
+**Publish a new episode:** in both locale files, (1) add it at the **top** of `episodes.items`, adding a `filters` entry if its `topic` is new, and (2) point the Featured hero at it by editing `featured.video_url`, `featured.duration`, `featured.ep`, `featured.tag`/`tagVariant`, `featured.title`, `featured.body` and `featured.date_iso`. The CTA button follows `video_url` automatically.
 
 **Add a playlist:** add `{ label, title, count, duration, icon }` to `playlists.items` in both locale files — no code change needed, the grid maps over the array generically. Remember every card links to the same YouTube channel URL regardless of content, since there's no per-playlist link field.
 
