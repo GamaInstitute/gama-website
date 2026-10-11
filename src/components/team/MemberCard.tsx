@@ -15,7 +15,7 @@ export function MemberCard({ name, role, photo, photoPosition, linkedin }: Membe
   return (
     <motion.article
       className="relative flex flex-col items-center justify-center text-center gap-3 p-6 aspect-square rounded-lg border border-hairline bg-surface shadow-[var(--sh-1)]"
-      whileHover={{ y: -ANIM.CARD_HOVER_Y, boxShadow: 'var(--sh-2)' }}
+      whileHover={{ y: ANIM.CARD_HOVER_Y, boxShadow: 'var(--sh-2)' }}
       transition={{ duration: ANIM.CARD_HOVER_DURATION }}
     >
       {linkedin && (

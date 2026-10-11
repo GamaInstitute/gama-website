@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- WeekPaper page now lists every published episode ("Browse the series" / "Parcourir la série"), with topic filters; clicking an episode title opens it on YouTube
+
 ### Security
 
 - Newsletter signup (`POST /api/newsletter`) now requires a verified Cloudflare Turnstile token, same invisible bot check already used on the contact form — previously open to unauthenticated scripted signups
@@ -13,6 +17,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
+- WeekPaper featured episode updated to Episode 2, "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense" / "Why AI-generated code is more dangerous than you think" (`youtu.be/kl2gaCSaAK8`, 22:09, aired 2026-10-08)
 - WeekPaper featured episode now plays the real Episode 1 video (`youtu.be/lFz45XSy_dk`, 23:31) instead of a placeholder loop. It no longer autoplays (click-to-play thumbnail), and the "Watch the episode" button now opens the video on YouTube instead of going nowhere
 - Homepage "News & events" Research card now links to the published Empirical Software Engineering article (Springer, `doi.org/10.1007/s10664-025-10656-8`) instead of the arXiv preprint, and its date line now reads "EMSE Journal · April 2025" to show the venue
 - Home page "Notre vision" video updated to the real vision video (`youtu.be/4ZHByQvt1Uk`) and no longer autoplays — shows the YouTube thumbnail with a click-to-play button instead
