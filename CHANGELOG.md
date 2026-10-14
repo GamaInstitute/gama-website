@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Added
 
+- Team page: Dmytro Humeniuk added as instructor (Formateur), with photo and LinkedIn link
 - WeekPaper page now lists every published episode ("Browse the series" / "Parcourir la série"), with topic filters; clicking an episode title opens it on YouTube
 
 ### Security
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
+- Team page photos now share the same light background and framing, so the leadership cards look consistent
 - WeekPaper featured episode updated to Episode 2, "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense" / "Why AI-generated code is more dangerous than you think" (`youtu.be/kl2gaCSaAK8`, 22:09, aired 2026-10-08)
 - WeekPaper featured episode now plays the real Episode 1 video (`youtu.be/lFz45XSy_dk`, 23:31) instead of a placeholder loop. It no longer autoplays (click-to-play thumbnail), and the "Watch the episode" button now opens the video on YouTube instead of going nowhere
 - Homepage "News & events" Research card now links to the published Empirical Software Engineering article (Springer, `doi.org/10.1007/s10664-025-10656-8`) instead of the arXiv preprint, and its date line now reads "EMSE Journal · April 2025" to show the venue

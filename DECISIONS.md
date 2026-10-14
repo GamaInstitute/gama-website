@@ -102,6 +102,8 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 
 **Why:** Both photos were supplied as local files (not Drive share links) and are small (139KB, 35KB), so they were committed to `public/team/` (`patrick-foalem.jpg`, `foutse-khomh.webp`) and referenced by local path instead of routed through Google Drive. This sidesteps the CORP-header fragility documented above ([D-10](#d-10-team-member-photos-are-linked-via-url-google-drive-not-committed-to-the-repo)) entirely for these two confirmed, stable photos. The general Drive-hosted, self-serve workflow in D-10 still stands for placeholder swaps and future members — this is a per-photo exception, not a reversal of the convention.
 
+**Update (2026-10-13):** Dmytro Humeniuk's photo follows the same exception (`public/team/dmytro-humeniuk.webp`). The same day, all three committed photos were background-removed and recomposited onto one shared backdrop at 400×400 with matched framing (recipe in [docs/pages/team.md](docs/pages/team.md#how-team-photos-work)), which also departs from D-10's "don't re-crop, use `photoPosition`" advice: `photoPosition` can shift a crop but can't zoom in or change a background. 400px is 4× the 96px avatar. The original, unprocessed photos are in git history.
+
 **Revisit when:** A local-only convention is chosen deliberately for all team photos (would fully supersede D-10), or these two photos need to change again — at that point, either update the committed file directly or move back to a Drive link using the `thumbnail?...` form.
 
 ---

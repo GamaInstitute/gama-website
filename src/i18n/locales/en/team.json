@@ -17,15 +17,20 @@
         "role": "Founder and Principal Research Scientist",
         "bio": "PhD candidate in software engineering at Polytechnique Montréal, specializing in machine learning systems engineering and AI software reliability.",
         "photo": "/team/patrick-foalem.jpg",
-        "photoPosition": "center top",
         "linkedin": "https://ca.linkedin.com/in/foalem"
       },
       {
         "name": "Pr. Foutse Khomh",
-        "role": "Polytechnique Montréal · Software engineering",
+        "role": "Scientific Advisor",
         "bio": "Professor of software engineering at Polytechnique Montréal and Canada CIFAR AI Chair on trustworthy machine learning systems.",
         "photo": "/team/foutse-khomh.webp",
         "linkedin": "https://ca.linkedin.com/in/khomh"
+      },
+      {
+        "name": "Dmytro Humeniuk",
+        "role": "Instructor",
+        "photo": "/team/dmytro-humeniuk.webp",
+        "linkedin": "https://www.linkedin.com/in/dmytro-humeniuk-ai/"
       }
     ]
   },
