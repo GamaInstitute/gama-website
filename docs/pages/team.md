@@ -26,7 +26,7 @@ Standard `PageHero`, no page-specific behavior.
 
 ### 2. Leadership
 
-`SectionWrapper alt`. A 3-column grid (collapsing to 2, then 1) of `MemberCard`s, `revealContainer`/`revealItem` staggered. Data: `leadership.members[]`, typed `{ name, role, bio?, photo?, photoPosition?, linkedin? }`. Currently populated with two real members. **`bio` is read into the data type but never actually rendered by `MemberCard`** — it's reserved for a possible future detail view/modal, not a bug in the current card.
+`SectionWrapper alt`. A 3-column grid (collapsing to 2, then 1) of `MemberCard`s, `revealContainer`/`revealItem` staggered. Data: `leadership.members[]`, typed `{ name, role, bio?, photo?, photoPosition?, linkedin? }`. Currently populated with three real members. **`bio` is read into the data type but never actually rendered by `MemberCard`** — it's reserved for a possible future detail view/modal, not a bug in the current card.
 
 ### 6. Join us
 
@@ -82,9 +82,11 @@ Unlike Home or WeekPaper (where a hidden section is blocked on content that does
 
 The documented convention ([D-10 in DECISIONS.md](../../DECISIONS.md)) is: host the photo on Google Drive, and use the link format `https://drive.google.com/thumbnail?id=<ID>&sz=w800` — **not** the ordinary "share" link (an HTML viewer page, won't load in an `<img>`) and **not** `drive.google.com/uc?export=view&id=...` (as of 2026-08 this sends a `Cross-Origin-Resource-Policy` header that silently blackholes the image in an `<img>` tag — no console error, it just falls back to blank/alt text). `public/_headers`' CSP already allowlists both `drive.google.com` and `lh3.googleusercontent.com` for this reason.
 
-**In practice, right now, nobody's photo actually uses a Drive link.** The two real Leadership members' photos were small enough to commit directly as local files (`public/team/patrick-foalem.jpg`, `public/team/foutse-khomh.webp`, referenced by local path) — a deliberate, documented exception (D-13), not a reversal of the Drive convention. The placeholder Researchers/Contributors entries use `randomuser.me` stock photos instead, meant to be replaced (with either a Drive link or a committed local file, following the D-13 pattern) once real people are identified. Don't go looking for an existing Drive link to copy the pattern from — there isn't one yet.
+**In practice, right now, nobody's photo actually uses a Drive link.** The three real Leadership members' photos were small enough to commit directly as local files (`public/team/patrick-foalem.jpg`, `public/team/foutse-khomh.webp`, `public/team/dmytro-humeniuk.webp`, referenced by local path) — a deliberate, documented exception (D-13), not a reversal of the Drive convention. The placeholder Researchers/Contributors entries use `randomuser.me` stock photos instead, meant to be replaced (with either a Drive link or a committed local file, following the D-13 pattern) once real people are identified. Don't go looking for an existing Drive link to copy the pattern from — there isn't one yet.
 
 **Photo spec (D-10):** square (1:1), at least 800×800px, headshot with shoulders visible, centered with even margins — because `Avatar` always applies `object-cover`, an off-center or non-square source crops badly. If a supplied photo doesn't meet spec, don't re-crop the file — set `photoPosition` in the JSON entry instead (e.g. `"center top"`), which flows straight through to the image's `object-position` style. Prefer JPEG/WebP, ideally under 500KB.
+
+**Shared background (since 2026-10-13):** the three Leadership photos were background-removed and recomposited so they all sit on the same backdrop, a vertical gradient from `#E6EFF1` (top) to `#C4D8DE` (bottom), 400×400px. Framing is matched too: top of the head at 15% from the top edge, head (hair to chin) about 55% of the height, face centered, body running off the bottom edge. A new member's photo should get the same treatment so the row stays consistent. It was done with [`@imgly/background-removal-node`](https://www.npmjs.com/package/@imgly/background-removal-node) run outside the repo (it is not a project dependency); use its output only as an alpha mask over the original photo, since it returns a 256-color palette PNG. Because of this, `photoPosition` isn't used by any current member.
 
 ## How-to recipes
 

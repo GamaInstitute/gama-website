@@ -14,18 +14,23 @@
     "members": [
       {
         "name": "Dr. Patrick Loic Foalem",
-        "role": "Fondateur et chercheur principal",
+        "role": "Fondateur et Chercheur Principal",
         "bio": "Doctorant en génie logiciel à Polytechnique Montréal, spécialiste de l'ingénierie des systèmes d'apprentissage automatique et de la fiabilité des logiciels basés sur l'IA.",
         "photo": "/team/patrick-foalem.jpg",
-        "photoPosition": "center top",
         "linkedin": "https://ca.linkedin.com/in/foalem"
       },
       {
         "name": "Pr. Foutse Khomh",
-        "role": "Polytechnique Montréal · Génie logiciel",
+        "role": "Conseiller Scientifique",
         "bio": "Professeur titulaire en génie logiciel à Polytechnique Montréal et titulaire de la Chaire en IA Canada-CIFAR sur la fiabilité des systèmes d'apprentissage automatique.",
         "photo": "/team/foutse-khomh.webp",
         "linkedin": "https://ca.linkedin.com/in/khomh"
+      },
+      {
+        "name": "Dmytro Humeniuk",
+        "role": "Formateur",
+        "photo": "/team/dmytro-humeniuk.webp",
+        "linkedin": "https://www.linkedin.com/in/dmytro-humeniuk-ai/"
       }
     ]
   },
