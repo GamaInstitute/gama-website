@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Added
 
-- Team page: Dmytro Humeniuk added as instructor (Formateur), with photo and LinkedIn link
+- Team page: Dr. Dmytro Humeniuk added as instructor (Formateur), with photo and LinkedIn link
 - WeekPaper page now lists every published episode ("Browse the series" / "Parcourir la série"), with topic filters; clicking an episode title opens it on YouTube
 
 ### Security
