@@ -9,17 +9,17 @@
     "link_youtube": "Watch on YouTube"
   },
   "featured": {
-    "ep": "Episode 2",
+    "ep": "Episode 3",
     "tag": "AI",
     "tagVariant": "teal",
-    "title": "Why AI-generated code is more dangerous than you think",
-    "body": "We analyse the empirical study \"Bugs in Large Language Models Generated Code\", which examines 666 buggy code samples produced by Codex, CodeGen and PanGu-Coder to understand how AI gets code wrong, and why those mistakes are so easy to miss.",
+    "title": "An AI that tests code and finds bugs on its own",
+    "body": "We analyse the paper \"ChatUniTest: A Framework for LLM-Based Test Generation\", which builds a full pipeline around an LLM to generate Java unit tests: context selection, generation, validation and automatic repair of failing tests.",
     "date_prefix": "Aired",
-    "date_iso": "2026-10-08",
-    "duration": "22:09",
+    "date_iso": "2026-10-15",
+    "duration": "18:53",
     "cta": "Watch the episode",
     "video_label": "Play featured episode",
-    "video_url": "https://youtu.be/kl2gaCSaAK8"
+    "video_url": "https://youtu.be/nzcUWRwPWgg"
   },
   "episodes": {
     "eyebrow": "Recent episodes",
@@ -28,6 +28,7 @@
     "empty": "No episodes in this category yet.",
     "filters_label": "Filter by topic",
     "items": [
+      { "no": "EP. 3", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "An AI that tests code and finds bugs on its own", "date_iso": "2026-10-15", "duration": "18:53", "video_url": "https://youtu.be/nzcUWRwPWgg" },
       { "no": "EP. 2", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "Why AI-generated code is more dangerous than you think", "date_iso": "2026-10-08", "duration": "22:09", "video_url": "https://youtu.be/kl2gaCSaAK8" },
       { "no": "EP. 1", "topic": "se", "tagVariant": "copper", "tag": "Software eng.", "title": "Toward a new vision for software engineering", "date_iso": "2026-10-01", "duration": "23:31", "video_url": "https://youtu.be/lFz45XSy_dk" }
     ]
