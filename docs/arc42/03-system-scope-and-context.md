@@ -47,16 +47,14 @@ flowchart TB
 
     YouTube["YouTube\n(embedded video)"]
     Drive["Google Drive\n(team photos)"]
-    Iconify["Iconify API\n(icon images)"]
     Wikimedia["Wikimedia Commons\n(partner logos)"]
 
     Browser -- "loads embeds/images\ndirectly" --> YouTube
     Browser -- "loads images\ndirectly" --> Drive
-    Browser -- "loads images\ndirectly" --> Iconify
     Browser -- "loads images\ndirectly" --> Wikimedia
 ```
 
-Everything below the browser in the second half of the diagram (YouTube, Google Drive, Iconify, Wikimedia Commons) is loaded **directly by the visitor's browser**, not proxied through Cloudflare Pages Functions — the site itself never talks to these services server-side, it just references their URLs in content. This is why `public/_headers`' Content Security Policy explicitly allowlists each of these hosts under `img-src`/`frame-src`; anything not on that list simply fails to load.
+Everything below the browser in the second half of the diagram (YouTube, Google Drive, Wikimedia Commons) is loaded **directly by the visitor's browser**, not proxied through Cloudflare Pages Functions — the site itself never talks to these services server-side, it just references their URLs in content. This is why `public/_headers`' Content Security Policy explicitly allowlists each of these hosts under `img-src`/`frame-src`; anything not on that list simply fails to load.
 
 This diagram deliberately starts at "the visitor's browser already has a connection to Cloudflare Pages" — it doesn't show *how* the browser got there (domain registration, DNS resolution, TLS). That's infrastructure, not application architecture, and belongs in [7 — Deployment View](07-deployment-view.md#network-infrastructure--domain-dns-and-tls), which covers Namecheap (registrar), Cloudflare's DNS/TLS layer, and the DNS records that make outbound email deliverable.
 
@@ -68,7 +66,6 @@ This diagram deliberately starts at "the visitor's browser already has a connect
 | **Resend** | Sends the contact form's email, and registers newsletter signups as Resend Contacts — no separate CRM, see [D-3](../../DECISIONS.md#d-3-contact-form-and-newsletter-both-use-resend--no-separate-crm) | `RESEND_API_KEY`, `CONTACT_EMAIL_TO`, `CONTACT_EMAIL_FROM` (Cloudflare Pages env vars) |
 | **YouTube** | Hosts every video shown on the site (WeekPaper episodes, the vision video) — the site only embeds YouTube's player, it doesn't host video itself | Video URLs are plain content, set per-page in i18n JSON |
 | **Google Drive** | The documented way for non-technical staff to host and swap team member photos without a code change — see [D-10](../../DECISIONS.md#d-10-team-member-photos-are-linked-via-url-google-drive-not-committed-to-the-repo) | Photo URLs are plain content in `team.json` |
-| **Iconify** (`api.iconify.design`) | Serves category/pillar icons as remote SVG images on About and WeekPaper, rather than bundling an icon library | Icon URLs are plain content in `about.json`/`weekpaper.json` |
 | **Wikimedia Commons / partner sites** | Source of the partner-university logos shown on Home (currently hidden pending confirmed partnerships — see [11](11-risks-and-technical-debt.md)) | Logo URLs are plain content, see [D-11](../../DECISIONS.md#d-11-academic-partner-logos-on-the-homepage-are-hotlinked-from-wikimedia-commons-and-partner-sites) |
 | **GitHub / GitHub Actions** | Source control, CI build, and the deploy pipeline to both hosting targets | `.github/workflows/` |
 | **Cloudflare Pages** | Production hosting — static assets + serverless Functions | `wrangler.toml`, Cloudflare Pages dashboard |

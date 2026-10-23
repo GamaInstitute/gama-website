@@ -39,7 +39,7 @@ The text side has two `Tag`s (episode number, then category), a heading, body, d
 
 ### 2. Playlists
 
-Plain `SectionWrapper`. Cards are built inline (no dedicated `PlaylistCard` component — unlike episodes, which do have one) from `playlists.items[]`, each `{ label, title, count, duration, icon }`. `icon` follows the same Iconify-URL convention as About's pillar icons (see [about.md](about.md)) — a remote `https://api.iconify.design/mdi:*.svg?color=...` image, not a bundled icon component. Every card's "watch" link currently points at `SOCIAL_LINKS.youtube` — there's no per-playlist URL field yet, so all playlists funnel to the same channel link regardless of which one you click.
+Plain `SectionWrapper`. Cards are built inline (no dedicated `PlaylistCard` component — unlike episodes, which do have one) from `playlists.items[]`, each `{ label, title, count, duration, icon }`. `icon` follows the same `public/icons/` convention as About's pillar icons (see [about.md](about.md)) — a self-hosted `/icons/<name>-<hex>.svg` file from `public/icons/`, not a bundled icon component. Every card's "watch" link currently points at `SOCIAL_LINKS.youtube` — there's no per-playlist URL field yet, so all playlists funnel to the same channel link regardless of which one you click.
 
 ### 3. Subscribe
 

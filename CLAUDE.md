@@ -90,7 +90,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 - [docs/pages/](docs/pages/README.md) — one file per page: section-by-section anatomy, which component renders what, exact i18n/data-file sources, and how-to recipes for common changes. Update the matching page doc whenever you add/remove/restructure a section, not just when you add a whole new page.
 - [docs/guides/content-editing.md](docs/guides/content-editing.md) — the existing `docs/guides/` entry: everyday content changes (text, photos, courses) with no code required. See the rule below for when to add another.
 - [CHANGELOG.md](CHANGELOG.md) — user- and contributor-facing changes; Keep a Changelog 1.1.0
-- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-13)
+- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-14)
 - [docs/adr/](docs/adr/) — full ADRs for the three heaviest architectural choices
 - [docs/sessions/](docs/sessions/) — session logs (write only when warranted; see rule below)
 

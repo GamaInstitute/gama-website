@@ -77,7 +77,7 @@ Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal Reac
 
 **`DarkCTA`** — [src/components/ui/DarkCTA.tsx](../../src/components/ui/DarkCTA.tsx) — the dark card used for bottom-of-page calls to action (`eyebrow`, `heading`, `body`, `children` — typically a `Button`). Self-wraps in `Reveal`, so don't wrap it again. Flips to a light bordered card in dark mode rather than staying dark-on-dark.
 
-**`icons.tsx`** — [src/components/ui/icons.tsx](../../src/components/ui/icons.tsx) — exports exactly one icon, `LinkedInIcon`, used by `MemberCard` on the Team page. **This is not where About page's "Strategic pillars" icons come from** — those are remote URLs from Iconify's REST API (`https://api.iconify.design/mdi:<name>.svg?color=...`) embedded directly in `about.json`, a completely different mechanism. See [about.md](about.md) for details — this is a common place to waste time grepping the wrong file.
+**`icons.tsx`** — [src/components/ui/icons.tsx](../../src/components/ui/icons.tsx) — exports exactly one icon, `LinkedInIcon`, used by `MemberCard` on the Team page. **This is not where About page's "Strategic pillars" icons come from** — those are self-hosted SVG files in `public/icons/`, referenced by path (`/icons/<name>-<hex>.svg`) directly in `about.json`, a completely different mechanism. See [about.md](about.md) for details — this is a common place to waste time grepping the wrong file.
 
 ### Modal
 

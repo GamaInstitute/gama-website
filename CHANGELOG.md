@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Category icons on the Home, About and WeekPaper pages (news cards, strategic pillars, playlists) were showing as broken images. They're now served from the site itself instead of an external icon service, so they can't break the same way again
+
 ### Added
 
 - Team page: Dr. Dmytro Humeniuk added as instructor (Formateur), with photo and LinkedIn link
@@ -14,10 +18,12 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 ### Security
 
 - Newsletter signup (`POST /api/newsletter`) now requires a verified Cloudflare Turnstile token, same invisible bot check already used on the contact form — previously open to unauthenticated scripted signups
+- Removed `api.iconify.design` from the Content Security Policy's allowed image sources, since icons are now self-hosted
 - Bumped `postcss` to patch an arbitrary `.map` file disclosure vulnerability (GHSA-r28c-9q8g-f849)
 
 ### Changed
 
+- WeekPaper featured episode updated to Episode 4, "Comment construire un système d'IA responsable ?" / "How do you build a responsible AI system?" (`youtu.be/yX2MjNb4Nbk`, 30:55, aired 2026-10-22)
 - Team page photos now share the same light background and framing, so the leadership cards look consistent
 - WeekPaper featured episode updated to Episode 2, "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense" / "Why AI-generated code is more dangerous than you think" (`youtu.be/kl2gaCSaAK8`, 22:09, aired 2026-10-08)
 - WeekPaper featured episode now plays the real Episode 1 video (`youtu.be/lFz45XSy_dk`, 23:31) instead of a placeholder loop. It no longer autoplays (click-to-play thumbnail), and the "Watch the episode" button now opens the video on YouTube instead of going nowhere
@@ -25,7 +31,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 - Home page "Notre vision" video updated to the real vision video (`youtu.be/4ZHByQvt1Uk`) and no longer autoplays — shows the YouTube thumbnail with a click-to-play button instead
 - Home page "Notre vision" intro copy updated to "Découvrez la vision qui guide GAMA Institute" / "Discover the vision that guides GAMA Institute"
 - Contact email updated to `contact@gamainstitute.ca` (displayed on the Contact page and used as the contact-form recipient)
-- About page "Strategic pillars" cards now show a category icon (flask, school, rocket, people — Iconify `mdi` set, brand-colored) instead of a plain gradient bar
+- About page "Strategic pillars" cards now show a category icon (flask, school, rocket, people — `mdi` set, brand-colored) instead of a plain gradient bar
 - Team page "Équipe de direction" section now lists both real current team members (Patrick Loic Foalem as Founder and Principal Research Scientist, Foutse Khomh) in place of the placeholder roster. Photos are committed to `public/team/` per [D-13](DECISIONS.md), replacing the temporary hotlinks to their public academic/GitHub profiles
 - `MemberCard` redesigned: larger circular centered photo (bio text removed to give it the room), role/title now shown above the name, and an optional LinkedIn badge pinned to the card's top-right corner when a member's `linkedin` URL is set
 - Team page "Researchers" and "The people who move the work forward" (contributors) sections hidden pending real people to list — current entries were placeholder data

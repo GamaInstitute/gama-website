@@ -127,3 +127,9 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 **Revisit when:** The cadence changes again, or if audience feedback shows the name is genuinely causing confusion about release frequency.
 
 **Update (2026-09-06):** Cadence reverted back to weekly. Copy in `weekpaper.json` (fr/en — hero h1, meta description, subscribe lead) restored to "every week" / "chaque semaine". The name-vs-cadence mismatch this entry was about no longer applies; kept here for history per the "update, don't delete" convention.
+
+## D-14. Content icons are self-hosted SVGs in `public/icons/`, not hotlinked from Iconify
+
+**Why:** Category/pillar icons on Home, About and WeekPaper used to be `<img>` URLs pointing at `api.iconify.design/mdi:<name>.svg?color=...`. In October 2026 Iconify stopped serving that URL form (404, only `mdi/<name>.svg` still works), and every icon on the site went blank at once with no deploy on our side. The icons are now downloaded once with the brand color baked in (`public/icons/<name>-<hex>.svg`) and served same-origin, so a third-party API change can't break them, and `api.iconify.design` was dropped from the CSP `img-src`.
+
+**Alternative considered:** Switching to the `mdi/<name>.svg` URL form. A one-line fix, but it keeps a runtime dependency on a free API that has already changed under us once. Bundling an icon library (e.g. `@mdi/js`) was also possible, but the icon is chosen per item in i18n JSON, so a plain path fits the existing content model with no code change.

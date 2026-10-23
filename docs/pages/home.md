@@ -53,7 +53,7 @@ Cards are a 3-column `revealContainer`/`revealItem` grid, built inline (there's 
 - `url` starts with `/` → renders an internal React Router `<Link>` (no full page reload)
 - anything else → renders `<a target="_blank" rel="noopener noreferrer">`
 
-`icon` (optional) is a small image shown in a white circle over the card's placeholder image area — typically an Iconify URL, same convention as About's pillar icons (see [about.md](about.md)).
+`icon` (optional) is a small image shown in a white circle over the card's placeholder image area — typically a `/icons/<name>-<hex>.svg` path, same convention as About's pillar icons (see [about.md](about.md)).
 
 ### 5. Research
 

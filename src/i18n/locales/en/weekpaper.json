@@ -9,17 +9,17 @@
     "link_youtube": "Watch on YouTube"
   },
   "featured": {
-    "ep": "Episode 3",
+    "ep": "Episode 4",
     "tag": "AI",
     "tagVariant": "teal",
-    "title": "An AI that tests code and finds bugs on its own",
-    "body": "We analyse the paper \"ChatUniTest: A Framework for LLM-Based Test Generation\", which builds a full pipeline around an LLM to generate Java unit tests: context selection, generation, validation and automatic repair of failing tests.",
+    "title": "How do you build a responsible AI system?",
+    "body": "We analyse two papers on Responsible AI engineering, which turn ethical principles into concrete design patterns for building AI systems that can be audited, monitored and governed.",
     "date_prefix": "Aired",
-    "date_iso": "2026-10-15",
-    "duration": "18:53",
+    "date_iso": "2026-10-22",
+    "duration": "30:55",
     "cta": "Watch the episode",
     "video_label": "Play featured episode",
-    "video_url": "https://youtu.be/nzcUWRwPWgg"
+    "video_url": "https://youtu.be/yX2MjNb4Nbk"
   },
   "episodes": {
     "eyebrow": "Recent episodes",
@@ -28,6 +28,7 @@
     "empty": "No episodes in this category yet.",
     "filters_label": "Filter by topic",
     "items": [
+      { "no": "EP. 4", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "How do you build a responsible AI system?", "date_iso": "2026-10-22", "duration": "30:55", "video_url": "https://youtu.be/yX2MjNb4Nbk" },
       { "no": "EP. 3", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "An AI that tests code and finds bugs on its own", "date_iso": "2026-10-15", "duration": "18:53", "video_url": "https://youtu.be/nzcUWRwPWgg" },
       { "no": "EP. 2", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "Why AI-generated code is more dangerous than you think", "date_iso": "2026-10-08", "duration": "22:09", "video_url": "https://youtu.be/kl2gaCSaAK8" },
       { "no": "EP. 1", "topic": "se", "tagVariant": "copper", "tag": "Software eng.", "title": "Toward a new vision for software engineering", "date_iso": "2026-10-01", "duration": "23:31", "video_url": "https://youtu.be/lFz45XSy_dk" }
@@ -43,9 +44,9 @@
     "h2": "Explore by topic",
     "link": "Play list",
     "items": [
-      { "label": "list · responsible AI",      "title": "Foundations of responsible AI",      "count": "8 episodes", "duration": "3 h 41 min", "icon": "https://api.iconify.design/mdi:scale-balance.svg?color=%23165C71" },
-      { "label": "list · software quality",    "title": "Software quality & verification",    "count": "6 episodes", "duration": "2 h 58 min", "icon": "https://api.iconify.design/mdi:code-tags-check.svg?color=%23B56418" },
-      { "label": "list · infra & security",    "title": "AI infrastructure & security",       "count": "7 episodes", "duration": "3 h 12 min", "icon": "https://api.iconify.design/mdi:server-security.svg?color=%232A8C8A" }
+      { "label": "list · responsible AI",      "title": "Foundations of responsible AI",      "count": "8 episodes", "duration": "3 h 41 min", "icon": "/icons/scale-balance-165c71.svg" },
+      { "label": "list · software quality",    "title": "Software quality & verification",    "count": "6 episodes", "duration": "2 h 58 min", "icon": "/icons/code-tags-check-b56418.svg" },
+      { "label": "list · infra & security",    "title": "AI infrastructure & security",       "count": "7 episodes", "duration": "3 h 12 min", "icon": "/icons/server-security-2a8c8a.svg" }
     ]
   },
   "subscribe": {
