@@ -36,10 +36,10 @@
     "h2": "Four pillars, one shared ambition",
     "lead": "Each pillar reinforces the others: research feeds training, which fuels innovation, carried by community.",
     "items": [
-      { "no": "01", "title": "Research",   "body": "Advancing research in AI and software engineering, with reliability at the core.", "icon": "https://api.iconify.design/mdi:flask.svg?color=%23165C71" },
-      { "no": "02", "title": "Training",   "body": "Training the next generation of researchers and engineers, from Quebec to francophone Africa.", "icon": "https://api.iconify.design/mdi:school.svg?color=%23B56418" },
-      { "no": "03", "title": "Innovation", "body": "Turning research into tools, prototypes and industry collaborations.", "icon": "https://api.iconify.design/mdi:rocket-launch.svg?color=%23D8942A" },
-      { "no": "04", "title": "Community",  "body": "Bringing together researchers, students and partners across a shared scientific network.", "icon": "https://api.iconify.design/mdi:account-group.svg?color=%238EA57A" }
+      { "no": "01", "title": "Research",   "body": "Advancing research in AI and software engineering, with reliability at the core.", "icon": "/icons/flask-165c71.svg" },
+      { "no": "02", "title": "Training",   "body": "Training the next generation of researchers and engineers, from Quebec to francophone Africa.", "icon": "/icons/school-b56418.svg" },
+      { "no": "03", "title": "Innovation", "body": "Turning research into tools, prototypes and industry collaborations.", "icon": "/icons/rocket-launch-d8942a.svg" },
+      { "no": "04", "title": "Community",  "body": "Bringing together researchers, students and partners across a shared scientific network.", "icon": "/icons/account-group-8ea57a.svg" }
     ]
   },
   "history": {

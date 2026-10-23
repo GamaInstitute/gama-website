@@ -35,7 +35,7 @@
         "excerpt": "Une étude des pratiques de journalisation sur 85 projets d'apprentissage automatique, pour identifier ce qu'il faut pour auditer en continu des systèmes d'IA responsables.",
         "link": "Lire",
         "url": "https://doi.org/10.1007/s10664-025-10656-8",
-        "icon": "https://api.iconify.design/mdi:flask.svg?color=%23B56418"
+        "icon": "/icons/flask-b56418.svg"
       },
       {
         "tag": "Événement", "tagVariant": "teal",
@@ -44,7 +44,7 @@
         "excerpt": "Étudiants, praticiens et chercheurs reproduisent et étendent des articles marquants en équipe.",
         "link": "S'inscrire",
         "url": "/contact?subject=research",
-        "icon": "https://api.iconify.design/mdi:calendar-star.svg?color=%23165C71"
+        "icon": "/icons/calendar-star-165c71.svg"
       },
       {
         "tag": "Atelier", "tagVariant": "default",
@@ -53,7 +53,7 @@
         "excerpt": "À partir d'un article scientifique, les participants apprennent à en analyser la structure, la méthodologie et les résultats pour en dégager les forces, les limites et de nouvelles pistes de recherche.",
         "link": "Détails",
         "url": "/contact?subject=training",
-        "icon": "https://api.iconify.design/mdi:book-open-page-variant.svg?color=%232A8C8A"
+        "icon": "/icons/book-open-page-variant-2a8c8a.svg"
       }
     ]
   },

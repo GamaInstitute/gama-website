@@ -35,7 +35,7 @@ Plain `SectionWrapper`. `values.items[]` (typed `{ title, body }`) is rendered a
 
 `SectionWrapper alt`. A 4-column grid (collapsing to 2, then 1) driven by `pillars.items[]` (typed `{ no, title, body, icon }`), animated with the `revealContainer`/`revealItem` staggered pattern (raw `motion.div`, not the `<Reveal>` wrapper — different from the Values section above it).
 
-**Where the icons actually come from — read this before grepping `icons.tsx`.** Each card's `icon` field is a full remote image URL pointing at Iconify's REST API, e.g. `https://api.iconify.design/mdi:flask.svg?color=%23165C71`, rendered as a plain `<img>`. It is **not** a React icon component and has nothing to do with [src/components/ui/icons.tsx](../../src/components/ui/icons.tsx) (which only exports `LinkedInIcon`, used elsewhere by the Team page). This is why `public/_headers`' CSP `img-src` directive includes `https://api.iconify.design` — that allowlist entry exists specifically for this section.
+**Where the icons actually come from — read this before grepping `icons.tsx`.** Each card's `icon` field is a path to a self-hosted SVG in `public/icons/`, e.g. `/icons/flask-165c71.svg`, rendered as a plain `<img>`. The files are Material Design Icons (`mdi`) downloaded from Iconify with the brand color baked in, named `<icon-name>-<hex>.svg`. They used to be hotlinked from `api.iconify.design`, until Iconify stopped serving the `mdi:<name>.svg` URL form and every icon on the site went blank at once. It is **not** a React icon component and has nothing to do with [src/components/ui/icons.tsx](../../src/components/ui/icons.tsx) (which only exports `LinkedInIcon`, used elsewhere by the Team page).
 
 ### 5. Join CTA
 
@@ -48,11 +48,11 @@ Plain `SectionWrapper`. `values.items[]` (typed `{ title, body }`) is rendered a
 ## How-to recipes
 
 **Add a Strategic Pillar card:**
-1. Add an object to `pillars.items` at the same array index in **both** `fr/about.json` and `en/about.json`: `{ "no": "05", "title": "...", "body": "...", "icon": "https://api.iconify.design/mdi:<icon-name>.svg?color=%23<hex-no-hash>" }`.
+1. Add an object to `pillars.items` at the same array index in **both** `fr/about.json` and `en/about.json`: `{ "no": "05", "title": "...", "body": "...", "icon": "/icons/<icon-name>-<hex>.svg" }`.
+   - If the file doesn't exist yet, download it into `public/icons/`: `curl -f "https://api.iconify.design/mdi/<icon-name>.svg?color=%23<HEX>" -o public/icons/<icon-name>-<hex>.svg`. Note the `/` after `mdi` (the `mdi:` form now 404s), and `#` URL-encoded as `%23`.
    - Browse icon names at Iconify's `mdi` (Material Design Icons) set to stay visually consistent with the existing four.
-   - The color query param must be URL-encoded — `#` becomes `%23`.
 2. No `.tsx` change needed for the data itself, but note the grid is hardcoded `grid-cols-4` — a 5th card will wrap awkwardly (4 + 1) unless you also adjust the grid class in `AboutPage.tsx`.
-3. `api.iconify.design` is already CSP-allowlisted in `public/_headers`; no header change needed unless you switch icon hosts.
+3. Icons are same-origin, so no CSP change is needed. Don't point `icon` back at a remote host without also adding it to `img-src` in `public/_headers`.
 
 **Restore the History timeline:** write a new section component reading `t('history.items')` (typed `{ year, title, body }[]`) — see [Orphaned content](#orphaned-content-history-timeline) above, the copy is already there and translated.
 

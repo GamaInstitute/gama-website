@@ -35,7 +35,7 @@
         "excerpt": "A study of logging practices across 85 machine learning projects, identifying what's needed to continuously audit responsible AI systems.",
         "link": "Read",
         "url": "https://doi.org/10.1007/s10664-025-10656-8",
-        "icon": "https://api.iconify.design/mdi:flask.svg?color=%23B56418"
+        "icon": "/icons/flask-b56418.svg"
       },
       {
         "tag": "Event", "tagVariant": "teal",
@@ -44,7 +44,7 @@
         "excerpt": "Students, practitioners and researchers reproduce and extend landmark papers in teams.",
         "link": "Register",
         "url": "/contact?subject=research",
-        "icon": "https://api.iconify.design/mdi:calendar-star.svg?color=%23165C71"
+        "icon": "/icons/calendar-star-165c71.svg"
       },
       {
         "tag": "Workshop", "tagVariant": "default",
@@ -53,7 +53,7 @@
         "excerpt": "Starting from a research paper, participants learn to analyze its structure, methodology and results to surface its strengths, limitations and new research questions.",
         "link": "Details",
         "url": "/contact?subject=training",
-        "icon": "https://api.iconify.design/mdi:book-open-page-variant.svg?color=%232A8C8A"
+        "icon": "/icons/book-open-page-variant-2a8c8a.svg"
       }
     ]
   },
