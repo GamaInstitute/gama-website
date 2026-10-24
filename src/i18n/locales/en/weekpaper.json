@@ -10,8 +10,8 @@
   },
   "featured": {
     "ep": "Episode 4",
-    "tag": "AI",
-    "tagVariant": "teal",
+    "tag": "Responsible AI",
+    "tagVariant": "default",
     "title": "How do you build a responsible AI system?",
     "body": "We analyse two papers on Responsible AI engineering, which turn ethical principles into concrete design patterns for building AI systems that can be audited, monitored and governed.",
     "date_prefix": "Aired",
@@ -28,7 +28,7 @@
     "empty": "No episodes in this category yet.",
     "filters_label": "Filter by topic",
     "items": [
-      { "no": "EP. 4", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "How do you build a responsible AI system?", "date_iso": "2026-10-22", "duration": "30:55", "video_url": "https://youtu.be/yX2MjNb4Nbk" },
+      { "no": "EP. 4", "topic": "rai", "tagVariant": "default", "tag": "Responsible AI", "title": "How do you build a responsible AI system?", "date_iso": "2026-10-22", "duration": "30:55", "video_url": "https://youtu.be/yX2MjNb4Nbk" },
       { "no": "EP. 3", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "An AI that tests code and finds bugs on its own", "date_iso": "2026-10-15", "duration": "18:53", "video_url": "https://youtu.be/nzcUWRwPWgg" },
       { "no": "EP. 2", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "Why AI-generated code is more dangerous than you think", "date_iso": "2026-10-08", "duration": "22:09", "video_url": "https://youtu.be/kl2gaCSaAK8" },
       { "no": "EP. 1", "topic": "se", "tagVariant": "copper", "tag": "Software eng.", "title": "Toward a new vision for software engineering", "date_iso": "2026-10-01", "duration": "23:31", "video_url": "https://youtu.be/lFz45XSy_dk" }
@@ -37,6 +37,7 @@
   "filters": {
     "all": "All",
     "ai": "AI",
+    "rai": "Responsible AI",
     "se": "Software eng."
   },
   "playlists": {

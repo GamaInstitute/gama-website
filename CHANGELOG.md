@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
-- WeekPaper featured episode updated to Episode 4, "Comment construire un système d'IA responsable ?" / "How do you build a responsible AI system?" (`youtu.be/yX2MjNb4Nbk`, 30:55, aired 2026-10-22)
+- WeekPaper featured episode updated to Episode 4, "Comment construire un système d'IA responsable ?" / "How do you build a responsible AI system?" (`youtu.be/yX2MjNb4Nbk`, 30:55, aired 2026-10-22), filed under a new "IA responsable" / "Responsible AI" topic with its own filter chip
 - Team page photos now share the same light background and framing, so the leadership cards look consistent
 - WeekPaper featured episode updated to Episode 2, "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense" / "Why AI-generated code is more dangerous than you think" (`youtu.be/kl2gaCSaAK8`, 22:09, aired 2026-10-08)
 - WeekPaper featured episode now plays the real Episode 1 video (`youtu.be/lFz45XSy_dk`, 23:31) instead of a placeholder loop. It no longer autoplays (click-to-play thumbnail), and the "Watch the episode" button now opens the video on YouTube instead of going nowhere
