@@ -11,7 +11,7 @@
     "cta_training": "Explorer les formations"
   },
   "metrics": [
-    { "value": "5",   "label": "axes de recherche",         "caption": "IA · génie logiciel · infonuagique · sécurité · IA responsable", "color": "#B56418" },
+    { "value": "5",   "label": "axes de recherche",         "caption": "IA · génie logiciel · infonuagique · cybersécurité · IA responsable", "color": "#B56418" },
     { "value": "02+", "label": "chercheurs & collaborateurs","caption": "à travers l'académie et l'industrie",                             "color": "#8EA57A" },
     { "value": "00",  "label": "apprenants formés",          "caption": "depuis le lancement en 2026",                                     "color": "#2A8C8A" },
     { "value": "00",  "label": "partenaires actifs",         "caption": "académiques · industriels · publics",                             "color": "#165C71" }

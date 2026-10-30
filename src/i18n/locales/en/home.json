@@ -11,7 +11,7 @@
     "cta_training": "Explore training programs"
   },
   "metrics": [
-    { "value": "5",   "label": "research areas",        "caption": "AI · software eng. · cloud · security · responsible AI", "color": "#B56418" },
+    { "value": "5",   "label": "research areas",        "caption": "AI · software eng. · cloud · cybersecurity · responsible AI", "color": "#B56418" },
     { "value": "02+", "label": "researchers & collaborators", "caption": "across academia and industry",                      "color": "#8EA57A" },
     { "value": "00",  "label": "learners trained",       "caption": "since launching in 2026",                                "color": "#2A8C8A" },
     { "value": "00",  "label": "active partners",        "caption": "academic · industry · public",                           "color": "#165C71" }
