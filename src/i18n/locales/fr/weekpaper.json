@@ -9,17 +9,17 @@
     "link_youtube": "Voir sur YouTube"
   },
   "featured": {
-    "ep": "Épisode 4",
-    "tag": "IA responsable",
+    "ep": "Épisode 5",
+    "tag": "Cybersécurité",
     "tagVariant": "default",
-    "title": "Comment construire un système d'IA responsable ?",
-    "body": "Nous analysons deux travaux sur l'ingénierie de l'IA responsable, qui traduisent les principes éthiques en design patterns concrets pour bâtir des systèmes d'IA auditables, surveillés et gouvernés.",
+    "title": "Quand un simple prompt peut attaquer votre base de données",
+    "body": "Nous explorons les attaques par Prompt-to-SQL Injection (P2SQL), où l'attaquant manipule un LLM connecté à une base de données pour qu'il génère et exécute lui-même des requêtes SQL malveillantes, ainsi que LangShield, une approche de défense en profondeur autour du LLM.",
     "date_prefix": "Diffusé",
-    "date_iso": "2026-10-22",
-    "duration": "30:55",
+    "date_iso": "2026-10-29",
+    "duration": "31:27",
     "cta": "Regarder l'épisode",
     "video_label": "Lire la vidéo, épisode vedette",
-    "video_url": "https://youtu.be/yX2MjNb4Nbk"
+    "video_url": "https://youtu.be/fc_XkwO7kCk"
   },
   "episodes": {
     "eyebrow": "Épisodes récents",
@@ -28,6 +28,7 @@
     "empty": "Aucun épisode dans cette catégorie pour l'instant.",
     "filters_label": "Filtres par thème",
     "items": [
+      { "no": "EP. 5", "topic": "sec", "tagVariant": "default", "tag": "Cybersécurité", "title": "Quand un simple prompt peut attaquer votre base de données", "date_iso": "2026-10-29", "duration": "31:27", "video_url": "https://youtu.be/fc_XkwO7kCk" },
       { "no": "EP. 4", "topic": "rai", "tagVariant": "default", "tag": "IA responsable", "title": "Comment construire un système d'IA responsable ?", "date_iso": "2026-10-22", "duration": "30:55", "video_url": "https://youtu.be/yX2MjNb4Nbk" },
       { "no": "EP. 3", "topic": "ai", "tagVariant": "teal", "tag": "IA", "title": "Une IA qui teste du code et découvre des bugs toute seule", "date_iso": "2026-10-15", "duration": "18:53", "video_url": "https://youtu.be/nzcUWRwPWgg" },
       { "no": "EP. 2", "topic": "ai", "tagVariant": "teal", "tag": "IA", "title": "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense", "date_iso": "2026-10-08", "duration": "22:09", "video_url": "https://youtu.be/kl2gaCSaAK8" },
@@ -38,6 +39,7 @@
     "all": "Tous",
     "ai": "IA",
     "rai": "IA responsable",
+    "sec": "Cybersécurité",
     "se": "Génie logiciel"
   },
   "playlists": {

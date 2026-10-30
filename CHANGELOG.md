@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
+- WeekPaper featured episode updated to Episode 5, "Quand un simple prompt peut attaquer votre base de données" / "When a simple prompt can attack your database" (`youtu.be/fc_XkwO7kCk`, 31:27, aired 2026-10-29), filed under a new "Cybersécurité" / "Cybersecurity" topic with its own filter chip
 - WeekPaper featured episode updated to Episode 4, "Comment construire un système d'IA responsable ?" / "How do you build a responsible AI system?" (`youtu.be/yX2MjNb4Nbk`, 30:55, aired 2026-10-22), filed under a new "IA responsable" / "Responsible AI" topic with its own filter chip
 - Team page photos now share the same light background and framing, so the leadership cards look consistent
 - WeekPaper featured episode updated to Episode 2, "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense" / "Why AI-generated code is more dangerous than you think" (`youtu.be/kl2gaCSaAK8`, 22:09, aired 2026-10-08)
