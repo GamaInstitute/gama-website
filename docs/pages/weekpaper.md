@@ -1,6 +1,6 @@
 # WeekPaper page
 
-_Last verified: 2026-10-11_
+_Last verified: 2026-10-31_
 
 - **Route:** `/week-paper`
 - **File:** [src/pages/WeekPaperPage.tsx](../../src/pages/WeekPaperPage.tsx)
@@ -16,8 +16,10 @@ WeekPaper is Gama Institute's video series. This page is the one place on the si
 | 1 | Featured hero | — | inline JSX + `VideoPlayer` | `featured.*` |
 | 2 | Episodes + filters | `#episodes` | filter chips + `EpisodeCard` grid | `episodes.*`, `filters` |
 | 3 | Playlists | — | inline cards | `playlists.items[]` |
-| 4 | Subscribe | `#subscribe` | inline + opens the newsletter `Modal` | `subscribe.*` |
+| 4 | Contribute | `#contribute` | inline JSX + opens the submission `Modal` | `contribute.*` |
+| 5 | Subscribe | `#subscribe` | inline + opens the newsletter `Modal` | `subscribe.*` |
 | — | Newsletter modal | — | `Modal` + `NewsletterPerks` + `NewsletterForm` | reuses `subscribe.h2` as the modal title |
+| — | Submission modal | — | `Modal tone="light"` + `PresentationForm` | `submit.*` |
 
 ### 1. Featured hero
 
@@ -65,6 +67,17 @@ Rendered unconditionally at the bottom of the page's `<main>` (the `Modal` compo
 ```
 
 Note the modal's `title` reuses `subscribe.h2` — the same heading text shown in the Subscribe section itself — rather than having its own separate copy. `NewsletterPerks` and `NewsletterForm` are the *exact same components and copy* as Home's own newsletter section (`NewsletterPerks` always reads from `home.json`, regardless of which page renders it — see [home.md](home.md)).
+
+## Contribute + submission form
+
+Added 2026-10-31 from the updated `week-paper.html` Claude Design export. (That export also re-mocks the hero, episode grid and playlists with placeholder episodes; those were **not** carried over, since this page already shows real episodes.)
+
+- **Left column:** `contribute.format[]` (voice / slides / face on camera), the numbered `contribute.structure[]` steps (numbers come from the array index), and `contribute.structure_note`.
+- **Right column (sticky on desktop):** `contribute.resources[]` downloads (`{ label, meta, file }`, where `file` is a key of `DOWNLOADS` in `src/constants/index.ts`) and a dark CTA box that opens the submission modal.
+- **[PresentationForm](../../src/components/weekpaper/PresentationForm.tsx)** collects presenter info, the paper (title, authors, link), a **link** to the video (videos are too big to upload through the site), the slides (`.pptx`/`.ppt`, ≤15MB), a profile photo (JPG/PNG, ≤5MB), the proposed YouTube title and description, a publication preference (`yt-li` or `yt`), and a required consent box.
+- Validation lives in [src/types/weekpaperSubmission.ts](../../src/types/weekpaperSubmission.ts) (Zod + file limits, shared with the server). Posting goes to `POST /api/weekpaper-submission` → [functions/api/weekpaper-submission.ts](../../functions/api/weekpaper-submission.ts), which re-validates, checks Turnstile and emails everything to `CONTACT_EMAIL_TO` with the slides and photo attached. Same design as Research Summaries, see [D-15](../../DECISIONS.md).
+
+**Change a resource file:** the Word guides are in the team's Google Drive folder. To update one, use "Manage versions" → upload a new version on the existing Drive file: the link, and so the site, stays the same with no deploy. Uploading a *new* file gives it a new ID, so update its entry in `DOWNLOADS` (`src/constants/index.ts`). Keep every file shared as "Anyone with the link". The slide template is still self-hosted in `public/downloads/`.
 
 ## Episodes + filters
 

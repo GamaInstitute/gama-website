@@ -4,7 +4,7 @@ _Last updated: 2026-09-09_
 
 ## Summary
 
-A bilingual (FR default / EN toggle) static marketing website for Gama Institute. Built with Vite + React 18 + TypeScript and pre-rendered at build time by vite-react-ssg. Deployed to Cloudflare Pages; two serverless CF Functions handle the contact form and newsletter subscription. No database, no auth.
+A bilingual (FR default / EN toggle) static marketing website for Gama Institute. Built with Vite + React 18 + TypeScript and pre-rendered at build time by vite-react-ssg. Deployed to Cloudflare Pages; four serverless CF Functions handle the contact form, newsletter subscription, Research Summary submissions and WeekPaper presentation submissions. No database, no auth.
 
 ## Components
 
@@ -15,10 +15,10 @@ A bilingual (FR default / EN toggle) static marketing website for Gama Institute
 | Routing | React Router v6 | `RootLayout` wraps all pages via `<Outlet>`; defined in `src/routes.tsx` |
 | i18n | react-i18next, i18next-browser-languagedetector | FR default; EN toggled client-side; stored in `localStorage` (`gama-lang`) |
 | Animation | Framer Motion | `whileInView` reveals, NetworkArt entrance, card hover |
-| Forms | react-hook-form + Zod | Shared Zod schema in `src/types/contact.ts` |
+| Forms | react-hook-form + Zod | Shared Zod schemas in `src/types/` (`contact.ts`, `researchSummary.ts`, `weekpaperSubmission.ts`) |
 | Fonts | @fontsource-variable/sora, @fontsource-variable/inter | Self-hosted; `@import` must precede `@tailwind` directives in `base.css` |
 | Meta / SEO | react-helmet-async | Per-page `<title>` and `<meta>`; must be in `ssr.noExternal` in vite.config.ts |
-| Server-side | Cloudflare Pages Functions | `POST /api/contact` and `POST /api/newsletter`, both Turnstile-verified; shared verification helper in `functions/_lib/turnstile.ts` |
+| Server-side | Cloudflare Pages Functions | `POST /api/contact`, `POST /api/newsletter`, `POST /api/research-summary` and `POST /api/weekpaper-submission` (the last two multipart, emailing the uploaded files as attachments via `functions/_lib/email.ts`), all Turnstile-verified; shared verification helper in `functions/_lib/turnstile.ts` |
 | Bot protection | Cloudflare Turnstile — invisible mode | Token obtained client-side on submit for both the contact form and newsletter signup; verified server-side in each CF Function |
 | Hosting — production | Cloudflare Pages | Triggered by push to `main`; serves static files + CF Functions |
 | Hosting — staging | GitHub Pages | Triggered by push to `develop`; static files only (no CF Functions) |

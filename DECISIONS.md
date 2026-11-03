@@ -133,3 +133,37 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 **Why:** Category/pillar icons on Home, About and WeekPaper used to be `<img>` URLs pointing at `api.iconify.design/mdi:<name>.svg?color=...`. In October 2026 Iconify stopped serving that URL form (404, only `mdi/<name>.svg` still works), and every icon on the site went blank at once with no deploy on our side. The icons are now downloaded once with the brand color baked in (`public/icons/<name>-<hex>.svg`) and served same-origin, so a third-party API change can't break them, and `api.iconify.design` was dropped from the CSP `img-src`.
 
 **Alternative considered:** Switching to the `mdi/<name>.svg` URL form. A one-line fix, but it keeps a runtime dependency on a free API that has already changed under us once. Bundling an icon library (e.g. `@mdi/js`) was also possible, but the icon is chosen per item in i18n JSON, so a plain path fits the existing content model with no code change.
+
+## D-15. Research Summary and WeekPaper submissions are emailed as Resend attachments, not stored
+
+**Why:** The submission form on `/research-summaries` collects a Word/PDF summary and an optional photo. Every submission is reviewed by a person before anything is published, so the file only has to reach the team's inbox. `POST /api/research-summary` reuses the contact form's Turnstile + Resend setup and attaches the files to an email to `CONTACT_EMAIL_TO`. That adds no new binding, bucket, secret or retention policy. Limits (10MB summary, 5MB photo) live in `src/types/researchSummary.ts`, are checked on both client and server, and stay well under Resend's 40MB per-email cap.
+
+**Alternative considered:** Uploading to an R2 bucket and emailing a link. That's more robust for large files and keeps attachments out of mailboxes, but it needs a bucket binding, access control on the stored files and a cleanup policy, all for a low-volume, human-reviewed flow.
+
+**Revisit when:** submissions regularly hit the size limits, volume grows enough that inbox triage becomes the bottleneck, or published summaries need to be served from the site itself (at that point the files need a real home anyway).
+
+**Note (2026-10-31):** the WeekPaper presentation form (`POST /api/weekpaper-submission`) follows the same pattern. Its video is collected as a share link (Drive, Dropbox…), not an upload, since talk-length videos are far over any email limit. Only the slides (≤15MB) and photo (≤5MB) are attached.
+
+## D-16. The `legal` i18n namespace is registered lazily by the legal page chunk
+
+**Why:** `src/i18n/index.ts` imports every namespace eagerly, so its JSON ships in the main bundle on every page (see the gotcha in docs/pages/README.md). The Privacy Policy and Terms are several KB of text per language and are only needed on `/privacy` and `/terms`. `LegalDocument.tsx` calls `i18n.addResourceBundle(lang, 'legal', …)` when its module loads, so the text lands only in the lazily loaded legal chunk while still living in `src/i18n/locales/{fr,en}/legal.json` like all other copy.
+
+**Alternative considered:** Registering it in `src/i18n/index.ts` like every other namespace. Simpler and consistent, but it adds the legal text to every page's initial download for no benefit.
+
+**Revisit when:** another large, single-page namespace appears. At that point, generalize this into a small per-page namespace loader rather than repeating the pattern.
+
+## D-17. Original content and published contributions are licensed CC BY 4.0
+
+**Why:** The Open Access Policy (`/open-access`, modelled on the [Montreal AI Ethics Institute's](https://montrealethics.ai/our-open-access-policy/)) puts the site's original content, Research Summaries, WeekPaper episodes and the downloadable guides and templates under Creative Commons Attribution 4.0. The Institute's goal is reach, including translations, and CC BY allows any reuse with credit without anyone having to ask. Contributors keep their copyright and agree to CC BY publication through the submission consent box and the Terms' Contributions section, so every published item can carry the same licence. Brand elements, photos of people, partner logos, third-party figures, the summarized papers and course materials are excluded.
+
+**Alternative considered:** CC BY-NC 4.0 (or the previous "personal, educational, non-commercial" wording in the Terms). It keeps control over commercial reuse, but makes translations and reuse by companies, publishers and some open platforms ambiguous, and NC is not considered an open licence under most open access definitions.
+
+**Revisit when:** a contributor or partner needs different terms for a specific item (mark it "unless otherwise noted" on that item), or before anything is published under CC BY if the Institute wants to restrict commercial use. A CC licence cannot be withdrawn for copies already made, so a switch only applies to content published afterwards.
+
+## D-18. Downloadable Word guides and templates are served from Google Drive, not `public/downloads/`
+
+**Why:** The team maintains these documents in a shared Google Drive folder and edits them there. Linking each file's direct-download URL (`drive.google.com/uc?export=download&id=…`, collected in `DOWNLOADS` in `src/constants/index.ts`) means a new version uploaded to the same Drive file ("Manage versions") is live immediately, with no commit or deploy, and the site never ships a stale copy. Before the switch, 5 of the 6 self-hosted copies had already drifted from the Drive versions.
+
+**Alternative considered:** Keeping the files in `public/downloads/`. Same-origin, no dependency on Drive sharing settings, and versioned in git, but every document edit needs a developer and a deploy.
+
+**Revisit when:** a file's sharing is changed and the link breaks (visitors land on a Google sign-in page), Drive starts interposing a warning page (it does for files over ~100MB), or the team stops using Drive. The `.pptx` slide template is not in the Drive folder yet and is still self-hosted.

@@ -12,17 +12,24 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Added
 
+- WeekPaper page: new "Present a paper on WeekPaper" section with the presentation format, the 6-part GAMA structure and downloadable guides and slide template, plus a form to submit a presentation (video link, slides, photo, YouTube title and description, YouTube-only or YouTube + LinkedIn). Submissions are emailed to the team for review
+- Privacy Policy (`/privacy`) and Terms of Use (`/terms`) pages, in French and English, linked from the footer
+- Open Access Policy (`/open-access`), in French and English, linked from the footer: the site's original content, Research Summaries, WeekPaper episodes and downloadable guides and templates are published under Creative Commons Attribution 4.0 (CC BY 4.0), with how to credit them, an attribution example and what the licence does not cover. The Terms of Use and both submission forms' consent boxes now state that accepted contributions are published under CC BY 4.0
+- Research Summaries page (`/research-summaries`): community-written summaries of scientific papers, with search, topic filters and downloadable FR/EN writing templates. Students and early-career researchers can submit their own summary (Word or PDF, optional photo) through a form; submissions are emailed to the team for review. Listed in the main navigation and footer. The summaries shown at launch are sample content
 - Team page: Dr. Dmytro Humeniuk added as instructor (Formateur), with photo and LinkedIn link
 - WeekPaper page now lists every published episode ("Browse the series" / "Parcourir la série"), with topic filters; clicking an episode title opens it on YouTube
 
 ### Security
 
+- Every form now explains, at the point of collection, how the information is used and where it goes, with a link to the Privacy Policy. The Research Summary and WeekPaper submission forms require explicit consent (Terms, Privacy Policy and publication) before sending, and the server rejects submissions without it. The newsletter form states what subscribers will receive and that they can unsubscribe at any time
+- Embedded YouTube videos now use YouTube's privacy-enhanced mode (`youtube-nocookie.com`)
 - Newsletter signup (`POST /api/newsletter`) now requires a verified Cloudflare Turnstile token, same invisible bot check already used on the contact form — previously open to unauthenticated scripted signups
 - Removed `api.iconify.design` from the Content Security Policy's allowed image sources, since icons are now self-hosted
 - Bumped `postcss` to patch an arbitrary `.map` file disclosure vulnerability (GHSA-r28c-9q8g-f849)
 
 ### Changed
 
+- The downloadable Word guides and templates (Research Summaries and WeekPaper) now come from the team's Google Drive folder, so they're always the latest version. English pages now offer the English edition of the "Finding research papers" guide instead of the French one
 - WeekPaper featured episode updated to Episode 5, "Quand un simple prompt peut attaquer votre base de données" / "When a simple prompt can attack your database" (`youtu.be/fc_XkwO7kCk`, 31:27, aired 2026-10-29), filed under a new "Cybersécurité" / "Cybersecurity" topic with its own filter chip
 - WeekPaper featured episode updated to Episode 4, "Comment construire un système d'IA responsable ?" / "How do you build a responsible AI system?" (`youtu.be/yX2MjNb4Nbk`, 30:55, aired 2026-10-22), filed under a new "IA responsable" / "Responsible AI" topic with its own filter chip
 - Team page photos now share the same light background and framing, so the leadership cards look consistent

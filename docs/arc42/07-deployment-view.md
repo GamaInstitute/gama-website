@@ -26,7 +26,7 @@ flowchart TB
     Repo -->|"push develop"| WF1 --> Build1 --> GHP
     Repo -->|"push main"| WF2 --> Build2 --> Deploy2 --> CFP
 
-    CFP -.->|"runs"| Functions["Pages Functions\n/api/contact, /api/newsletter"]
+    CFP -.->|"runs"| Functions["Pages Functions\n/api/contact, /api/newsletter,\n/api/research-summary,\n/api/weekpaper-submission"]
 ```
 
 ## Staging — GitHub Pages

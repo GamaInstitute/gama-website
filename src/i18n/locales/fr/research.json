@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "title": "Research Summaries | Gama Institute",
+    "description": "Research Summaries : la recherche expliquée par la prochaine génération de chercheurs."
+  },
+  "hero": {
+    "eyebrow": "Communauté · Research Summaries",
+    "h1": "La recherche expliquée par la prochaine génération de chercheurs",
+    "lead": "Les étudiants et jeunes chercheurs proposent un résumé accessible d'une publication scientifique qu'ils ont étudiée.",
+    "cta_submit": "Proposer un résumé",
+    "cta_read": "Lire les résumés",
+    "how_label": "Comment ça marche",
+    "steps": [
+      "Soumission",
+      "Révision GAMA",
+      "Publication"
+    ],
+    "note": "Il n'est pas nécessaire d'être Research Fellow pour contribuer."
+  },
+  "list": {
+    "h2": "Research Summaries",
+    "sample_label": "Contenu d'exemple",
+    "sample_body": "Les résumés et contributeurs ci-dessous illustrent la mise en page. Les publications originales citées sont réelles.",
+    "by": "Research Summary par",
+    "orig_by": "Publication originale de",
+    "read_paper": "Lire la publication originale",
+    "image_placeholder": "image",
+    "empty": "Aucun résumé ne correspond à votre recherche pour l'instant.",
+    "pagination_label": "Pagination",
+    "prev": "« Page précédente",
+    "next": "Page suivante »"
+  },
+  "sidebar": {
+    "cta_h": "Proposer un résumé",
+    "cta_body": "Vous avez étudié un article ? Expliquez-le simplement. GAMA révise avant publication.",
+    "tpl_fr": "Modèle FR",
+    "tpl_en": "Modèle EN",
+    "search_h": "Rechercher",
+    "search_ph": "Titre, auteur, sujet…",
+    "axes_h": "Axes",
+    "contributors_h": "Contributeurs récents"
+  },
+  "axes": {
+    "all": "Tous les axes",
+    "ai": "IA",
+    "se": "Génie logiciel",
+    "sec": "Cybersécurité",
+    "rai": "IA responsable"
+  },
+  "items": [
+    {
+      "id": "lost-in-the-middle",
+      "axis": "ai",
+      "title": "Pourquoi les modèles de langage oublient le milieu de leurs documents",
+      "date_iso": "2026-04-02",
+      "author": "Aminata Traoré",
+      "initials": "AT",
+      "color": "c4",
+      "bio": "étudiante à la maîtrise en informatique à l'Université de Montréal, s'intéresse aux systèmes RAG.",
+      "paper_authors": "Nelson F. Liu, Kevin Lin, John Hewitt …",
+      "paper_url": "https://arxiv.org/abs/2307.03172"
+    },
+    {
+      "id": "transformer-without-equations",
+      "axis": "ai",
+      "title": "Le Transformer expliqué sans équations",
+      "date_iso": "2026-03-12",
+      "author": "Mariam Ouédraogo",
+      "initials": "MO",
+      "color": "c1",
+      "bio": "étudiante au baccalauréat en génie logiciel à l'Université Laval.",
+      "paper_authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar …",
+      "paper_url": "https://arxiv.org/abs/1706.03762"
+    },
+    {
+      "id": "ml-technical-debt",
+      "axis": "se",
+      "title": "La dette technique cachée de l'apprentissage automatique",
+      "date_iso": "2026-02-26",
+      "author": "Kevin Mbarga",
+      "initials": "KM",
+      "color": "c4",
+      "bio": "doctorant à Polytechnique Montréal, travaille sur le MLOps.",
+      "paper_authors": "D. Sculley, Gary Holt, Daniel Golovin …",
+      "paper_url": "https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html"
+    },
+    {
+      "id": "swe-bench",
+      "axis": "se",
+      "title": "Les LLM savent-ils corriger de vrais bogues ?",
+      "date_iso": "2026-02-05",
+      "author": "Sophie Gagnon",
+      "initials": "SG",
+      "color": "c2",
+      "bio": "étudiante à la maîtrise à l'Université de Sherbrooke, s'intéresse aux tests logiciels.",
+      "paper_authors": "Carlos E. Jimenez, John Yang, Alexander Wettig …",
+      "paper_url": "https://arxiv.org/abs/2310.06770"
+    },
+    {
+      "id": "masakhane",
+      "axis": "ai",
+      "title": "Masakhane : traduire pour l'Afrique, par l'Afrique",
+      "date_iso": "2026-01-22",
+      "author": "Ibrahima Faye",
+      "initials": "IF",
+      "color": "c3",
+      "bio": "étudiant à la maîtrise à l'Université Gaston Berger, travaille sur le wolof.",
+      "paper_authors": "Iroro Orife, Julia Kreutzer, Blessing Sibanda …",
+      "paper_url": "https://arxiv.org/abs/2003.11529"
+    }
+  ],
+  "contribute": {
+    "eyebrow": "Contribuer",
+    "h2": "Proposer un Research Summary",
+    "body": "Vous avez étudié un article et vous voulez l'expliquer simplement ? Envoyez-nous votre résumé. L'équipe GAMA le révise avec vous avant publication.",
+    "tpl_label": "Modèle à suivre",
+    "tpl_body": "Structure en 5 parties, 500 à 900 mots, règles de rédaction et conseils pour les visuels. Rédigez en français ou en anglais.",
+    "files": [
+      {
+        "label": "Modèle en français",
+        "meta": "Word · .docx",
+        "file": "summary_template_fr"
+      },
+      {
+        "label": "Modèle en anglais",
+        "meta": "Word · .docx",
+        "file": "summary_template_en"
+      },
+      {
+        "label": "Trouver des articles scientifiques",
+        "meta": "Word · .docx · ACM, arXiv",
+        "file": "paper_search_guide_fr"
+      }
+    ],
+    "includes_label": "Chaque résumé présente",
+    "includes": [
+      "Le titre du papier original",
+      "Un résumé accessible",
+      "L'auteur du résumé et son établissement",
+      "La date de publication",
+      "La référence vers la publication originale",
+      "Le profil du contributeur"
+    ]
+  },
+  "form": {
+    "title": "Proposer un Research Summary",
+    "sub": "Votre résumé sera révisé par GAMA avant publication.",
+    "name": "Nom complet",
+    "email": "Courriel",
+    "institution": "Établissement",
+    "linkedin": "Profil LinkedIn (facultatif)",
+    "bio": "Courte biographie",
+    "bio_ph": "Ex. : étudiante à la maîtrise en informatique à l'Université de Montréal, s'intéresse aux systèmes RAG.",
+    "bio_hint": "Une ou deux phrases, affichées avec votre résumé.",
+    "photo": "Photo (facultative)",
+    "photo_hint": "JPG ou PNG, 5 Mo max. Affichée avec votre résumé.",
+    "paper_title": "Titre du papier original",
+    "paper_url": "Lien vers le papier original",
+    "summary": "Votre résumé",
+    "summary_hint": "Document Word ou PDF, 10 Mo max, rédigé à partir du modèle",
+    "consent": "J'accepte les <terms>Conditions d'utilisation</terms> et la <privacy>Politique de confidentialité</privacy>. Je confirme être l'auteur·e de ce résumé et, s'il est retenu, j'autorise Gama Institute à le publier avec mon nom, ma biographie, mon établissement et ma photo, sous licence CC BY 4.0 (<openaccess>Politique de libre accès</openaccess>).",
+    "cancel": "Annuler",
+    "submit": "Soumettre",
+    "submitting": "Envoi…",
+    "error": "Une erreur est survenue. Réessayez.",
+    "ok_title": "Merci pour votre résumé",
+    "ok_body": "L'équipe GAMA vous écrira après la révision.",
+    "close": "Fermer",
+    "errors": {
+      "required": "Requis",
+      "email": "Courriel invalide",
+      "url": "Lien invalide (commencez par https://)",
+      "summary_type": "Envoyez un document Word (.doc, .docx) ou PDF",
+      "summary_size": "Le fichier dépasse 10 Mo",
+      "photo_type": "Envoyez une image JPG ou PNG",
+      "photo_size": "L'image dépasse 5 Mo"
+    }
+  }
+}

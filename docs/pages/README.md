@@ -10,8 +10,10 @@ Each page of the site has its own file here, written for someone who has never t
 | About | `/about` | [about.md](about.md) | Live |
 | Training | not routed | [training.md](training.md) | Built, held back — see doc |
 | WeekPaper | `/week-paper` | [weekpaper.md](weekpaper.md) | Live |
+| Research Summaries | `/research-summaries` | [research-summaries.md](research-summaries.md) | Live (sample content, see doc) |
 | Team | `/team` | [team.md](team.md) | Live (some sections hidden — see doc) |
 | Contact | `/contact` | [contact.md](contact.md) | Live |
+| Privacy Policy / Terms of Use / Open Access Policy | `/privacy`, `/terms`, `/open-access` | [legal.md](legal.md) | Live, pending legal review |
 
 **If you only need to change text, a number, or an image URL** — not layout or behavior — go straight to [docs/guides/content-editing.md](../guides/content-editing.md) instead. It's the fast path for pure content edits. Come here when you need to understand *how* a section works, add a new kind of section, or wire up something that isn't pure copy.
 
@@ -19,7 +21,7 @@ Each page of the site has its own file here, written for someone who has never t
 
 ## How every page is put together
 
-All six pages share the same skeleton, defined once in [src/routes.tsx](../../src/routes.tsx):
+All pages share the same skeleton, defined once in [src/routes.tsx](../../src/routes.tsx):
 
 ```
 RootLayout (eager, not code-split)
@@ -82,7 +84,7 @@ Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal Reac
 ### Modal
 
 **`Modal`** — [src/components/ui/Modal.tsx](../../src/components/ui/Modal.tsx)
-Used by WeekPaper's newsletter dialog (see [weekpaper.md](weekpaper.md)); reusable for any future modal. Props: `isOpen`, `onClose`, `closeLabel` (required — drives the close button's `aria-label`), `title?`, `children`.
+Used by WeekPaper's newsletter dialog (see [weekpaper.md](weekpaper.md)) and the Research Summaries submission form; reusable for any future modal. Props: `isOpen`, `onClose`, `closeLabel` (required — drives the close button's `aria-label`), `title?`, `tone?` (`dark` default: compact 440px newsletter card; `light`: 640px surface card for longer forms), `children`. The panel scrolls internally when its content is taller than the viewport. Pass a stable `onClose` (e.g. `useCallback`): the focus-trap effect depends on it and re-runs, refocusing the dialog, whenever its identity changes.
 - **Portal + SSR safety:** renders via `createPortal(..., document.body)`, but only after a `mounted` state flips true in a `useEffect` — this avoids a server/client hydration mismatch under `vite-react-ssg`'s prerendering, since the portal target doesn't exist during SSR.
 - **Focus trap:** on open, remembers `document.activeElement`, focuses the dialog, and manually cycles Tab/Shift+Tab between the dialog's focusable descendants (queried live, not a fixed list) — closes on `Escape` and on backdrop click, and restores focus to whatever was focused before opening, when it closes.
 - **Reduced motion:** zeroes transition duration and disables the scale/slide transform when `prefers-reduced-motion` is set (`useReducedMotion()` from framer-motion).
@@ -95,6 +97,17 @@ YouTube-only embed with a click-to-play thumbnail. Props: `label` (required — 
 - Not yet playing: shows the real YouTube thumbnail (`maxresdefault.jpg`, falling back to `hqdefault.jpg` on error) with an overlaid play button; the button is `disabled` if no `videoId` resolved.
 - `autoplay=true` skips the thumbnail entirely and renders the iframe immediately, muted + looped (`autoplay=1&mute=1&loop=1&playlist={videoId}`) — per the component's own doc comment, this mode is meant for temporary "coming soon" placeholder loops, not real published content, which should omit `autoplay` and use the normal click-to-play flow.
 - Always passes `modestbranding=1&rel=0` to reduce YouTube's own branding/related-video suggestions, and deliberately leaves YouTube's native controls visible on autoplay so the user retains a way to pause it (WCAG 2.2.2 — auto-playing content must be stoppable).
+
+### Forms and legal notices
+
+**`FileField`**: [src/components/forms/FileField.tsx](../../src/components/forms/FileField.tsx). Styled file picker used by both submission forms (label, chosen file name, hint, error). It doesn't validate anything itself; the form checks the file against the limits in `src/types/*`.
+
+**Required fields.** Pass `required` to `FormField`, `FileField` or `ConsentCheckbox` to show a `*` after the label and mark the input as required for screen readers. Forms use `noValidate`, so the attribute never blocks submission; Zod stays the source of truth, so keep the `required` props in line with the schema. The WeekPaper form shows a "* Required field" note under its intro (`weekpaper:submit.required_note`).
+
+**`LegalNotice`**: [src/components/forms/LegalNotice.tsx](../../src/components/forms/LegalNotice.tsx). Three exports:
+- `LegalText` renders an i18n string where `<privacy>…</privacy>`, `<terms>…</terms>` and `<openaccess>…</openaccess>` become links to `/privacy`, `/terms` and `/open-access`, opening in a new tab so a half-filled form isn't lost. Pass `linkClassName` on dark backgrounds.
+- `PrivacyNotice` is the collection notice (`common:forms.privacy_notice`). **Put it under every form that sends personal information.** Quebec's Law 25 requires telling people, at collection, why, through whom and where their data goes.
+- `ConsentCheckbox` is the required, unticked consent box used when someone grants publication rights (both submission forms). Pair it with `consentField()` from `src/types/researchSummary.ts`, so the server enforces it too.
 
 ### Newsletter
 

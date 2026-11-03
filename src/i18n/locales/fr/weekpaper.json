@@ -28,11 +28,56 @@
     "empty": "Aucun épisode dans cette catégorie pour l'instant.",
     "filters_label": "Filtres par thème",
     "items": [
-      { "no": "EP. 5", "topic": "sec", "tagVariant": "default", "tag": "Cybersécurité", "title": "Quand un simple prompt peut attaquer votre base de données", "date_iso": "2026-10-29", "duration": "31:27", "video_url": "https://youtu.be/fc_XkwO7kCk" },
-      { "no": "EP. 4", "topic": "rai", "tagVariant": "default", "tag": "IA responsable", "title": "Comment construire un système d'IA responsable ?", "date_iso": "2026-10-22", "duration": "30:55", "video_url": "https://youtu.be/yX2MjNb4Nbk" },
-      { "no": "EP. 3", "topic": "ai", "tagVariant": "teal", "tag": "IA", "title": "Une IA qui teste du code et découvre des bugs toute seule", "date_iso": "2026-10-15", "duration": "18:53", "video_url": "https://youtu.be/nzcUWRwPWgg" },
-      { "no": "EP. 2", "topic": "ai", "tagVariant": "teal", "tag": "IA", "title": "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense", "date_iso": "2026-10-08", "duration": "22:09", "video_url": "https://youtu.be/kl2gaCSaAK8" },
-      { "no": "EP. 1", "topic": "se", "tagVariant": "copper", "tag": "Génie logiciel", "title": "Vers une nouvelle vision du génie logiciel", "date_iso": "2026-10-01", "duration": "23:31", "video_url": "https://youtu.be/lFz45XSy_dk" }
+      {
+        "no": "EP. 5",
+        "topic": "sec",
+        "tagVariant": "default",
+        "tag": "Cybersécurité",
+        "title": "Quand un simple prompt peut attaquer votre base de données",
+        "date_iso": "2026-10-29",
+        "duration": "31:27",
+        "video_url": "https://youtu.be/fc_XkwO7kCk"
+      },
+      {
+        "no": "EP. 4",
+        "topic": "rai",
+        "tagVariant": "default",
+        "tag": "IA responsable",
+        "title": "Comment construire un système d'IA responsable ?",
+        "date_iso": "2026-10-22",
+        "duration": "30:55",
+        "video_url": "https://youtu.be/yX2MjNb4Nbk"
+      },
+      {
+        "no": "EP. 3",
+        "topic": "ai",
+        "tagVariant": "teal",
+        "tag": "IA",
+        "title": "Une IA qui teste du code et découvre des bugs toute seule",
+        "date_iso": "2026-10-15",
+        "duration": "18:53",
+        "video_url": "https://youtu.be/nzcUWRwPWgg"
+      },
+      {
+        "no": "EP. 2",
+        "topic": "ai",
+        "tagVariant": "teal",
+        "tag": "IA",
+        "title": "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense",
+        "date_iso": "2026-10-08",
+        "duration": "22:09",
+        "video_url": "https://youtu.be/kl2gaCSaAK8"
+      },
+      {
+        "no": "EP. 1",
+        "topic": "se",
+        "tagVariant": "copper",
+        "tag": "Génie logiciel",
+        "title": "Vers une nouvelle vision du génie logiciel",
+        "date_iso": "2026-10-01",
+        "duration": "23:31",
+        "video_url": "https://youtu.be/lFz45XSy_dk"
+      }
     ]
   },
   "filters": {
@@ -47,9 +92,27 @@
     "h2": "Explorer par thème",
     "link": "Lire la liste",
     "items": [
-      { "label": "liste · IA responsable",    "title": "Fondements de l'IA responsable",    "count": "8 épisodes",  "duration": "3 h 41 min", "icon": "/icons/scale-balance-165c71.svg" },
-      { "label": "liste · génie logiciel",    "title": "Qualité & vérification du logiciel", "count": "6 épisodes", "duration": "2 h 58 min", "icon": "/icons/code-tags-check-b56418.svg" },
-      { "label": "liste · infra & sécurité",  "title": "Infrastructure & sécurité de l'IA", "count": "7 épisodes", "duration": "3 h 12 min", "icon": "/icons/server-security-2a8c8a.svg" }
+      {
+        "label": "liste · IA responsable",
+        "title": "Fondements de l'IA responsable",
+        "count": "8 épisodes",
+        "duration": "3 h 41 min",
+        "icon": "/icons/scale-balance-165c71.svg"
+      },
+      {
+        "label": "liste · génie logiciel",
+        "title": "Qualité & vérification du logiciel",
+        "count": "6 épisodes",
+        "duration": "2 h 58 min",
+        "icon": "/icons/code-tags-check-b56418.svg"
+      },
+      {
+        "label": "liste · infra & sécurité",
+        "title": "Infrastructure & sécurité de l'IA",
+        "count": "7 épisodes",
+        "duration": "3 h 12 min",
+        "icon": "/icons/server-security-2a8c8a.svg"
+      }
     ]
   },
   "subscribe": {
@@ -58,5 +121,133 @@
     "lead": "Un nouvel épisode chaque semaine. Recevez l'alerte par courriel ou suivez la chaîne.",
     "btn_youtube": "S'abonner sur YouTube",
     "btn_email": "Alerte courriel"
+  },
+  "contribute": {
+    "eyebrow": "Contribuer",
+    "h2": "Présentez un article dans WeekPaper",
+    "body": "Étudiants et membres de la communauté peuvent présenter un article en génie logiciel, en IA ou dans un domaine connexe. Les présentations sont les bienvenues : il suffit de bien comprendre l'article pour en expliquer fidèlement les idées.",
+    "format": [
+      {
+        "label": "Voix",
+        "value": "En français"
+      },
+      {
+        "label": "Diapositives",
+        "value": "En anglais"
+      },
+      {
+        "label": "Visage à l'écran",
+        "value": "Facultatif"
+      }
+    ],
+    "structure_label": "Structure de présentation GAMA",
+    "structure": [
+      {
+        "title": "Introduction",
+        "desc": "Une situation réaliste ou une question captivante, l'article et pourquoi le problème compte."
+      },
+      {
+        "title": "Concepts clés",
+        "desc": "Les termes et idées essentiels pour comprendre la recherche."
+      },
+      {
+        "title": "Méthodologie",
+        "desc": "Ce que les chercheurs ont fait et comment ils ont évalué leur approche."
+      },
+      {
+        "title": "Résultats",
+        "desc": "Les résultats les plus importants et ce qu'ils signifient."
+      },
+      {
+        "title": "Discussion et implications",
+        "desc": "Leçons pratiques, limites, pistes futures. Votre interprétation, distincte de celle des auteurs."
+      },
+      {
+        "title": "Question au public",
+        "desc": "Une question ouverte qui invite les spectateurs à partager leur point de vue."
+      }
+    ],
+    "structure_note": "Vous pouvez aussi proposer une structure innovante, si elle explique clairement la recherche.",
+    "resources_label": "Ressources à télécharger",
+    "resources": [
+      {
+        "label": "Guide de contribution (FR)",
+        "meta": "Word · .docx",
+        "file": "weekpaper_guide_fr"
+      },
+      {
+        "label": "Guide de contribution (EN)",
+        "meta": "Word · .docx",
+        "file": "weekpaper_guide_en"
+      },
+      {
+        "label": "Trouver des articles scientifiques",
+        "meta": "Word · .docx · ACM, arXiv",
+        "file": "paper_search_guide_fr"
+      },
+      {
+        "label": "Modèle de diapositives GAMA",
+        "meta": "PowerPoint · .pptx",
+        "file": "slide_template"
+      }
+    ],
+    "cta_h": "Prêt·e à soumettre ?",
+    "cta_body": "Vidéo, diapositives modifiables, titre et description YouTube, photo et biographie. GAMA révise chaque contribution avant publication.",
+    "cta": "Soumettre ma présentation"
+  },
+  "submit": {
+    "title": "Soumettre une présentation WeekPaper",
+    "sub": "Présentation en français, diapositives en anglais. GAMA révise chaque contribution avant publication.",
+    "required_note": "Champ obligatoire",
+    "grp_you": "Vous",
+    "grp_paper": "L'article",
+    "grp_talk": "Votre présentation",
+    "grp_pub": "Publication",
+    "name": "Nom complet",
+    "email": "Courriel",
+    "institution": "Établissement",
+    "linkedin": "Profil LinkedIn (facultatif)",
+    "bio": "Courte biographie",
+    "bio_hint": "Quelques phrases sur votre parcours et vos intérêts.",
+    "photo": "Photo de profil",
+    "photo_hint": "JPG ou PNG, 5 Mo max. Utilisée dans la miniature de la vidéo, même si votre visage n'apparaît pas.",
+    "paper_title": "Titre de l'article original",
+    "paper_authors": "Auteurs",
+    "paper_url": "Lien vers l'article",
+    "video_url": "Lien vers la vidéo",
+    "video_hint": "Google Drive, OneDrive, Dropbox ou WeTransfer. Présentation en français.",
+    "slides": "Diapositives modifiables",
+    "slides_hint": "PowerPoint (.pptx), 15 Mo max, réalisé avec le modèle GAMA, en anglais.",
+    "yt_title": "Titre YouTube proposé",
+    "yt_desc": "Description YouTube (en français)",
+    "yt_desc_hint": "Le sujet, ce que les spectateurs vont apprendre, la référence et le lien de l'article.",
+    "publish_label": "Préférence de publication",
+    "publish": {
+      "yt-li": {
+        "title": "YouTube et LinkedIn",
+        "desc": "GAMA publie la vidéo sur YouTube et la partage sur LinkedIn."
+      },
+      "yt": {
+        "title": "YouTube seulement",
+        "desc": "GAMA publie la vidéo sur YouTube, sans la partager sur LinkedIn."
+      }
+    },
+    "consent": "J'accepte les <terms>Conditions d'utilisation</terms> et la <privacy>Politique de confidentialité</privacy>. Je confirme détenir les droits sur cette présentation (vidéo, voix, image, diapositives) et, si elle est retenue, j'autorise Gama Institute à la publier selon ma préférence ci-dessus, avec mon nom, ma photo, ma biographie et mon établissement, sous licence CC BY 4.0 (<openaccess>Politique de libre accès</openaccess>).",
+    "cancel": "Annuler",
+    "submit": "Soumettre",
+    "submitting": "Envoi…",
+    "error": "Une erreur est survenue. Réessayez.",
+    "ok_title": "Merci pour votre contribution",
+    "ok_body": "L'équipe GAMA examinera votre présentation et vous écrira avant toute publication.",
+    "close": "Fermer",
+    "errors": {
+      "required": "Requis",
+      "email": "Courriel invalide",
+      "url": "Lien invalide (commencez par https://)",
+      "slides_type": "Envoyez un fichier PowerPoint (.pptx ou .ppt)",
+      "slides_size": "Le fichier dépasse 15 Mo",
+      "photo_type": "Envoyez une image JPG ou PNG",
+      "photo_size": "L'image dépasse 5 Mo"
+    }
   }
 }

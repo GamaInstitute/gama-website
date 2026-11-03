@@ -1,4 +1,4 @@
-import { useState }       from 'react'
+import { useCallback, useState } from 'react'
 import { Helmet }         from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { motion }         from 'framer-motion'
@@ -14,7 +14,8 @@ import { EpisodeCard }    from '@/components/weekpaper/EpisodeCard'
 import { Modal }          from '@/components/ui/Modal'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
-import { SOCIAL_LINKS }   from '@/constants'
+import { PresentationForm } from '@/components/weekpaper/PresentationForm'
+import { SOCIAL_LINKS, DOWNLOADS, type DownloadKey } from '@/constants'
 import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
 import type { TagVariant } from '@/types/course'
 
@@ -29,6 +30,18 @@ type EpisodeItem = {
   video_url: string
 }
 
+type FormatItem   = { label: string; value: string }
+type StepItem     = { title: string; desc: string }
+type ResourceItem = { label: string; meta: string; file: DownloadKey }
+
+function DownloadIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+    </svg>
+  )
+}
+
 type PlaylistItem = {
   label: string
   title: string
@@ -41,6 +54,9 @@ export default function WeekPaperPage() {
   const { t, i18n } = useTranslation('weekpaper')
   const { t: tCommon } = useTranslation('common')
   const [newsletterOpen, setNewsletterOpen] = useState(false)
+  const [submitOpen, setSubmitOpen] = useState(false)
+  // Stable identity: Modal's focus-trap effect depends on onClose
+  const closeSubmit = useCallback(() => setSubmitOpen(false), [])
 
   // Filter keys come from `filters` in weekpaper.json ('all' plus one per episode topic)
   const [filter, setFilter] = useState('all')
@@ -48,6 +64,9 @@ export default function WeekPaperPage() {
   const filters   = t('filters',          { returnObjects: true }) as Record<string, string>
   const visible = episodes.filter(ep => filter === 'all' || ep.topic === filter)
   const playlists = t('playlists.items',  { returnObjects: true }) as PlaylistItem[]
+  const format    = t('contribute.format',    { returnObjects: true }) as FormatItem[]
+  const structure = t('contribute.structure', { returnObjects: true }) as StepItem[]
+  const resources = t('contribute.resources', { returnObjects: true }) as ResourceItem[]
 
   return (
     <>
@@ -213,6 +232,75 @@ export default function WeekPaperPage() {
           </div>
         </SectionWrapper>
 
+        {/* ── CONTRIBUTE ────────────────────────────────────── */}
+        <SectionWrapper alt id="contribute">
+          <div className="wrap">
+            <Reveal className="mb-[clamp(28px,3.5vw,44px)]">
+              <Eyebrow>{t('contribute.eyebrow')}</Eyebrow>
+              <h2 className="font-display font-semibold text-[clamp(1.9rem,3.4vw,2.9rem)] tracking-[-0.02em] text-ink mt-[14px]">
+                {t('contribute.h2')}
+              </h2>
+              <p className="max-w-[60ch] text-ink-soft mt-[14px]">{t('contribute.body')}</p>
+            </Reveal>
+
+            <div className="grid grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] gap-[clamp(28px,4vw,56px)] items-start max-[960px]:grid-cols-1">
+              <Reveal>
+                <dl className="grid grid-cols-3 border border-hairline rounded-lg bg-surface overflow-hidden m-0 max-[520px]:grid-cols-1">
+                  {format.map(f => (
+                    <div key={f.label} className="py-4 px-[18px] border-r border-hairline last:border-r-0 max-[520px]:border-r-0 max-[520px]:border-b max-[520px]:last:border-b-0">
+                      <dt className="text-[0.68rem] font-bold tracking-[0.13em] uppercase text-ink-muted">{f.label}</dt>
+                      <dd className="m-0 mt-1 font-display font-semibold text-[1.08rem] text-ink">{f.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <p className="text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted mt-7 mb-1.5">{t('contribute.structure_label')}</p>
+                <ol className="list-none m-0 p-0 border-t border-hairline">
+                  {structure.map((step, i) => (
+                    <li key={step.title} className="grid grid-cols-[48px_1fr] gap-[14px] py-4 border-b border-hairline">
+                      <span className="font-display font-semibold text-[0.86rem] text-[var(--accent-ink)] pt-0.5">{String(i + 1).padStart(2, '0')}</span>
+                      <div>
+                        <b className="font-display font-semibold text-[1.04rem] text-ink">{step.title}</b>
+                        <p className="mt-1 text-[0.92rem] text-ink-soft">{step.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                <p className="text-ink-muted text-[0.9rem] mt-4">{t('contribute.structure_note')}</p>
+              </Reveal>
+
+              <Reveal delay={0.1} className="grid gap-[18px] sticky top-[100px] max-[960px]:static">
+                <div className="bg-surface border border-hairline rounded-lg p-[22px]">
+                  <p className="text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted">{t('contribute.resources_label')}</p>
+                  <div className="grid gap-2.5 mt-4">
+                    {resources.map(r => (
+                      <a
+                        key={r.file}
+                        href={DOWNLOADS[r.file]}
+                        download
+                        className="flex gap-3 items-center py-3 px-[14px] border border-hairline-2 rounded-md transition-colors hover:border-copper hover:bg-[rgba(181,100,24,.05)]"
+                      >
+                        <span className="text-[var(--accent-ink)] flex-none"><DownloadIcon /></span>
+                        <span>
+                          <b className="block text-[0.92rem] font-semibold text-ink">{r.label}</b>
+                          <small className="block text-[0.76rem] text-ink-muted">{r.meta}</small>
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-lg p-[22px] border bg-ink border-ink dark:bg-surface-2 dark:border-hairline-2">
+                  <h3 className="font-display font-semibold text-[1.15rem] text-white dark:text-ink">{t('contribute.cta_h')}</h3>
+                  <p className="text-[0.9rem] text-white/75 dark:text-ink-soft mt-2.5 mb-4">{t('contribute.cta_body')}</p>
+                  <Button variant="accent" size="sm" onClick={() => setSubmitOpen(true)}>
+                    {t('contribute.cta')} <span aria-hidden="true">→</span>
+                  </Button>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </SectionWrapper>
+
         {/* ── SUBSCRIBE ─────────────────────────────────────── */}
         <SectionWrapper spacing="tight" id="subscribe">
           <div className="wrap">
@@ -250,6 +338,16 @@ export default function WeekPaperPage() {
         >
           <NewsletterPerks />
           <NewsletterForm />
+        </Modal>
+
+        <Modal
+          isOpen={submitOpen}
+          onClose={closeSubmit}
+          closeLabel={tCommon('close')}
+          title={t('submit.title')}
+          tone="light"
+        >
+          <PresentationForm onClose={closeSubmit} />
         </Modal>
 
       </main>

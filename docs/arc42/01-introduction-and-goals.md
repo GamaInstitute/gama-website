@@ -4,7 +4,7 @@
 
 The Gama Institute website is the public marketing and information site for Gama Institute, a bilingual (French/English) research and training institute working at the intersection of software engineering and AI. It presents the institute to three kinds of visitors: prospective students and researchers, potential university/industry partners, and press — and gives staff a way to receive messages (contact form) and grow a mailing list (newsletter signup). There is no login, no user accounts, and no database — every visible page is content, not an application in the software-product sense.
 
-Six pages exist: Home, About, Training, WeekPaper (a video series), Team, and Contact. Training is fully built but deliberately not yet live — see [11 — Risks and Technical Debt](11-risks-and-technical-debt.md).
+Seven pages exist: Home, About, Training, WeekPaper (a video series), Research Summaries (community-written paper summaries, with a submission form), Team, and Contact, plus a Privacy Policy and Terms of Use. Training is fully built but deliberately not yet live — see [11 — Risks and Technical Debt](11-risks-and-technical-debt.md).
 
 ## Why this document exists
 

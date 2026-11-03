@@ -75,6 +75,7 @@ export function Footer() {
             <FooterLink to="/#research">{t('footer.research')}</FooterLink>
             {/* TODO: restore training footer link once the page ships */}
             <FooterLink to="/week-paper">{t('footer.weekpaper')}</FooterLink>
+            <FooterLink to="/research-summaries">{t('footer.research_summaries')}</FooterLink>
             <FooterLink to="/contact">{t('footer.newsletter')}</FooterLink>
           </div>
 
@@ -99,7 +100,12 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex justify-between items-center gap-4 flex-wrap mt-12 pt-6 border-t border-hairline text-[0.85rem] text-ink-muted">
-          <span>{t('footer.copyright')}</span>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 items-center">
+            <span>{t('footer.copyright')}</span>
+            <Link to="/privacy" className="hover:text-ink transition-colors">{t('legal.privacy')}</Link>
+            <Link to="/terms" className="hover:text-ink transition-colors">{t('legal.terms')}</Link>
+            <Link to="/open-access" className="hover:text-ink transition-colors">{t('legal.open_access')}</Link>
+          </div>
           <div className="flex gap-2.5">
             <SocialLink href={SOCIAL_LINKS.linkedin} label="LinkedIn"><LinkedInIcon /></SocialLink>
             <SocialLink href={SOCIAL_LINKS.facebook} label="Facebook"><FacebookIcon /></SocialLink>

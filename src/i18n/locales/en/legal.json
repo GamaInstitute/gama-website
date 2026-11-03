@@ -1,0 +1,365 @@
+{
+  "ui": {
+    "updated": "Last updated:",
+    "toc": "On this page",
+    "questions": "A question about this document?",
+    "write_us": "Write to us:"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy | Gama Institute",
+      "description": "How Gama Institute collects, uses, shares and protects your personal information, and how to exercise your rights."
+    },
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "updated_iso": "2026-10-31",
+    "intro": [
+      "Gama Institute (\"Gama\", \"we\") respects your privacy. This policy explains what personal information we collect on gamainstitute.ca, why, who we share it with, how long we keep it and how to exercise your rights.",
+      "It is based on Quebec's Act respecting the protection of personal information in the private sector (Law 25) and, where it applies, Canada's federal privacy law (PIPEDA)."
+    ],
+    "sections": [
+      {
+        "id": "responsable",
+        "h": "Person in charge",
+        "p": [
+          "Gama Institute's person in charge of the protection of personal information oversees this policy. You can reach them at [contact@gamainstitute.ca](mailto:contact@gamainstitute.ca), with \"Personal information\" in the subject line."
+        ]
+      },
+      {
+        "id": "renseignements",
+        "h": "Information we collect",
+        "p": [
+          "We only collect what you send us through a form, and what is technically needed to run the site:"
+        ],
+        "list": [
+          "**Contact form**: first name, last name, email, subject and message.",
+          "**Newsletter**: email address.",
+          "**Research Summary submission**: name, email, institution, LinkedIn profile (optional), short bio, photo (optional), paper title and link, your summary file.",
+          "**WeekPaper submission**: name, email, institution, LinkedIn profile (optional), bio, photo, paper details, link to your video (which contains your voice and, if you choose, your image), slides, YouTube title and description, publication preference.",
+          "**Technical data**: IP address, browser type and technical signals processed by Cloudflare to host the site and detect bots (Turnstile). We do not use them to identify or profile you."
+        ],
+        "p_after": [
+          "We use no audience analytics, targeted advertising or profiling tools, and we never sell personal information."
+        ]
+      },
+      {
+        "id": "finalites",
+        "h": "Why we use it",
+        "list": [
+          "To answer your messages.",
+          "To send you the newsletter you asked for.",
+          "To assess your contribution, review it with you and, if accepted, publish it.",
+          "To protect the site and our forms against abuse and automated submissions.",
+          "To meet our legal obligations."
+        ],
+        "p_after": [
+          "We do not use your information for any other purpose without your consent, except where the law allows it."
+        ]
+      },
+      {
+        "id": "consentement",
+        "h": "Consent",
+        "p": [
+          "By sending a form, you consent to the use of your information for the purposes stated. For Research Summary and WeekPaper submissions, a separate box, unticked by default, records your express consent to publication.",
+          "You can withdraw your consent at any time (see [Your rights](#droits)). Withdrawal applies going forward.",
+          "If you are under 14, a parent or guardian must consent before you send us any information."
+        ]
+      },
+      {
+        "id": "publication",
+        "h": "What becomes public",
+        "p": [
+          "If your contribution is published, the following become public: your name, bio, institution, photo and the content of the contribution. For WeekPaper, the video (your voice and, if you chose, your image) is published on YouTube and, depending on your preference, shared on LinkedIn.",
+          "Your email is never published. Once online, content can be copied or indexed by third parties; we remove our own publications on request, but we cannot control those copies."
+        ]
+      },
+      {
+        "id": "prestataires",
+        "h": "Service providers and sharing",
+        "p": [
+          "We rely on the following providers, which only process your information to deliver their services to us:"
+        ],
+        "list": [
+          "**Cloudflare, Inc.** (United States): site hosting, form processing and Turnstile bot protection.",
+          "**Resend** (United States): delivering form submissions to our inbox and managing the newsletter list.",
+          "**Our email provider**, which hosts the contact@gamainstitute.ca inbox where messages and attachments arrive.",
+          "**YouTube (Google)**: streaming WeekPaper episodes. The embedded player only loads when you click Play, in privacy-enhanced mode.",
+          "**LinkedIn**: sharing episodes, if you chose it.",
+          "**Google Drive, Wikimedia Commons and partner websites**: some images (team photos, logos) load from their servers; your browser then sends them your IP address, as with any image online."
+        ],
+        "p_after": [
+          "**Transfers outside Quebec.** Several of these providers are located in the United States. Your information may therefore be processed and stored outside Quebec, where it is subject to local laws.",
+          "We do not share your information with any other third party unless required by law."
+        ]
+      },
+      {
+        "id": "conservation",
+        "h": "How long we keep it",
+        "list": [
+          "**Contact messages**: as long as needed to handle your request, then at most 2 years.",
+          "**Newsletter**: until you unsubscribe.",
+          "**Submissions not accepted**: deleted no later than 12 months after our decision.",
+          "**Published contributions**: as long as they are online, or until you ask us to remove them.",
+          "**Technical data**: according to Cloudflare's retention periods."
+        ],
+        "p_after": [
+          "At the end of these periods, the information is destroyed or anonymized."
+        ]
+      },
+      {
+        "id": "securite",
+        "h": "Security",
+        "p": [
+          "The site is served over HTTPS only, forms are protected against automated submissions, and access to personal information is limited to team members who need it. No system is perfectly secure.",
+          "If a confidentiality incident presents a risk of serious injury, we will notify the people concerned and Quebec's Commission d'accès à l'information, as the law requires."
+        ]
+      },
+      {
+        "id": "temoins",
+        "h": "Cookies and local storage",
+        "p": [
+          "This site sets no tracking or advertising cookies. It stores two preferences in your browser's local storage: language (gama-lang) and light or dark theme (gama-theme). They stay on your device and are never sent to us.",
+          "Cloudflare Turnstile uses technical signals to tell humans from bots. If you play a video, YouTube may set its own cookies, governed by Google's privacy policy."
+        ]
+      },
+      {
+        "id": "droits",
+        "h": "Your rights",
+        "p": [
+          "At any time, you can:"
+        ],
+        "list": [
+          "access the information we hold about you and get a copy, including in a structured, commonly used technological format;",
+          "have it corrected if it is inaccurate or incomplete;",
+          "withdraw your consent and unsubscribe from the newsletter;",
+          "ask us to delete your information or remove a published contribution;",
+          "ask how we use it."
+        ],
+        "p_after": [
+          "Write to [contact@gamainstitute.ca](mailto:contact@gamainstitute.ca). We reply within 30 days and may ask you to confirm your identity.",
+          "If you are not satisfied with our answer, you can file a complaint with Quebec's [Commission d'accès à l'information](https://www.cai.gouv.qc.ca) or the [Office of the Privacy Commissioner of Canada](https://www.priv.gc.ca)."
+        ]
+      },
+      {
+        "id": "modifications",
+        "h": "Changes",
+        "p": [
+          "We may update this policy. The date at the top of the page shows the version in force. If we make a significant change, we will announce it on the site."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms of Use | Gama Institute",
+      "description": "Rules for using the Gama Institute website and terms for Research Summaries and WeekPaper contributions."
+    },
+    "eyebrow": "Legal",
+    "title": "Terms of Use",
+    "updated_iso": "2026-11-02",
+    "intro": [
+      "These terms govern your use of gamainstitute.ca (the \"site\"), operated by Gama Institute. By using the site, you accept them. If you submit a contribution, the [Contributions](#contributions) section also applies."
+    ],
+    "sections": [
+      {
+        "id": "site",
+        "h": "The site",
+        "p": [
+          "The site presents Gama Institute's activities for information and educational purposes. We may change, suspend or remove all or part of the site at any time."
+        ]
+      },
+      {
+        "id": "propriete",
+        "h": "Intellectual property",
+        "p": [
+          "Unless otherwise noted, the site's original content (text, Research Summaries, WeekPaper episodes, downloadable guides and templates) is published under a Creative Commons Attribution 4.0 (CC BY 4.0) licence. You may share and adapt it, including commercially, as long as you give credit. The conditions and exceptions are set out in our [Open Access Policy](/open-access).",
+          "The Gama Institute name, logo and brand elements, photos of people and partner logos are not covered by this licence. Any use beyond simply crediting the source requires our written permission.",
+          "The scientific papers summarized or presented remain the property of their authors and publishers. Partner names and logos belong to their owners."
+        ]
+      },
+      {
+        "id": "contributions",
+        "h": "Contributions (Research Summaries and WeekPaper)",
+        "p": [
+          "By submitting a contribution:"
+        ],
+        "list": [
+          "you confirm that you are its author, or hold the necessary rights, and that anyone visible or audible in your video has agreed to its publication;",
+          "you respect copyright: you cite the original paper, rephrase in your own words, and only include figures or excerpts within permitted limits (fair dealing, open licences), with their source;",
+          "you keep ownership of your contribution and agree that, once published, it is made available under a Creative Commons Attribution 4.0 (CC BY 4.0) licence, credited to your name (see our [Open Access Policy](/open-access)); you also grant Gama Institute a non-exclusive, royalty-free, worldwide licence to review, format, translate, publish and promote it on its website, its YouTube channel and, if you chose it, LinkedIn;",
+          "you agree that Gama Institute may decline a contribution, ask for changes or correct its form before publication; any substantive change will be submitted to you;",
+          "you can ask for a published contribution to be removed at any time; we will remove it from our platforms within a reasonable time, but the CC BY licence cannot be revoked for copies that others have already made in line with it;",
+          "you agree not to submit illegal, defamatory, hateful or misleading content, or confidential or personal information about others."
+        ],
+        "p_after": [
+          "Contributions are voluntary and unpaid, unless agreed otherwise in a separate written agreement."
+        ]
+      },
+      {
+        "id": "utilisation",
+        "h": "Acceptable use",
+        "p": [
+          "You may not:"
+        ],
+        "list": [
+          "use the forms to send unsolicited or automated messages;",
+          "try to bypass the site's security measures or disrupt its operation;",
+          "impersonate another person;",
+          "scrape the site's content in bulk in a way that harms its operation."
+        ]
+      },
+      {
+        "id": "liens",
+        "h": "External links",
+        "p": [
+          "The site links to third-party websites (YouTube, scientific publishers, partners). We do not control their content or practices and are not responsible for them."
+        ]
+      },
+      {
+        "id": "responsabilite",
+        "h": "Accuracy and liability",
+        "p": [
+          "Summaries and presentations explain research for educational purposes. They may simplify or leave out nuances, and they reflect their authors' interpretation, not necessarily that of Gama Institute or of the original authors. Always refer to the original paper.",
+          "The site is provided \"as is\". To the extent permitted by law, Gama Institute is not liable for indirect damages arising from its use. Nothing in these terms limits the rights the law gives you, including under Quebec's Consumer Protection Act."
+        ]
+      },
+      {
+        "id": "renseignements",
+        "h": "Personal information",
+        "p": [
+          "How we handle your personal information is described in our [Privacy Policy](/privacy)."
+        ]
+      },
+      {
+        "id": "droit",
+        "h": "Governing law",
+        "p": [
+          "These terms are governed by the laws of Quebec and the federal laws of Canada that apply there. Any dispute falls under the courts of the judicial district of Montréal, subject to the rights the law grants consumers."
+        ]
+      },
+      {
+        "id": "modifications",
+        "h": "Changes",
+        "p": [
+          "We may change these terms. The date at the top of the page shows the version in force. Using the site after a change means you accept the new version."
+        ]
+      },
+      {
+        "id": "langue",
+        "h": "Language",
+        "p": [
+          "These terms are written in French and translated into English. If the two versions differ, the French version prevails."
+        ]
+      }
+    ]
+  },
+  "openaccess": {
+    "meta": {
+      "title": "Open Access Policy | Gama Institute",
+      "description": "Gama Institute's original content (research summaries, WeekPaper episodes, guides and templates) is published under a Creative Commons Attribution 4.0 licence. How to reuse and cite it."
+    },
+    "eyebrow": "Open access",
+    "title": "Open Access Policy",
+    "updated_iso": "2026-11-02",
+    "intro": [
+      "Gama Institute's mission is to make research at the intersection of software engineering and AI accessible to as many people as possible. To reach that audience, including in other languages, we publish our content in open access: you can read, share, translate and adapt it freely, as long as you credit the source.",
+      "We also encourage our contributors, partners and community to publish their own work under open licences."
+    ],
+    "sections": [
+      {
+        "id": "licence",
+        "h": "Creative Commons licence",
+        "p": [
+          "Unless otherwise noted, Gama Institute's original content is published under a [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) licence. This covers:"
+        ],
+        "list": [
+          "the text of this website;",
+          "the **Research Summaries** published on the site;",
+          "**WeekPaper** episodes (videos and slides) produced by Gama Institute or its contributors;",
+          "the downloadable guides and templates (Word and PowerPoint)."
+        ]
+      },
+      {
+        "id": "permissions",
+        "h": "What you can do",
+        "p": [
+          "You are free to:"
+        ],
+        "list": [
+          "**Share**: copy and redistribute the content in any medium or format;",
+          "**Adapt**: remix, transform, translate and build upon the content, for any purpose, including commercially."
+        ],
+        "p_after": [
+          "The only condition is proper attribution (see below). You may not add terms or technical measures that prevent others from doing anything the licence permits."
+        ]
+      },
+      {
+        "id": "attribution",
+        "h": "How to credit our content",
+        "p": [
+          "Proper attribution includes:"
+        ],
+        "list": [
+          "the **title** of the original content;",
+          "the **author(s)**, with a link to their profile where relevant;",
+          "the **source**: Gama Institute, with a link to the original page;",
+          "the **licence**: CC BY 4.0, with a link to [the licence deed](https://creativecommons.org/licenses/by/4.0/)."
+        ],
+        "p_after": [
+          "If you changed the content (translation, excerpt, remix), say so and briefly describe what you changed.",
+          "Do not suggest that Gama Institute or the authors endorse your reuse or your organization, unless they have agreed in writing."
+        ]
+      },
+      {
+        "id": "exemple",
+        "h": "Attribution example",
+        "p": [
+          "For a Spanish translation of a research summary:",
+          "\"Spanish translation of '[Summary title]' by [Author name], Research Summaries, Gama Institute, 2026, [gamainstitute.ca/research-summaries](/research-summaries), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Translated by [your name].\"",
+          "For a reuse without changes, the same notice without the \"Translation\" part is enough."
+        ]
+      },
+      {
+        "id": "exceptions",
+        "h": "What is not covered",
+        "p": [
+          "The CC BY 4.0 licence does not apply to the following, which remain under their own terms:"
+        ],
+        "list": [
+          "the **Gama Institute** name, logo and brand elements; you may mention them to credit the source, but not use them to present a product, service or event as ours;",
+          "**photos of people** (team, contributors) and partner logos;",
+          "**third-party material** included in our content (figures, images or excerpts from papers), which keeps the licence and source shown next to it;",
+          "the **scientific papers** summarized or presented, which remain the property of their authors and publishers;",
+          "**training materials** handed out to participants in our courses, unless otherwise noted;",
+          "any content that carries a different licence notice."
+        ],
+        "p_after": [
+          "The licence covers copyright. It does not allow you to use the image, voice or name of a person who appears in a WeekPaper video to promote a product or cause, or in a misleading way or one that harms their reputation."
+        ]
+      },
+      {
+        "id": "contributions",
+        "h": "Community contributions",
+        "p": [
+          "Research Summaries and WeekPaper presentations are written by members of our community. Authors keep ownership of their work. By submitting a contribution, they agree to its publication under CC BY 4.0, credited to their name, as set out in our [Terms of Use](/terms#contributions).",
+          "Authors can ask for their contribution to be removed from our platforms at any time. The CC BY licence cannot, however, be revoked for copies that others have already made in line with it."
+        ]
+      },
+      {
+        "id": "recherche",
+        "h": "Our research",
+        "p": [
+          "Where publishers' policies allow it, we make our research papers freely available, for example by posting a preprint to an open archive such as arXiv. Papers published by a publisher remain under the licence that publisher chose.",
+          "We encourage our researchers, students and partners to do the same."
+        ]
+      },
+      {
+        "id": "traductions",
+        "h": "Translations",
+        "p": [
+          "Translations are especially welcome. If you translate any of our content, [write to us](mailto:contact@gamainstitute.ca): with your agreement, we can mention it or link to it from the original page."
+        ]
+      }
+    ]
+  }
+}

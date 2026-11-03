@@ -42,7 +42,9 @@ export const FormField = forwardRef<
 
   return (
     <div className={wrapperCls}>
-      <label htmlFor={id} className={labelCls}>{label}</label>
+      <label htmlFor={id} className={labelCls}>
+        {label}{props.required && <span aria-hidden="true" className="text-[var(--accent-ink)] ml-0.5">*</span>}
+      </label>
 
       {as === 'textarea' ? (
         <textarea

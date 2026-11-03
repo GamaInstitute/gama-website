@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useTurnstileToken } from '@/hooks/useTurnstileToken'
+import { LegalText } from '@/components/forms/LegalNotice'
 
 type State = 'idle' | 'loading' | 'success' | 'error'
 
@@ -50,6 +51,10 @@ export function NewsletterForm() {
       >
         {state === 'loading' ? '…' : t('newsletter.subscribe')}
       </button>
+
+      <p className="basis-full text-[0.78rem] leading-[1.5] text-white/60 m-0">
+        <LegalText i18nKey="forms.newsletter_notice" linkClassName="font-semibold text-white/85 underline underline-offset-2 hover:text-white" />
+      </p>
 
       {/* Invisible Turnstile container */}
       <div ref={turnstileRef} />

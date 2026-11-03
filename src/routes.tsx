@@ -47,7 +47,11 @@ export const routes: RouteObject[] = [
       // TODO: Training page is built but held back for a later release — restore the route below to ship it.
       // { path: 'training',   lazy: () => import('@/pages/TrainingPage').then(m => ({ Component: m.default })) },
       { path: 'week-paper', lazy: () => import('@/pages/WeekPaperPage').then(m => ({ Component: m.default })) },
+      { path: 'research-summaries', lazy: () => import('@/pages/ResearchSummariesPage').then(m => ({ Component: m.default })) },
       { path: 'team',       lazy: () => import('@/pages/TeamPage').then(m => ({ Component: m.default })) },
+      { path: 'privacy',    lazy: () => import('@/pages/PrivacyPage').then(m => ({ Component: m.default })) },
+      { path: 'terms',      lazy: () => import('@/pages/TermsPage').then(m => ({ Component: m.default })) },
+      { path: 'open-access', lazy: () => import('@/pages/OpenAccessPage').then(m => ({ Component: m.default })) },
       { path: 'contact',    lazy: () => import('@/pages/ContactPage').then(m => ({ Component: m.default })) },
     ],
   },

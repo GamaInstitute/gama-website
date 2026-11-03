@@ -28,7 +28,7 @@ export function VideoPlayer({ label, url, duration, placeholder = 'vidéo', smal
       <div className={`relative rounded-lg overflow-hidden ${small ? 'aspect-video' : 'aspect-[16/9]'}`}>
         <iframe
           className="absolute inset-0 w-full h-full"
-          src={`https://www.youtube.com/embed/${videoId}?${params}`}
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?${params}`}
           title={label}
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowFullScreen

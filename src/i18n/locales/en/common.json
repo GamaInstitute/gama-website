@@ -7,26 +7,28 @@
   "close": "Close",
   "video_placeholder": "Coming soon",
   "nav": {
-    "home":      "Home",
-    "about":     "About",
-    "training":  "Training",
+    "home": "Home",
+    "about": "About",
+    "training": "Training",
     "weekpaper": "WeekPaper",
-    "team":      "Team",
-    "contact":   "Contact"
+    "research": "Research Summaries",
+    "team": "Team",
+    "contact": "Contact"
   },
   "footer": {
     "tagline": "When francophone talent meets, research crosses borders.",
     "explore": "Explore",
     "institute": "Institute",
     "follow": "Follow",
-    "about":    "About",
+    "about": "About",
     "research": "Research",
     "training": "Training",
     "weekpaper": "WeekPaper",
-    "team":     "Team",
-    "careers":  "Careers",
+    "research_summaries": "Research Summaries",
+    "team": "Team",
+    "careers": "Careers",
     "partners": "Partners",
-    "contact":  "Contact",
+    "contact": "Contact",
     "newsletter": "Newsletter",
     "copyright": "© 2026 Gama Institute · Montréal, Québec"
   },
@@ -36,5 +38,17 @@
     "success": "Thank you! You're subscribed."
   },
   "enroll": "Enroll",
-  "arrow": "→"
+  "arrow": "→",
+  "forms": {
+    "choose_file": "Choose a file",
+    "no_file": "No file selected",
+    "consent_required": "You must accept to submit",
+    "privacy_notice": "We use this information only to handle your request. It passes through our service providers Cloudflare and Resend, which may store it outside Quebec. Details and access rights: <privacy>Privacy Policy</privacy>.",
+    "newsletter_notice": "By subscribing, you agree to receive emails from Gama Institute (new episodes and Institute news). Unsubscribe at any time. <privacy>Privacy Policy</privacy>."
+  },
+  "legal": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "open_access": "Open access"
+  }
 }

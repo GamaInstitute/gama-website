@@ -28,11 +28,56 @@
     "empty": "No episodes in this category yet.",
     "filters_label": "Filter by topic",
     "items": [
-      { "no": "EP. 5", "topic": "sec", "tagVariant": "default", "tag": "Cybersecurity", "title": "When a simple prompt can attack your database", "date_iso": "2026-10-29", "duration": "31:27", "video_url": "https://youtu.be/fc_XkwO7kCk" },
-      { "no": "EP. 4", "topic": "rai", "tagVariant": "default", "tag": "Responsible AI", "title": "How do you build a responsible AI system?", "date_iso": "2026-10-22", "duration": "30:55", "video_url": "https://youtu.be/yX2MjNb4Nbk" },
-      { "no": "EP. 3", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "An AI that tests code and finds bugs on its own", "date_iso": "2026-10-15", "duration": "18:53", "video_url": "https://youtu.be/nzcUWRwPWgg" },
-      { "no": "EP. 2", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "Why AI-generated code is more dangerous than you think", "date_iso": "2026-10-08", "duration": "22:09", "video_url": "https://youtu.be/kl2gaCSaAK8" },
-      { "no": "EP. 1", "topic": "se", "tagVariant": "copper", "tag": "Software eng.", "title": "Toward a new vision for software engineering", "date_iso": "2026-10-01", "duration": "23:31", "video_url": "https://youtu.be/lFz45XSy_dk" }
+      {
+        "no": "EP. 5",
+        "topic": "sec",
+        "tagVariant": "default",
+        "tag": "Cybersecurity",
+        "title": "When a simple prompt can attack your database",
+        "date_iso": "2026-10-29",
+        "duration": "31:27",
+        "video_url": "https://youtu.be/fc_XkwO7kCk"
+      },
+      {
+        "no": "EP. 4",
+        "topic": "rai",
+        "tagVariant": "default",
+        "tag": "Responsible AI",
+        "title": "How do you build a responsible AI system?",
+        "date_iso": "2026-10-22",
+        "duration": "30:55",
+        "video_url": "https://youtu.be/yX2MjNb4Nbk"
+      },
+      {
+        "no": "EP. 3",
+        "topic": "ai",
+        "tagVariant": "teal",
+        "tag": "AI",
+        "title": "An AI that tests code and finds bugs on its own",
+        "date_iso": "2026-10-15",
+        "duration": "18:53",
+        "video_url": "https://youtu.be/nzcUWRwPWgg"
+      },
+      {
+        "no": "EP. 2",
+        "topic": "ai",
+        "tagVariant": "teal",
+        "tag": "AI",
+        "title": "Why AI-generated code is more dangerous than you think",
+        "date_iso": "2026-10-08",
+        "duration": "22:09",
+        "video_url": "https://youtu.be/kl2gaCSaAK8"
+      },
+      {
+        "no": "EP. 1",
+        "topic": "se",
+        "tagVariant": "copper",
+        "tag": "Software eng.",
+        "title": "Toward a new vision for software engineering",
+        "date_iso": "2026-10-01",
+        "duration": "23:31",
+        "video_url": "https://youtu.be/lFz45XSy_dk"
+      }
     ]
   },
   "filters": {
@@ -47,9 +92,27 @@
     "h2": "Explore by topic",
     "link": "Play list",
     "items": [
-      { "label": "list · responsible AI",      "title": "Foundations of responsible AI",      "count": "8 episodes", "duration": "3 h 41 min", "icon": "/icons/scale-balance-165c71.svg" },
-      { "label": "list · software quality",    "title": "Software quality & verification",    "count": "6 episodes", "duration": "2 h 58 min", "icon": "/icons/code-tags-check-b56418.svg" },
-      { "label": "list · infra & security",    "title": "AI infrastructure & security",       "count": "7 episodes", "duration": "3 h 12 min", "icon": "/icons/server-security-2a8c8a.svg" }
+      {
+        "label": "list · responsible AI",
+        "title": "Foundations of responsible AI",
+        "count": "8 episodes",
+        "duration": "3 h 41 min",
+        "icon": "/icons/scale-balance-165c71.svg"
+      },
+      {
+        "label": "list · software quality",
+        "title": "Software quality & verification",
+        "count": "6 episodes",
+        "duration": "2 h 58 min",
+        "icon": "/icons/code-tags-check-b56418.svg"
+      },
+      {
+        "label": "list · infra & security",
+        "title": "AI infrastructure & security",
+        "count": "7 episodes",
+        "duration": "3 h 12 min",
+        "icon": "/icons/server-security-2a8c8a.svg"
+      }
     ]
   },
   "subscribe": {
@@ -58,5 +121,133 @@
     "lead": "A new episode every week. Get the email alert or follow the channel.",
     "btn_youtube": "Subscribe on YouTube",
     "btn_email": "Email alert"
+  },
+  "contribute": {
+    "eyebrow": "Contribute",
+    "h2": "Present a paper on WeekPaper",
+    "body": "Students and community members can present a paper in software engineering, AI or a related field. Presenters are welcome: you only need to understand the paper well enough to explain its ideas accurately.",
+    "format": [
+      {
+        "label": "Voice",
+        "value": "In French"
+      },
+      {
+        "label": "Slides",
+        "value": "In English"
+      },
+      {
+        "label": "Face on camera",
+        "value": "Optional"
+      }
+    ],
+    "structure_label": "GAMA presentation structure",
+    "structure": [
+      {
+        "title": "Intro",
+        "desc": "A realistic situation or engaging question, the paper, and why the problem matters."
+      },
+      {
+        "title": "Key concepts",
+        "desc": "The essential terms and ideas needed to follow the research."
+      },
+      {
+        "title": "Methodology",
+        "desc": "What the researchers did and how they evaluated their approach."
+      },
+      {
+        "title": "Results",
+        "desc": "The most important findings and what they mean."
+      },
+      {
+        "title": "Discussion & implications",
+        "desc": "Practical lessons, limitations, future directions. Your interpretation, kept distinct from the authors'."
+      },
+      {
+        "title": "Question to the audience",
+        "desc": "An open question that invites viewers to share their perspective."
+      }
+    ],
+    "structure_note": "You may also suggest an innovative structure, as long as it explains the research clearly.",
+    "resources_label": "Resources to download",
+    "resources": [
+      {
+        "label": "Contribution guidelines (EN)",
+        "meta": "Word · .docx",
+        "file": "weekpaper_guide_en"
+      },
+      {
+        "label": "Contribution guidelines (FR)",
+        "meta": "Word · .docx",
+        "file": "weekpaper_guide_fr"
+      },
+      {
+        "label": "Finding research papers",
+        "meta": "Word · .docx · ACM, arXiv",
+        "file": "paper_search_guide_en"
+      },
+      {
+        "label": "GAMA slide template",
+        "meta": "PowerPoint · .pptx",
+        "file": "slide_template"
+      }
+    ],
+    "cta_h": "Ready to submit?",
+    "cta_body": "Video, editable slides, YouTube title and description, photo and bio. GAMA reviews every contribution before publication.",
+    "cta": "Submit my presentation"
+  },
+  "submit": {
+    "title": "Submit a WeekPaper presentation",
+    "sub": "Presentation in French, slides in English. GAMA reviews every contribution before publication.",
+    "required_note": "Required field",
+    "grp_you": "About you",
+    "grp_paper": "The paper",
+    "grp_talk": "Your presentation",
+    "grp_pub": "Publication",
+    "name": "Full name",
+    "email": "Email",
+    "institution": "Institution",
+    "linkedin": "LinkedIn profile (optional)",
+    "bio": "Short bio",
+    "bio_hint": "A few sentences about your background and interests.",
+    "photo": "Profile photo",
+    "photo_hint": "JPG or PNG, 5 MB max. Used in the video thumbnail, even if your face does not appear.",
+    "paper_title": "Original paper title",
+    "paper_authors": "Authors",
+    "paper_url": "Link to the paper",
+    "video_url": "Link to the video",
+    "video_hint": "Google Drive, OneDrive, Dropbox or WeTransfer. Presentation in French.",
+    "slides": "Editable slides",
+    "slides_hint": "PowerPoint (.pptx), 15 MB max, made with the GAMA template, in English.",
+    "yt_title": "Proposed YouTube title",
+    "yt_desc": "YouTube description (in French)",
+    "yt_desc_hint": "The topic, what viewers will learn, the paper reference and link.",
+    "publish_label": "Publication preference",
+    "publish": {
+      "yt-li": {
+        "title": "YouTube and LinkedIn",
+        "desc": "GAMA publishes the video on YouTube and shares it on LinkedIn."
+      },
+      "yt": {
+        "title": "YouTube only",
+        "desc": "GAMA publishes the video on YouTube, without sharing it on LinkedIn."
+      }
+    },
+    "consent": "I accept the <terms>Terms of Use</terms> and the <privacy>Privacy Policy</privacy>. I confirm I hold the rights to this presentation (video, voice, image, slides) and, if it is accepted, I authorize Gama Institute to publish it as chosen above, with my name, photo, bio and institution, under a CC BY 4.0 licence (<openaccess>Open Access Policy</openaccess>).",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "submitting": "Sending…",
+    "error": "Something went wrong. Please try again.",
+    "ok_title": "Thank you for your contribution",
+    "ok_body": "The GAMA team will review your presentation and get back to you before anything is published.",
+    "close": "Close",
+    "errors": {
+      "required": "Required",
+      "email": "Invalid email",
+      "url": "Invalid link (start with https://)",
+      "slides_type": "Upload a PowerPoint file (.pptx or .ppt)",
+      "slides_size": "The file is larger than 15 MB",
+      "photo_type": "Upload a JPG or PNG image",
+      "photo_size": "The image is larger than 5 MB"
+    }
   }
 }

@@ -7,26 +7,28 @@
   "close": "Fermer",
   "video_placeholder": "Bientôt disponible",
   "nav": {
-    "home":      "Accueil",
-    "about":     "À propos",
-    "training":  "Formations",
+    "home": "Accueil",
+    "about": "À propos",
+    "training": "Formations",
     "weekpaper": "WeekPaper",
-    "team":      "Équipe",
-    "contact":   "Contact"
+    "research": "Research Summaries",
+    "team": "Équipe",
+    "contact": "Contact"
   },
   "footer": {
     "tagline": "Quand les talents francophones se rencontrent, la recherche franchit les frontières.",
     "explore": "Explorer",
     "institute": "Institut",
     "follow": "Suivre",
-    "about":    "À propos",
+    "about": "À propos",
     "research": "Recherche",
     "training": "Formations",
     "weekpaper": "WeekPaper",
-    "team":     "Équipe",
-    "careers":  "Carrières",
+    "research_summaries": "Research Summaries",
+    "team": "Équipe",
+    "careers": "Carrières",
     "partners": "Partenaires",
-    "contact":  "Contact",
+    "contact": "Contact",
     "newsletter": "Infolettre",
     "copyright": "© 2026 Gama Institute · Montréal, Québec"
   },
@@ -36,5 +38,17 @@
     "success": "Merci ! Vous êtes abonné."
   },
   "enroll": "S'inscrire",
-  "arrow": "→"
+  "arrow": "→",
+  "forms": {
+    "choose_file": "Choisir un fichier",
+    "no_file": "Aucun fichier sélectionné",
+    "consent_required": "Vous devez accepter pour soumettre",
+    "privacy_notice": "Nous utilisons ces renseignements uniquement pour traiter votre demande. Ils sont transmis par nos prestataires Cloudflare et Resend, qui peuvent les héberger hors du Québec. Détails et droits d'accès : <privacy>Politique de confidentialité</privacy>.",
+    "newsletter_notice": "En vous abonnant, vous acceptez de recevoir les courriels de Gama Institute (nouveaux épisodes et nouvelles de l'Institut). Désabonnement en tout temps. <privacy>Politique de confidentialité</privacy>."
+  },
+  "legal": {
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "open_access": "Libre accès"
+  }
 }

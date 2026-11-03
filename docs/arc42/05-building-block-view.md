@@ -53,6 +53,8 @@ The frontend and backend are two independent build targets that happen to deploy
 |---|---|---|
 | Contact form endpoint | `functions/api/contact.ts` | Validates the submitted form (Zod), verifies the Turnstile token, sends the message via Resend to `CONTACT_EMAIL_TO` |
 | Newsletter endpoint | `functions/api/newsletter.ts` | Validates the email (Zod), verifies the Turnstile token, registers the address as a Resend Contact |
+| WeekPaper submission endpoint | `functions/api/weekpaper-submission.ts` | Same pattern as the Research Summary endpoint, for presentations (slides + photo attached, video shared as a link); schema in `src/types/weekpaperSubmission.ts` |
+| Research Summary endpoint | `functions/api/research-summary.ts` | Parses `multipart/form-data`, validates text fields (Zod, `src/types/researchSummary.ts`) and file type/size, verifies the Turnstile token, emails the submission with the files attached via Resend to `CONTACT_EMAIL_TO` |
 | Shared Turnstile verification | `functions/_lib/turnstile.ts` | Single implementation of the Cloudflare siteverify call, used by both endpoints above — added 2026-09-09 to remove duplication and ensure both endpoints are protected identically |
 | Shared Zod schema | `src/types/contact.ts` | `ContactSubject` enum and `contactSchema`, imported by both the client form (`ContactForm.tsx`) and the server function (`contact.ts`) — the one place client and server share a type definition |
 

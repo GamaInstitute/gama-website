@@ -31,7 +31,7 @@ flowchart TB
 
     subgraph CF["Cloudflare Pages (production)"]
         Static["Static site\n(pre-rendered HTML/JS/CSS)"]
-        Fn["Pages Functions\n/api/contact, /api/newsletter"]
+        Fn["Pages Functions\n/api/contact, /api/newsletter,\n/api/research-summary,\n/api/weekpaper-submission"]
     end
 
     GHPages["GitHub Pages\n(staging — static only)"]

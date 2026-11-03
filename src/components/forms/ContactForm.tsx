@@ -6,6 +6,7 @@ import { makeContactFormSchema, type ContactFormPayload, type ContactSubject } f
 import { useTurnstileToken } from '@/hooks/useTurnstileToken'
 import { FormField } from './FormField'
 import { Button } from '@/components/ui/Button'
+import { PrivacyNotice } from './LegalNotice'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -153,10 +154,9 @@ export function ContactForm({ defaultSubject }: ContactFormProps) {
             ? (lang === 'fr' ? 'Envoi…' : 'Sending…')
             : (lang === 'fr' ? 'Envoyer le message →' : 'Send message →')}
         </Button>
-        <span className="text-[0.85rem] text-ink-muted">
-          {lang === 'fr' ? 'Vos données restent confidentielles.' : 'Your data stays confidential.'}
-        </span>
       </div>
+
+      <PrivacyNotice className="mt-4" />
     </form>
   )
 }
