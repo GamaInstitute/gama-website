@@ -15,15 +15,10 @@ import { FormField } from '@/components/forms/FormField'
 import { FileField } from '@/components/forms/FileField'
 import { ConsentCheckbox, LegalText, PrivacyNotice } from '@/components/forms/LegalNotice'
 import { Button } from '@/components/ui/Button'
-import { DOWNLOADS } from '@/constants'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
 type FileKey = 'summary' | 'photo'
 
-const TEMPLATES = {
-  fr: DOWNLOADS.summary_template_fr,
-  en: DOWNLOADS.summary_template_en,
-} as const
 
 export function SummaryForm({ onClose }: { onClose: () => void }) {
   const { t, i18n } = useTranslation('research')
@@ -102,9 +97,6 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
     )
   }
 
-  // Lead with the template in the visitor's own language
-  const tplOrder = lang === 'fr' ? (['fr', 'en'] as const) : (['en', 'fr'] as const)
-
   return (
     <form onSubmit={onSubmit} noValidate>
       <p className="text-ink-soft text-[0.94rem] -mt-2 mb-[22px]">{t('form.sub')}</p>
@@ -152,14 +144,10 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
           error={fileErrors.summary}
           hint={
             <>
-              {t('form.summary_hint')} (
-              {tplOrder.map((l, i) => (
-                <span key={l}>
-                  {i > 0 && ' · '}
-                  <a className="font-semibold text-[var(--link)] hover:underline" href={TEMPLATES[l]} download>{l.toUpperCase()}</a>
-                </span>
-              ))}
-              ).
+              {t('form.summary_hint')}{' '}
+              <a className="font-semibold text-[var(--link)] hover:underline" href={`${import.meta.env.BASE_URL}guides/research-summary`} target="_blank" rel="noopener">
+                {t('form.summary_guide')}
+              </a>.
             </>
           }
         />

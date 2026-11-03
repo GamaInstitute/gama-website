@@ -1,0 +1,200 @@
+import { Fragment, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
+import { DOWNLOADS, type DownloadKey } from '@/constants'
+
+/*
+ * Small Markdown renderer for the guides in src/content/guides/. It supports only
+ * what the guides use, so no Markdown library ships to the browser:
+ *
+ *   ## Heading {#anchor}   h2, listed in the table of contents (anchor optional)
+ *   ### Heading            h3
+ *   - item / 1. item       lists (one level)
+ *   - [ ] item             checklist
+ *   | a | b |              table (first row is the header; leave it empty for none)
+ *   > text                 callout box
+ *   ```                    code block (used for search queries)
+ *   ![alt](src "caption")  figure
+ *   **bold** _italic_ `code` [label](href)
+ *
+ * Links: `/route` → router Link, `download:<key>` → file from DOWNLOADS,
+ * `#anchor` / `mailto:` → plain anchor, anything else opens in a new tab.
+ */
+
+export type Heading = { id: string; text: string }
+
+const BASE = import.meta.env.BASE_URL
+const LINK_CLS = 'font-semibold text-[var(--link)] underline underline-offset-2 decoration-[color-mix(in_srgb,currentColor_35%,transparent)] hover:decoration-current'
+
+export function slugify(text: string) {
+  return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
+
+function parseHeading(raw: string): Heading {
+  const m = raw.match(/^(.*?)\s*\{#([\w-]+)\}\s*$/)
+  return m ? { text: m[1], id: m[2] } : { text: raw, id: slugify(raw) }
+}
+
+export function headings(md: string): Heading[] {
+  return md.split('\n').filter(l => l.startsWith('## ')).map(l => parseHeading(l.slice(3)))
+}
+
+function MdLink({ href, children }: { href: string; children: ReactNode }) {
+  if (href.startsWith('/')) return <Link to={href} className={LINK_CLS}>{children}</Link>
+  if (href.startsWith('download:')) {
+    const url = DOWNLOADS[href.slice(9) as DownloadKey]
+    return <a href={url} download className={LINK_CLS}>{children}</a>
+  }
+  if (href.startsWith('#') || href.startsWith('mailto:')) return <a href={href} className={LINK_CLS}>{children}</a>
+  return <a href={href} target="_blank" rel="noopener noreferrer" className={LINK_CLS}>{children}</a>
+}
+
+function Inline({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)\s]+\)|\b_[^_\s][^_]*_\b)/g)
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={i} className="font-semibold text-ink"><Inline text={part.slice(2, -2)} /></strong>
+        if (/^`[^`]+`$/.test(part)) return <code key={i} className="font-mono text-[0.88em] px-1.5 py-0.5 rounded bg-bg-alt border border-hairline text-ink">{part.slice(1, -1)}</code>
+        if (/^_[^_]+_$/.test(part)) return <em key={i}>{part.slice(1, -1)}</em>
+        const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/)
+        if (link) return <MdLink key={i} href={link[2]}><Inline text={link[1]} /></MdLink>
+        return <Fragment key={i}>{part}</Fragment>
+      })}
+    </>
+  )
+}
+
+const cells = (row: string) => row.trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim())
+
+export function Markdown({ source }: { source: string }) {
+  const lines = source.split('\n')
+  const out: ReactNode[] = []
+  let i = 0
+  const key = () => out.length
+
+  while (i < lines.length) {
+    const line = lines[i]
+    const trimmed = line.trim()
+
+    if (!trimmed) { i++; continue }
+
+    if (trimmed.startsWith('```')) {
+      const code: string[] = []
+      i++
+      while (i < lines.length && !lines[i].trim().startsWith('```')) code.push(lines[i++])
+      i++
+      out.push(
+        <pre key={key()} className="mt-4 overflow-x-auto rounded-md border border-hairline bg-bg-alt px-4 py-3 text-[0.86rem] leading-[1.7] text-ink">
+          <code className="font-mono">{code.join('\n')}</code>
+        </pre>,
+      )
+      continue
+    }
+
+    if (trimmed.startsWith('## ')) {
+      const h = parseHeading(trimmed.slice(3))
+      out.push(
+        <h2 key={key()} id={h.id} className="font-display font-semibold text-[1.5rem] tracking-[-0.015em] text-ink mt-14 mb-1 scroll-mt-[96px] first:mt-0">
+          <Inline text={h.text} />
+        </h2>,
+      )
+      i++
+      continue
+    }
+
+    if (trimmed.startsWith('### ')) {
+      out.push(<h3 key={key()} className="font-display font-semibold text-[1.12rem] text-ink mt-8"><Inline text={trimmed.slice(4)} /></h3>)
+      i++
+      continue
+    }
+
+    const img = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/)
+    if (img) {
+      const [, alt, src, caption] = img
+      out.push(
+        <figure key={key()} className="mt-6">
+          <img src={src.startsWith('/') ? BASE + src.slice(1) : src} alt={alt} loading="lazy" className="w-full rounded-md border border-hairline" />
+          {caption && <figcaption className="mt-2 text-[0.84rem] text-ink-muted"><Inline text={caption} /></figcaption>}
+        </figure>,
+      )
+      i++
+      continue
+    }
+
+    if (trimmed.startsWith('|')) {
+      const rows: string[][] = []
+      while (i < lines.length && lines[i].trim().startsWith('|')) {
+        if (!/^\|[\s:|-]*-[\s:|-]*\|$/.test(lines[i].trim())) rows.push(cells(lines[i]))
+        i++
+      }
+      const [head, ...body] = rows
+      out.push(
+        <div key={key()} className="mt-5 overflow-x-auto rounded-md border border-hairline">
+          <table className="w-full text-[0.92rem] border-collapse">
+            {head.some(Boolean) && (
+              <thead className="bg-bg-alt text-left">
+                <tr>{head.map((c, j) => <th key={j} className="px-4 py-2.5 font-semibold text-ink border-b border-hairline"><Inline text={c} /></th>)}</tr>
+              </thead>
+            )}
+            <tbody>
+              {body.map((r, j) => (
+                <tr key={j} className="border-b border-hairline last:border-b-0 align-top">
+                  {r.map((c, k) => <td key={k} className={`px-4 py-2.5 ${k === 0 ? 'font-semibold text-ink whitespace-nowrap' : ''}`}><Inline text={c} /></td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>,
+      )
+      continue
+    }
+
+    if (trimmed.startsWith('> ')) {
+      const quote: string[] = []
+      while (i < lines.length && lines[i].trim().startsWith('>')) quote.push(lines[i++].trim().replace(/^>\s?/, ''))
+      out.push(
+        <aside key={key()} className="mt-6 rounded-md border-l-[3px] border-[var(--accent)] bg-[rgba(181,100,24,.06)] px-5 py-4 text-ink">
+          {quote.join('\n').split(/\n\s*\n/).map((p, j) => <p key={j} className="mt-2 first:mt-0"><Inline text={p.replace(/\n/g, ' ')} /></p>)}
+        </aside>,
+      )
+      continue
+    }
+
+    if (/^- \[ \] /.test(trimmed)) {
+      const items: string[] = []
+      while (i < lines.length && /^- \[ \] /.test(lines[i].trim())) items.push(lines[i++].trim().slice(6))
+      out.push(
+        <ul key={key()} className="mt-4 grid gap-2.5 list-none p-0">
+          {items.map((it, j) => (
+            <li key={j} className="flex gap-3 items-start">
+              <span aria-hidden="true" className="mt-[5px] w-4 h-4 flex-none rounded-[4px] border-2 border-[var(--accent)]" />
+              <span><Inline text={it} /></span>
+            </li>
+          ))}
+        </ul>,
+      )
+      continue
+    }
+
+    if (/^(- |\d+\. )/.test(trimmed)) {
+      const ordered = /^\d+\. /.test(trimmed)
+      const items: string[] = []
+      while (i < lines.length && /^(- |\d+\. )/.test(lines[i].trim()) && !/^- \[ \] /.test(lines[i].trim())) {
+        items.push(lines[i++].trim().replace(/^(- |\d+\. )/, ''))
+      }
+      const Tag = ordered ? 'ol' : 'ul'
+      out.push(
+        <Tag key={key()} className={`mt-3 pl-5 grid gap-1.5 ${ordered ? 'list-decimal marker:font-semibold' : 'list-disc'} marker:text-[var(--accent)]`}>
+          {items.map((it, j) => <li key={j}><Inline text={it} /></li>)}
+        </Tag>,
+      )
+      continue
+    }
+
+    const para: string[] = []
+    while (i < lines.length && lines[i].trim() && !/^(#{2,3} |```|\||> |- |\d+\. |!\[)/.test(lines[i].trim())) para.push(lines[i++].trim())
+    out.push(<p key={key()} className="mt-4"><Inline text={para.join(' ')} /></p>)
+  }
+
+  return <>{out}</>
+}

@@ -168,22 +168,17 @@
       }
     ],
     "structure_note": "You may also suggest an innovative structure, as long as it explains the research clearly.",
-    "resources_label": "Resources to download",
+    "resources_label": "Guides and resources",
     "resources": [
       {
-        "label": "Contribution guidelines (EN)",
-        "meta": "Word · .docx",
-        "file": "weekpaper_guide_en"
-      },
-      {
-        "label": "Contribution guidelines (FR)",
-        "meta": "Word · .docx",
-        "file": "weekpaper_guide_fr"
+        "label": "Contribution guidelines",
+        "meta": "Guide · 4 min read",
+        "to": "/guides/weekpaper"
       },
       {
         "label": "Finding research papers",
-        "meta": "Word · .docx · ACM, arXiv",
-        "file": "paper_search_guide_en"
+        "meta": "Guide · ACM, arXiv",
+        "to": "/guides/finding-papers"
       },
       {
         "label": "GAMA slide template",

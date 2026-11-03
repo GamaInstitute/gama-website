@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
-- The downloadable Word guides and templates (Research Summaries and WeekPaper) now come from the team's Google Drive folder, so they're always the latest version. English pages now offer the English edition of the "Finding research papers" guide instead of the French one
+- The contributor guides are now pages on the site instead of Word downloads: "Writing a research summary" (`/guides/research-summary`), "Presenting a paper on WeekPaper" (`/guides/weekpaper`) and "Finding research papers" (`/guides/finding-papers`, with ACM and arXiv screenshots and query examples by research area), in French and English. The Research Summaries and WeekPaper pages link to them. They replace the Word guides and the Word research summary templates; the only download left is the PowerPoint slide template for WeekPaper
 - WeekPaper featured episode updated to Episode 5, "Quand un simple prompt peut attaquer votre base de données" / "When a simple prompt can attack your database" (`youtu.be/fc_XkwO7kCk`, 31:27, aired 2026-10-29), filed under a new "Cybersécurité" / "Cybersecurity" topic with its own filter chip
 - WeekPaper featured episode updated to Episode 4, "Comment construire un système d'IA responsable ?" / "How do you build a responsible AI system?" (`youtu.be/yX2MjNb4Nbk`, 30:55, aired 2026-10-22), filed under a new "IA responsable" / "Responsible AI" topic with its own filter chip
 - Team page photos now share the same light background and framing, so the leadership cards look consistent

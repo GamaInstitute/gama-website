@@ -167,3 +167,13 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 **Alternative considered:** Keeping the files in `public/downloads/`. Same-origin, no dependency on Drive sharing settings, and versioned in git, but every document edit needs a developer and a deploy.
 
 **Revisit when:** a file's sharing is changed and the link breaks (visitors land on a Google sign-in page), Drive starts interposing a warning page (it does for files over ~100MB), or the team stops using Drive. The `.pptx` slide template is not in the Drive folder yet and is still self-hosted.
+
+**Note (2026-11-02):** superseded. The guides are now web pages (D-19), and the Word research summary templates were dropped too: the writing guide page replaces them. Nothing is served from Drive any more; the only download left is the self-hosted `.pptx` slide template.
+
+## D-19. Contributor guides are Markdown files rendered by a small in-house renderer
+
+**Why:** The three contributor guides (research summary, WeekPaper, finding papers) were Word downloads; they are now pages on the site (`/guides/*`), on the model of freeCodeCamp's publication style guide. Each is 750 to 1,350 words with tables, code blocks, screenshots and checklists. Locale JSON, the convention for all other copy, is impractical for that: every paragraph becomes an escaped string and tables become nested arrays. The text instead lives in `src/content/guides/{fr,en}/<slug>.md`, imported with `?raw`, and is rendered by `src/components/guides/Markdown.tsx` (about 150 lines). It supports only the syntax the guides use, adds no dependency, resolves internal links to router `Link`s and `download:<key>` to `DOWNLOADS`, and adds the deploy base path to images.
+
+**Alternative considered:** `react-markdown` + `remark-gfm` (or `marked`). Full CommonMark/GFM support, but tens of KB more in the guide chunk, plus extra wiring for router links and base paths. Also considered: keeping the guides as JSON blocks like the legal pages (D-16), which works for prose sections but not for tables, code and figures.
+
+**Revisit when:** the guides need syntax the renderer doesn't handle (nested lists, footnotes), or the site gets more long-form content (blog, summary detail pages). At that point a Markdown library or a content collection is worth its weight.

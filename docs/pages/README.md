@@ -13,6 +13,7 @@ Each page of the site has its own file here, written for someone who has never t
 | Research Summaries | `/research-summaries` | [research-summaries.md](research-summaries.md) | Live (sample content, see doc) |
 | Team | `/team` | [team.md](team.md) | Live (some sections hidden — see doc) |
 | Contact | `/contact` | [contact.md](contact.md) | Live |
+| Contributor guides | `/guides/research-summary`, `/guides/weekpaper`, `/guides/finding-papers` | [guides.md](guides.md) | Live |
 | Privacy Policy / Terms of Use / Open Access Policy | `/privacy`, `/terms`, `/open-access` | [legal.md](legal.md) | Live, pending legal review |
 
 **If you only need to change text, a number, or an image URL** — not layout or behavior — go straight to [docs/guides/content-editing.md](../guides/content-editing.md) instead. It's the fast path for pure content edits. Come here when you need to understand *how* a section works, add a new kind of section, or wire up something that isn't pure copy.

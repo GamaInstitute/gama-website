@@ -168,22 +168,17 @@
       }
     ],
     "structure_note": "Vous pouvez aussi proposer une structure innovante, si elle explique clairement la recherche.",
-    "resources_label": "Ressources à télécharger",
+    "resources_label": "Guides et ressources",
     "resources": [
       {
-        "label": "Guide de contribution (FR)",
-        "meta": "Word · .docx",
-        "file": "weekpaper_guide_fr"
-      },
-      {
-        "label": "Guide de contribution (EN)",
-        "meta": "Word · .docx",
-        "file": "weekpaper_guide_en"
+        "label": "Guide de contribution",
+        "meta": "Guide · 4 min de lecture",
+        "to": "/guides/weekpaper"
       },
       {
         "label": "Trouver des articles scientifiques",
-        "meta": "Word · .docx · ACM, arXiv",
-        "file": "paper_search_guide_fr"
+        "meta": "Guide · ACM, arXiv",
+        "to": "/guides/finding-papers"
       },
       {
         "label": "Modèle de diapositives GAMA",

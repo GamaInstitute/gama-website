@@ -15,7 +15,8 @@ import { Modal }          from '@/components/ui/Modal'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
 import { PresentationForm } from '@/components/weekpaper/PresentationForm'
-import { SOCIAL_LINKS, DOWNLOADS, type DownloadKey } from '@/constants'
+import { SOCIAL_LINKS }   from '@/constants'
+import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
 import type { TagVariant } from '@/types/course'
 
@@ -32,15 +33,6 @@ type EpisodeItem = {
 
 type FormatItem   = { label: string; value: string }
 type StepItem     = { title: string; desc: string }
-type ResourceItem = { label: string; meta: string; file: DownloadKey }
-
-function DownloadIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-    </svg>
-  )
-}
 
 type PlaylistItem = {
   label: string
@@ -272,22 +264,7 @@ export default function WeekPaperPage() {
               <Reveal delay={0.1} className="grid gap-[18px] sticky top-[100px] max-[960px]:static">
                 <div className="bg-surface border border-hairline rounded-lg p-[22px]">
                   <p className="text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted">{t('contribute.resources_label')}</p>
-                  <div className="grid gap-2.5 mt-4">
-                    {resources.map(r => (
-                      <a
-                        key={r.file}
-                        href={DOWNLOADS[r.file]}
-                        download
-                        className="flex gap-3 items-center py-3 px-[14px] border border-hairline-2 rounded-md transition-colors hover:border-copper hover:bg-[rgba(181,100,24,.05)]"
-                      >
-                        <span className="text-[var(--accent-ink)] flex-none"><DownloadIcon /></span>
-                        <span>
-                          <b className="block text-[0.92rem] font-semibold text-ink">{r.label}</b>
-                          <small className="block text-[0.76rem] text-ink-muted">{r.meta}</small>
-                        </span>
-                      </a>
-                    ))}
-                  </div>
+                  <ResourceList items={resources} className="mt-4" />
                 </div>
                 <div className="rounded-lg p-[22px] border bg-ink border-ink dark:bg-surface-2 dark:border-hairline-2">
                   <h3 className="font-display font-semibold text-[1.15rem] text-white dark:text-ink">{t('contribute.cta_h')}</h3>

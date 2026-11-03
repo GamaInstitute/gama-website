@@ -36,6 +36,7 @@ const PAGES = [
   { path: '/contact',    label: 'Contact' },
   { path: '/privacy',    label: 'Privacy' },
   { path: '/open-access', label: 'Open access' },
+  { path: '/guides/finding-papers', label: 'Guide (longest)' },
 ]
 
 // Deterministic — the main eager chunk was 340KB before the framer-motion

@@ -23,7 +23,7 @@
     "sample_body": "Les résumés et contributeurs ci-dessous illustrent la mise en page. Les publications originales citées sont réelles.",
     "by": "Research Summary par",
     "orig_by": "Publication originale de",
-    "read_paper": "Lire la publication originale",
+    "read_summary": "Lire le résumé de recherche",
     "image_placeholder": "image",
     "empty": "Aucun résumé ne correspond à votre recherche pour l'instant.",
     "pagination_label": "Pagination",
@@ -33,8 +33,7 @@
   "sidebar": {
     "cta_h": "Proposer un résumé",
     "cta_body": "Vous avez étudié un article ? Expliquez-le simplement. GAMA révise avant publication.",
-    "tpl_fr": "Modèle FR",
-    "tpl_en": "Modèle EN",
+    "guide": "Lire le guide de rédaction",
     "search_h": "Rechercher",
     "search_ph": "Titre, auteur, sujet…",
     "axes_h": "Axes",
@@ -44,6 +43,7 @@
     "all": "Tous les axes",
     "ai": "IA",
     "se": "Génie logiciel",
+    "cloud": "Infonuagique",
     "sec": "Cybersécurité",
     "rai": "IA responsable"
   },
@@ -113,23 +113,18 @@
     "eyebrow": "Contribuer",
     "h2": "Proposer un Research Summary",
     "body": "Vous avez étudié un article et vous voulez l'expliquer simplement ? Envoyez-nous votre résumé. L'équipe GAMA le révise avec vous avant publication.",
-    "tpl_label": "Modèle à suivre",
-    "tpl_body": "Structure en 5 parties, 500 à 900 mots, règles de rédaction et conseils pour les visuels. Rédigez en français ou en anglais.",
+    "tpl_label": "Guides",
+    "tpl_body": "Structure en 5 parties, 500 à 900 mots, règles de rédaction et conseils pour les visuels : tout est dans le guide de rédaction.",
     "files": [
       {
-        "label": "Modèle en français",
-        "meta": "Word · .docx",
-        "file": "summary_template_fr"
-      },
-      {
-        "label": "Modèle en anglais",
-        "meta": "Word · .docx",
-        "file": "summary_template_en"
+        "label": "Rédiger un résumé de recherche",
+        "meta": "Guide · 4 min de lecture",
+        "to": "/guides/research-summary"
       },
       {
         "label": "Trouver des articles scientifiques",
-        "meta": "Word · .docx · ACM, arXiv",
-        "file": "paper_search_guide_fr"
+        "meta": "Guide · ACM, arXiv",
+        "to": "/guides/finding-papers"
       }
     ],
     "includes_label": "Chaque résumé présente",
@@ -157,7 +152,8 @@
     "paper_title": "Titre du papier original",
     "paper_url": "Lien vers le papier original",
     "summary": "Votre résumé",
-    "summary_hint": "Document Word ou PDF, 10 Mo max, rédigé à partir du modèle",
+    "summary_hint": "Document Word ou PDF, 10 Mo max, rédigé selon le",
+    "summary_guide": "guide de rédaction",
     "consent": "J'accepte les <terms>Conditions d'utilisation</terms> et la <privacy>Politique de confidentialité</privacy>. Je confirme être l'auteur·e de ce résumé et, s'il est retenu, j'autorise Gama Institute à le publier avec mon nom, ma biographie, mon établissement et ma photo, sous licence CC BY 4.0 (<openaccess>Politique de libre accès</openaccess>).",
     "cancel": "Annuler",
     "submit": "Soumettre",

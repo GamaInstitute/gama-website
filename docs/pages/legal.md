@@ -37,7 +37,7 @@ The Privacy Policy describes concrete behaviour. If you change any of these, upd
 
 ## The Open Access Policy
 
-Modelled on the [Montreal AI Ethics Institute's open access policy](https://montrealethics.ai/our-open-access-policy/). Original content, published Research Summaries, WeekPaper episodes and the downloadable guides and templates (`DOWNLOADS` in `src/constants/index.ts`) are **CC BY 4.0**, unless otherwise noted. Why CC BY rather than a non-commercial licence: [D-17](../../DECISIONS.md).
+Modelled on the [Montreal AI Ethics Institute's open access policy](https://montrealethics.ai/our-open-access-policy/). Original content, published Research Summaries, WeekPaper episodes, the contributor guides and the downloadable templates are **CC BY 4.0**, unless otherwise noted. Why CC BY rather than a non-commercial licence: [D-17](../../DECISIONS.md).
 
 Three other places must stay consistent with it. Change them together:
 

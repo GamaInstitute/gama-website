@@ -3,6 +3,8 @@ import { Trans } from 'react-i18next'
 
 // Legal links inside forms open in a new tab so a half-filled form isn't lost.
 const LINK_CLS = 'font-semibold text-[var(--link)] underline-offset-2 hover:underline'
+// Plain <a>, not a router Link (new tab), so the deploy base path must be added by hand.
+const BASE = import.meta.env.BASE_URL
 
 /**
  * Renders an i18n string that may contain <privacy>, <terms> or <openaccess> tags
@@ -14,9 +16,9 @@ export function LegalText({ i18nKey, ns = 'common', linkClassName = LINK_CLS }: 
       i18nKey={i18nKey}
       ns={ns}
       components={{
-        privacy: <a href="/privacy" target="_blank" rel="noopener" className={linkClassName} />,
-        terms:   <a href="/terms"   target="_blank" rel="noopener" className={linkClassName} />,
-        openaccess: <a href="/open-access" target="_blank" rel="noopener" className={linkClassName} />,
+        privacy: <a href={`${BASE}privacy`} target="_blank" rel="noopener" className={linkClassName} />,
+        terms:   <a href={`${BASE}terms`}   target="_blank" rel="noopener" className={linkClassName} />,
+        openaccess: <a href={`${BASE}open-access`} target="_blank" rel="noopener" className={linkClassName} />,
       }}
     />
   )

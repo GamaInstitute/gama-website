@@ -50,5 +50,10 @@
     "privacy": "Politique de confidentialité",
     "terms": "Conditions d'utilisation",
     "open_access": "Libre accès"
+  },
+  "guides": {
+    "eyebrow": "Guide",
+    "toc": "Sur cette page",
+    "ready": "Prêt·e à contribuer ?"
   }
 }

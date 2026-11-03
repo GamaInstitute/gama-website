@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Helmet }         from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
+import { Link }           from 'react-router-dom'
 
 import { Eyebrow }        from '@/components/ui/Eyebrow'
 import { Button }         from '@/components/ui/Button'
@@ -9,7 +10,7 @@ import { Reveal }         from '@/components/ui/Reveal'
 import { Modal }          from '@/components/ui/Modal'
 import { SummaryForm }    from '@/components/research/SummaryForm'
 import { formatEpisodeDate } from '@/lib/formatDate'
-import { DOWNLOADS, type DownloadKey } from '@/constants'
+import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 
 type SummaryItem = {
   id: string
@@ -24,7 +25,6 @@ type SummaryItem = {
   paper_url: string
 }
 
-type TemplateFile = { label: string; meta: string; file: DownloadKey }
 
 const PAGE_SIZE = 5
 const RECENT_CONTRIBUTORS = 4
@@ -42,14 +42,6 @@ const AVATAR_BG: Record<string, string> = {
 const H2_CLS = 'font-display font-semibold text-[clamp(1.9rem,3.4vw,2.9rem)] tracking-[-0.02em] text-ink'
 const LABEL_CLS = 'text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted'
 const BOX_CLS = 'bg-surface border border-hairline rounded-lg p-[22px]'
-
-function DownloadIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-    </svg>
-  )
-}
 
 function Avatar({ initials, color, size = 30 }: { initials: string; color: string; size?: number }) {
   return (
@@ -74,7 +66,7 @@ export default function ResearchSummariesPage() {
   const items = t('items',                 { returnObjects: true }) as SummaryItem[]
   const axes  = t('axes',                  { returnObjects: true }) as Record<string, string>
   const steps = t('hero.steps',            { returnObjects: true }) as string[]
-  const files = t('contribute.files',      { returnObjects: true }) as TemplateFile[]
+  const files = t('contribute.files',      { returnObjects: true }) as ResourceItem[]
   const includes = t('contribute.includes', { returnObjects: true }) as string[]
 
   const visible = useMemo(() => {
@@ -187,7 +179,7 @@ export default function ResearchSummariesPage() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-[0.35em] mt-2 text-[0.9rem] font-semibold text-[var(--link)] group"
                           >
-                            {t('list.read_paper')}
+                            {t('list.read_summary')}
                             <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">↗</span>
                           </a>
                         </p>
@@ -233,13 +225,9 @@ export default function ResearchSummariesPage() {
                   <h3 className="font-display font-semibold text-[1.15rem] text-white dark:text-ink">{t('sidebar.cta_h')}</h3>
                   <p className="text-[0.9rem] text-white/75 dark:text-ink-soft mt-2.5 mb-4">{t('sidebar.cta_body')}</p>
                   <Button variant="accent" size="sm" onClick={openForm}>{submitLabel}</Button>
-                  <div className="flex gap-[14px] mt-[14px] flex-wrap">
-                    {[{ href: DOWNLOADS.summary_template_fr, label: t('sidebar.tpl_fr') }, { href: DOWNLOADS.summary_template_en, label: t('sidebar.tpl_en') }].map(tpl => (
-                      <a key={tpl.href} href={tpl.href} download className="inline-flex gap-1.5 items-center text-[0.84rem] font-semibold text-white/85 hover:text-white dark:text-ink-soft dark:hover:text-ink">
-                        <DownloadIcon />{tpl.label}
-                      </a>
-                    ))}
-                  </div>
+                  <Link to="/guides/research-summary" className="block mt-[14px] text-[0.84rem] font-semibold text-white/85 hover:text-white dark:text-ink-soft dark:hover:text-ink">
+                    {t('sidebar.guide')} <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
 
                 <div className={BOX_CLS}>
@@ -305,22 +293,7 @@ export default function ResearchSummariesPage() {
               <div className={`${BOX_CLS} mt-[30px]`}>
                 <p className={LABEL_CLS}>{t('contribute.tpl_label')}</p>
                 <p className="mt-2 text-[0.92rem] text-ink-soft">{t('contribute.tpl_body')}</p>
-                <div className="grid grid-cols-2 gap-2.5 mt-4 max-[480px]:grid-cols-1">
-                  {files.map(f => (
-                    <a
-                      key={f.file}
-                      href={DOWNLOADS[f.file]}
-                      download
-                      className="flex gap-3 items-center py-3 px-[14px] border border-hairline-2 rounded-md transition-colors hover:border-copper hover:bg-[rgba(181,100,24,.05)]"
-                    >
-                      <span className="text-[var(--accent-ink)] flex-none"><DownloadIcon /></span>
-                      <span>
-                        <b className="block text-[0.92rem] font-semibold text-ink">{f.label}</b>
-                        <small className="block text-[0.76rem] text-ink-muted">{f.meta}</small>
-                      </span>
-                    </a>
-                  ))}
-                </div>
+                <ResourceList items={files} className="grid-cols-2 mt-4 max-[480px]:grid-cols-1" />
               </div>
             </Reveal>
 

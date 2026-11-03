@@ -83,11 +83,11 @@ To edit an existing course's text (title, description, etc.), you only need `tra
 
 Team photos and partner logos are plain URLs (`photo` / `logo` fields) pointing at external hosts (e.g. Wikimedia, randomuser.me placeholders). To swap an image, replace the URL string, there's no local image pipeline to run. If you want to use a locally-hosted image instead, drop the file in `public/` and reference it as `/your-file.png`.
 
-## Downloadable guides and templates
+## Contributor guides and templates
 
-The Word guides and templates offered on the Research Summaries and WeekPaper pages are in the team's Google Drive folder, and the site links straight to them. **To update one, no code change is needed:** in Drive, right-click the file → *File information* → *Manage versions* → *Upload new version*. The download link stays the same, so the site serves the new version immediately.
+The three guides (writing a research summary, presenting on WeekPaper, finding research papers) are web pages. Their text is in plain Markdown files, one per language, in `src/content/guides/fr/` and `src/content/guides/en/`: edit both, like any other text. The supported formatting is listed in [docs/pages/guides.md](../pages/guides.md).
 
-Two things break the link: uploading the update as a *separate* file (it gets a new link; a developer then updates `DOWNLOADS` in [`src/constants/index.ts`](../../src/constants/index.ts)), and changing the file's sharing away from "Anyone with the link" (visitors get a Google sign-in page instead of the file). The PowerPoint slide template is the exception: it's still in `public/downloads/`.
+The only downloadable file is the PowerPoint slide template for WeekPaper, in `public/downloads/`. To update it, overwrite the file under the same name.
 
 ## Navigation, footer, and site-wide labels
 

@@ -23,7 +23,7 @@
     "sample_body": "The summaries and contributors below illustrate the layout. The original papers cited are real.",
     "by": "Research Summary by",
     "orig_by": "Original paper by",
-    "read_paper": "Read the original paper",
+    "read_summary": "Read the research summary",
     "image_placeholder": "image",
     "empty": "No summary matches your search yet.",
     "pagination_label": "Pagination",
@@ -33,8 +33,7 @@
   "sidebar": {
     "cta_h": "Submit a summary",
     "cta_body": "Studied a paper? Explain it simply. GAMA reviews before publication.",
-    "tpl_fr": "FR template",
-    "tpl_en": "EN template",
+    "guide": "Read the writing guide",
     "search_h": "Search",
     "search_ph": "Title, author, topic…",
     "axes_h": "Areas",
@@ -44,6 +43,7 @@
     "all": "All areas",
     "ai": "AI",
     "se": "Software eng.",
+    "cloud": "Cloud computing",
     "sec": "Cybersecurity",
     "rai": "Responsible AI"
   },
@@ -113,23 +113,18 @@
     "eyebrow": "Contribute",
     "h2": "Submit a Research Summary",
     "body": "Have you studied a paper and want to explain it simply? Send us your summary. The GAMA team reviews it with you before publication.",
-    "tpl_label": "Template to follow",
-    "tpl_body": "5-part structure, 500 to 900 words, writing rules and tips for visuals. Write in English or French.",
+    "tpl_label": "Guides",
+    "tpl_body": "5-part structure, 500 to 900 words, writing rules and tips for visuals: it is all in the writing guide.",
     "files": [
       {
-        "label": "English template",
-        "meta": "Word · .docx",
-        "file": "summary_template_en"
-      },
-      {
-        "label": "French template",
-        "meta": "Word · .docx",
-        "file": "summary_template_fr"
+        "label": "Writing a research summary",
+        "meta": "Guide · 4 min read",
+        "to": "/guides/research-summary"
       },
       {
         "label": "Finding research papers",
-        "meta": "Word · .docx · ACM, arXiv",
-        "file": "paper_search_guide_en"
+        "meta": "Guide · ACM, arXiv",
+        "to": "/guides/finding-papers"
       }
     ],
     "includes_label": "Each summary includes",
@@ -157,7 +152,8 @@
     "paper_title": "Original paper title",
     "paper_url": "Link to the original paper",
     "summary": "Your summary",
-    "summary_hint": "Word document or PDF, 10 MB max, written from the template",
+    "summary_hint": "Word document or PDF, 10 MB max, written following the",
+    "summary_guide": "writing guide",
     "consent": "I accept the <terms>Terms of Use</terms> and the <privacy>Privacy Policy</privacy>. I confirm I wrote this summary and, if it is accepted, I authorize Gama Institute to publish it with my name, bio, institution and photo, under a CC BY 4.0 licence (<openaccess>Open Access Policy</openaccess>).",
     "cancel": "Cancel",
     "submit": "Submit",

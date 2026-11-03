@@ -1,6 +1,6 @@
 # Research Summaries page
 
-_Last verified: 2026-10-31_
+_Last verified: 2026-11-02_
 
 - **Route:** `/research-summaries`
 - **File:** [src/pages/ResearchSummariesPage.tsx](../../src/pages/ResearchSummariesPage.tsx)
@@ -30,17 +30,17 @@ Custom padding (not `PageHero`, there's no `NetworkArt`). Left column: eyebrow, 
 
 Two columns (list + 320px sidebar). Below 960px they stack and the sidebar boxes flow into an auto-fit grid. On desktop the sidebar is `sticky`.
 
-Each entry of `items[]` renders as one article: title, date (`date_iso`, formatted with `formatEpisodeDate`), a square image placeholder, then "Research Summary by **author**, bio", "Original paper by …" and an external link to `paper_url`.
+Each entry of `items[]` renders as one article: title, date (`date_iso`, formatted with `formatEpisodeDate`), a square image placeholder, then "Research Summary by **author**, bio", "Original paper by …" and a "Read the research summary" link (`list.read_summary`). **That link is a placeholder:** there's no summary text or per-summary page yet, so it currently points to `paper_url` (the original paper). When summaries get their own page or file, change the `href` in `ResearchSummariesPage.tsx`; the label already says the right thing.
 
 - **Search** filters on title, author, bio, `paper_authors` and the axis label (case-insensitive substring).
-- **Axes** chips come from the `axes` object. Its keys must match each item's `axis` (`all` is the reset).
+- **Axes** chips come from the `axes` object, one per research axis on the Home page (AI, software engineering, cloud computing, cybersecurity, responsible AI). Its keys must match each item's `axis` (`all` is the reset).
 - **Pagination** is client-side, `PAGE_SIZE = 5` at the top of the page file. Hidden while everything fits on one page.
 - **Recent contributors** are the first 4 distinct authors in `items[]`, so keep `items[]` sorted newest first. Avatar colour comes from `color` (`c1`…`c5` → copper, copper-bright, sage, teal-mid, teal; see `AVATAR_BG`).
-- The dark CTA box offers the FR/EN templates (paths are constants at the top of the page file).
+- The dark CTA box opens the form and links to the writing guide (`sidebar.guide`).
 
 ### 3. Contribute
 
-Left: heading, body, CTA, and a "Template to follow" box listing `contribute.files[]` (each `{ label, meta, file }`, where `file` is a key of `DOWNLOADS` in `src/constants/index.ts`). Right: the `contribute.includes[]` checklist.
+Left: heading, body, CTA, and a "Guides" box listing `contribute.files[]` with `ResourceList` (`src/components/guides/ResourceList.tsx`), each `{ label, meta, to }` linking to a [guide page](guides.md). The sidebar box and the form's file hint also link to the writing guide; there are no Word templates to download. Right: the `contribute.includes[]` checklist.
 
 ## Submission flow
 
@@ -59,7 +59,8 @@ Like the contact form, this only works on Cloudflare Pages (production, or `npm 
 
 **Add a topic.** Add a key to `axes` in both locale files and use it as `axis` on items. Order in `axes` is the order of the chips.
 
-**Replace a template.** The templates and guide are in the team's Google Drive folder, linked as direct downloads from `DOWNLOADS` in `src/constants/index.ts` (used by the locale files, the sidebar box and `SummaryForm.tsx`). Upload a new version of the existing Drive file ("Manage versions") and the site picks it up with no deploy. A brand-new Drive file has a new ID: update its `DOWNLOADS` entry. Files must stay shared as "Anyone with the link".
+**Edit the writing guide.** It's a web page: edit `src/content/guides/{fr,en}/research-summary.md` (see [guides.md](guides.md)).
+
 
 **Change the upload limits.** Edit `SUMMARY_FILE` / `PHOTO_FILE` in `src/types/researchSummary.ts` (used by both client and function), then the hint text in `form.photo_hint` / `form.summary_hint` and the `*_size` error messages. Keep the combined total well under Resend's 40MB per-email limit.
 
@@ -68,5 +69,5 @@ Like the contact form, this only works on Cloudflare Pages (production, or `npm 
 The design belongs to a larger planned site, so some of its pieces don't exist here yet:
 
 - Its header has "Research" and "Community" dropdowns, plus Research Fellows, Bootcamps, Opportunities and Donate pages. Here the page is a single top-level nav item, and the "Community / Research Summaries" breadcrumb is dropped (the eyebrow carries the same context).
-- Its "Read more" links and contributor-name links point to `#`, because summary detail pages and contributor profiles don't exist yet. Here entries link to the real original paper and contributor names are plain text.
+- Its "Read more" links and contributor-name links point to `#`, because summary detail pages and contributor profiles don't exist yet. Here the "Read the research summary" link temporarily points to the original paper (see above) and contributor names are plain text.
 - Its pagination was a static mock-up. Here it's real client-side pagination.
