@@ -29,7 +29,7 @@ export const CONTACT_EMAIL = {
 } as const
 
 // Files offered for download. Only the PowerPoint slide template: the contributor
-// guides are web pages (src/content/guides/), not documents.
+// guidelines are a web page (src/content/publication-guidelines/), not documents.
 export const DOWNLOADS = {
   slide_template: `${import.meta.env.BASE_URL}downloads/GAMA_Institute_Slide_Template.pptx`,
 } as const

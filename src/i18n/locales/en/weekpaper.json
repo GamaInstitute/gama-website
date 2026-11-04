@@ -125,7 +125,7 @@
   "contribute": {
     "eyebrow": "Contribute",
     "h2": "Present a paper on WeekPaper",
-    "body": "Students and community members can present a paper in software engineering, AI or a related field. Presenters are welcome: you only need to understand the paper well enough to explain its ideas accurately.",
+    "body": "Students and community members can present a paper related to one of our five research axes: AI and machine learning, software engineering, cloud computing, cybersecurity, and responsible and trustworthy AI. You don't need to be an expert: you only need to understand the paper well enough to explain its ideas accurately.",
     "format": [
       {
         "label": "Voice",
@@ -140,7 +140,7 @@
         "value": "Optional"
       }
     ],
-    "structure_label": "GAMA presentation structure",
+    "structure_label": "Recommended GAMA structure, or propose an innovative one",
     "structure": [
       {
         "title": "Intro",
@@ -167,18 +167,12 @@
         "desc": "An open question that invites viewers to share their perspective."
       }
     ],
-    "structure_note": "You may also suggest an innovative structure, as long as it explains the research clearly.",
-    "resources_label": "Guides and resources",
+    "resources_label": "Guide and resources",
     "resources": [
       {
-        "label": "Contribution guidelines",
-        "meta": "Guide · 4 min read",
-        "to": "/guides/weekpaper"
-      },
-      {
-        "label": "Finding research papers",
-        "meta": "Guide · ACM, arXiv",
-        "to": "/guides/finding-papers"
+        "label": "GAMA Institute Publication Guidelines",
+        "meta": "Guide · WeekPaper section",
+        "to": "/publication-guidelines#weekpaper"
       },
       {
         "label": "GAMA slide template",

@@ -145,7 +145,7 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
           hint={
             <>
               {t('form.summary_hint')}{' '}
-              <a className="font-semibold text-[var(--link)] hover:underline" href={`${import.meta.env.BASE_URL}guides/research-summary`} target="_blank" rel="noopener">
+              <a className="font-semibold text-[var(--link)] hover:underline" href={`${import.meta.env.BASE_URL}publication-guidelines#research-summaries`} target="_blank" rel="noopener">
                 {t('form.summary_guide')}
               </a>.
             </>

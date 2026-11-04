@@ -20,9 +20,11 @@ type SummaryItem = {
   author: string
   initials: string
   color: string
-  bio: string
-  paper_authors: string
-  paper_url: string
+  // Link to the published summary
+  url: string
+  // Optional: contributor bio and authors of the summarized paper, shown when present
+  bio?: string
+  paper_authors?: string
 }
 
 
@@ -73,7 +75,7 @@ export default function ResearchSummariesPage() {
     const q = query.trim().toLocaleLowerCase()
     return items.filter(it =>
       (axis === 'all' || it.axis === axis) &&
-      (!q || [it.title, it.author, it.bio, it.paper_authors, axes[it.axis] ?? '']
+      (!q || [it.title, it.author, it.bio ?? '', it.paper_authors ?? '', axes[it.axis] ?? '']
         .some(s => s.toLocaleLowerCase().includes(q)))
     )
   }, [items, axes, axis, query])
@@ -143,11 +145,6 @@ export default function ResearchSummariesPage() {
         {/* ── SUMMARIES LIST + SIDEBAR ──────────────────────── */}
         <section id="summaries" className="bg-bg-alt pt-[clamp(48px,6vw,80px)] pb-[clamp(64px,9vw,124px)] scroll-mt-[72px]">
           <div className="wrap">
-            <p className="flex gap-3 items-center text-[0.88rem] text-ink-muted py-3 px-4 border border-dashed border-hairline-2 rounded-md mb-7 bg-surface max-[520px]:flex-col max-[520px]:items-start max-[520px]:gap-1">
-              <b className="font-mono text-[0.7rem] tracking-[0.06em] uppercase text-ink-soft font-semibold flex-none">{t('list.sample_label')}</b>
-              <span>{t('list.sample_body')}</span>
-            </p>
-
             <div className="grid grid-cols-[minmax(0,1fr)_320px] gap-[clamp(32px,5vw,72px)] items-start max-[960px]:grid-cols-1">
               {/* Main list */}
               <div>
@@ -161,23 +158,35 @@ export default function ResearchSummariesPage() {
                       <h3 className="font-display font-semibold text-[clamp(1.25rem,2vw,1.55rem)] leading-[1.28] tracking-[-0.015em] text-ink">
                         {it.title}
                       </h3>
-                      <p className="mt-2 mb-4 text-[0.84rem] font-semibold text-ink-muted tracking-[0.02em]">
+                      <p className="mt-2 mb-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.84rem] font-semibold text-ink-muted tracking-[0.02em]">
                         <time dateTime={it.date_iso}>{formatEpisodeDate(it.date_iso, i18n.language)}</time>
+                        <span aria-hidden="true">·</span>
+                        {/* Axis tag: filters the list by this axis, same as the sidebar chips */}
+                        <button
+                          type="button"
+                          onClick={() => { setAxis(it.axis); goToPage(1) }}
+                          aria-label={t('list.filter_axis', { axis: axes[it.axis] })}
+                          className="inline-flex items-center text-[0.7rem] font-semibold tracking-[0.08em] uppercase py-[0.3em] px-[0.7em] rounded-pill border text-[var(--accent-ink)] bg-[rgba(181,100,24,.08)] border-[rgba(181,100,24,.2)] transition-colors hover:bg-[rgba(181,100,24,.16)] focus-visible:outline-none focus-visible:shadow-[var(--ring)]"
+                        >
+                          {axes[it.axis]}
+                        </button>
                       </p>
                       <div className="grid grid-cols-[112px_minmax(0,1fr)] gap-5 items-start max-[520px]:grid-cols-[72px_1fr] max-[520px]:gap-[14px]">
                         <div className="relative aspect-square rounded-md overflow-hidden border border-hairline" aria-hidden="true">
                           <div className="ph"><span className="!text-[0.62rem]">{t('list.image_placeholder')}</span></div>
                         </div>
                         <p className="m-0 text-[0.95rem] text-ink-soft leading-[1.6]">
-                          <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>, {it.bio}
-                          <span className="block mt-1.5 italic text-ink-muted">
-                            {t('list.orig_by')} {it.paper_authors}
-                          </span>
+                          <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>{it.bio && `, ${it.bio}`}
+                          {it.paper_authors && (
+                            <span className="block mt-1.5 italic text-ink-muted">
+                              {t('list.orig_by')} {it.paper_authors}
+                            </span>
+                          )}
                           <a
-                            href={it.paper_url}
+                            href={it.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-[0.35em] mt-2 text-[0.9rem] font-semibold text-[var(--link)] group"
+                            className="flex w-fit items-center gap-[0.35em] mt-2 text-[0.9rem] font-semibold text-[var(--link)] group"
                           >
                             {t('list.read_summary')}
                             <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">↗</span>
@@ -225,7 +234,7 @@ export default function ResearchSummariesPage() {
                   <h3 className="font-display font-semibold text-[1.15rem] text-white dark:text-ink">{t('sidebar.cta_h')}</h3>
                   <p className="text-[0.9rem] text-white/75 dark:text-ink-soft mt-2.5 mb-4">{t('sidebar.cta_body')}</p>
                   <Button variant="accent" size="sm" onClick={openForm}>{submitLabel}</Button>
-                  <Link to="/guides/research-summary" className="block mt-[14px] text-[0.84rem] font-semibold text-white/85 hover:text-white dark:text-ink-soft dark:hover:text-ink">
+                  <Link to="/publication-guidelines#research-summaries" className="block mt-[14px] text-[0.84rem] font-semibold text-white/85 hover:text-white dark:text-ink-soft dark:hover:text-ink">
                     {t('sidebar.guide')} <span aria-hidden="true">→</span>
                   </Link>
                 </div>
@@ -293,7 +302,7 @@ export default function ResearchSummariesPage() {
               <div className={`${BOX_CLS} mt-[30px]`}>
                 <p className={LABEL_CLS}>{t('contribute.tpl_label')}</p>
                 <p className="mt-2 text-[0.92rem] text-ink-soft">{t('contribute.tpl_body')}</p>
-                <ResourceList items={files} className="grid-cols-2 mt-4 max-[480px]:grid-cols-1" />
+                <ResourceList items={files} className="mt-4" />
               </div>
             </Reveal>
 

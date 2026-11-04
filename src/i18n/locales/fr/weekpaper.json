@@ -125,7 +125,7 @@
   "contribute": {
     "eyebrow": "Contribuer",
     "h2": "Présentez un article dans WeekPaper",
-    "body": "Étudiants et membres de la communauté peuvent présenter un article en génie logiciel, en IA ou dans un domaine connexe. Les présentations sont les bienvenues : il suffit de bien comprendre l'article pour en expliquer fidèlement les idées.",
+    "body": "Étudiants et membres de la communauté peuvent présenter un article lié à l'un de nos cinq axes de recherche : IA et apprentissage automatique, génie logiciel, infonuagique, cybersécurité, IA responsable et fiable. Nul besoin d'être expert : il suffit de bien comprendre l'article pour en expliquer fidèlement les idées.",
     "format": [
       {
         "label": "Voix",
@@ -140,7 +140,7 @@
         "value": "Facultatif"
       }
     ],
-    "structure_label": "Structure de présentation GAMA",
+    "structure_label": "Structure GAMA recommandée, ou proposez une structure innovante",
     "structure": [
       {
         "title": "Introduction",
@@ -167,18 +167,12 @@
         "desc": "Une question ouverte qui invite les spectateurs à partager leur point de vue."
       }
     ],
-    "structure_note": "Vous pouvez aussi proposer une structure innovante, si elle explique clairement la recherche.",
-    "resources_label": "Guides et ressources",
+    "resources_label": "Guide et ressources",
     "resources": [
       {
-        "label": "Guide de contribution",
-        "meta": "Guide · 4 min de lecture",
-        "to": "/guides/weekpaper"
-      },
-      {
-        "label": "Trouver des articles scientifiques",
-        "meta": "Guide · ACM, arXiv",
-        "to": "/guides/finding-papers"
+        "label": "GAMA Institute Publication Guidelines",
+        "meta": "Guide · Section WeekPaper",
+        "to": "/publication-guidelines#weekpaper"
       },
       {
         "label": "Modèle de diapositives GAMA",

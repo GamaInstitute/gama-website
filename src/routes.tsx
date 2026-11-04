@@ -49,11 +49,7 @@ export const routes: RouteObject[] = [
       { path: 'week-paper', lazy: () => import('@/pages/WeekPaperPage').then(m => ({ Component: m.default })) },
       { path: 'research-summaries', lazy: () => import('@/pages/ResearchSummariesPage').then(m => ({ Component: m.default })) },
       { path: 'team',       lazy: () => import('@/pages/TeamPage').then(m => ({ Component: m.default })) },
-      // One route per guide (not `guides/:slug`) so the SSG pass knows every page to prerender.
-      ...(['research-summary', 'weekpaper', 'finding-papers'] as const).map(slug => ({
-        path: `guides/${slug}`,
-        lazy: () => import('@/pages/GuidePage').then(m => ({ Component: () => <m.GuidePage slug={slug} /> })),
-      })),
+      { path: 'publication-guidelines', lazy: () => import('@/pages/PublicationGuidelinesPage').then(m => ({ Component: m.default })) },
       { path: 'privacy',    lazy: () => import('@/pages/PrivacyPage').then(m => ({ Component: m.default })) },
       { path: 'terms',      lazy: () => import('@/pages/TermsPage').then(m => ({ Component: m.default })) },
       { path: 'open-access', lazy: () => import('@/pages/OpenAccessPage').then(m => ({ Component: m.default })) },

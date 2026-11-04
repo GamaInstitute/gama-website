@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { DOWNLOADS, type DownloadKey } from '@/constants'
 
-/** A guide page (`to`) or a downloadable file (`file`, a key of DOWNLOADS). */
+/** A page on the site (`to`) or a downloadable file (`file`, a key of DOWNLOADS). */
 export type ResourceItem = { label: string; meta: string; to?: string; file?: DownloadKey }
 
 const CARD_CLS = 'flex gap-3 items-center py-3 px-[14px] border border-hairline-2 rounded-md transition-colors hover:border-copper hover:bg-[rgba(181,100,24,.05)]'
@@ -34,7 +34,7 @@ function Body({ item }: { item: ResourceItem }) {
   )
 }
 
-/** Cards for the contribute sections: guides open as pages, templates download. */
+/** Cards for the contribute sections: the guidelines open as a page, the slide template downloads. */
 export function ResourceList({ items, className = '' }: { items: ResourceItem[]; className?: string }) {
   return (
     <div className={`grid gap-2.5 ${className}`}>

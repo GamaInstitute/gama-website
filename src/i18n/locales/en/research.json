@@ -19,11 +19,10 @@
   },
   "list": {
     "h2": "Research Summaries",
-    "sample_label": "Sample content",
-    "sample_body": "The summaries and contributors below illustrate the layout. The original papers cited are real.",
     "by": "Research Summary by",
     "orig_by": "Original paper by",
     "read_summary": "Read the research summary",
+    "filter_axis": "Show {{axis}} summaries",
     "image_placeholder": "image",
     "empty": "No summary matches your search yet.",
     "pagination_label": "Pagination",
@@ -33,7 +32,7 @@
   "sidebar": {
     "cta_h": "Submit a summary",
     "cta_body": "Studied a paper? Explain it simply. GAMA reviews before publication.",
-    "guide": "Read the writing guide",
+    "guide": "Read the Publication Guidelines",
     "search_h": "Search",
     "search_ph": "Title, author, topic…",
     "axes_h": "Areas",
@@ -49,82 +48,27 @@
   },
   "items": [
     {
-      "id": "lost-in-the-middle",
+      "id": "financial-fraud-knowledge-graphs",
       "axis": "ai",
-      "title": "Why language models forget the middle of their documents",
-      "date_iso": "2026-04-02",
-      "author": "Aminata Traoré",
-      "initials": "AT",
-      "color": "c4",
-      "bio": "master's student in computer science at Université de Montréal, working on RAG systems.",
-      "paper_authors": "Nelson F. Liu, Kevin Lin, John Hewitt …",
-      "paper_url": "https://arxiv.org/abs/2307.03172"
-    },
-    {
-      "id": "transformer-without-equations",
-      "axis": "ai",
-      "title": "The Transformer explained without equations",
-      "date_iso": "2026-03-12",
-      "author": "Mariam Ouédraogo",
-      "initials": "MO",
+      "title": "How to Detect Financial Fraud Patterns with Knowledge Graphs: A Production Guide",
+      "date_iso": "2026-10-30",
+      "author": "Kamal Kishore",
+      "initials": "KK",
       "color": "c1",
-      "bio": "undergraduate software engineering student at Université Laval.",
-      "paper_authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar …",
-      "paper_url": "https://arxiv.org/abs/1706.03762"
-    },
-    {
-      "id": "ml-technical-debt",
-      "axis": "se",
-      "title": "The hidden technical debt of machine learning",
-      "date_iso": "2026-02-26",
-      "author": "Kevin Mbarga",
-      "initials": "KM",
-      "color": "c4",
-      "bio": "PhD student at Polytechnique Montréal, working on MLOps.",
-      "paper_authors": "D. Sculley, Gary Holt, Daniel Golovin …",
-      "paper_url": "https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html"
-    },
-    {
-      "id": "swe-bench",
-      "axis": "se",
-      "title": "Can LLMs fix real bugs?",
-      "date_iso": "2026-02-05",
-      "author": "Sophie Gagnon",
-      "initials": "SG",
-      "color": "c2",
-      "bio": "master's student at Université de Sherbrooke, interested in software testing.",
-      "paper_authors": "Carlos E. Jimenez, John Yang, Alexander Wettig …",
-      "paper_url": "https://arxiv.org/abs/2310.06770"
-    },
-    {
-      "id": "masakhane",
-      "axis": "ai",
-      "title": "Masakhane: translation for Africa, by Africa",
-      "date_iso": "2026-01-22",
-      "author": "Ibrahima Faye",
-      "initials": "IF",
-      "color": "c3",
-      "bio": "master's student at Université Gaston Berger, working on Wolof.",
-      "paper_authors": "Iroro Orife, Julia Kreutzer, Blessing Sibanda …",
-      "paper_url": "https://arxiv.org/abs/2003.11529"
+      "url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
     }
   ],
   "contribute": {
     "eyebrow": "Contribute",
     "h2": "Submit a Research Summary",
     "body": "Have you studied a paper and want to explain it simply? Send us your summary. The GAMA team reviews it with you before publication.",
-    "tpl_label": "Guides",
-    "tpl_body": "5-part structure, 500 to 900 words, writing rules and tips for visuals: it is all in the writing guide.",
+    "tpl_label": "Guide",
+    "tpl_body": "5-part structure, 500 to 900 words, writing rules and tips for visuals: it is all in our publication guidelines.",
     "files": [
       {
-        "label": "Writing a research summary",
-        "meta": "Guide · 4 min read",
-        "to": "/guides/research-summary"
-      },
-      {
-        "label": "Finding research papers",
-        "meta": "Guide · ACM, arXiv",
-        "to": "/guides/finding-papers"
+        "label": "GAMA Institute Publication Guidelines",
+        "meta": "Guide · Research Summaries section",
+        "to": "/publication-guidelines#research-summaries"
       }
     ],
     "includes_label": "Each summary includes",
@@ -153,7 +97,7 @@
     "paper_url": "Link to the original paper",
     "summary": "Your summary",
     "summary_hint": "Word document or PDF, 10 MB max, written following the",
-    "summary_guide": "writing guide",
+    "summary_guide": "Publication Guidelines",
     "consent": "I accept the <terms>Terms of Use</terms> and the <privacy>Privacy Policy</privacy>. I confirm I wrote this summary and, if it is accepted, I authorize Gama Institute to publish it with my name, bio, institution and photo, under a CC BY 4.0 licence (<openaccess>Open Access Policy</openaccess>).",
     "cancel": "Cancel",
     "submit": "Submit",

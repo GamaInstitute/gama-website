@@ -11,7 +11,7 @@ _Last verified: 2026-11-02_
 
 Students and early-career researchers write an accessible summary of a scientific paper. The page lists published summaries and lets anyone submit one, which the GAMA team reviews by email before publication. Built from the `research-summaries.html` Claude Design mock-up.
 
-**The summaries currently listed are sample content.** The contributors are fictional. The original papers and their links are real. A dashed "Sample content" notice above the list says so. Remove it (the `<p>` that uses `list.sample_label`) once real summaries replace the samples.
+The list holds real, published summaries only (since 2026-11-03; the launch sample entries and their "Sample content" notice were removed). The first one is published on freeCodeCamp, so `url` points there.
 
 ## Section-by-section (rendering order)
 
@@ -30,17 +30,17 @@ Custom padding (not `PageHero`, there's no `NetworkArt`). Left column: eyebrow, 
 
 Two columns (list + 320px sidebar). Below 960px they stack and the sidebar boxes flow into an auto-fit grid. On desktop the sidebar is `sticky`.
 
-Each entry of `items[]` renders as one article: title, date (`date_iso`, formatted with `formatEpisodeDate`), a square image placeholder, then "Research Summary by **author**, bio", "Original paper by …" and a "Read the research summary" link (`list.read_summary`). **That link is a placeholder:** there's no summary text or per-summary page yet, so it currently points to `paper_url` (the original paper). When summaries get their own page or file, change the `href` in `ResearchSummariesPage.tsx`; the label already says the right thing.
+Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**", followed by `, bio` when `bio` is set, an "Original paper by …" line when `paper_authors` is set, and a "Read the research summary" link (`list.read_summary`) to `url`, the published summary (opens in a new tab). There's no per-summary page on this site: `url` points to wherever the summary is published.
 
 - **Search** filters on title, author, bio, `paper_authors` and the axis label (case-insensitive substring).
 - **Axes** chips come from the `axes` object, one per research axis on the Home page (AI, software engineering, cloud computing, cybersecurity, responsible AI). Its keys must match each item's `axis` (`all` is the reset).
 - **Pagination** is client-side, `PAGE_SIZE = 5` at the top of the page file. Hidden while everything fits on one page.
 - **Recent contributors** are the first 4 distinct authors in `items[]`, so keep `items[]` sorted newest first. Avatar colour comes from `color` (`c1`…`c5` → copper, copper-bright, sage, teal-mid, teal; see `AVATAR_BG`).
-- The dark CTA box opens the form and links to the writing guide (`sidebar.guide`).
+- The dark CTA box opens the form and links to the Publication Guidelines (`sidebar.guide`).
 
 ### 3. Contribute
 
-Left: heading, body, CTA, and a "Guides" box listing `contribute.files[]` with `ResourceList` (`src/components/guides/ResourceList.tsx`), each `{ label, meta, to }` linking to a [guide page](guides.md). The sidebar box and the form's file hint also link to the writing guide; there are no Word templates to download. Right: the `contribute.includes[]` checklist.
+Left: heading, body, CTA, and a "Guide" box with one `ResourceList` card (`contribute.files[]`, `src/components/guides/ResourceList.tsx`) linking to the [Publication Guidelines](publication-guidelines.md) at `#research-summaries`. The sidebar box (`sidebar.guide`) and the form's file hint also link there; there are no Word templates to download. Right: the `contribute.includes[]` checklist.
 
 ## Submission flow
 
@@ -55,11 +55,11 @@ Like the contact form, this only works on Cloudflare Pages (production, or `npm 
 
 ## Recipes
 
-**Publish a real summary.** Add an object at the **top** of `items[]` in both `fr/research.json` and `en/research.json` with the same `id`, `axis`, `date_iso`, `author`, `initials`, `color` and `paper_url`, and translated `title` / `bio`. There's no per-summary detail page yet, so the entry links to the original paper.
+**Publish a real summary.** Add an object at the **top** of `items[]` in both `fr/research.json` and `en/research.json` with the same `id`, `axis`, `date_iso`, `author`, `initials`, `color` and `url` (the published summary), and translated `title`. `bio` and `paper_authors` are optional.
 
 **Add a topic.** Add a key to `axes` in both locale files and use it as `axis` on items. Order in `axes` is the order of the chips.
 
-**Edit the writing guide.** It's a web page: edit `src/content/guides/{fr,en}/research-summary.md` (see [guides.md](guides.md)).
+**Edit the writing guide.** It's the Research Summaries part of a web page: edit `src/content/publication-guidelines/{fr,en}.md` (see [publication-guidelines.md](publication-guidelines.md)).
 
 
 **Change the upload limits.** Edit `SUMMARY_FILE` / `PHOTO_FILE` in `src/types/researchSummary.ts` (used by both client and function), then the hint text in `form.photo_hint` / `form.summary_hint` and the `*_size` error messages. Keep the combined total well under Resend's 40MB per-email limit.

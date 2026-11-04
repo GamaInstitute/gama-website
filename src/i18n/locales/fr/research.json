@@ -19,11 +19,10 @@
   },
   "list": {
     "h2": "Research Summaries",
-    "sample_label": "Contenu d'exemple",
-    "sample_body": "Les résumés et contributeurs ci-dessous illustrent la mise en page. Les publications originales citées sont réelles.",
     "by": "Research Summary par",
     "orig_by": "Publication originale de",
     "read_summary": "Lire le résumé de recherche",
+    "filter_axis": "Afficher les résumés de l'axe {{axis}}",
     "image_placeholder": "image",
     "empty": "Aucun résumé ne correspond à votre recherche pour l'instant.",
     "pagination_label": "Pagination",
@@ -33,7 +32,7 @@
   "sidebar": {
     "cta_h": "Proposer un résumé",
     "cta_body": "Vous avez étudié un article ? Expliquez-le simplement. GAMA révise avant publication.",
-    "guide": "Lire le guide de rédaction",
+    "guide": "Lire les Publication Guidelines",
     "search_h": "Rechercher",
     "search_ph": "Titre, auteur, sujet…",
     "axes_h": "Axes",
@@ -49,82 +48,27 @@
   },
   "items": [
     {
-      "id": "lost-in-the-middle",
+      "id": "financial-fraud-knowledge-graphs",
       "axis": "ai",
-      "title": "Pourquoi les modèles de langage oublient le milieu de leurs documents",
-      "date_iso": "2026-04-02",
-      "author": "Aminata Traoré",
-      "initials": "AT",
-      "color": "c4",
-      "bio": "étudiante à la maîtrise en informatique à l'Université de Montréal, s'intéresse aux systèmes RAG.",
-      "paper_authors": "Nelson F. Liu, Kevin Lin, John Hewitt …",
-      "paper_url": "https://arxiv.org/abs/2307.03172"
-    },
-    {
-      "id": "transformer-without-equations",
-      "axis": "ai",
-      "title": "Le Transformer expliqué sans équations",
-      "date_iso": "2026-03-12",
-      "author": "Mariam Ouédraogo",
-      "initials": "MO",
+      "title": "Détecter les schémas de fraude financière avec les graphes de connaissances : un guide pour la production",
+      "date_iso": "2026-10-30",
+      "author": "Kamal Kishore",
+      "initials": "KK",
       "color": "c1",
-      "bio": "étudiante au baccalauréat en génie logiciel à l'Université Laval.",
-      "paper_authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar …",
-      "paper_url": "https://arxiv.org/abs/1706.03762"
-    },
-    {
-      "id": "ml-technical-debt",
-      "axis": "se",
-      "title": "La dette technique cachée de l'apprentissage automatique",
-      "date_iso": "2026-02-26",
-      "author": "Kevin Mbarga",
-      "initials": "KM",
-      "color": "c4",
-      "bio": "doctorant à Polytechnique Montréal, travaille sur le MLOps.",
-      "paper_authors": "D. Sculley, Gary Holt, Daniel Golovin …",
-      "paper_url": "https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html"
-    },
-    {
-      "id": "swe-bench",
-      "axis": "se",
-      "title": "Les LLM savent-ils corriger de vrais bogues ?",
-      "date_iso": "2026-02-05",
-      "author": "Sophie Gagnon",
-      "initials": "SG",
-      "color": "c2",
-      "bio": "étudiante à la maîtrise à l'Université de Sherbrooke, s'intéresse aux tests logiciels.",
-      "paper_authors": "Carlos E. Jimenez, John Yang, Alexander Wettig …",
-      "paper_url": "https://arxiv.org/abs/2310.06770"
-    },
-    {
-      "id": "masakhane",
-      "axis": "ai",
-      "title": "Masakhane : traduire pour l'Afrique, par l'Afrique",
-      "date_iso": "2026-01-22",
-      "author": "Ibrahima Faye",
-      "initials": "IF",
-      "color": "c3",
-      "bio": "étudiant à la maîtrise à l'Université Gaston Berger, travaille sur le wolof.",
-      "paper_authors": "Iroro Orife, Julia Kreutzer, Blessing Sibanda …",
-      "paper_url": "https://arxiv.org/abs/2003.11529"
+      "url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
     }
   ],
   "contribute": {
     "eyebrow": "Contribuer",
     "h2": "Proposer un Research Summary",
     "body": "Vous avez étudié un article et vous voulez l'expliquer simplement ? Envoyez-nous votre résumé. L'équipe GAMA le révise avec vous avant publication.",
-    "tpl_label": "Guides",
-    "tpl_body": "Structure en 5 parties, 500 à 900 mots, règles de rédaction et conseils pour les visuels : tout est dans le guide de rédaction.",
+    "tpl_label": "Guide",
+    "tpl_body": "Structure en 5 parties, 500 à 900 mots, règles de rédaction et conseils pour les visuels : tout est dans nos lignes directrices de publication.",
     "files": [
       {
-        "label": "Rédiger un résumé de recherche",
-        "meta": "Guide · 4 min de lecture",
-        "to": "/guides/research-summary"
-      },
-      {
-        "label": "Trouver des articles scientifiques",
-        "meta": "Guide · ACM, arXiv",
-        "to": "/guides/finding-papers"
+        "label": "GAMA Institute Publication Guidelines",
+        "meta": "Guide · Section Research Summaries",
+        "to": "/publication-guidelines#research-summaries"
       }
     ],
     "includes_label": "Chaque résumé présente",
@@ -152,8 +96,8 @@
     "paper_title": "Titre du papier original",
     "paper_url": "Lien vers le papier original",
     "summary": "Votre résumé",
-    "summary_hint": "Document Word ou PDF, 10 Mo max, rédigé selon le",
-    "summary_guide": "guide de rédaction",
+    "summary_hint": "Document Word ou PDF, 10 Mo max, rédigé selon les",
+    "summary_guide": "Publication Guidelines",
     "consent": "J'accepte les <terms>Conditions d'utilisation</terms> et la <privacy>Politique de confidentialité</privacy>. Je confirme être l'auteur·e de ce résumé et, s'il est retenu, j'autorise Gama Institute à le publier avec mon nom, ma biographie, mon établissement et ma photo, sous licence CC BY 4.0 (<openaccess>Politique de libre accès</openaccess>).",
     "cancel": "Annuler",
     "submit": "Soumettre",

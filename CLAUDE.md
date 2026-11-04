@@ -4,7 +4,7 @@ _Last updated: 2026-07-03_
 
 ## Overview
 
-Marketing and information website for Gama Institute, a bilingual (FR/EN) research and training institute at the intersection of software engineering and AI. Pages: Home, About, Training, WeekPaper, Research Summaries, Team, Contact, plus three contributor guides (`/guides/*`), Privacy Policy, Terms of Use and Open Access Policy. Statically generated (SSG), deployed to Cloudflare Pages with four serverless Functions handling the contact form, newsletter stub, Research Summary submissions and WeekPaper presentation submissions.
+Marketing and information website for Gama Institute, a bilingual (FR/EN) research and training institute at the intersection of software engineering and AI. Pages: Home, About, Training, WeekPaper, Research Summaries, Team, Contact, plus the Publication Guidelines (`/publication-guidelines`), Privacy Policy, Terms of Use and Open Access Policy. Statically generated (SSG), deployed to Cloudflare Pages with four serverless Functions handling the contact form, newsletter stub, Research Summary submissions and WeekPaper presentation submissions.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the system map.
 
@@ -48,7 +48,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 ## Conventions
 
 - **CSS:** Pure Tailwind v3 utilities + CSS custom properties (`--bg`, `--ink`, `--accent`, etc.). No DaisyUI. Token system lives in `src/styles/base.css`.
-- **i18n:** All user-facing copy lives in `src/i18n/locales/{fr,en}/<namespace>.json`. Namespaces: `common`, `home`, `about`, `training`, `weekpaper`, `research`, `team`, plus `legal`, which is registered lazily by `LegalDocument.tsx` instead of in `src/i18n/index.ts` ([D-16](DECISIONS.md)). Default language is French; English toggled client-side via `localStorage` (`gama-lang`). **Exception:** the long-form contributor guides are Markdown files in `src/content/guides/{fr,en}/`, rendered by `src/components/guides/Markdown.tsx` ([D-19](DECISIONS.md), [docs/pages/guides.md](docs/pages/guides.md)).
+- **i18n:** All user-facing copy lives in `src/i18n/locales/{fr,en}/<namespace>.json`. Namespaces: `common`, `home`, `about`, `training`, `weekpaper`, `research`, `team`, plus `legal`, which is registered lazily by `LegalDocument.tsx` instead of in `src/i18n/index.ts` ([D-16](DECISIONS.md)). Default language is French; English toggled client-side via `localStorage` (`gama-lang`). **Exception:** the long-form Publication Guidelines are Markdown files in `src/content/publication-guidelines/{fr,en}.md`, rendered by `src/components/guides/Markdown.tsx` ([D-19](DECISIONS.md), [docs/pages/publication-guidelines.md](docs/pages/publication-guidelines.md)).
 - **Components:** UI primitives in `src/components/ui/`, layout in `src/components/layout/`, brand assets in `src/components/brand/`, page-specific in `src/components/<page>/`.
 - **Animation constants:** Use `ANIM.*` from `src/constants/index.ts` — not ad-hoc numbers.
 - **Brand gradient:** `GRAD_STOPS` in `src/constants/index.ts` — copper (#B56418) → teal (#165C71). Used by both `NetworkArt` and `BrandMark`.
@@ -83,8 +83,8 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 | Shared Zod schema (contact) | `src/types/contact.ts` |
 | Shared Zod schemas + file limits (submissions) | `src/types/researchSummary.ts`, `src/types/weekpaperSubmission.ts` |
 | Legal pages text (Privacy Policy, Terms, Open Access Policy) | `src/i18n/locales/{fr,en}/legal.json` |
-| Contributor guides (web pages) | `src/content/guides/{fr,en}/*.md`, images in `public/guides/` |
-| Downloadable files | `DOWNLOADS` in `src/constants/index.ts`: only the WeekPaper `.pptx` slide template (`public/downloads/`). Guides are web pages, never `.docx` downloads |
+| Publication Guidelines (contributor guide, one web page) | `src/content/publication-guidelines/{fr,en}.md`, images in `public/publication-guidelines/` |
+| Downloadable files | `DOWNLOADS` in `src/constants/index.ts`: only the WeekPaper `.pptx` slide template (`public/downloads/`). Guidelines are a web page, never `.docx` downloads |
 | CI workflows | `.github/workflows/` |
 | Public assets (CSP headers, redirects) | `public/` |
 

@@ -52,8 +52,10 @@
     "open_access": "Libre accès"
   },
   "guides": {
-    "eyebrow": "Guide",
+    "eyebrow": "Contribuer",
     "toc": "Sur cette page",
-    "ready": "Prêt·e à contribuer ?"
+    "ready": "Prêt·e à contribuer ?",
+    "cta_summary": "Proposer un Research Summary",
+    "cta_weekpaper": "Présenter dans WeekPaper"
   }
 }

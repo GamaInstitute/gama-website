@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import { DOWNLOADS, type DownloadKey } from '@/constants'
 
 /*
- * Small Markdown renderer for the guides in src/content/guides/. It supports only
- * what the guides use, so no Markdown library ships to the browser:
+ * Small Markdown renderer for the publication guidelines (src/content/publication-guidelines/).
+ * It supports only what that page uses, so no Markdown library ships to the browser:
  *
- *   ## Heading {#anchor}   h2, listed in the table of contents (anchor optional)
- *   ### Heading            h3
+ *   ## Heading {#anchor}   h2, a part of the page, in the table of contents (anchor optional)
+ *   ### Heading {#anchor}  h3, a sub-section, also in the table of contents
+ *   #### Heading           h4
  *   - item / 1. item       lists (one level)
  *   - [ ] item             checklist
  *   | a | b |              table (first row is the header; leave it empty for none)
@@ -20,7 +21,7 @@ import { DOWNLOADS, type DownloadKey } from '@/constants'
  * `#anchor` / `mailto:` → plain anchor, anything else opens in a new tab.
  */
 
-export type Heading = { id: string; text: string }
+export type Heading = { id: string; text: string; level: 2 | 3 }
 
 const BASE = import.meta.env.BASE_URL
 const LINK_CLS = 'font-semibold text-[var(--link)] underline underline-offset-2 decoration-[color-mix(in_srgb,currentColor_35%,transparent)] hover:decoration-current'
@@ -29,13 +30,15 @@ export function slugify(text: string) {
   return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 }
 
-function parseHeading(raw: string): Heading {
+function parseHeading(raw: string, level: 2 | 3): Heading {
   const m = raw.match(/^(.*?)\s*\{#([\w-]+)\}\s*$/)
-  return m ? { text: m[1], id: m[2] } : { text: raw, id: slugify(raw) }
+  return m ? { text: m[1], id: m[2], level } : { text: raw, id: slugify(raw), level }
 }
 
 export function headings(md: string): Heading[] {
-  return md.split('\n').filter(l => l.startsWith('## ')).map(l => parseHeading(l.slice(3)))
+  return md.split('\n')
+    .filter(l => l.startsWith('## ') || l.startsWith('### '))
+    .map(l => l.startsWith('## ') ? parseHeading(l.slice(3), 2) : parseHeading(l.slice(4), 3))
 }
 
 function MdLink({ href, children }: { href: string; children: ReactNode }) {
@@ -92,9 +95,9 @@ export function Markdown({ source }: { source: string }) {
     }
 
     if (trimmed.startsWith('## ')) {
-      const h = parseHeading(trimmed.slice(3))
+      const h = parseHeading(trimmed.slice(3), 2)
       out.push(
-        <h2 key={key()} id={h.id} className="font-display font-semibold text-[1.5rem] tracking-[-0.015em] text-ink mt-14 mb-1 scroll-mt-[96px] first:mt-0">
+        <h2 key={key()} id={h.id} className="font-display font-semibold text-[1.75rem] tracking-[-0.02em] text-ink mt-20 pt-10 border-t border-hairline mb-1 scroll-mt-[96px] first:mt-0 first:pt-0 first:border-t-0">
           <Inline text={h.text} />
         </h2>,
       )
@@ -103,7 +106,18 @@ export function Markdown({ source }: { source: string }) {
     }
 
     if (trimmed.startsWith('### ')) {
-      out.push(<h3 key={key()} className="font-display font-semibold text-[1.12rem] text-ink mt-8"><Inline text={trimmed.slice(4)} /></h3>)
+      const h = parseHeading(trimmed.slice(4), 3)
+      out.push(
+        <h3 key={key()} id={h.id} className="font-display font-semibold text-[1.3rem] tracking-[-0.015em] text-ink mt-12 scroll-mt-[96px]">
+          <Inline text={h.text} />
+        </h3>,
+      )
+      i++
+      continue
+    }
+
+    if (trimmed.startsWith('#### ')) {
+      out.push(<h4 key={key()} className="font-display font-semibold text-[1.08rem] text-ink mt-8"><Inline text={trimmed.slice(5)} /></h4>)
       i++
       continue
     }
@@ -192,7 +206,7 @@ export function Markdown({ source }: { source: string }) {
     }
 
     const para: string[] = []
-    while (i < lines.length && lines[i].trim() && !/^(#{2,3} |```|\||> |- |\d+\. |!\[)/.test(lines[i].trim())) para.push(lines[i++].trim())
+    while (i < lines.length && lines[i].trim() && !/^(#{2,4} |```|\||> |- |\d+\. |!\[)/.test(lines[i].trim())) para.push(lines[i++].trim())
     out.push(<p key={key()} className="mt-4"><Inline text={para.join(' ')} /></p>)
   }
 

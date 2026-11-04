@@ -72,12 +72,12 @@ Note the modal's `title` reuses `subscribe.h2` — the same heading text shown i
 
 Added 2026-10-31 from the updated `week-paper.html` Claude Design export. (That export also re-mocks the hero, episode grid and playlists with placeholder episodes; those were **not** carried over, since this page already shows real episodes.)
 
-- **Left column:** `contribute.format[]` (voice / slides / face on camera), the numbered `contribute.structure[]` steps (numbers come from the array index), and `contribute.structure_note`.
-- **Right column (sticky on desktop):** `contribute.resources[]`, rendered by `ResourceList`: [guide pages](guides.md) (`{ label, meta, to }`) and the slide template download (`{ label, meta, file }`, `file` being a key of `DOWNLOADS` in `src/constants/index.ts`) and a dark CTA box that opens the submission modal.
+- **Left column:** `contribute.format[]` (voice / slides / face on camera) and the numbered `contribute.structure[]` steps (numbers come from the array index) under `contribute.structure_label`, which also says an innovative structure is accepted.
+- **Right column (sticky on desktop):** `contribute.resources[]`, rendered by `ResourceList`: one card to the [Publication Guidelines](publication-guidelines.md) (`{ label, meta, to: '/publication-guidelines#weekpaper' }`) and the slide template download (`{ label, meta, file }`, `file` being a key of `DOWNLOADS` in `src/constants/index.ts`) and a dark CTA box that opens the submission modal.
 - **[PresentationForm](../../src/components/weekpaper/PresentationForm.tsx)** collects presenter info, the paper (title, authors, link), a **link** to the video (videos are too big to upload through the site), the slides (`.pptx`/`.ppt`, ≤15MB), a profile photo (JPG/PNG, ≤5MB), the proposed YouTube title and description, a publication preference (`yt-li` or `yt`), and a required consent box.
 - Validation lives in [src/types/weekpaperSubmission.ts](../../src/types/weekpaperSubmission.ts) (Zod + file limits, shared with the server). Posting goes to `POST /api/weekpaper-submission` → [functions/api/weekpaper-submission.ts](../../functions/api/weekpaper-submission.ts), which re-validates, checks Turnstile and emails everything to `CONTACT_EMAIL_TO` with the slides and photo attached. Same design as Research Summaries, see [D-15](../../DECISIONS.md).
 
-**Edit the contribution guidelines.** They're a web page: edit `src/content/guides/{fr,en}/weekpaper.md` (see [guides.md](guides.md)).
+**Edit the contribution guidelines.** They're the WeekPaper part of a web page: edit `src/content/publication-guidelines/{fr,en}.md` (see [publication-guidelines.md](publication-guidelines.md)).
 
 **Replace the slide template.** Overwrite `public/downloads/GAMA_Institute_Slide_Template.pptx` under the same name.
 

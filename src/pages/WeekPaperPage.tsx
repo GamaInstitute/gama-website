@@ -258,7 +258,6 @@ export default function WeekPaperPage() {
                     </li>
                   ))}
                 </ol>
-                <p className="text-ink-muted text-[0.9rem] mt-4">{t('contribute.structure_note')}</p>
               </Reveal>
 
               <Reveal delay={0.1} className="grid gap-[18px] sticky top-[100px] max-[960px]:static">

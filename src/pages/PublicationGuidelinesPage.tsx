@@ -4,15 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { Eyebrow }        from '@/components/ui/Eyebrow'
 import { Button }         from '@/components/ui/Button'
 import { Markdown, headings } from '@/components/guides/Markdown'
+import frSource           from '@/content/publication-guidelines/fr.md?raw'
+import enSource           from '@/content/publication-guidelines/en.md?raw'
 
-export const GUIDE_SLUGS = ['research-summary', 'weekpaper', 'finding-papers'] as const
-export type GuideSlug = typeof GUIDE_SLUGS[number]
+// Both languages are bundled into this page's lazy chunk (a few KB gzipped), so
+// the SSG pass can render synchronously and the language toggle switches instantly.
+const SOURCES = { fr: frSource, en: enSource }
 
-// Every guide in both languages is bundled into this page's lazy chunk (a few KB
-// gzipped), so the SSG pass can render them synchronously.
-const SOURCES = import.meta.glob('/src/content/guides/*/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
-
-type Meta = { title: string; description: string; lead: string; cta_label?: string; cta_href?: string }
+type Meta = { title: string; description: string; lead: string }
 
 // Front matter is a `---` block of `key: value` lines, nothing more.
 function parse(raw: string): { meta: Meta; body: string } {
@@ -25,10 +24,10 @@ function parse(raw: string): { meta: Meta; body: string } {
   return { meta: meta as Meta, body: m ? raw.slice(m[0].length) : raw }
 }
 
-export function GuidePage({ slug }: { slug: GuideSlug }) {
+export default function PublicationGuidelinesPage() {
   const { t, i18n } = useTranslation('common')
   const lang = i18n.language?.startsWith('en') ? 'en' : 'fr'
-  const { meta, body } = parse(SOURCES[`/src/content/guides/${lang}/${slug}.md`])
+  const { meta, body } = parse(SOURCES[lang])
   const toc = headings(body)
 
   return (
@@ -50,13 +49,22 @@ export function GuidePage({ slug }: { slug: GuideSlug }) {
         </section>
 
         <section className="py-[clamp(40px,6vw,80px)]">
-          <div className="wrap grid grid-cols-[220px_minmax(0,1fr)] gap-[clamp(28px,5vw,72px)] items-start max-[860px]:grid-cols-1">
-            <nav aria-label={t('guides.toc')} className="sticky top-[100px] max-[860px]:static">
+          <div className="wrap grid grid-cols-[240px_minmax(0,1fr)] gap-[clamp(28px,5vw,72px)] items-start max-[860px]:grid-cols-1">
+            <nav
+              aria-label={t('guides.toc')}
+              className="sticky top-[100px] max-h-[calc(100vh-120px)] overflow-y-auto overscroll-contain pr-2 max-[860px]:static max-[860px]:max-h-none"
+            >
               <p className="text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted mb-3">{t('guides.toc')}</p>
-              <ol className="list-none m-0 p-0 grid gap-1.5 text-[0.88rem] max-[860px]:grid-cols-2 max-[480px]:grid-cols-1">
+              <ol className="list-none m-0 p-0 grid gap-1 text-[0.86rem]">
                 {toc.map(h => (
-                  <li key={h.id}>
-                    <a href={`#${h.id}`} className="text-ink-soft hover:text-ink transition-colors">{h.text}</a>
+                  // Sub-sections are hidden on small screens, where the list sits above the text
+                  <li key={h.id} className={h.level === 2 ? 'mt-2 first:mt-0' : 'pl-3 border-l border-hairline max-[860px]:hidden'}>
+                    <a
+                      href={`#${h.id}`}
+                      className={h.level === 2 ? 'font-semibold text-ink hover:text-[var(--accent-ink)] transition-colors' : 'text-ink-muted hover:text-ink transition-colors'}
+                    >
+                      {h.text}
+                    </a>
                   </li>
                 ))}
               </ol>
@@ -65,12 +73,13 @@ export function GuidePage({ slug }: { slug: GuideSlug }) {
             <article className="max-w-[72ch] text-ink-soft text-[1rem] leading-[1.7]">
               <Markdown source={body} />
 
-              {meta.cta_href && (
-                <div className="mt-14 p-[22px] rounded-lg border bg-ink border-ink dark:bg-surface-2 dark:border-hairline-2 flex flex-wrap gap-4 items-center justify-between">
-                  <p className="m-0 font-display font-semibold text-[1.1rem] text-white dark:text-ink">{t('guides.ready')}</p>
-                  <Button as="link" to={meta.cta_href} variant="accent" size="sm">{meta.cta_label}</Button>
+              <div className="mt-16 p-[22px] rounded-lg border bg-ink border-ink dark:bg-surface-2 dark:border-hairline-2">
+                <p className="m-0 font-display font-semibold text-[1.15rem] text-white dark:text-ink">{t('guides.ready')}</p>
+                <div className="flex flex-wrap gap-2.5 mt-4">
+                  <Button as="link" to="/research-summaries#contribute" variant="accent" size="sm">{t('guides.cta_summary')}</Button>
+                  <Button as="link" to="/week-paper#contribute" variant="ghost-dark" size="sm">{t('guides.cta_weekpaper')}</Button>
                 </div>
-              )}
+              </div>
             </article>
           </div>
         </section>
