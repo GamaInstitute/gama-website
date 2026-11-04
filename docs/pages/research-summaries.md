@@ -1,9 +1,10 @@
 # Research Summaries page
 
-_Last verified: 2026-11-02_
+_Last verified: 2026-11-03_
 
-- **Route:** `/research-summaries`
-- **File:** [src/pages/ResearchSummariesPage.tsx](../../src/pages/ResearchSummariesPage.tsx)
+- **Route:** `/research-summaries`, plus one page per summary at `/research-summaries/:id`
+- **Files:** [src/pages/ResearchSummariesPage.tsx](../../src/pages/ResearchSummariesPage.tsx) (list), [src/pages/ResearchSummaryPage.tsx](../../src/pages/ResearchSummaryPage.tsx) (one summary)
+- **Summary texts:** Markdown in [src/content/research-summaries/](../../src/content/research-summaries/), `<id>/en.md` (optional `<id>/fr.md`)
 - **i18n namespace:** `research` → [src/i18n/locales/{fr,en}/research.json](../../src/i18n/locales/fr/research.json)
 - **Page-specific components:** [src/components/research/SummaryForm.tsx](../../src/components/research/SummaryForm.tsx)
 - **Backend:** `POST /api/research-summary` → [functions/api/research-summary.ts](../../functions/api/research-summary.ts)
@@ -11,7 +12,7 @@ _Last verified: 2026-11-02_
 
 Students and early-career researchers write an accessible summary of a scientific paper. The page lists published summaries and lets anyone submit one, which the GAMA team reviews by email before publication. Built from the `research-summaries.html` Claude Design mock-up.
 
-The list holds real, published summaries only (since 2026-11-03; the launch sample entries and their "Sample content" notice were removed). The first one is published on freeCodeCamp, so `url` points there.
+Every summary listed is already validated: the GAMA team reviews submissions by email, and only accepted summaries are added here. Each one is read on its own page on this site (like an article on freeCodeCamp). The launch sample entries and their "Sample content" notice were removed on 2026-11-03.
 
 ## Section-by-section (rendering order)
 
@@ -30,13 +31,25 @@ Custom padding (not `PageHero`, there's no `NetworkArt`). Left column: eyebrow, 
 
 Two columns (list + 320px sidebar). Below 960px they stack and the sidebar boxes flow into an auto-fit grid. On desktop the sidebar is `sticky`.
 
-Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**", followed by `, bio` when `bio` is set, an "Original paper by …" line when `paper_authors` is set, and a "Read the research summary" link (`list.read_summary`) to `url`, the published summary (opens in a new tab). There's no per-summary page on this site: `url` points to wherever the summary is published.
+Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**" (followed by `, bio` when `bio` is set), "Original paper by `paper_authors`", and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
 
 - **Search** filters on title, author, bio, `paper_authors` and the axis label (case-insensitive substring).
 - **Axes** chips come from the `axes` object, one per research axis on the Home page (AI, software engineering, cloud computing, cybersecurity, responsible AI). Its keys must match each item's `axis` (`all` is the reset).
 - **Pagination** is client-side, `PAGE_SIZE = 5` at the top of the page file. Hidden while everything fits on one page.
 - **Recent contributors** are the first 4 distinct authors in `items[]`, so keep `items[]` sorted newest first. Avatar colour comes from `color` (`c1`…`c5` → copper, copper-bright, sage, teal-mid, teal; see `AVATAR_BG`).
 - The dark CTA box opens the form and links to the Publication Guidelines (`sidebar.guide`).
+
+### Summary page (`/research-summaries/:id`)
+
+[ResearchSummaryPage.tsx](../../src/pages/ResearchSummaryPage.tsx) finds the entry of `items[]` whose `id` matches the URL and renders:
+
+- **Header:** back link (`article.back`), date and axis tag, the title as h1, "Research Summary by **author**", and "Original publication:" (`article.orig`) linking `paper_authors` to `source_url`. The browser tab title is the summary title; the meta description is the item's `description`.
+- **Text:** the Markdown file `src/content/research-summaries/<id>/en.md`, rendered by the same `Markdown` component as the Publication Guidelines (`compact` mode: lighter `##` headings). If a `fr.md` exists it is used on the French site; otherwise the English text shows on both, with a note on the French site (`article.lang_note`) that summaries are written in English, as the guidelines require.
+- **Closing box:** `article.cta_*`, linking to the submission form and the guidelines.
+
+Each summary page is prerendered at build time: `getStaticPaths` on the route in `src/routes.tsx` lists the ids from `fr/research.json`. An id with no entry or no text shows `article.not_found`.
+
+The summary texts are imported eagerly into the summary page's chunk ([content index](../../src/content/research-summaries/index.ts)), so that chunk grows with every summary. Fine for dozens; past that, load each text on its own (see [D-20](../../DECISIONS.md)).
 
 ### 3. Contribute
 
@@ -55,7 +68,13 @@ Like the contact form, this only works on Cloudflare Pages (production, or `npm 
 
 ## Recipes
 
-**Publish a real summary.** Add an object at the **top** of `items[]` in both `fr/research.json` and `en/research.json` with the same `id`, `axis`, `date_iso`, `author`, `initials`, `color` and `url` (the published summary), and translated `title`. `bio` and `paper_authors` are optional.
+**Publish a validated summary.**
+
+1. Pick an `id` (lowercase, hyphens: it becomes the URL, `/research-summaries/<id>`).
+2. Save the text as `src/content/research-summaries/<id>/en.md`: the five parts of the guidelines as `##` headings (Overview, Why this matters, Key findings, Discussion and implications, What's next), then `## References`. No title or byline in the file, the page adds them. Supported syntax: [publication-guidelines.md](publication-guidelines.md#file-format). Optionally add a French translation as `fr.md`.
+3. Add an object at the **top** of `items[]` in both `fr/research.json` and `en/research.json` with the same `id`, `axis`, `date_iso`, `author`, `initials`, `color`, `paper_authors` and `source_url` (the original publication), and a translated `title` and `description` (one sentence, used as the page's meta description). `bio` is optional.
+
+The build creates the new page automatically.
 
 **Add a topic.** Add a key to `axes` in both locale files and use it as `axis` on items. Order in `axes` is the order of the chips.
 

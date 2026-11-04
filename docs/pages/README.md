@@ -10,7 +10,7 @@ Each page of the site has its own file here, written for someone who has never t
 | About | `/about` | [about.md](about.md) | Live |
 | Training | not routed | [training.md](training.md) | Built, held back — see doc |
 | WeekPaper | `/week-paper` | [weekpaper.md](weekpaper.md) | Live |
-| Research Summaries | `/research-summaries` | [research-summaries.md](research-summaries.md) | Live |
+| Research Summaries | `/research-summaries`, `/research-summaries/:id` | [research-summaries.md](research-summaries.md) | Live |
 | Team | `/team` | [team.md](team.md) | Live (some sections hidden — see doc) |
 | Contact | `/contact` | [contact.md](contact.md) | Live |
 | Publication Guidelines | `/publication-guidelines` | [publication-guidelines.md](publication-guidelines.md) | Live |

@@ -11,21 +11,8 @@ import { Modal }          from '@/components/ui/Modal'
 import { SummaryForm }    from '@/components/research/SummaryForm'
 import { formatEpisodeDate } from '@/lib/formatDate'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
+import type { SummaryItem } from '@/content/research-summaries'
 
-type SummaryItem = {
-  id: string
-  axis: string
-  title: string
-  date_iso: string
-  author: string
-  initials: string
-  color: string
-  // Link to the published summary
-  url: string
-  // Optional: contributor bio and authors of the summarized paper, shown when present
-  bio?: string
-  paper_authors?: string
-}
 
 
 const PAGE_SIZE = 5
@@ -75,7 +62,7 @@ export default function ResearchSummariesPage() {
     const q = query.trim().toLocaleLowerCase()
     return items.filter(it =>
       (axis === 'all' || it.axis === axis) &&
-      (!q || [it.title, it.author, it.bio ?? '', it.paper_authors ?? '', axes[it.axis] ?? '']
+      (!q || [it.title, it.author, it.bio ?? '', it.paper_authors, axes[it.axis] ?? '']
         .some(s => s.toLocaleLowerCase().includes(q)))
     )
   }, [items, axes, axis, query])
@@ -156,7 +143,7 @@ export default function ResearchSummariesPage() {
                   pageItems.map(it => (
                     <article key={it.id} className="py-[30px] border-b border-hairline">
                       <h3 className="font-display font-semibold text-[clamp(1.25rem,2vw,1.55rem)] leading-[1.28] tracking-[-0.015em] text-ink">
-                        {it.title}
+                        <Link to={`/research-summaries/${it.id}`} className="hover:text-[var(--accent-ink)] transition-colors">{it.title}</Link>
                       </h3>
                       <p className="mt-2 mb-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.84rem] font-semibold text-ink-muted tracking-[0.02em]">
                         <time dateTime={it.date_iso}>{formatEpisodeDate(it.date_iso, i18n.language)}</time>
@@ -177,20 +164,16 @@ export default function ResearchSummariesPage() {
                         </div>
                         <p className="m-0 text-[0.95rem] text-ink-soft leading-[1.6]">
                           <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>{it.bio && `, ${it.bio}`}
-                          {it.paper_authors && (
-                            <span className="block mt-1.5 italic text-ink-muted">
-                              {t('list.orig_by')} {it.paper_authors}
-                            </span>
-                          )}
-                          <a
-                            href={it.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <span className="block mt-1.5 italic text-ink-muted">
+                            {t('list.orig_by')} {it.paper_authors}
+                          </span>
+                          <Link
+                            to={`/research-summaries/${it.id}`}
                             className="flex w-fit items-center gap-[0.35em] mt-2 text-[0.9rem] font-semibold text-[var(--link)] group"
                           >
                             {t('list.read_summary')}
-                            <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">↗</span>
-                          </a>
+                            <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                          </Link>
                         </p>
                       </div>
                     </article>

@@ -176,4 +176,12 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 
 **Alternative considered:** `react-markdown` + `remark-gfm` (or `marked`). Full CommonMark/GFM support, but tens of KB more in the guide chunk, plus extra wiring for router links and base paths. Also considered: keeping the guidelines as JSON blocks like the legal pages (D-16), which works for prose sections but not for tables, code and figures.
 
-**Revisit when:** the guides need syntax the renderer doesn't handle (nested lists, footnotes), or the site gets more long-form content (blog, summary detail pages). At that point a Markdown library or a content collection is worth its weight.
+**Revisit when:** the guides need syntax the renderer doesn't handle (nested lists, footnotes), or the site gets more long-form content (blog). At that point a Markdown library or a content collection is worth its weight. (2026-11-03: the Research Summary pages now use the same renderer, see D-20.)
+
+## D-20. Each published Research Summary is a page on the site, its text in Markdown, its listing data in locale JSON
+
+**Why:** Validated summaries are read on the site itself (`/research-summaries/:id`), like articles on freeCodeCamp, rather than linked elsewhere. The listing data (title, author, axis, date, original publication) stays in `items[]` of `research.json`, which the list page already reads and which needs a translated title; the text, several hundred words with headings and tables, is Markdown in `src/content/research-summaries/<id>/en.md`, rendered by the D-19 renderer. Summaries are written in English (Publication Guidelines), so `fr.md` is optional and the French site falls back to the English text with a note. Pages are prerendered via vite-react-ssg's `getStaticPaths`, with ids read from `research.json`.
+
+**Alternative considered:** one Markdown file per summary with all metadata in front matter, the list built from the files. One place per summary, but the list page would then have to load every text (or a build step would have to extract the front matter), and the French title would need its own field anyway.
+
+**Revisit when:** there are more than a few dozen summaries. The texts are imported eagerly into the summary page's chunk, so it grows with each one; switch to a non-eager `import.meta.glob` loaded in the route's `lazy`, or to a content collection.

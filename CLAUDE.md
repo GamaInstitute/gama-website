@@ -48,7 +48,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 ## Conventions
 
 - **CSS:** Pure Tailwind v3 utilities + CSS custom properties (`--bg`, `--ink`, `--accent`, etc.). No DaisyUI. Token system lives in `src/styles/base.css`.
-- **i18n:** All user-facing copy lives in `src/i18n/locales/{fr,en}/<namespace>.json`. Namespaces: `common`, `home`, `about`, `training`, `weekpaper`, `research`, `team`, plus `legal`, which is registered lazily by `LegalDocument.tsx` instead of in `src/i18n/index.ts` ([D-16](DECISIONS.md)). Default language is French; English toggled client-side via `localStorage` (`gama-lang`). **Exception:** the long-form Publication Guidelines are Markdown files in `src/content/publication-guidelines/{fr,en}.md`, rendered by `src/components/guides/Markdown.tsx` ([D-19](DECISIONS.md), [docs/pages/publication-guidelines.md](docs/pages/publication-guidelines.md)).
+- **i18n:** All user-facing copy lives in `src/i18n/locales/{fr,en}/<namespace>.json`. Namespaces: `common`, `home`, `about`, `training`, `weekpaper`, `research`, `team`, plus `legal`, which is registered lazily by `LegalDocument.tsx` instead of in `src/i18n/index.ts` ([D-16](DECISIONS.md)). Default language is French; English toggled client-side via `localStorage` (`gama-lang`). **Exception:** the long-form Publication Guidelines are Markdown files in `src/content/publication-guidelines/{fr,en}.md`, rendered by `src/components/guides/Markdown.tsx` ([D-19](DECISIONS.md), [docs/pages/publication-guidelines.md](docs/pages/publication-guidelines.md)). Same for the text of each published Research Summary, `src/content/research-summaries/<id>/en.md`; its listing data stays in `research.json` `items[]` ([D-20](DECISIONS.md)).
 - **Components:** UI primitives in `src/components/ui/`, layout in `src/components/layout/`, brand assets in `src/components/brand/`, page-specific in `src/components/<page>/`.
 - **Animation constants:** Use `ANIM.*` from `src/constants/index.ts` — not ad-hoc numbers.
 - **Brand gradient:** `GRAD_STOPS` in `src/constants/index.ts` — copper (#B56418) → teal (#165C71). Used by both `NetworkArt` and `BrandMark`.
@@ -83,6 +83,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 | Shared Zod schema (contact) | `src/types/contact.ts` |
 | Shared Zod schemas + file limits (submissions) | `src/types/researchSummary.ts`, `src/types/weekpaperSubmission.ts` |
 | Legal pages text (Privacy Policy, Terms, Open Access Policy) | `src/i18n/locales/{fr,en}/legal.json` |
+| Research Summary texts (one page each, `/research-summaries/:id`) | `src/content/research-summaries/<id>/en.md` (optional `fr.md`); listing data in `items[]` of `research.json` |
 | Publication Guidelines (contributor guide, one web page) | `src/content/publication-guidelines/{fr,en}.md`, images in `public/publication-guidelines/` |
 | Downloadable files | `DOWNLOADS` in `src/constants/index.ts`: only the WeekPaper `.pptx` slide template (`public/downloads/`). Guidelines are a web page, never `.docx` downloads |
 | CI workflows | `.github/workflows/` |
@@ -96,7 +97,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 - [docs/pages/](docs/pages/README.md) — one file per page: section-by-section anatomy, which component renders what, exact i18n/data-file sources, and how-to recipes for common changes. Update the matching page doc whenever you add/remove/restructure a section, not just when you add a whole new page.
 - [docs/guides/content-editing.md](docs/guides/content-editing.md) — the existing `docs/guides/` entry: everyday content changes (text, photos, courses) with no code required. See the rule below for when to add another.
 - [CHANGELOG.md](CHANGELOG.md) — user- and contributor-facing changes; Keep a Changelog 1.1.0
-- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-19)
+- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-20)
 - [docs/adr/](docs/adr/) — full ADRs for the three heaviest architectural choices
 - [docs/sessions/](docs/sessions/) — session logs (write only when warranted; see rule below)
 

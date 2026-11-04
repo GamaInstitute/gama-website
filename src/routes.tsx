@@ -1,10 +1,11 @@
-import type { RouteObject } from 'react-router-dom'
+import type { RouteRecord } from 'vite-react-ssg'
 import { Outlet, useLocation } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { I18nextProvider } from 'react-i18next'
 import i18n from '@/i18n'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import research from '@/i18n/locales/fr/research.json'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 
 function RootLayout() {
@@ -37,7 +38,7 @@ function RootLayout() {
 // chunk instead of bundling all pages (+ framer-motion per page) into one file.
 // Unlike React.lazy(), this resolves before render, so vite-react-ssg's SSG
 // pass still produces full static HTML per page.
-export const routes: RouteObject[] = [
+export const routes: RouteRecord[] = [
   {
     path: '/',
     element: <RootLayout />,
@@ -48,6 +49,12 @@ export const routes: RouteObject[] = [
       // { path: 'training',   lazy: () => import('@/pages/TrainingPage').then(m => ({ Component: m.default })) },
       { path: 'week-paper', lazy: () => import('@/pages/WeekPaperPage').then(m => ({ Component: m.default })) },
       { path: 'research-summaries', lazy: () => import('@/pages/ResearchSummariesPage').then(m => ({ Component: m.default })) },
+      {
+        path: 'research-summaries/:id',
+        lazy: () => import('@/pages/ResearchSummaryPage').then(m => ({ Component: m.default })),
+        // One static page per published summary (ids from research.json, same in both languages)
+        getStaticPaths: () => research.items.map(it => `research-summaries/${it.id}`),
+      },
       { path: 'team',       lazy: () => import('@/pages/TeamPage').then(m => ({ Component: m.default })) },
       { path: 'publication-guidelines', lazy: () => import('@/pages/PublicationGuidelinesPage').then(m => ({ Component: m.default })) },
       { path: 'privacy',    lazy: () => import('@/pages/PrivacyPage').then(m => ({ Component: m.default })) },

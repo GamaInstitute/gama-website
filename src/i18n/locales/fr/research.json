@@ -50,14 +50,25 @@
     {
       "id": "financial-fraud-knowledge-graphs",
       "axis": "ai",
-      "title": "Détecter les schémas de fraude financière avec les graphes de connaissances : un guide pour la production",
+      "title": "Suivre l'argent : comment les graphes de connaissances révèlent la fraude que les règles ne voient pas",
+      "description": "Research Summary du guide de Kamal Kishore sur la détection de fraude financière avec les graphes de connaissances : cinq schémas de fraude, cinq requêtes, et leurs limites.",
       "date_iso": "2026-10-30",
-      "author": "Kamal Kishore",
-      "initials": "KK",
-      "color": "c1",
-      "url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
+      "author": "Équipe Gama Institute",
+      "initials": "GI",
+      "color": "c5",
+      "paper_authors": "Kamal Kishore",
+      "source_url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
     }
   ],
+  "article": {
+    "back": "Tous les Research Summaries",
+    "orig": "Publication originale :",
+    "lang_note": "Comme tous les Research Summaries, ce résumé est rédigé en anglais.",
+    "not_found": "Ce résumé n'existe pas ou n'est plus disponible.",
+    "cta_h": "Vous avez étudié un article ?",
+    "cta_body": "Expliquez-le simplement dans un Research Summary. GAMA le révise avec vous avant publication.",
+    "cta_btn": "Proposer un résumé"
+  },
   "contribute": {
     "eyebrow": "Contribuer",
     "h2": "Proposer un Research Summary",

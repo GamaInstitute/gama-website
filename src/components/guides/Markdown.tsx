@@ -69,7 +69,13 @@ function Inline({ text }: { text: string }) {
 
 const cells = (row: string) => row.trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim())
 
-export function Markdown({ source }: { source: string }) {
+// `compact` tones down the h2 for article pages (Research Summaries): no rule or large gap between parts.
+const H2_CLS = {
+  guide:   'font-display font-semibold text-[1.75rem] tracking-[-0.02em] text-ink mt-20 pt-10 border-t border-hairline mb-1 scroll-mt-[96px] first:mt-0 first:pt-0 first:border-t-0',
+  compact: 'font-display font-semibold text-[1.45rem] tracking-[-0.015em] text-ink mt-12 scroll-mt-[96px] first:mt-0',
+}
+
+export function Markdown({ source, compact = false }: { source: string; compact?: boolean }) {
   const lines = source.split('\n')
   const out: ReactNode[] = []
   let i = 0
@@ -97,7 +103,7 @@ export function Markdown({ source }: { source: string }) {
     if (trimmed.startsWith('## ')) {
       const h = parseHeading(trimmed.slice(3), 2)
       out.push(
-        <h2 key={key()} id={h.id} className="font-display font-semibold text-[1.75rem] tracking-[-0.02em] text-ink mt-20 pt-10 border-t border-hairline mb-1 scroll-mt-[96px] first:mt-0 first:pt-0 first:border-t-0">
+        <h2 key={key()} id={h.id} className={H2_CLS[compact ? 'compact' : 'guide']}>
           <Inline text={h.text} />
         </h2>,
       )
