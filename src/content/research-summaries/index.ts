@@ -9,13 +9,20 @@ export type SummaryItem = {
   // Meta description of the summary page
   description: string
   date_iso: string
+  // Contributor, from the submission form: name, short bio, optional institution,
+  // LinkedIn and photo (a path under public/, e.g. /research-summaries/contributors/x.webp)
   author: string
   initials: string
   color: string
-  // Optional: contributor bio, shown after the name when present
   bio?: string
-  paper_authors: string
+  institution?: string
+  linkedin?: string
+  photo?: string
   // The original publication being summarized
+  paper_title: string
+  paper_authors: string
+  // Where and when it was published, e.g. "Proceedings of NAACL 2025, pages 11995–12041"
+  paper_venue?: string
   source_url: string
 }
 

@@ -31,7 +31,7 @@ Custom padding (not `PageHero`, there's no `NetworkArt`). Left column: eyebrow, 
 
 Two columns (list + 320px sidebar). Below 960px they stack and the sidebar boxes flow into an auto-fit grid. On desktop the sidebar is `sticky`.
 
-Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**" (followed by `, bio` when `bio` is set), "Original paper by `paper_authors`", and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
+Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**", "Original paper by `paper_authors`", and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
 
 - **Search** filters on title, author, bio, `paper_authors` and the axis label (case-insensitive substring).
 - **Axes** chips come from the `axes` object, one per research axis on the Home page (AI, software engineering, cloud computing, cybersecurity, responsible AI). Its keys must match each item's `axis` (`all` is the reset).
@@ -43,7 +43,10 @@ Each entry of `items[]` renders as one article: title, then the date (`date_iso`
 
 [ResearchSummaryPage.tsx](../../src/pages/ResearchSummaryPage.tsx) finds the entry of `items[]` whose `id` matches the URL and renders:
 
-- **Header:** back link (`article.back`), date and axis tag, the title as h1, "Research Summary by **author**", and "Original publication:" (`article.orig`) linking `paper_authors` to `source_url`. The browser tab title is the summary title; the meta description is the item's `description`.
+- **Header**, modelled on the Montreal AI Ethics Institute's research summaries: back link (`article.back`), date and axis tag, the title as h1, then:
+  - **Contributor:** round photo (`photo`, initials if absent), "Research Summary by **author**", a LinkedIn icon link when `linkedin` is set (`article.linkedin`), and `bio` · `institution` below. These come from the submission form.
+  - **Original paper** box (`article.orig`): `paper_title` linked to `source_url`, `paper_authors`, and `paper_venue` in italics. The browser tab title is the summary title; the meta description is the item's `description`.
+- **Table of contents:** built from the text's `##` and `###` headings (`article.toc`). The guidelines make a table of contents mandatory for every summary, so contributors don't write one in the file.
 - **Text:** the Markdown file `src/content/research-summaries/<id>/en.md`, rendered by the same `Markdown` component as the Publication Guidelines (`compact` mode: lighter `##` headings). If a `fr.md` exists it is used on the French site; otherwise the English text shows on both, with a note on the French site (`article.lang_note`) that summaries are written in English, as the guidelines require.
 - **Closing box:** `article.cta_*`, linking to the submission form and the guidelines.
 
@@ -71,8 +74,12 @@ Like the contact form, this only works on Cloudflare Pages (production, or `npm 
 **Publish a validated summary.**
 
 1. Pick an `id` (lowercase, hyphens: it becomes the URL, `/research-summaries/<id>`).
-2. Save the text as `src/content/research-summaries/<id>/en.md`: the five parts of the guidelines as `##` headings (Overview, Why this matters, Key findings, Discussion and implications, What's next), then `## References`. No title or byline in the file, the page adds them. Supported syntax: [publication-guidelines.md](publication-guidelines.md#file-format). Optionally add a French translation as `fr.md`.
-3. Add an object at the **top** of `items[]` in both `fr/research.json` and `en/research.json` with the same `id`, `axis`, `date_iso`, `author`, `initials`, `color`, `paper_authors` and `source_url` (the original publication), and a translated `title` and `description` (one sentence, used as the page's meta description). `bio` is optional.
+2. Save the text as `src/content/research-summaries/<id>/en.md`: the five parts of the guidelines as `##` headings (Overview, Why it matters, Key findings, Discussion and implications, Moving forward), then `## References`; a research-based tutorial uses its own headings. No title, byline or table of contents in the file, the page adds them. Supported syntax: [publication-guidelines.md](publication-guidelines.md#file-format). Optionally add a French translation as `fr.md`.
+3. Add an object at the **top** of `items[]` in both `fr/research.json` and `en/research.json` with:
+   - the same `id`, `axis`, `date_iso`, `initials`, `color` in both files;
+   - a translated `title` and `description` (one sentence, used as the page's meta description);
+   - the contributor, from the submission form: `author` (name), `bio` (translated), and optionally `institution`, `linkedin` (full URL) and `photo`. Save the photo as `public/research-summaries/contributors/<name>.webp` (square, about 200×200) and set `photo` to `/research-summaries/contributors/<name>.webp`;
+   - the original paper: `paper_title`, `paper_authors` (shorten long lists to "First, Second et al."), `paper_venue` (venue, pages, date; translated) and `source_url` (the form's paper link).
 
 The build creates the new page automatically.
 

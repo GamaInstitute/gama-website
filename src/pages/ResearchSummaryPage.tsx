@@ -4,9 +4,14 @@ import { Link, useParams } from 'react-router-dom'
 
 import { Button }         from '@/components/ui/Button'
 import { Tag }            from '@/components/ui/Tag'
-import { Markdown }       from '@/components/guides/Markdown'
+import { LinkedInIcon }   from '@/components/ui/icons'
+import { Avatar }         from '@/components/team/Avatar'
+import { Markdown, headings } from '@/components/guides/Markdown'
 import { formatEpisodeDate } from '@/lib/formatDate'
 import { summaryText, type SummaryItem } from '@/content/research-summaries'
+
+// Plain <img> paths, so the deploy base path is added by hand (as in Markdown.tsx)
+const BASE = import.meta.env.BASE_URL
 
 const BACK_CLS = 'inline-flex items-center gap-1.5 text-[0.88rem] font-semibold text-ink-muted hover:text-ink transition-colors'
 
@@ -55,15 +60,49 @@ export default function ResearchSummaryPage() {
             <h1 className="font-display font-semibold text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-[-0.025em] text-ink mt-4">
               {item.title}
             </h1>
-            <p className="mt-5 text-[0.95rem] text-ink-soft leading-[1.6]">
-              <b className="text-ink font-semibold">{t('list.by')} {item.author}</b>{item.bio && `, ${item.bio}`}
-            </p>
-            <p className="mt-1 text-[0.95rem] text-ink-muted leading-[1.6]">
-              {t('article.orig')}{' '}
-              <a href={item.source_url} target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">
-                {item.paper_authors}
+            {/* Contributor, as on the Montreal AI Ethics Institute's summaries: photo, name, bio, LinkedIn */}
+            <div className="mt-7 flex gap-4 items-start">
+              <div className="w-14 h-14 flex-none rounded-full overflow-hidden border border-hairline bg-surface">
+                <Avatar name={item.author} photo={item.photo && (item.photo.startsWith('/') ? BASE + item.photo.slice(1) : item.photo)} shape="circle" />
+              </div>
+              <div className="min-w-0 text-[0.95rem] leading-[1.6]">
+                <p className="m-0 flex flex-wrap items-center gap-x-2">
+                  <span className="text-ink-soft">{t('list.by')}</span>
+                  <b className="text-ink font-semibold">{item.author}</b>
+                  {item.linkedin && (
+                    <a
+                      href={item.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t('article.linkedin', { name: item.author })}
+                      className="text-ink-muted hover:text-[var(--link)] transition-colors"
+                    >
+                      <LinkedInIcon size={15} />
+                    </a>
+                  )}
+                </p>
+                {(item.bio || item.institution) && (
+                  <p className="mt-1 text-ink-muted max-w-[60ch]">
+                    {[item.bio, item.institution].filter(Boolean).join(' · ')}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* The original paper: title (linked), authors, venue */}
+            <div className="mt-6 border-l-[3px] border-[var(--accent)] pl-4 py-1 text-[0.95rem] leading-[1.6]">
+              <p className="m-0 text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted">{t('article.orig')}</p>
+              <a
+                href={item.source_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline font-semibold text-[var(--link)] underline-offset-2 hover:underline"
+              >
+                {item.paper_title} <span aria-hidden="true">↗</span>
               </a>
-            </p>
+              <p className="m-0 mt-0.5 text-ink-soft">{item.paper_authors}</p>
+              {item.paper_venue && <p className="m-0 italic text-ink-muted">{item.paper_venue}</p>}
+            </div>
           </div></div>
         </header>
 
@@ -74,6 +113,18 @@ export default function ResearchSummaryPage() {
                 {t('article.lang_note')}
               </p>
             )}
+
+            {/* Table of contents, required by the Publication Guidelines, built from the ## / ### headings */}
+            <nav aria-label={t('article.toc')} className="mb-10 p-[22px] rounded-lg border border-hairline bg-surface">
+              <p className="text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted mb-3">{t('article.toc')}</p>
+              <ol lang={text.lang} className="list-none m-0 p-0 grid gap-1.5 text-[0.92rem]">
+                {headings(text.source).map(h => (
+                  <li key={h.id} className={h.level === 3 ? 'pl-4' : ''}>
+                    <a href={`#${h.id}`} className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
 
             <article lang={text.lang} className="text-ink-soft text-[1.02rem] leading-[1.75]">
               <Markdown source={text.source} compact />

@@ -14,7 +14,7 @@ import { DOWNLOADS, type DownloadKey } from '@/constants'
  *   | a | b |              table (first row is the header; leave it empty for none)
  *   > text                 callout box
  *   ```                    code block (used for search queries)
- *   ![alt](src "caption")  figure
+ *   ![alt](src "caption"){1280x600}  figure; the optional {WxH} reserves the space, so anchors below don't shift as it loads
  *   **bold** _italic_ `code` [label](href)
  *
  * Links: `/route` → router Link, `download:<key>` → file from DOWNLOADS,
@@ -128,12 +128,12 @@ export function Markdown({ source, compact = false }: { source: string; compact?
       continue
     }
 
-    const img = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/)
+    const img = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)(?:\{(\d+)x(\d+)\})?$/)
     if (img) {
-      const [, alt, src, caption] = img
+      const [, alt, src, caption, width, height] = img
       out.push(
         <figure key={key()} className="mt-6">
-          <img src={src.startsWith('/') ? BASE + src.slice(1) : src} alt={alt} loading="lazy" className="w-full rounded-md border border-hairline" />
+          <img src={src.startsWith('/') ? BASE + src.slice(1) : src} alt={alt} width={width} height={height} loading="lazy" className="w-full h-auto rounded-md border border-hairline" />
           {caption && <figcaption className="mt-2 text-[0.84rem] text-ink-muted"><Inline text={caption} /></figcaption>}
         </figure>,
       )

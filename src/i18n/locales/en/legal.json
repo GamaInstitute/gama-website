@@ -12,7 +12,7 @@
     },
     "eyebrow": "Legal",
     "title": "Privacy Policy",
-    "updated_iso": "2026-10-31",
+    "updated_iso": "2026-11-04",
     "intro": [
       "Gama Institute (\"Gama\", \"we\") respects your privacy. This policy explains what personal information we collect on gamainstitute.ca, why, who we share it with, how long we keep it and how to exercise your rights.",
       "It is based on Quebec's Act respecting the protection of personal information in the private sector (Law 25) and, where it applies, Canada's federal privacy law (PIPEDA)."
@@ -136,8 +136,7 @@
           "ask how we use it."
         ],
         "p_after": [
-          "Write to [contact@gamainstitute.ca](mailto:contact@gamainstitute.ca). We reply within 30 days and may ask you to confirm your identity.",
-          "If you are not satisfied with our answer, you can file a complaint with Quebec's [Commission d'accès à l'information](https://www.cai.gouv.qc.ca) or the [Office of the Privacy Commissioner of Canada](https://www.priv.gc.ca)."
+          "Write to [contact@gamainstitute.ca](mailto:contact@gamainstitute.ca). We reply within 30 days and may ask you to confirm your identity."
         ]
       },
       {

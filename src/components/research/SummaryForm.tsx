@@ -99,17 +99,21 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
 
   return (
     <form onSubmit={onSubmit} noValidate>
-      <p className="text-ink-soft text-[0.94rem] -mt-2 mb-[22px]">{t('form.sub')}</p>
+      <p className="text-ink-soft text-[0.94rem] -mt-2">{t('form.sub')}</p>
+      <p className="text-ink-muted text-[0.8rem] mt-1.5 mb-[22px]">
+        <span aria-hidden="true" className="text-[var(--accent-ink)]">*</span> {t('form.required_note')}
+      </p>
 
       <div className="grid grid-cols-2 gap-[18px] max-[620px]:grid-cols-1">
-        <FormField id="rs-n" label={t('form.name')} type="text" autoComplete="name" error={errors.name?.message} {...register('name')} />
-        <FormField id="rs-e" label={t('form.email')} type="email" autoComplete="email" error={errors.email?.message} {...register('email')} />
+        <FormField id="rs-n" required label={t('form.name')} type="text" autoComplete="name" error={errors.name?.message} {...register('name')} />
+        <FormField id="rs-e" required label={t('form.email')} type="email" autoComplete="email" error={errors.email?.message} {...register('email')} />
         <FormField id="rs-u" label={t('form.institution')} type="text" autoComplete="organization" error={errors.institution?.message} {...register('institution')} />
         <FormField id="rs-li" label={t('form.linkedin')} type="url" placeholder="https://linkedin.com/in/…" error={errors.linkedin?.message} {...register('linkedin')} />
 
         <div className="col-span-full flex flex-col gap-[7px]">
           <FormField
             id="rs-bio"
+            required
             as="textarea"
             label={t('form.bio')}
             rows={2}
@@ -132,11 +136,12 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
           error={fileErrors.photo}
         />
 
-        <FormField id="rs-t" label={t('form.paper_title')} type="text" fullWidth error={errors.paperTitle?.message} {...register('paperTitle')} />
-        <FormField id="rs-l" label={t('form.paper_url')} type="url" placeholder="https://" fullWidth error={errors.paperUrl?.message} {...register('paperUrl')} />
+        <FormField id="rs-t" required label={t('form.paper_title')} type="text" fullWidth error={errors.paperTitle?.message} {...register('paperTitle')} />
+        <FormField id="rs-l" required label={t('form.paper_url')} type="url" placeholder="https://" fullWidth error={errors.paperUrl?.message} {...register('paperUrl')} />
 
         <FileField
           id="rs-f"
+          required
           label={t('form.summary')}
           accept={SUMMARY_FILE.accept}
           file={files.summary}
@@ -152,7 +157,7 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
           }
         />
 
-        <ConsentCheckbox id="rs-consent" error={errors.consent?.message} {...register('consent')}>
+        <ConsentCheckbox id="rs-consent" required error={errors.consent?.message} {...register('consent')}>
           <LegalText ns="research" i18nKey="form.consent" />
         </ConsentCheckbox>
       </div>

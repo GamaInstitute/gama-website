@@ -163,7 +163,7 @@ export default function ResearchSummariesPage() {
                           <div className="ph"><span className="!text-[0.62rem]">{t('list.image_placeholder')}</span></div>
                         </div>
                         <p className="m-0 text-[0.95rem] text-ink-soft leading-[1.6]">
-                          <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>{it.bio && `, ${it.bio}`}
+                          <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>
                           <span className="block mt-1.5 italic text-ink-muted">
                             {t('list.orig_by')} {it.paper_authors}
                           </span>
