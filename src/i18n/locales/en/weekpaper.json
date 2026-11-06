@@ -11,7 +11,7 @@
   "featured": {
     "ep": "Episode 6",
     "tag": "Cloud computing",
-    "tagVariant": "teal",
+    "topic": "cloud",
     "title": "AI generates your cloud infrastructure: can you trust it?",
     "body": "We look at DPIaC-Eval and IaCGen, which put LLMs in a real DevOps loop to generate AWS CloudFormation templates: generate, validate, deploy, learn from failure and retry. Even when successfully deployed, only 25.2% of the infrastructures meet every requirement, and 8.4% are fully security compliant.",
     "date_prefix": "Aired",
@@ -31,7 +31,6 @@
       {
         "no": "EP. 6",
         "topic": "cloud",
-        "tagVariant": "teal",
         "tag": "Cloud computing",
         "title": "AI generates your cloud infrastructure: can you trust it?",
         "date_iso": "2026-11-05",
@@ -41,7 +40,6 @@
       {
         "no": "EP. 5",
         "topic": "sec",
-        "tagVariant": "default",
         "tag": "Cybersecurity",
         "title": "When a simple prompt can attack your database",
         "date_iso": "2026-10-29",
@@ -51,7 +49,6 @@
       {
         "no": "EP. 4",
         "topic": "rai",
-        "tagVariant": "default",
         "tag": "Responsible AI",
         "title": "How do you build a responsible AI system?",
         "date_iso": "2026-10-22",
@@ -61,7 +58,6 @@
       {
         "no": "EP. 3",
         "topic": "ai",
-        "tagVariant": "teal",
         "tag": "AI",
         "title": "An AI that tests code and finds bugs on its own",
         "date_iso": "2026-10-15",
@@ -71,7 +67,6 @@
       {
         "no": "EP. 2",
         "topic": "ai",
-        "tagVariant": "teal",
         "tag": "AI",
         "title": "Why AI-generated code is more dangerous than you think",
         "date_iso": "2026-10-08",
@@ -81,7 +76,6 @@
       {
         "no": "EP. 1",
         "topic": "se",
-        "tagVariant": "copper",
         "tag": "Software eng.",
         "title": "Toward a new vision for software engineering",
         "date_iso": "2026-10-01",

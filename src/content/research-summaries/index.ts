@@ -2,9 +2,11 @@
 // src/i18n/locales/{fr,en}/research.json; the text of each summary is Markdown in
 // ./<id>/en.md (summaries are written in English), with an optional ./<id>/fr.md.
 
+import type { Topic } from '@/constants'
+
 export type SummaryItem = {
   id: string
-  axis: string
+  axis: Topic
   title: string
   // Meta description of the summary page
   description: string

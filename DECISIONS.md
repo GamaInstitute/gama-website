@@ -185,3 +185,11 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 **Alternative considered:** one Markdown file per summary with all metadata in front matter, the list built from the files. One place per summary, but the list page would then have to load every text (or a build step would have to extract the front matter), and the French title would need its own field anyway.
 
 **Revisit when:** there are more than a few dozen summaries. The texts are imported eagerly into the summary page's chunk, so it grows with each one; switch to a non-eager `import.meta.glob` loaded in the route's `lazy`, or to a content collection.
+
+## D-21. Each research topic has one fixed colour, set in code, not per item in content
+
+**Why:** Topic tags (WeekPaper episodes, Research Summaries, Training courses) used to take a `tagVariant` chosen per item in the JSON, from only three colours for five topics. Unrelated topics shared a colour (AI and Cloud were both teal), and the same topic looked different from one page to the next. Now `TopicTag` maps each topic key to one of the five brand gradient stops (`TOPIC_COLORS`): AI copper, software engineering amber, cloud sage, responsible AI mid teal, cybersecurity teal. Content only gives the topic. Text shades are darker (light theme) or lighter (dark theme) variants of each colour, checked for at least 4.5:1 contrast.
+
+**Alternative considered:** one neutral style for every topic tag, relying on the text alone. Calmer, but visitors lose the at-a-glance cue, and the brand palette has exactly five colours for the five topics.
+
+**Revisit when:** a sixth topic is added; the palette then needs a sixth colour that stays distinct from the others in both themes.

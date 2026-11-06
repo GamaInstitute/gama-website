@@ -57,7 +57,7 @@ Same shape as `PageHero` (two-column, `NetworkArt` on the right) but hand-built 
 
 This is the one place on the whole site where content isn't 100% in JSON, and it trips people up if you don't know the rule going in:
 
-- **`src/data/courses.ts`** owns structure: which courses/categories exist, their stable `id` (a lookup key only — never shown to a visitor), and styling data (`tagVariant`, category `color`). No translatable text lives here, so this file needs no French/English counterpart.
+- **`src/data/courses.ts`** owns structure: which courses/categories exist, their stable `id` (a lookup key only — never shown to a visitor), and styling data (each course's `topic`, which sets its tag colour, and each category's `color`, both from `TOPIC_COLORS`). DevOps courses use the `cloud` topic, since DevOps belongs to the Cloud Computing and MLOps axis. No translatable text lives here, so this file needs no French/English counterpart.
 - **`training.json`** (both languages) owns every word a visitor reads — `courses.<id>.{category, title, excerpt, duration, level}` and `categories.items.<key>.{name, count}` — keyed by the same `id`/`key` used in `courses.ts`.
 
 **Nothing enforces the two stay in sync.** There's no TypeScript union tying `Course.id` to the JSON keys — a typo or a missing entry in either file fails *silently* at runtime: `i18next` returns the raw key string (e.g. `courses.llm-safety.title`) instead of throwing, so a mismatched course quietly ships with its dotted key visible as the heading instead of real text. Always add/rename an `id` in both places in the same change, and check the rendered page after.
@@ -65,7 +65,7 @@ This is the one place on the whole site where content isn't 100% in JSON, and it
 ## How-to recipes
 
 **Add a featured course:**
-1. In `courses.ts`, add an entry to `FEATURED_COURSES` with a new unique kebab-case `id` and a `tagVariant` (`copper | teal | default` — see [Tag](README.md#buttons-tags-labels)). Set `imageSrc` if you have a real course image; otherwise the card falls back to a generic placeholder box (every course does today — no `FEATURED_COURSES` entry currently sets `imageSrc`).
+1. In `courses.ts`, add an entry to `FEATURED_COURSES` with a new unique kebab-case `id` and a `topic` (`ai | se | cloud | rai | sec`, see [Tag](README.md#buttons-tags-labels)), which sets the tag colour. Set `imageSrc` if you have a real course image; otherwise the card falls back to a generic placeholder box (every course does today — no `FEATURED_COURSES` entry currently sets `imageSrc`).
 2. In **both** `en/training.json` and `fr/training.json`, add `courses.<same-id>` with `category`, `title`, `excerpt`, `duration`, `level`.
 3. No page code changes — the grid and stagger animation pick it up automatically.
 
@@ -79,6 +79,6 @@ This is the one place on the whole site where content isn't 100% in JSON, and it
 
 **`CategoryCard`** — [src/components/training/CategoryCard.tsx](../../src/components/training/CategoryCard.tsx). Props: `name`, `count` (both pre-translated strings), `color` (hex, used as an inline style), `href?` (defaults to `#courses`). It's just an anchor scrolling down to Featured Courses — there's no actual category-filtering logic anywhere; clicking any category lands on the same unfiltered course grid.
 
-**`CourseCard`** — [src/components/training/CourseCard.tsx](../../src/components/training/CourseCard.tsx). Props: `category`, `tagVariant`, `title`, `excerpt`, `duration`, `level` (pre-translated strings), `enrollHref?` (defaults to `#`), `imageSrc?` (falls back to a placeholder box reading "image · cours" — this fallback text is hardcoded French regardless of active language, worth fixing if you touch this component).
+**`CourseCard`** — [src/components/training/CourseCard.tsx](../../src/components/training/CourseCard.tsx). Props: `category`, `topic`, `title`, `excerpt`, `duration`, `level` (pre-translated strings), `enrollHref?` (defaults to `#`), `imageSrc?` (falls back to a placeholder box reading "image · cours" — this fallback text is hardcoded French regardless of active language, worth fixing if you touch this component).
 
 **`LearningJourney`** — [src/components/training/LearningJourney.tsx](../../src/components/training/LearningJourney.tsx). Props: `steps: { title, description }[]`. 4-column grid (1 column under 760px) with a decorative connector line behind numbered circles, colored by the `STEP_COLORS` array described above.

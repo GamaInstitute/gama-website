@@ -5,7 +5,7 @@ import { motion }         from 'framer-motion'
 
 import { Eyebrow }        from '@/components/ui/Eyebrow'
 import { Button }         from '@/components/ui/Button'
-import { Tag }            from '@/components/ui/Tag'
+import { Tag, TopicTag }  from '@/components/ui/Tag'
 import { SectionWrapper } from '@/components/ui/SectionWrapper'
 import { Reveal, revealContainer, revealItem } from '@/components/ui/Reveal'
 import { VideoPlayer }    from '@/components/ui/VideoPlayer'
@@ -18,12 +18,11 @@ import { PresentationForm } from '@/components/weekpaper/PresentationForm'
 import { SOCIAL_LINKS }   from '@/constants'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
-import type { TagVariant } from '@/types/course'
+import type { Topic } from '@/constants'
 
 type EpisodeItem = {
   no: string
-  topic: string
-  tagVariant: string
+  topic: Topic
   tag: string
   title: string
   date_iso: string
@@ -95,7 +94,7 @@ export default function WeekPaperPage() {
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2 flex-wrap">
                   <Tag variant="copper">{t('featured.ep')}</Tag>
-                  <Tag variant={t('featured.tagVariant') as TagVariant}>{t('featured.tag')}</Tag>
+                  <TopicTag topic={t('featured.topic') as Topic}>{t('featured.tag')}</TopicTag>
                 </div>
                 <h2 className="font-display font-semibold text-[clamp(1.5rem,2.4vw,2.1rem)] tracking-[-0.02em] text-ink m-0">
                   {t('featured.title')}
@@ -162,7 +161,7 @@ export default function WeekPaperPage() {
                     <EpisodeCard
                       no={ep.no}
                       tag={ep.tag}
-                      tagVariant={ep.tagVariant as TagVariant}
+                      topic={ep.topic}
                       title={ep.title}
                       date={formatRelativeEpisodeDate(ep.date_iso, i18n.language)}
                       dateIso={ep.date_iso}

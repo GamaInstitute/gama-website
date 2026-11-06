@@ -119,7 +119,7 @@ export default function TrainingPage() {
                 <motion.div key={course.id} variants={revealItem}>
                   <CourseCard
                     category={t(`courses.${course.id}.category`)}
-                    tagVariant={course.tagVariant}
+                    topic={course.topic}
                     title={t(`courses.${course.id}.title`)}
                     excerpt={t(`courses.${course.id}.excerpt`)}
                     duration={t(`courses.${course.id}.duration`)}

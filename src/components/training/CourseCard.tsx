@@ -1,13 +1,12 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import { Tag } from '@/components/ui/Tag'
+import { TopicTag } from '@/components/ui/Tag'
 import { Button } from '@/components/ui/Button'
-import type { TagVariant } from '@/types/course'
-import { ANIM } from '@/constants'
+import { ANIM, type Topic } from '@/constants'
 
 interface CourseCardProps {
   category:    string
-  tagVariant:  TagVariant
+  topic:       Topic
   title:       string
   excerpt:     string
   duration:    string
@@ -18,7 +17,7 @@ interface CourseCardProps {
 
 export function CourseCard({
   category,
-  tagVariant,
+  topic,
   title,
   excerpt,
   duration,
@@ -50,7 +49,7 @@ export function CourseCard({
       {/* Body */}
       <div className="flex flex-col gap-3 flex-1 p-[22px_24px_26px]">
         <div className="flex items-center gap-3 flex-wrap">
-          <Tag variant={tagVariant}>{category}</Tag>
+          <TopicTag topic={topic}>{category}</TopicTag>
         </div>
         <h3 className="font-display font-semibold text-[clamp(1.25rem,2vw,1.5rem)] tracking-[-0.015em] text-ink">
           <a href={enrollHref} className="hover:text-[var(--accent-ink)] transition-colors duration-[180ms]">

@@ -12,6 +12,7 @@ import { SummaryForm }    from '@/components/research/SummaryForm'
 import { formatEpisodeDate } from '@/lib/formatDate'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import type { SummaryItem } from '@/content/research-summaries'
+import { topicTagCls }    from '@/components/ui/Tag'
 
 
 
@@ -153,7 +154,7 @@ export default function ResearchSummariesPage() {
                           type="button"
                           onClick={() => { setAxis(it.axis); goToPage(1) }}
                           aria-label={t('list.filter_axis', { axis: axes[it.axis] })}
-                          className="inline-flex items-center text-[0.7rem] font-semibold tracking-[0.08em] uppercase py-[0.3em] px-[0.7em] rounded-pill border text-[var(--accent-ink)] bg-[rgba(181,100,24,.08)] border-[rgba(181,100,24,.2)] transition-colors hover:bg-[rgba(181,100,24,.16)] focus-visible:outline-none focus-visible:shadow-[var(--ring)]"
+                          className={`${topicTagCls(it.axis)} transition-[filter] hover:brightness-95 dark:hover:brightness-125 focus-visible:outline-none focus-visible:shadow-[var(--ring)]`}
                         >
                           {axes[it.axis]}
                         </button>

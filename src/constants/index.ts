@@ -1,3 +1,5 @@
+import type { Topic } from '@/types/topic'
+
 export const ANIM = {
   REVEAL_DURATION: 0.7,
   REVEAL_EASE: [0.22, 1, 0.36, 1] as const,
@@ -16,6 +18,17 @@ export const GRAD_STOPS = [
   { offset: 0.76, hex: '#2A8C8A' },
   { offset: 1,   hex: '#165C71' },
 ] as const
+
+// One colour per research topic, taken from the brand gradient, so a topic looks the same
+// on every page (WeekPaper, Research Summaries, Training). TopicTag holds the text shades.
+export type { Topic }
+export const TOPIC_COLORS: Record<Topic, string> = {
+  ai:    '#B56418',
+  se:    '#D8942A',
+  cloud: '#8EA57A',
+  rai:   '#2A8C8A',
+  sec:   '#165C71',
+}
 
 export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/company/gamainstitute',

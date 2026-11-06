@@ -52,6 +52,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 - **Components:** UI primitives in `src/components/ui/`, layout in `src/components/layout/`, brand assets in `src/components/brand/`, page-specific in `src/components/<page>/`.
 - **Animation constants:** Use `ANIM.*` from `src/constants/index.ts` — not ad-hoc numbers.
 - **Brand gradient:** `GRAD_STOPS` in `src/constants/index.ts` — copper (#B56418) → teal (#165C71). Used by both `NetworkArt` and `BrandMark`.
+- **Topic colours:** research-topic tags use `TopicTag` (`src/components/ui/Tag.tsx`) with a `topic` key (`ai | se | cloud | rai | sec`); each topic always has the same colour (`TOPIC_COLORS`, [D-21](DECISIONS.md)). Never pick a colour per item in content.
 - **No em dashes:** Use `,` for mid-sentence pauses, `|` for page-title separators (`Page | Gama Institute`).
 
 ## Gotchas
@@ -97,7 +98,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 - [docs/pages/](docs/pages/README.md) — one file per page: section-by-section anatomy, which component renders what, exact i18n/data-file sources, and how-to recipes for common changes. Update the matching page doc whenever you add/remove/restructure a section, not just when you add a whole new page.
 - [docs/guides/content-editing.md](docs/guides/content-editing.md) — the existing `docs/guides/` entry: everyday content changes (text, photos, courses) with no code required. See the rule below for when to add another.
 - [CHANGELOG.md](CHANGELOG.md) — user- and contributor-facing changes; Keep a Changelog 1.1.0
-- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-20)
+- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-21)
 - [docs/adr/](docs/adr/) — full ADRs for the three heaviest architectural choices
 - [docs/sessions/](docs/sessions/) — session logs (write only when warranted; see rule below)
 

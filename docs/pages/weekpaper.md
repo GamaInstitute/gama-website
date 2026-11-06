@@ -85,13 +85,13 @@ Added 2026-10-31 from the updated `week-paper.html` Claude Design export. (That 
 
 `SectionWrapper alt id="episodes"`. Every published episode as an `EpisodeCard` grid, newest first, including the one currently featured above. Filter chips above the grid narrow it by `topic`.
 
-- **Episodes** come from `episodes.items` in both locale files, each `{ no, topic, tagVariant, tag, title, date_iso, duration, video_url }`. Order in the array is display order, so put the newest first.
+- **Episodes** come from `episodes.items` in both locale files, each `{ no, topic, tag, title, date_iso, duration, video_url }`. `topic` (`ai | se | cloud | rai | sec`) sets both the filter and the tag colour (`TopicTag`, see [README.md](README.md#buttons-tags-labels)). Order in the array is display order, so put the newest first.
 - **Filter chips** are generated from the `filters` object: `all` plus one key per topic. Each episode's `topic` must match one of those keys. Only add a filter key once at least one episode uses it, or visitors get a chip that always shows the `episodes.empty` message.
 - **`EpisodeCard`** ([src/components/weekpaper/EpisodeCard.tsx](../../src/components/weekpaper/EpisodeCard.tsx)) renders a `small` `VideoPlayer` (click-to-play) and a title that opens `video_url` on YouTube in a new tab. Its `placeholder` comes from `common.video_placeholder`, like every other `VideoPlayer`.
 
 ## How-to recipes
 
-**Publish a new episode:** in both locale files, (1) add it at the **top** of `episodes.items`, adding a `filters` entry if its `topic` is new, and (2) point the Featured hero at it by editing `featured.video_url`, `featured.duration`, `featured.ep`, `featured.tag`/`tagVariant`, `featured.title`, `featured.body` and `featured.date_iso`. The CTA button follows `video_url` automatically.
+**Publish a new episode:** in both locale files, (1) add it at the **top** of `episodes.items`, adding a `filters` entry if its `topic` is new, and (2) point the Featured hero at it by editing `featured.video_url`, `featured.duration`, `featured.ep`, `featured.tag`/`topic`, `featured.title`, `featured.body` and `featured.date_iso`. The CTA button follows `video_url` automatically.
 
 **Add a playlist:** add `{ label, title, count, duration, icon }` to `playlists.items` in both locale files — no code change needed, the grid maps over the array generically. Remember every card links to the same YouTube channel URL regardless of content, since there's no per-playlist link field.
 

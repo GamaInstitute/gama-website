@@ -11,7 +11,7 @@
   "featured": {
     "ep": "Épisode 6",
     "tag": "Infonuagique",
-    "tagVariant": "teal",
+    "topic": "cloud",
     "title": "L'IA génère votre infrastructure Cloud : peut-on lui faire confiance ?",
     "body": "Nous analysons DPIaC-Eval et IaCGen, qui placent les LLM dans une vraie boucle DevOps pour générer des templates AWS CloudFormation : générer, valider, déployer, apprendre de l'échec et réessayer. Même déployées avec succès, seules 25,2 % des infrastructures respectent toutes les exigences, et 8,4 % sont entièrement conformes en matière de sécurité.",
     "date_prefix": "Diffusé",
@@ -31,7 +31,6 @@
       {
         "no": "EP. 6",
         "topic": "cloud",
-        "tagVariant": "teal",
         "tag": "Infonuagique",
         "title": "L'IA génère votre infrastructure Cloud : peut-on lui faire confiance ?",
         "date_iso": "2026-11-05",
@@ -41,7 +40,6 @@
       {
         "no": "EP. 5",
         "topic": "sec",
-        "tagVariant": "default",
         "tag": "Cybersécurité",
         "title": "Quand un simple prompt peut attaquer votre base de données",
         "date_iso": "2026-10-29",
@@ -51,7 +49,6 @@
       {
         "no": "EP. 4",
         "topic": "rai",
-        "tagVariant": "default",
         "tag": "IA responsable",
         "title": "Comment construire un système d'IA responsable ?",
         "date_iso": "2026-10-22",
@@ -61,7 +58,6 @@
       {
         "no": "EP. 3",
         "topic": "ai",
-        "tagVariant": "teal",
         "tag": "IA",
         "title": "Une IA qui teste du code et découvre des bugs toute seule",
         "date_iso": "2026-10-15",
@@ -71,7 +67,6 @@
       {
         "no": "EP. 2",
         "topic": "ai",
-        "tagVariant": "teal",
         "tag": "IA",
         "title": "Pourquoi le code généré par l'IA est plus dangereux qu'on le pense",
         "date_iso": "2026-10-08",
@@ -81,7 +76,6 @@
       {
         "no": "EP. 1",
         "topic": "se",
-        "tagVariant": "copper",
         "tag": "Génie logiciel",
         "title": "Vers une nouvelle vision du génie logiciel",
         "date_iso": "2026-10-01",

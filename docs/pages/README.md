@@ -76,7 +76,7 @@ Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal Reac
 
 **`Eyebrow`** — [src/components/ui/Eyebrow.tsx](../../src/components/ui/Eyebrow.tsx) — small uppercase label with a short rule before it (`noRule` to omit). Purely presentational.
 
-**`Tag`** — [src/components/ui/Tag.tsx](../../src/components/ui/Tag.tsx) — pill badge. `variant` is one of exactly three values: `default | copper | teal` — there is no mechanism to add a fourth without editing `Tag.tsx` itself, so when content-editing a `tagVariant` field in JSON, only reuse these three.
+**`Tag`** — [src/components/ui/Tag.tsx](../../src/components/ui/Tag.tsx) — pill badge. `variant` is one of exactly three values: `default | copper | teal` — there is no mechanism to add a fourth without editing `Tag.tsx` itself, so when content-editing a `tagVariant` field in JSON, only reuse these three. `Tag` is for non-topic labels (Home news and papers, episode numbers). **Research topics use `TopicTag`** (same file) with `topic` = `ai | se | cloud | rai | sec`: each topic always has the same colour from the brand gradient (`TOPIC_COLORS` in `src/constants/index.ts`, [D-21](../../DECISIONS.md)), on WeekPaper, Research Summaries and Training. Content never picks a topic colour; it only sets the topic. `topicTagCls(topic)` gives the same classes for a non-span element, like the clickable axis tag on the Research Summaries list.
 
 **`DarkCTA`** — [src/components/ui/DarkCTA.tsx](../../src/components/ui/DarkCTA.tsx) — the dark card used for bottom-of-page calls to action (`eyebrow`, `heading`, `body`, `children` — typically a `Button`). Self-wraps in `Reveal`, so don't wrap it again. Flips to a light bordered card in dark mode rather than staying dark-on-dark.
 
