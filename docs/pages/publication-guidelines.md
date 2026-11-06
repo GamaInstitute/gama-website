@@ -28,7 +28,7 @@ The Word document numbers its last sections inconsistently (7, 6, 7, 8, 9, 10); 
 
 `###` sub-sections carry prefixed anchors (`rs-`, `wp-`, `fp-`) so they stay unique on the page. **Anchors must be identical in `fr.md` and `en.md`**: the site links to them (`/publication-guidelines#weekpaper`) whatever the language.
 
-The table of contents lists parts and sub-sections; on small screens only the parts. A closing box links to both submission forms.
+The table of contents lists parts and sub-sections; on small screens only the parts. On wide screens it is a sticky sidebar that highlights the section being read and scrolls itself to keep it in view; on small screens, where it sits above the text, a floating "Sommaire / Contents" button appears once it is scrolled past and leads back to it. A closing box links to both submission forms.
 
 ## File format
 
@@ -37,8 +37,8 @@ Front matter (one `key: value` per line): `title`, `description` (meta descripti
 The body supports exactly what the renderer handles (see the comment at the top of `Markdown.tsx`):
 
 - `## Part {#anchor}`, `### Sub-section {#anchor}` (both in the table of contents), `#### Heading`.
-- Paragraphs, `-` and `1.` lists, `- [ ]` checklists.
-- Tables (`| a | b |`; leave the first row empty for a table without a header), `> ` callout boxes, fenced code blocks, `![alt](/publication-guidelines/x.webp "caption"){1280x600}` figures. Captions can't contain straight double quotes. The `{WxH}` (the image's pixel size) is optional but keep it: without it the lazy-loaded image pushes the page down as it loads, and links to anchors further down (like `#weekpaper`) land in the wrong place.
+- Paragraphs, `-` and `1.` lists (the final checklist is a plain `-` list: decorative check boxes that can't be ticked were dropped).
+- Tables (`| a | b |`; leave the first row empty for a table without a header), `> ` callout boxes (start the first line with `[!rule]` for a requirement, `[!tip]` for a tip or `[!example]` for an example; each has its own style, and a rule gets an icon), fenced code blocks, `![alt](/publication-guidelines/x.webp "caption"){1280x600}` figures. Captions can't contain straight double quotes. The `{WxH}` (the image's pixel size) is optional but keep it: without it the lazy-loaded image pushes the page down as it loads, and links to anchors further down (like `#weekpaper`) land in the wrong place.
 - Inline: `**bold**`, `_italic_`, `` `code` ``, `[label](href)`. `href` can be a route (`/week-paper#contribute`), an anchor on the page (`#review`), `download:slide_template` (the one file in `DOWNLOADS`, `src/constants/index.ts`), `mailto:`, or an external URL (opens in a new tab).
 
 Anything else (nested lists, HTML, `#` h1) is not supported and will render as plain text.

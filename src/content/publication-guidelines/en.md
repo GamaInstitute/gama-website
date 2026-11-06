@@ -6,7 +6,7 @@ lead: Research Summaries, research-based tutorials and GAMA WeekPaper. What we p
 
 ## 1. Our mission and editorial principles {#introduction}
 
-GAMA Institute is a nonprofit research, training and innovation initiative dedicated to making research in artificial intelligence and software engineering more accessible while developing the next generation of researchers. We welcome undergraduate and graduate students, doctoral researchers, early-career researchers, and anyone taking their first steps into the world of research. **No prior scientific publication experience is required.**
+GAMA Institute is a nonprofit research, training and innovation institute dedicated to making research in artificial intelligence and software engineering more accessible while developing the next generation of researchers. We welcome contributions from undergraduate and graduate students, doctoral researchers, early-career researchers, and anyone taking their first steps into the world of research. **No prior scientific publication experience is required.**
 
 We value scientific accuracy, independent thinking, clear communication, openness, inclusion, and quality over quantity.
 
@@ -37,8 +37,6 @@ Every Research Summary or GAMA WeekPaper published under your name becomes part 
 
 That is why we strongly encourage you to prioritize quality over quantity, develop your own analysis, verify your sources, and take ownership of every contribution you submit. You do not need to be an expert to begin. You need curiosity, discipline, intellectual honesty, and the willingness to do meaningful work.
 
-We encourage contributors to publish multiple high-quality contributions over time, progressively building their expertise, research interests and scientific portfolios. At GAMA Institute, we believe that the next generation of researchers deserves the opportunity to be seen, heard and recognized long before their first scientific publication.
-
 **Your research journey can start here.**
 
 ## 2. Scope and accepted contribution formats {#scope}
@@ -53,9 +51,11 @@ All submissions must align with at least one of GAMA Institute's five research a
 - **Cybersecurity:** software and AI security, vulnerability detection, secure development practices, threat analysis, and protection against emerging cyberattacks.
 - **Responsible and Trustworthy AI:** AI fairness, transparency, explainability, privacy, accountability, safety, governance and auditing.
 
-> **Not sure whether your topic fits?** Explore the [Research Summaries](/research-summaries), [GAMA WeekPaper presentations](/week-paper) and other contributions on our website to better understand our research interests and the types of contributions we welcome.
+> [!tip] **Not sure whether your topic fits?** Explore the [Research Summaries](/research-summaries), [GAMA WeekPaper presentations](/week-paper) and other contributions on our website to better understand our research interests and the types of contributions we welcome.
 
 Topics that connect multiple research axes are particularly encouraged, provided they have a clear scientific foundation and offer meaningful insights to our community.
+
+> [!rule] **Requirement: a published paper.** Every paper you summarize, implement or present must have been **published in an international peer-reviewed journal or conference**. Preprints that have not been peer reviewed, for example on arXiv, are not accepted. Before you start, check where the paper was published (see [Search arXiv](#fp-arxiv)).
 
 ### A. Research Summary, written in English {#rs-format}
 
@@ -72,7 +72,7 @@ A Research Summary can also be a **research-based technical tutorial** that impl
 
 **Reproducibility is required.** Every tutorial must include the source code, instructions, dependencies and necessary resources so that GAMA reviewers can execute and verify the implementation.
 
-> **Important:** we do not accept generic software tutorials. The tutorial must be directly grounded in scientific research and demonstrate a meaningful contribution from the cited paper(s). Simply mentioning or citing a research paper is not sufficient.
+> [!rule] **Important:** we do not accept generic software tutorials. The tutorial must be directly grounded in scientific research and demonstrate a meaningful contribution from the cited paper(s). Simply mentioning or citing a research paper is not sufficient.
 
 ### B. GAMA WeekPaper, a recorded research presentation {#wp-format}
 
@@ -95,6 +95,8 @@ This bilingual format allows you to present confidently in French while making y
 - You may choose to show your face or present using slides and voice narration only.
 - AI-generated video presentations, synthetic narration and AI avatars are not accepted.
 
+**No professional equipment needed.** You can record with common tools such as Zoom, Google Meet or Microsoft Teams, with or without a microphone or headset, as long as your voice is clearly audible. To cut bad sequences from your final video, use a simple free or open-source editor such as Microsoft Clipchamp, [Shotcut](https://shotcut.org/) or [OpenShot](https://www.openshot.org/). There is no need to invest in lighting or advanced editing: we only ask for a clear video, with audible sound and readable slides.
+
 The goal is to demonstrate your understanding of the research while developing your scientific communication and presentation skills.
 
 ## 3. Finding research papers in computer science {#finding-papers}
@@ -103,7 +105,7 @@ A practical guide to [ACM Digital Library](https://dl.acm.org/) and [arXiv](http
 
 The examples focus on software engineering, cloud computing and MLOps, cybersecurity, and responsible and trustworthy AI. GitHub lists and the suggested X account provide additional discovery leads. ACM and arXiv are the two research libraries covered here, but the same approach applies to other academic platforms, including [Google Scholar](https://scholar.google.com/), [IEEE Xplore](https://ieeexplore.ieee.org/Xplore/home.jsp) and [Engineering Village](https://www.engineeringvillage.com/app/search/quick/).
 
-> **Important:** if you have institutional access through your university or organization, we encourage you to use the academic databases available to you. Otherwise, free platforms such as arXiv and Google Scholar are excellent starting points.
+> [!tip] **Important:** if you have institutional access through your university or organization, we encourage you to use the academic databases available to you. Otherwise, free platforms such as arXiv and Google Scholar are excellent starting points.
 
 ### 3.1 Build a focused search {#fp-requete}
 
@@ -181,7 +183,9 @@ arXiv gives free access to scientific papers, but not all papers on arXiv are pe
 3. Verify its publication status. If the paper has been published in a peer-reviewed journal or conference, you can select it for your contribution.
 4. If you cannot verify a peer-reviewed version, choose another paper and repeat the process.
 
-> **Example:** suppose you find the paper "Beyond Leaderboards: A Method for Application-Specific Capability Profiling of Large Language Models" on arXiv. Searching its exact title in major academic databases does not reveal a verified peer-reviewed publication. You should therefore treat it as a preprint unless further publication evidence is found, and select another paper under GAMA's peer-review requirement.
+> [!tip] **Tip: ask an AI tool.** You can also use an AI tool to check whether your paper was peer reviewed, and above all to find out **which conference or journal** published it. Give it the exact title and authors, then ask where and in which year the paper was published. Always confirm the answer on the conference's, journal's or publisher's website (for example ACM Digital Library or IEEE Xplore): AI can be wrong or invent a venue.
+
+> [!example] **Example:** suppose you find the paper "Beyond Leaderboards: A Method for Application-Specific Capability Profiling of Large Language Models" on arXiv. Searching its exact title in major academic databases does not reveal a verified peer-reviewed publication. You should therefore treat it as a preprint unless further publication evidence is found, and select another paper under GAMA's peer-review requirement.
 
 #### You can also reverse the process
 
@@ -332,11 +336,21 @@ The structure is flexible. Adapt it to your topic, but make sure readers can und
 
 ### 4.4 Using images and tables {#rs-visuels}
 
-Visuals are optional. Include them when they help explain an idea.
+Visuals are optional. Include them when they help explain an idea: a diagram or illustration to explain a concept, process or practical example, a table to summarize findings, compare approaches or organize key ideas.
 
-- **Create your own diagram or illustration** to explain a concept, process or practical example.
-- **Build your own table** to summarize findings, compare approaches or organize key ideas.
-- Add a short caption explaining the visual.
+#### Tools
+
+| To create | Possible tools |
+|---|---|
+| Diagrams | [LibreOffice](https://www.libreoffice.org/) Draw or Impress, PowerPoint, [Miro](https://miro.com/diagramming/) |
+| Tables | Your text editor, Excel or another spreadsheet |
+| Charts | Excel or another spreadsheet; in Python, Pandas, NumPy and SciPy to prepare the data, Matplotlib and Seaborn to plot it |
+
+Any other tool, preferably free, works too. AI can help you design a figure or write the functions that generate your charts, provided you can interpret and explain the result, it is legible and clear, it faithfully represents the data, and you disclose its use (see [Acceptable uses of AI](#ai-acceptable)).
+
+#### Rules
+
+- Give each visual a short caption that explains it.
 - Label invented examples as _illustrative_. Preserve the meaning and context of any results you present.
 - If you reuse or adapt an existing visual, credit its source and check its reuse conditions.
 
@@ -372,11 +386,14 @@ The GAMA Institute Policy on AI Use applies in full to every Research Summary, r
 You may use AI tools to:
 
 - Explore a topic and identify keywords or concepts to investigate.
+- Search for papers published in the best conferences and journals related to your research interests.
+- Check that your selected paper was published in an international peer-reviewed journal or conference, and find out which one, always confirming it on the publisher's or conference's website.
 - Obtain preliminary explanations of unfamiliar terminology.
 - Brainstorm questions, examples or possible structures.
 - Improve grammar, spelling, clarity or translation.
 - Receive feedback on a draft you have written.
-- Assist with designing illustrations, diagrams or slides, provided you verify their accuracy and disclose their use.
+- Assist with designing illustrations, diagrams or slides, provided you can interpret and explain them, make sure they are legible and clear, verify their accuracy and disclose their use.
+- Write the functions (for example in Python, with Pandas, Matplotlib or Seaborn) that generate your charts, provided you check that they faithfully represent the data. See [Using images and tables](#rs-visuels).
 
 AI-generated explanations and references must be checked against the original paper and other reliable sources. Exploring a paper through AI does not replace reading it.
 
@@ -413,7 +430,7 @@ You may present with or without showing your face. Standard recording and editin
 
 Include a brief statement with every submission describing whether and how you used AI.
 
-> **Example:** "I used [tool name] to explore unfamiliar concepts and improve English grammar. I read the original paper, developed the analysis, and verified all claims and references myself."
+> [!example] **Example:** "I used [tool name] to explore unfamiliar concepts and improve English grammar. I read the original paper, developed the analysis, and verified all claims and references myself."
 >
 > If no AI tools were used, state: "No generative AI tools were used in preparing this contribution."
 
@@ -459,13 +476,14 @@ These publicly shared contributions can help you develop a research portfolio an
 
 ## 11. Final contributor checklist {#checklist}
 
-- [ ] My topic fits a GAMA research axis and is based on at least one original scientific paper.
-- [ ] I read and verified the original paper(s), their evidence and their limitations.
-- [ ] My Research Summary is in English and contains a table of contents; multi-paper comparisons are meaningful where used.
-- [ ] If I wrote a tutorial, it demonstrably implements or adapts an identifiable research technique and the code is tested.
-- [ ] If I prepared a WeekPaper, I speak French, use English slides, and provide my own authentic recording.
-- [ ] I cite and license source material appropriately and distinguish research findings from my own interpretations.
-- [ ] I included the contributor bio and profile materials, all required submission assets, and an AI-use disclosure.
-- [ ] I proofread the contribution and can explain and defend it to an editor.
+- My topic fits a GAMA research axis and is based on at least one original scientific paper.
+- I checked that each paper I chose was published in an international peer-reviewed journal or conference.
+- I read and verified the original paper(s), their evidence and their limitations.
+- My Research Summary is in English and contains a table of contents; multi-paper comparisons are meaningful where used.
+- If I wrote a tutorial, it demonstrably implements or adapts an identifiable research technique and the code is tested.
+- If I prepared a WeekPaper, I speak French, use English slides, and provide my own authentic recording.
+- I cite and license source material appropriately and distinguish research findings from my own interpretations.
+- I included the contributor bio and profile materials, all required submission assets, and an AI-use disclosure.
+- I proofread the contribution and can explain and defend it to an editor.
 
 A question about these guidelines? [Write to us](mailto:contact@gamainstitute.ca).

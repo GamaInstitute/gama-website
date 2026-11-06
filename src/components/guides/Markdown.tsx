@@ -10,9 +10,8 @@ import { DOWNLOADS, type DownloadKey } from '@/constants'
  *   ### Heading {#anchor}  h3, a sub-section, also in the table of contents
  *   #### Heading           h4
  *   - item / 1. item       lists (one level)
- *   - [ ] item             checklist
  *   | a | b |              table (first row is the header; leave it empty for none)
- *   > text                 callout box
+ *   > text                 callout box; start it with [!rule], [!tip] or [!example] for those styles
  *   ```                    code block (used for search queries)
  *   ![alt](src "caption"){1280x600}  figure; the optional {WxH} reserves the space, so anchors below don't shift as it loads
  *   **bold** _italic_ `code` [label](href)
@@ -73,6 +72,15 @@ const cells = (row: string) => row.trim().replace(/^\||\|$/g, '').split('|').map
 const H2_CLS = {
   guide:   'font-display font-semibold text-[1.75rem] tracking-[-0.02em] text-ink mt-20 pt-10 border-t border-hairline mb-1 scroll-mt-[96px] first:mt-0 first:pt-0 first:border-t-0',
   compact: 'font-display font-semibold text-[1.45rem] tracking-[-0.015em] text-ink mt-12 scroll-mt-[96px] first:mt-0',
+}
+
+// A rule must stand out from tips and examples: thicker accent border, stronger tint, an icon.
+type CalloutKind = 'note' | 'rule' | 'tip' | 'example'
+const CALLOUT_CLS: Record<CalloutKind, string> = {
+  note:    'border-l-[3px] border-[var(--accent)] bg-[color:color-mix(in_srgb,var(--accent)_6%,transparent)]',
+  rule:    'border border-l-[5px] border-[color:color-mix(in_srgb,var(--accent)_45%,transparent)] border-l-[color:var(--accent)] bg-[color:color-mix(in_srgb,var(--accent)_13%,transparent)]',
+  tip:     'border-l-[3px] border-[var(--link)] bg-[color:color-mix(in_srgb,var(--link)_8%,transparent)]',
+  example: 'border-l-[3px] border-hairline-2 bg-bg-alt',
 }
 
 export function Markdown({ source, compact = false }: { source: string; compact?: boolean }) {
@@ -172,26 +180,15 @@ export function Markdown({ source, compact = false }: { source: string; compact?
     if (trimmed.startsWith('> ')) {
       const quote: string[] = []
       while (i < lines.length && lines[i].trim().startsWith('>')) quote.push(lines[i++].trim().replace(/^>\s?/, ''))
+      const kind = (quote[0].match(/^\[!(rule|tip|example)\]\s*/)?.[1] ?? 'note') as CalloutKind
+      if (kind !== 'note') quote[0] = quote[0].replace(/^\[!\w+\]\s*/, '')
       out.push(
-        <aside key={key()} className="mt-6 rounded-md border-l-[3px] border-[var(--accent)] bg-[rgba(181,100,24,.06)] px-5 py-4 text-ink">
+        <aside key={key()} className={`mt-6 rounded-md px-5 py-4 text-ink ${CALLOUT_CLS[kind]}`}>
+          {kind === 'rule' && (
+            <span aria-hidden="true" className="float-left mr-3 mt-[2px] grid place-items-center w-[22px] h-[22px] rounded-full bg-[var(--accent)] text-white text-[0.8rem] font-bold">!</span>
+          )}
           {quote.join('\n').split(/\n\s*\n/).map((p, j) => <p key={j} className="mt-2 first:mt-0"><Inline text={p.replace(/\n/g, ' ')} /></p>)}
         </aside>,
-      )
-      continue
-    }
-
-    if (/^- \[ \] /.test(trimmed)) {
-      const items: string[] = []
-      while (i < lines.length && /^- \[ \] /.test(lines[i].trim())) items.push(lines[i++].trim().slice(6))
-      out.push(
-        <ul key={key()} className="mt-4 grid gap-2.5 list-none p-0">
-          {items.map((it, j) => (
-            <li key={j} className="flex gap-3 items-start">
-              <span aria-hidden="true" className="mt-[5px] w-4 h-4 flex-none rounded-[4px] border-2 border-[var(--accent)]" />
-              <span><Inline text={it} /></span>
-            </li>
-          ))}
-        </ul>,
       )
       continue
     }
@@ -199,7 +196,7 @@ export function Markdown({ source, compact = false }: { source: string; compact?
     if (/^(- |\d+\. )/.test(trimmed)) {
       const ordered = /^\d+\. /.test(trimmed)
       const items: string[] = []
-      while (i < lines.length && /^(- |\d+\. )/.test(lines[i].trim()) && !/^- \[ \] /.test(lines[i].trim())) {
+      while (i < lines.length && /^(- |\d+\. )/.test(lines[i].trim())) {
         items.push(lines[i++].trim().replace(/^(- |\d+\. )/, ''))
       }
       const Tag = ordered ? 'ol' : 'ul'

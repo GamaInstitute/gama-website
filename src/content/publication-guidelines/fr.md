@@ -6,7 +6,7 @@ lead: Research Summaries, tutoriels fondés sur la recherche et GAMA WeekPaper. 
 
 ## 1. Notre mission et nos principes éditoriaux {#introduction}
 
-GAMA Institute est une initiative de recherche, de formation et d'innovation à but non lucratif. Elle vise à rendre la recherche en intelligence artificielle et en génie logiciel plus accessible, tout en formant la prochaine génération de chercheurs. Nous accueillons les étudiants au baccalauréat et aux cycles supérieurs, les doctorants, les chercheurs en début de carrière et toute personne qui fait ses premiers pas dans le monde de la recherche. **Aucune expérience de publication scientifique n'est requise.**
+GAMA Institute est un institut de recherche, de formation et d'innovation à but non lucratif. Il vise à rendre la recherche en intelligence artificielle et en génie logiciel plus accessible, tout en formant la prochaine génération de chercheurs. Nous accueillons les contributions des étudiants au baccalauréat et aux cycles supérieurs, des doctorants, des chercheurs en début de carrière et de toute personne qui fait ses premiers pas dans le monde de la recherche. **Aucune expérience de publication scientifique n'est requise.**
 
 Nous accordons de l'importance à la rigueur scientifique, à la pensée indépendante, à la clarté, à l'ouverture, à l'inclusion et à la qualité plutôt qu'à la quantité.
 
@@ -37,8 +37,6 @@ Chaque Research Summary ou GAMA WeekPaper publié sous votre nom fait partie de 
 
 C'est pourquoi nous vous encourageons fortement à privilégier la qualité plutôt que la quantité, à développer votre propre analyse, à vérifier vos sources et à assumer pleinement chaque contribution que vous soumettez. Pas besoin d'être expert pour commencer. Il vous faut de la curiosité, de la discipline, de l'honnêteté intellectuelle et la volonté de faire un travail qui a du sens.
 
-Nous encourageons les contributeurs à publier plusieurs contributions de qualité au fil du temps, pour développer progressivement leur expertise, leurs intérêts de recherche et leur portfolio scientifique. Chez GAMA Institute, nous pensons que la prochaine génération de chercheurs mérite d'être vue, entendue et reconnue bien avant sa première publication scientifique.
-
 **Votre parcours de recherche peut commencer ici.**
 
 ## 2. Portée et formats de contribution acceptés {#scope}
@@ -53,9 +51,11 @@ Toutes les soumissions doivent s'inscrire dans au moins un des cinq axes de rech
 - **Cybersécurité :** sécurité des logiciels et de l'IA, détection de vulnérabilités, pratiques de développement sécurisé, analyse des menaces et protection contre les nouvelles cyberattaques.
 - **IA responsable et digne de confiance :** équité, transparence, explicabilité, protection de la vie privée, responsabilité, sûreté, gouvernance et audit de l'IA.
 
-> **Vous ne savez pas si votre sujet convient ?** Parcourez les [Research Summaries](/research-summaries), les [présentations GAMA WeekPaper](/week-paper) et les autres contributions sur notre site pour mieux connaître nos intérêts de recherche et les types de contributions que nous accueillons.
+> [!tip] **Vous ne savez pas si votre sujet convient ?** Parcourez les [Research Summaries](/research-summaries), les [présentations GAMA WeekPaper](/week-paper) et les autres contributions sur notre site pour mieux connaître nos intérêts de recherche et les types de contributions que nous accueillons.
 
 Les sujets qui relient plusieurs axes de recherche sont particulièrement bienvenus, à condition de reposer sur une base scientifique claire et d'apporter un éclairage utile à notre communauté.
+
+> [!rule] **Exigence : un article publié.** Chaque article résumé, mis en œuvre ou présenté doit avoir été **publié dans une revue ou une conférence internationale avec évaluation par les pairs**. Les prépublications qui n'ont pas été évaluées par les pairs, par exemple sur arXiv, ne sont pas acceptées. Avant de commencer, vérifiez où l'article a été publié (voir [Chercher dans arXiv](#fp-arxiv)).
 
 ### A. Research Summary, rédigé en anglais {#rs-format}
 
@@ -72,7 +72,7 @@ Un Research Summary peut aussi être un **tutoriel technique fondé sur la reche
 
 **La reproductibilité est obligatoire.** Chaque tutoriel doit inclure le code source, les instructions, les dépendances et les ressources nécessaires pour que les réviseurs de GAMA puissent exécuter et vérifier l'implémentation.
 
-> **Important :** nous n'acceptons pas les tutoriels logiciels génériques. Le tutoriel doit reposer directement sur la recherche scientifique et démontrer un apport réel du ou des articles cités. Il ne suffit pas de mentionner ou de citer un article de recherche.
+> [!rule] **Important :** nous n'acceptons pas les tutoriels logiciels génériques. Le tutoriel doit reposer directement sur la recherche scientifique et démontrer un apport réel du ou des articles cités. Il ne suffit pas de mentionner ou de citer un article de recherche.
 
 ### B. GAMA WeekPaper, une présentation de recherche enregistrée {#wp-format}
 
@@ -95,6 +95,8 @@ Ce format bilingue vous permet de présenter avec aisance en français, tout en 
 - Vous pouvez montrer votre visage ou présenter uniquement avec vos diapositives et votre voix.
 - Les présentations vidéo générées par l'IA, les voix de synthèse et les avatars d'IA ne sont pas acceptés.
 
+**Pas besoin de matériel professionnel.** Vous pouvez enregistrer avec des outils courants comme Zoom, Google Meet ou Microsoft Teams, avec ou sans micro ou casque, à condition que votre voix soit bien audible. Pour couper les mauvaises séquences de votre vidéo finale, utilisez un éditeur simple, gratuit ou libre, comme Microsoft Clipchamp, [Shotcut](https://shotcut.org/) ou [OpenShot](https://www.openshot.org/). Inutile d'investir dans l'éclairage ou le montage avancé : nous demandons seulement une vidéo claire, avec un son audible et des diapositives lisibles.
+
 L'objectif est de démontrer votre compréhension de la recherche tout en développant vos compétences en communication scientifique et en présentation.
 
 ## 3. Trouver des articles de recherche en informatique {#finding-papers}
@@ -103,7 +105,7 @@ Un guide pratique pour [ACM Digital Library](https://dl.acm.org/) et [arXiv](htt
 
 Les exemples portent sur le génie logiciel, l'infonuagique et le MLOps, la cybersécurité, et l'IA responsable et digne de confiance. Des listes GitHub et un compte X offrent des pistes supplémentaires. ACM et arXiv sont les deux bibliothèques présentées ici, mais la même démarche s'applique à d'autres plateformes universitaires, dont [Google Scholar](https://scholar.google.com/), [IEEE Xplore](https://ieeexplore.ieee.org/Xplore/home.jsp) et [Engineering Village](https://www.engineeringvillage.com/app/search/quick/).
 
-> **Important :** si vous avez un accès institutionnel par votre université ou votre organisation, nous vous encourageons à utiliser les bases de données universitaires à votre disposition. Sinon, des plateformes gratuites comme arXiv et Google Scholar sont d'excellents points de départ.
+> [!tip] **Important :** si vous avez un accès institutionnel par votre université ou votre organisation, nous vous encourageons à utiliser les bases de données universitaires à votre disposition. Sinon, des plateformes gratuites comme arXiv et Google Scholar sont d'excellents points de départ.
 
 ### 3.1 Construire une recherche ciblée {#fp-requete}
 
@@ -181,7 +183,9 @@ arXiv donne gratuitement accès à des articles scientifiques, mais tous ne sont
 3. Vérifiez son statut de publication. Si l'article a été publié dans une revue ou une conférence avec évaluation par les pairs, vous pouvez le choisir pour votre contribution.
 4. Si vous ne trouvez pas de version évaluée par les pairs, choisissez un autre article et recommencez.
 
-> **Exemple :** vous trouvez sur arXiv l'article « Beyond Leaderboards: A Method for Application-Specific Capability Profiling of Large Language Models ». En recherchant son titre exact dans les grandes bases de données universitaires, vous ne trouvez aucune publication évaluée par les pairs. Vous devez donc le considérer comme une prépublication, sauf preuve de publication ultérieure, et choisir un autre article, conformément à l'exigence d'évaluation par les pairs de GAMA.
+> [!tip] **Astuce : demandez à l'IA.** Vous pouvez aussi utiliser un outil d'IA pour vérifier si votre article a été évalué par les pairs, et surtout pour savoir **dans quelle conférence ou quelle revue** il a été publié. Donnez-lui le titre exact et les auteurs, puis demandez-lui où l'article a été publié et en quelle année. Confirmez toujours la réponse sur le site de la conférence, de la revue ou de l'éditeur (par exemple ACM Digital Library ou IEEE Xplore) : l'IA peut se tromper ou inventer un lieu de publication.
+
+> [!example] **Exemple :** vous trouvez sur arXiv l'article « Beyond Leaderboards: A Method for Application-Specific Capability Profiling of Large Language Models ». En recherchant son titre exact dans les grandes bases de données universitaires, vous ne trouvez aucune publication évaluée par les pairs. Vous devez donc le considérer comme une prépublication, sauf preuve de publication ultérieure, et choisir un autre article, conformément à l'exigence d'évaluation par les pairs de GAMA.
 
 #### Vous pouvez aussi faire l'inverse
 
@@ -332,11 +336,21 @@ Cette structure est flexible. Adaptez-la à votre sujet, mais assurez-vous que l
 
 ### 4.4 Images et tableaux {#rs-visuels}
 
-Les éléments visuels sont facultatifs. Incluez-les lorsqu'ils facilitent l'explication d'une idée.
+Les éléments visuels sont facultatifs. Incluez-les lorsqu'ils facilitent l'explication d'une idée : un schéma ou une illustration pour expliquer un concept, un processus ou un exemple pratique, un tableau pour résumer les résultats, comparer des approches ou organiser les idées principales.
 
-- **Créez votre propre schéma ou illustration** pour expliquer un concept, un processus ou un exemple pratique.
-- **Construisez votre propre tableau** pour résumer les résultats, comparer des approches ou organiser les idées principales.
-- Ajoutez une courte légende expliquant le visuel.
+#### Outils
+
+| Pour créer | Outils possibles |
+|---|---|
+| Schémas | [LibreOffice](https://www.libreoffice.org/) Draw ou Impress, PowerPoint, [Miro](https://miro.com/diagramming/) |
+| Tableaux | Votre éditeur de texte, Excel ou un autre tableur |
+| Graphiques | Excel ou un autre tableur ; en Python, Pandas, NumPy et SciPy pour préparer les données, Matplotlib et Seaborn pour les tracer |
+
+Tout autre outil, de préférence libre, convient aussi. L'IA peut vous aider à concevoir une figure ou à écrire les fonctions qui génèrent vos graphiques, à condition que vous soyez capable d'interpréter et d'expliquer le résultat, qu'il soit lisible et clair, qu'il représente fidèlement les données et que vous en déclariez l'utilisation (voir [Utilisations acceptables de l'IA](#ai-acceptable)).
+
+#### Règles
+
+- Ajoutez à chaque visuel une courte légende qui l'explique.
 - Précisez que les exemples inventés sont _illustratifs_. Préservez le sens et le contexte des résultats présentés.
 - Si vous réutilisez ou adaptez un visuel existant, indiquez sa source et vérifiez ses conditions de réutilisation.
 
@@ -372,11 +386,14 @@ La politique de GAMA Institute sur l'utilisation de l'IA s'applique intégraleme
 Vous pouvez utiliser des outils d'IA pour :
 
 - Explorer un sujet et repérer des mots-clés ou des concepts à approfondir.
+- Rechercher des articles publiés dans les meilleures conférences et revues liées à vos intérêts de recherche.
+- Vérifier que l'article sélectionné a été publié dans une revue ou une conférence internationale avec évaluation par les pairs, et savoir dans laquelle, en confirmant toujours l'information sur le site de l'éditeur ou de la conférence.
 - Obtenir une première explication d'une terminologie peu familière.
 - Trouver des idées de questions, d'exemples ou de structures possibles.
 - Améliorer la grammaire, l'orthographe, la clarté ou la traduction.
 - Recevoir des commentaires sur une ébauche que vous avez rédigée.
-- Vous aider à concevoir des illustrations, des schémas ou des diapositives, à condition d'en vérifier l'exactitude et d'en déclarer l'utilisation.
+- Vous aider à concevoir des illustrations, des schémas ou des diapositives, à condition d'être capable de les interpréter et de les expliquer, de vous assurer qu'ils sont lisibles et clairs, d'en vérifier l'exactitude et d'en déclarer l'utilisation.
+- Écrire les fonctions (par exemple en Python, avec Pandas, Matplotlib ou Seaborn) qui génèrent vos graphiques, à condition de vérifier qu'ils représentent fidèlement les données. Voir [Images et tableaux](#rs-visuels).
 
 Les explications et les références générées par l'IA doivent être vérifiées à partir de l'article original et d'autres sources fiables. Explorer un article avec l'IA ne remplace pas sa lecture.
 
@@ -413,7 +430,7 @@ Vous pouvez présenter en montrant votre visage ou non. Les outils courants d'en
 
 Joignez à chaque soumission une courte déclaration indiquant si vous avez utilisé l'IA et de quelle façon.
 
-> **Exemple :** « J'ai utilisé [nom de l'outil] pour explorer des concepts peu familiers et améliorer la grammaire anglaise. J'ai lu l'article original, développé l'analyse et vérifié moi-même toutes les affirmations et les références. »
+> [!example] **Exemple :** « J'ai utilisé [nom de l'outil] pour explorer des concepts peu familiers et améliorer la grammaire anglaise. J'ai lu l'article original, développé l'analyse et vérifié moi-même toutes les affirmations et les références. »
 >
 > Si vous n'avez utilisé aucun outil d'IA, indiquez : « Aucun outil d'IA générative n'a été utilisé pour préparer cette contribution. »
 
@@ -459,13 +476,14 @@ Ces contributions publiques peuvent vous aider à constituer un portfolio de rec
 
 ## 11. Liste de vérification finale {#checklist}
 
-- [ ] Mon sujet correspond à un axe de recherche de GAMA et repose sur au moins un article scientifique original.
-- [ ] J'ai lu et vérifié le ou les articles originaux, leurs données probantes et leurs limites.
-- [ ] Mon Research Summary est rédigé en anglais et comporte une table des matières ; les comparaisons entre plusieurs articles, le cas échéant, sont pertinentes.
-- [ ] Si j'ai rédigé un tutoriel, il met en œuvre ou adapte de façon démontrable une technique de recherche identifiable, et le code a été testé.
-- [ ] Si j'ai préparé un WeekPaper, je présente en français, mes diapositives sont en anglais et l'enregistrement est authentique et réalisé par moi.
-- [ ] Je cite les sources et respecte leurs licences, et je distingue les résultats de recherche de mes propres interprétations.
-- [ ] J'ai joint ma biographie et mes éléments de profil, tous les fichiers requis pour la soumission et une déclaration d'utilisation de l'IA.
-- [ ] J'ai relu ma contribution et je peux l'expliquer et la défendre devant un réviseur.
+- Mon sujet correspond à un axe de recherche de GAMA et repose sur au moins un article scientifique original.
+- J'ai vérifié que chaque article choisi a été publié dans une revue ou une conférence internationale avec évaluation par les pairs.
+- J'ai lu et vérifié le ou les articles originaux, leurs données probantes et leurs limites.
+- Mon Research Summary est rédigé en anglais et comporte une table des matières ; les comparaisons entre plusieurs articles, le cas échéant, sont pertinentes.
+- Si j'ai rédigé un tutoriel, il met en œuvre ou adapte de façon démontrable une technique de recherche identifiable, et le code a été testé.
+- Si j'ai préparé un WeekPaper, je présente en français, mes diapositives sont en anglais et l'enregistrement est authentique et réalisé par moi.
+- Je cite les sources et respecte leurs licences, et je distingue les résultats de recherche de mes propres interprétations.
+- J'ai joint ma biographie et mes éléments de profil, tous les fichiers requis pour la soumission et une déclaration d'utilisation de l'IA.
+- J'ai relu ma contribution et je peux l'expliquer et la défendre devant un réviseur.
 
 Une question sur ces lignes directrices ? [Écrivez-nous](mailto:contact@gamainstitute.ca).
