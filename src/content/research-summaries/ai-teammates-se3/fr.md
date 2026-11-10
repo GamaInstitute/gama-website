@@ -98,5 +98,3 @@ Le prochain défi n'est pas seulement de construire des agents qui écrivent du 
 **Jeu de données et ressources de réplication**
 
 - **Jeu de données AIDev et dépôt de réplication :** [SAILResearch/AI_Teammates_in_SE3](https://github.com/SAILResearch/AI_Teammates_in_SE3) sur GitHub.
-
-Le premier article est avant tout une vision et une feuille de route de recherche, et non une étude empirique qui exigerait un dossier de réplication expérimental. Le dépôt AIDev permet d'approfondir les données empiriques du second article.

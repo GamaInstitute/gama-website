@@ -98,5 +98,3 @@ The next challenge is not simply building AI agents that write code faster, but 
 **Dataset and replication resources**
 
 - **AIDev dataset and replication repository:** [SAILResearch/AI_Teammates_in_SE3](https://github.com/SAILResearch/AI_Teammates_in_SE3) on GitHub.
-
-The first paper is primarily a vision and research roadmap, rather than an empirical study requiring an experimental replication package. The AIDev repository supports further investigation of the second paper's empirical evidence.
