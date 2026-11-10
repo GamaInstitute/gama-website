@@ -159,24 +159,19 @@ export default function ResearchSummariesPage() {
                           {axes[it.axis]}
                         </button>
                       </p>
-                      <div className="grid grid-cols-[112px_minmax(0,1fr)] gap-5 items-start max-[520px]:grid-cols-[72px_1fr] max-[520px]:gap-[14px]">
-                        <div className="relative aspect-square rounded-md overflow-hidden border border-hairline" aria-hidden="true">
-                          <div className="ph"><span className="!text-[0.62rem]">{t('list.image_placeholder')}</span></div>
-                        </div>
-                        <p className="m-0 text-[0.95rem] text-ink-soft leading-[1.6]">
-                          <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>
-                          <span className="block mt-1.5 italic text-ink-muted">
-                            {t(it.papers.length > 1 ? 'list.orig_by_many' : 'list.orig_by')} {it.papers.map(p => p.authors).join('; ')}
-                          </span>
-                          <Link
-                            to={`/research-summaries/${it.id}`}
-                            className="flex w-fit items-center gap-[0.35em] mt-2 text-[0.9rem] font-semibold text-[var(--link)] group"
-                          >
-                            {t('list.read_summary')}
-                            <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                          </Link>
-                        </p>
-                      </div>
+                      <p className="m-0 mt-4 text-[0.95rem] text-ink-soft leading-[1.6]">
+                        <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>
+                        <span className="block mt-1.5 italic text-ink-muted">
+                          {t(it.papers.length > 1 ? 'list.orig_by_many' : 'list.orig_by')} {it.papers.map(p => p.authors).join('; ')}
+                        </span>
+                        <Link
+                          to={`/research-summaries/${it.id}`}
+                          className="flex w-fit items-center gap-[0.35em] mt-2 text-[0.9rem] font-semibold text-[var(--link)] group"
+                        >
+                          {t('list.read_summary')}
+                          <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                        </Link>
+                      </p>
                     </article>
                   ))
                 ) : (

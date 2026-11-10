@@ -24,7 +24,6 @@
     "orig_by_many": "Publications originales de",
     "read_summary": "Lire le résumé de recherche",
     "filter_axis": "Afficher les résumés de l'axe {{axis}}",
-    "image_placeholder": "image",
     "empty": "Aucun résumé ne correspond à votre recherche pour l'instant.",
     "pagination_label": "Pagination",
     "prev": "« Page précédente",
@@ -72,26 +71,6 @@
           "authors": "Hao Li, Haoxiang Zhang, Ahmed E. Hassan (Université Queen's)",
           "venue": "Prépublication arXiv:2507.15003 [cs.SE], 2025",
           "url": "https://arxiv.org/abs/2507.15003"
-        }
-      ]
-    },
-    {
-      "id": "financial-fraud-knowledge-graphs",
-      "axis": "ai",
-      "title": "Suivre l'argent : les graphes de connaissances contre la fraude invisible",
-      "description": "Research Summary du guide de Kamal Kishore sur freeCodeCamp : détecter cinq schémas de fraude aux paiements avec un graphe de connaissances Neo4j, et les limites du prototype.",
-      "date_iso": "2026-10-30",
-      "author": "Équipe Gama Institute",
-      "initials": "GI",
-      "color": "c5",
-      "bio": "GAMA Institute rend la recherche en intelligence artificielle et en génie logiciel accessible aux étudiants et jeunes chercheurs du Québec et de l'Afrique francophone.",
-      "photo": "/logo-icon.png",
-      "papers": [
-        {
-          "title": "How to Detect Financial Fraud Patterns with Knowledge Graphs: A Production Guide",
-          "authors": "Kamal Kishore",
-          "venue": "freeCodeCamp, 30 octobre 2026",
-          "url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
         }
       ]
     }

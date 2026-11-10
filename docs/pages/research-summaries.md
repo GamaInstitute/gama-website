@@ -31,7 +31,7 @@ Custom padding (not `PageHero`, there's no `NetworkArt`). Left column: eyebrow, 
 
 Two columns (list + 320px sidebar). Below 960px they stack and the sidebar boxes flow into an auto-fit grid. On desktop the sidebar is `sticky`.
 
-Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**", "Original paper by" the authors of each entry of `papers` ("Original papers by" when there are several, `list.orig_by_many`), and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
+Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), then (no image) "Research Summary by **author**", "Original paper by" the authors of each entry of `papers` ("Original papers by" when there are several, `list.orig_by_many`), and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
 
 - **Search** filters on title, author, bio, the authors in `papers` and the axis label (case-insensitive substring).
 - **Axes** chips come from the `axes` object, one per research axis on the Home page (AI, software engineering, cloud computing, cybersecurity, responsible AI). Its keys must match each item's `axis` (`all` is the reset).

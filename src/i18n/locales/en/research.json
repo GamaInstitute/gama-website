@@ -24,7 +24,6 @@
     "orig_by_many": "Original papers by",
     "read_summary": "Read the research summary",
     "filter_axis": "Show {{axis}} summaries",
-    "image_placeholder": "image",
     "empty": "No summary matches your search yet.",
     "pagination_label": "Pagination",
     "prev": "« Previous page",
@@ -72,26 +71,6 @@
           "authors": "Hao Li, Haoxiang Zhang, Ahmed E. Hassan (Queen's University)",
           "venue": "arXiv preprint arXiv:2507.15003 [cs.SE], 2025",
           "url": "https://arxiv.org/abs/2507.15003"
-        }
-      ]
-    },
-    {
-      "id": "financial-fraud-knowledge-graphs",
-      "axis": "ai",
-      "title": "Follow the money: knowledge graphs against invisible fraud",
-      "description": "Research Summary of Kamal Kishore's freeCodeCamp guide: detecting five payment fraud patterns with a Neo4j knowledge graph, and the limits of the prototype.",
-      "date_iso": "2026-10-30",
-      "author": "Gama Institute team",
-      "initials": "GI",
-      "color": "c5",
-      "bio": "GAMA Institute makes research in artificial intelligence and software engineering accessible to students and early-career researchers from Quebec and Francophone Africa.",
-      "photo": "/logo-icon.png",
-      "papers": [
-        {
-          "title": "How to Detect Financial Fraud Patterns with Knowledge Graphs: A Production Guide",
-          "authors": "Kamal Kishore",
-          "venue": "freeCodeCamp, October 30, 2026",
-          "url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
         }
       ]
     }
