@@ -63,7 +63,7 @@ export default function ResearchSummariesPage() {
     const q = query.trim().toLocaleLowerCase()
     return items.filter(it =>
       (axis === 'all' || it.axis === axis) &&
-      (!q || [it.title, it.author, it.bio ?? '', it.paper_authors, axes[it.axis] ?? '']
+      (!q || [it.title, it.author, it.bio ?? '', ...it.papers.map(p => p.authors), axes[it.axis] ?? '']
         .some(s => s.toLocaleLowerCase().includes(q)))
     )
   }, [items, axes, axis, query])
@@ -166,7 +166,7 @@ export default function ResearchSummariesPage() {
                         <p className="m-0 text-[0.95rem] text-ink-soft leading-[1.6]">
                           <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>
                           <span className="block mt-1.5 italic text-ink-muted">
-                            {t('list.orig_by')} {it.paper_authors}
+                            {t(it.papers.length > 1 ? 'list.orig_by_many' : 'list.orig_by')} {it.papers.map(p => p.authors).join('; ')}
                           </span>
                           <Link
                             to={`/research-summaries/${it.id}`}

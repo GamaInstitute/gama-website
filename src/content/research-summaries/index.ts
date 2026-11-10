@@ -20,12 +20,16 @@ export type SummaryItem = {
   institution?: string
   linkedin?: string
   photo?: string
-  // The original publication being summarized
-  paper_title: string
-  paper_authors: string
+  // The original publication(s) being summarized, usually one
+  papers: Paper[]
+}
+
+export type Paper = {
+  title: string
+  authors: string
   // Where and when it was published, e.g. "Proceedings of NAACL 2025, pages 11995–12041"
-  paper_venue?: string
-  source_url: string
+  venue?: string
+  url: string
 }
 
 // Eager so the SSG pass renders the text synchronously. Only the summary page imports

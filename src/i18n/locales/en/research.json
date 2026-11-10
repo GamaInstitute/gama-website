@@ -21,6 +21,7 @@
     "h2": "Research Summaries",
     "by": "Research Summary by",
     "orig_by": "Original paper by",
+    "orig_by_many": "Original papers by",
     "read_summary": "Read the research summary",
     "filter_axis": "Show {{axis}} summaries",
     "image_placeholder": "image",
@@ -48,38 +49,31 @@
   },
   "items": [
     {
-      "id": "ai-coding-agents-aidev",
+      "id": "ai-teammates-se3",
       "axis": "se",
-      "title": "AI coding agents in the wild: fast to submit, slower to be trusted",
-      "description": "Research Summary of AIDev: 456,535 pull requests opened by five autonomous coding agents on GitHub show their work is fast but accepted less often than human work.",
-      "date_iso": "2026-11-05",
+      "title": "From AI coding assistants to AI teammates: is software engineering 3.0 already here?",
+      "description": "Research Summary of two papers: the vision of AI-native software engineering 3.0, and AIDev, 456,535 pull requests opened by autonomous coding agents on GitHub.",
+      "date_iso": "2026-11-06",
       "author": "Patrick Loic Foalem",
       "initials": "PF",
       "color": "c1",
       "bio": "Founder and Principal Research Scientist at GAMA Institute. PhD candidate in software engineering at Polytechnique Montréal, specializing in machine learning systems engineering and AI software reliability.",
       "photo": "/team/patrick-foalem.jpg",
       "linkedin": "https://ca.linkedin.com/in/foalem",
-      "paper_title": "The Rise of AI Teammates in Software Engineering (SE) 3.0: How Autonomous Coding Agents Are Reshaping Software Engineering",
-      "paper_authors": "Hao Li, Haoxiang Zhang, Ahmed E. Hassan (Queen's University)",
-      "paper_venue": "arXiv preprint arXiv:2507.15003 [cs.SE], July 2025",
-      "source_url": "https://arxiv.org/abs/2507.15003"
-    },
-    {
-      "id": "se3-ai-native-software-engineering",
-      "axis": "se",
-      "title": "Software engineering 3.0: developers state the intent, AI writes the code",
-      "description": "Research Summary of the SE 3.0 vision: AI-native software engineering built around intents and conversations with an AI teammate, and a roadmap of its challenges.",
-      "date_iso": "2026-11-05",
-      "author": "Patrick Loic Foalem",
-      "initials": "PF",
-      "color": "c1",
-      "bio": "Founder and Principal Research Scientist at GAMA Institute. PhD candidate in software engineering at Polytechnique Montréal, specializing in machine learning systems engineering and AI software reliability.",
-      "photo": "/team/patrick-foalem.jpg",
-      "linkedin": "https://ca.linkedin.com/in/foalem",
-      "paper_title": "Towards AI-Native Software Engineering (SE 3.0): A Vision and a Challenge Roadmap",
-      "paper_authors": "Ahmed E. Hassan, Gustavo A. Oliva, Dayi Lin, Boyuan Chen, Zhen Ming (Jack) Jiang",
-      "paper_venue": "arXiv preprint arXiv:2410.06107 [cs.SE], version 2, January 2026",
-      "source_url": "https://arxiv.org/abs/2410.06107"
+      "papers": [
+        {
+          "title": "Towards AI-Native Software Engineering (SE 3.0): A Vision and a Challenge Roadmap",
+          "authors": "Ahmed E. Hassan, Gustavo A. Oliva, Dayi Lin, Boyuan Chen, Zhen Ming (Jack) Jiang",
+          "venue": "arXiv preprint arXiv:2410.06107 [cs.SE], 2024",
+          "url": "https://arxiv.org/abs/2410.06107"
+        },
+        {
+          "title": "The Rise of AI Teammates in Software Engineering (SE) 3.0: How Autonomous Coding Agents Are Reshaping Software Engineering",
+          "authors": "Hao Li, Haoxiang Zhang, Ahmed E. Hassan (Queen's University)",
+          "venue": "arXiv preprint arXiv:2507.15003 [cs.SE], 2025",
+          "url": "https://arxiv.org/abs/2507.15003"
+        }
+      ]
     },
     {
       "id": "financial-fraud-knowledge-graphs",
@@ -92,15 +86,20 @@
       "color": "c5",
       "bio": "GAMA Institute makes research in artificial intelligence and software engineering accessible to students and early-career researchers from Quebec and Francophone Africa.",
       "photo": "/logo-icon.png",
-      "paper_title": "How to Detect Financial Fraud Patterns with Knowledge Graphs: A Production Guide",
-      "paper_authors": "Kamal Kishore",
-      "paper_venue": "freeCodeCamp, October 30, 2026",
-      "source_url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
+      "papers": [
+        {
+          "title": "How to Detect Financial Fraud Patterns with Knowledge Graphs: A Production Guide",
+          "authors": "Kamal Kishore",
+          "venue": "freeCodeCamp, October 30, 2026",
+          "url": "https://www.freecodecamp.org/news/how-to-detect-financial-fraud-patterns-with-knowledge-graphs-a-production-guide/"
+        }
+      ]
     }
   ],
   "article": {
     "back": "All Research Summaries",
     "orig": "Original paper",
+    "orig_many": "Original papers",
     "linkedin": "{{name}}'s LinkedIn profile",
     "toc": "Table of contents",
     "lang_note": "Like all Research Summaries, this summary is written in English.",

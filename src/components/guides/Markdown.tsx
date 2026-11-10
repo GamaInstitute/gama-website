@@ -167,7 +167,8 @@ export function Markdown({ source, compact = false }: { source: string; compact?
             <tbody>
               {body.map((r, j) => (
                 <tr key={j} className="border-b border-hairline last:border-b-0 align-top">
-                  {r.map((c, k) => <td key={k} className={`px-4 py-2.5 ${k === 0 ? 'font-semibold text-ink whitespace-nowrap' : ''}`}><Inline text={c} /></td>)}
+                  {/* The first column is a label: kept on one line when short, wrapped when it is a sentence */}
+                  {r.map((c, k) => <td key={k} className={`px-4 py-2.5 ${k === 0 ? `font-semibold text-ink ${c.length <= 30 ? 'whitespace-nowrap' : 'min-w-[16ch]'}` : ''}`}><Inline text={c} /></td>)}
                 </tr>
               ))}
             </tbody>

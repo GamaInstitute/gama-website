@@ -89,19 +89,25 @@ export default function ResearchSummaryPage() {
               </div>
             </div>
 
-            {/* The original paper: title (linked), authors, venue */}
+            {/* The original paper(s): title (linked), authors, venue */}
             <div className="mt-6 border-l-[3px] border-[var(--accent)] pl-4 py-1 text-[0.95rem] leading-[1.6]">
-              <p className="m-0 text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted">{t('article.orig')}</p>
-              <a
-                href={item.source_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 inline font-semibold text-[var(--link)] underline-offset-2 hover:underline"
-              >
-                {item.paper_title} <span aria-hidden="true">↗</span>
-              </a>
-              <p className="m-0 mt-0.5 text-ink-soft">{item.paper_authors}</p>
-              {item.paper_venue && <p className="m-0 italic text-ink-muted">{item.paper_venue}</p>}
+              <p className="m-0 text-[0.72rem] font-bold tracking-[0.13em] uppercase text-ink-muted">
+                {t(item.papers.length > 1 ? 'article.orig_many' : 'article.orig')}
+              </p>
+              {item.papers.map(paper => (
+                <div key={paper.url} className="mt-1 [&+&]:mt-3">
+                  <a
+                    href={paper.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline font-semibold text-[var(--link)] underline-offset-2 hover:underline"
+                  >
+                    {paper.title} <span aria-hidden="true">↗</span>
+                  </a>
+                  <p className="m-0 mt-0.5 text-ink-soft">{paper.authors}</p>
+                  {paper.venue && <p className="m-0 italic text-ink-muted">{paper.venue}</p>}
+                </div>
+              ))}
             </div>
           </div></div>
         </header>

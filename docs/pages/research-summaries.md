@@ -31,9 +31,9 @@ Custom padding (not `PageHero`, there's no `NetworkArt`). Left column: eyebrow, 
 
 Two columns (list + 320px sidebar). Below 960px they stack and the sidebar boxes flow into an auto-fit grid. On desktop the sidebar is `sticky`.
 
-Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**", "Original paper by `paper_authors`", and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
+Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), a square image placeholder, then "Research Summary by **author**", "Original paper by" the authors of each entry of `papers` ("Original papers by" when there are several, `list.orig_by_many`), and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
 
-- **Search** filters on title, author, bio, `paper_authors` and the axis label (case-insensitive substring).
+- **Search** filters on title, author, bio, the authors in `papers` and the axis label (case-insensitive substring).
 - **Axes** chips come from the `axes` object, one per research axis on the Home page (AI, software engineering, cloud computing, cybersecurity, responsible AI). Its keys must match each item's `axis` (`all` is the reset).
 - **Pagination** is client-side, `PAGE_SIZE = 5` at the top of the page file. Hidden while everything fits on one page.
 - **Recent contributors** are the first 4 distinct authors in `items[]`, so keep `items[]` sorted newest first. Avatar colour comes from `color` (`c1`…`c5` → copper, copper-bright, sage, teal-mid, teal; see `AVATAR_BG`).
@@ -45,7 +45,7 @@ Each entry of `items[]` renders as one article: title, then the date (`date_iso`
 
 - **Header**, modelled on the Montreal AI Ethics Institute's research summaries: back link (`article.back`), date and axis tag, the title as h1, then:
   - **Contributor:** round photo (`photo`, initials if absent), "Research Summary by **author**", a LinkedIn icon link when `linkedin` is set (`article.linkedin`), and `bio` · `institution` below. These come from the submission form.
-  - **Original paper** box (`article.orig`): `paper_title` linked to `source_url`, `paper_authors`, and `paper_venue` in italics. The browser tab title is the summary title; the meta description is the item's `description`.
+  - **Original paper** box (`article.orig`, or `article.orig_many` for several): for each entry of `papers`, its `title` linked to `url`, `authors`, and `venue` in italics. The browser tab title is the summary title; the meta description is the item's `description`.
 - **Table of contents:** built from the text's `##` and `###` headings (`article.toc`). The guidelines make a table of contents mandatory for every summary, so contributors don't write one in the file.
 - **Text:** the Markdown file `src/content/research-summaries/<id>/en.md`, rendered by the same `Markdown` component as the Publication Guidelines (`compact` mode: lighter `##` headings). If a `fr.md` exists it is used on the French site; otherwise the English text shows on both, with a note on the French site (`article.lang_note`) that summaries are written in English, as the guidelines require.
 - **Closing box:** `article.cta_*`, linking to the submission form and the guidelines.
@@ -79,7 +79,8 @@ Like the contact form, this only works on Cloudflare Pages (production, or `npm 
    - the same `id`, `axis`, `date_iso`, `initials`, `color` in both files;
    - a translated `title` and `description` (one sentence, used as the page's meta description);
    - the contributor, from the submission form: `author` (name), `bio` (translated), and optionally `institution`, `linkedin` (full URL) and `photo`. Save the photo as `public/research-summaries/contributors/<name>.webp` (square, about 200×200) and set `photo` to `/research-summaries/contributors/<name>.webp`;
-   - the original paper: `paper_title`, `paper_authors` (shorten long lists to "First, Second et al."), `paper_venue` (venue, pages, date; translated) and `source_url` (the form's paper link).
+   - the original paper, as one entry of `papers`: `title`, `authors` (shorten long lists to "First, Second et al."), `venue` (venue, pages, date; translated) and `url` (the form's paper link). A summary that covers several papers lists each one;
+   - figures go in `public/research-summaries/figures/` (`.webp`) and are placed in the Markdown with `![alt](/research-summaries/figures/x.webp "Figure 1. Caption"){WxH}`.
 
 The build creates the new page automatically.
 

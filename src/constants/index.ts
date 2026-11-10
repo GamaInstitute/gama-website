@@ -44,7 +44,7 @@ export const CONTACT_EMAIL = {
 // Files offered for download. Only the PowerPoint slide template: the contributor
 // guidelines are a web page (src/content/publication-guidelines/), not documents.
 export const DOWNLOADS = {
-  slide_template: `${import.meta.env.BASE_URL}downloads/GAMA_Institute_Slide_Template.pptx`,
+  slide_template: `${import.meta.env.BASE_URL}downloads/GAMA_Institute_Slide_Template.pptx?v=2026-11-06b`,
 } as const
 
 export type DownloadKey = keyof typeof DOWNLOADS

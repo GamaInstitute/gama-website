@@ -25,6 +25,7 @@ export default function TeamPage() {
   const { t } = useTranslation('team')
 
   const leadership   = t('leadership.members',   { returnObjects: true }) as Member[]
+  const staff        = t('staff.members',        { returnObjects: true }) as Member[]
   // TODO: hidden pending real researchers/contributors — restore along with the RESEARCHERS and CONTRIBUTORS sections below
   // const researchers  = t('researchers.members',  { returnObjects: true }) as Member[]
   // const contributors = t('contributors.members', { returnObjects: true }) as Member[]
@@ -65,6 +66,31 @@ export default function TeamPage() {
               viewport={{ once: true, margin: '-8% 0px' }}
             >
               {leadership.map(m => (
+                <motion.div key={m.name} variants={revealItem}>
+                  <MemberCard name={m.name} role={m.role} photo={m.photo} photoPosition={m.photoPosition} linkedin={m.linkedin} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </SectionWrapper>
+
+        {/* ── TECHNICAL STAFF ───────────────────────────────── */}
+        <SectionWrapper>
+          <div className="wrap">
+            <Reveal className="mb-[clamp(32px,4vw,48px)]">
+              <Eyebrow>{t('staff.eyebrow')}</Eyebrow>
+              <h2 className="font-display font-semibold text-[clamp(1.9rem,3.4vw,2.9rem)] tracking-[-0.02em] text-ink mt-3">
+                {t('staff.h2')}
+              </h2>
+            </Reveal>
+            <motion.div
+              className="grid grid-cols-3 gap-[clamp(18px,2.5vw,32px)] max-[800px]:grid-cols-2 max-[520px]:grid-cols-1"
+              variants={revealContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: '-8% 0px' }}
+            >
+              {staff.map(m => (
                 <motion.div key={m.name} variants={revealItem}>
                   <MemberCard name={m.name} role={m.role} photo={m.photo} photoPosition={m.photoPosition} linkedin={m.linkedin} />
                 </motion.div>

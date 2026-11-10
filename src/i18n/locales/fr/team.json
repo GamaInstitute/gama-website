@@ -34,6 +34,15 @@
       }
     ]
   },
+  "staff": {
+    "eyebrow": "Équipe technique",
+    "h2": "L'équipe dans les coulisses",
+    "members": [
+      { "name": "Jordy Nouala",       "role": "Coordonnateur des Opérations",     "photo": "/team/jordy-nouala.webp", "linkedin": "https://www.linkedin.com/in/jordy-nouala-b33a4b14a/" },
+      { "name": "Armand Meppa",       "role": "Responsable Web",                  "photo": "/team/armand-meppa.webp", "linkedin": "https://www.linkedin.com/in/armand-meppa-482450216/" },
+      { "name": "Christian Ngatchou", "role": "Responsable Éditorial",            "photo": "/team/christian-ngatchou.webp", "linkedin": "https://www.linkedin.com/in/christian-ngatchou/" }
+    ]
+  },
   "researchers": {
     "eyebrow": "Chercheurs",
     "h2": "L'équipe de recherche",

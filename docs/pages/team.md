@@ -1,6 +1,6 @@
 # Team page
 
-_Last verified: 2026-09-09_
+_Last verified: 2026-11-09_
 
 - **Route:** `/team`
 - **File:** [src/pages/TeamPage.tsx](../../src/pages/TeamPage.tsx)
@@ -15,7 +15,8 @@ Three of this page's four member-listing sections are currently hidden. Read [Hi
 |---|---|---|---|---|---|
 | 1 | Hero | — | Yes | `PageHero` | `hero.*` |
 | 2 | Leadership | — | Yes | `MemberCard` grid | `leadership.members[]` |
-| 3 | Advisory board | — | **No** (commented out) | `MemberCard` grid | `advisory.members` (empty `[]`) |
+| 3 | Technical staff | — | Yes | `MemberCard` grid | `staff.members[]` |
+| 3b | Advisory board | — | **No** (commented out) | `MemberCard` grid | `advisory.members` (empty `[]`) |
 | 4 | Researchers | — | **No** (commented out) | `AdvisorRow` grid | `researchers.members[]` (placeholder data) |
 | 5 | Contributors | — | **No** (commented out) | `AdvisorRow` grid | `contributors.members[]` (placeholder data) |
 | 6 | Join us | `#join` | Yes | inline cards | `join.items[]` |
@@ -27,6 +28,10 @@ Standard `PageHero`, no page-specific behavior.
 ### 2. Leadership
 
 `SectionWrapper alt`. A 3-column grid (collapsing to 2, then 1) of `MemberCard`s, `revealContainer`/`revealItem` staggered. Data: `leadership.members[]`, typed `{ name, role, bio?, photo?, photoPosition?, linkedin? }`. Currently populated with three real members. **`bio` is read into the data type but never actually rendered by `MemberCard`** — it's reserved for a possible future detail view/modal, not a bug in the current card.
+
+### 3. Technical staff
+
+`SectionWrapper` (no `alt`, so the backgrounds keep alternating with Leadership above and Join below). Same grid and `MemberCard` as Leadership; data: `staff.members[]`, same `Member` shape. Photos are 400×400 `.webp` in `public/team/`. To add someone, add an entry to `staff.members` in both locale files (the `role` is translated).
 
 ### 6. Join us
 
