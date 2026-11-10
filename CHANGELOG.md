@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 ### Fixed
 
 - Category icons on the Home, About and WeekPaper pages (news cards, strategic pillars, playlists) were showing as broken images. They're now served from the site itself instead of an external icon service, so they can't break the same way again
+- On the staging site (GitHub Pages), those icons, the Team photos and the Research Summary photos and figures were broken images, because their paths ignored the site's sub-folder
 
 ### Added
 

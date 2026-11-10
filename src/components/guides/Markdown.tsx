@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { DOWNLOADS, type DownloadKey } from '@/constants'
+import { DOWNLOADS, publicUrl, type DownloadKey } from '@/constants'
 
 /*
  * Small Markdown renderer for the publication guidelines (src/content/publication-guidelines/).
@@ -22,7 +22,6 @@ import { DOWNLOADS, type DownloadKey } from '@/constants'
 
 export type Heading = { id: string; text: string; level: 2 | 3 }
 
-const BASE = import.meta.env.BASE_URL
 const LINK_CLS = 'font-semibold text-[var(--link)] underline underline-offset-2 decoration-[color-mix(in_srgb,currentColor_35%,transparent)] hover:decoration-current'
 
 export function slugify(text: string) {
@@ -141,7 +140,7 @@ export function Markdown({ source, compact = false }: { source: string; compact?
       const [, alt, src, caption, width, height] = img
       out.push(
         <figure key={key()} className="mt-6">
-          <img src={src.startsWith('/') ? BASE + src.slice(1) : src} alt={alt} width={width} height={height} loading="lazy" className="w-full h-auto rounded-md border border-hairline" />
+          <img src={publicUrl(src)} alt={alt} width={width} height={height} loading="lazy" className="w-full h-auto rounded-md border border-hairline" />
           {caption && <figcaption className="mt-2 text-[0.84rem] text-ink-muted"><Inline text={caption} /></figcaption>}
         </figure>,
       )

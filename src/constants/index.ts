@@ -43,6 +43,12 @@ export const CONTACT_EMAIL = {
 
 // Files offered for download. Only the PowerPoint slide template: the contributor
 // guidelines are a web page (src/content/publication-guidelines/), not documents.
+/** A site path from content files (e.g. "/team/x.webp") under the deploy base, which is
+ *  not "/" on GitHub Pages. External URLs pass through unchanged. */
+export function publicUrl(path: string) {
+  return path.startsWith('/') ? import.meta.env.BASE_URL + path.slice(1) : path
+}
+
 export const DOWNLOADS = {
   slide_template: `${import.meta.env.BASE_URL}downloads/GAMA_Institute_Slide_Template.pptx?v=2026-11-06b`,
 } as const

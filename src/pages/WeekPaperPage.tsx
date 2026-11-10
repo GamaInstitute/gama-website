@@ -15,7 +15,7 @@ import { Modal }          from '@/components/ui/Modal'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
 import { PresentationForm } from '@/components/weekpaper/PresentationForm'
-import { SOCIAL_LINKS }   from '@/constants'
+import { SOCIAL_LINKS, publicUrl } from '@/constants'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
 import type { Topic } from '@/constants'
@@ -206,7 +206,7 @@ export default function WeekPaperPage() {
                   <div className="aspect-[16/9] relative">
                     <div className="ph" style={{ position: 'absolute', inset: 0 }}>
                       <div className="w-16 h-16 rounded-full bg-white/92 grid place-items-center shadow-lg">
-                        <img src={pl.icon} alt={pl.label} width={32} height={32} loading="lazy" />
+                        <img src={publicUrl(pl.icon)} alt={pl.label} width={32} height={32} loading="lazy" />
                       </div>
                     </div>
                   </div>

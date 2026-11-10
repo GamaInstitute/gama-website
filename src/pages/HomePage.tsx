@@ -12,7 +12,7 @@ import { VideoPlayer }    from '@/components/ui/VideoPlayer'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
 import { Reveal, revealContainer, revealItem } from '@/components/ui/Reveal'
-import { SOCIAL_LINKS }   from '@/constants'
+import { SOCIAL_LINKS, publicUrl } from '@/constants'
 import type { TagVariant }  from '@/types/course'
 
 type Metric     = { value: string; label: string; caption: string; color: string }
@@ -160,7 +160,7 @@ export default function HomePage() {
                     <div className="ph" style={{ position: 'absolute', inset: 0 }}>
                       {item.icon && (
                         <div className="w-16 h-16 rounded-full bg-white/92 grid place-items-center shadow-lg">
-                          <img src={item.icon} alt="" width={32} height={32} loading="lazy" />
+                          <img src={publicUrl(item.icon)} alt="" width={32} height={32} loading="lazy" />
                         </div>
                       )}
                     </div>

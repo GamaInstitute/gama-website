@@ -10,9 +10,6 @@ import { Markdown, headings } from '@/components/guides/Markdown'
 import { formatEpisodeDate } from '@/lib/formatDate'
 import { summaryText, type SummaryItem } from '@/content/research-summaries'
 
-// Plain <img> paths, so the deploy base path is added by hand (as in Markdown.tsx)
-const BASE = import.meta.env.BASE_URL
-
 const BACK_CLS = 'inline-flex items-center gap-1.5 text-[0.88rem] font-semibold text-ink-muted hover:text-ink transition-colors'
 
 /** One published Research Summary: /research-summaries/:id */
@@ -63,7 +60,7 @@ export default function ResearchSummaryPage() {
             {/* Contributor, as on the Montreal AI Ethics Institute's summaries: photo, name, bio, LinkedIn */}
             <div className="mt-7 flex gap-4 items-start">
               <div className="w-14 h-14 flex-none rounded-full overflow-hidden border border-hairline bg-surface">
-                <Avatar name={item.author} photo={item.photo && (item.photo.startsWith('/') ? BASE + item.photo.slice(1) : item.photo)} shape="circle" />
+                <Avatar name={item.author} photo={item.photo} shape="circle" />
               </div>
               <div className="min-w-0 text-[0.95rem] leading-[1.6]">
                 <p className="m-0 flex flex-wrap items-center gap-x-2">
