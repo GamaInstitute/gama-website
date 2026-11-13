@@ -9,17 +9,17 @@
     "link_youtube": "Voir sur YouTube"
   },
   "featured": {
-    "ep": "Épisode 6",
-    "tag": "Infonuagique",
-    "topic": "cloud",
-    "title": "L'IA génère votre infrastructure Cloud : peut-on lui faire confiance ?",
-    "body": "Nous analysons DPIaC-Eval et IaCGen, qui placent les LLM dans une vraie boucle DevOps pour générer des templates AWS CloudFormation : générer, valider, déployer, apprendre de l'échec et réessayer. Même déployées avec succès, seules 25,2 % des infrastructures respectent toutes les exigences, et 8,4 % sont entièrement conformes en matière de sécurité.",
+    "ep": "Épisode 7",
+    "tag": "IA",
+    "topic": "ai",
+    "title": "Une IA peut-elle vraiment déboguer comme un développeur ?",
+    "body": "Nous analysons DEVLoRe, une approche qui donne à un LLM les mêmes indices qu'un développeur pour localiser et réparer un bug : contenu du ticket, stack trace et informations de débogage à l'exécution. Sur Defects4J, ajouter le ticket et la stack trace fait passer la localisation des bugs d'une seule méthode de 27,8 % à 49,3 %, et aucun artefact n'est universellement meilleur que les autres.",
     "date_prefix": "Diffusé",
-    "date_iso": "2026-11-05",
-    "duration": "24:47",
+    "date_iso": "2026-11-12",
+    "duration": "29:04",
     "cta": "Regarder l'épisode",
     "video_label": "Lire la vidéo, épisode vedette",
-    "video_url": "https://youtu.be/eD7nbIhkRQ8"
+    "video_url": "https://youtu.be/np3TjkqV2JQ"
   },
   "episodes": {
     "eyebrow": "Épisodes récents",
@@ -28,6 +28,15 @@
     "empty": "Aucun épisode dans cette catégorie pour l'instant.",
     "filters_label": "Filtres par thème",
     "items": [
+      {
+        "no": "EP. 7",
+        "topic": "ai",
+        "tag": "IA",
+        "title": "Une IA peut-elle vraiment déboguer comme un développeur ?",
+        "date_iso": "2026-11-12",
+        "duration": "29:04",
+        "video_url": "https://youtu.be/np3TjkqV2JQ"
+      },
       {
         "no": "EP. 6",
         "topic": "cloud",
