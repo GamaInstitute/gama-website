@@ -9,17 +9,17 @@
     "link_youtube": "Watch on YouTube"
   },
   "featured": {
-    "ep": "Episode 6",
-    "tag": "Cloud computing",
+    "ep": "Episode 7",
+    "tag": "AI",
     "tagVariant": "teal",
-    "title": "AI generates your cloud infrastructure: can you trust it?",
-    "body": "We look at DPIaC-Eval and IaCGen, which put LLMs in a real DevOps loop to generate AWS CloudFormation templates: generate, validate, deploy, learn from failure and retry. Even when successfully deployed, only 25.2% of the infrastructures meet every requirement, and 8.4% are fully security compliant.",
+    "title": "Can an AI really debug like a developer?",
+    "body": "We look at DEVLoRe, an approach that gives an LLM the same clues a developer uses to locate and fix a bug: issue content, stack trace and runtime debugging information. On Defects4J, adding the issue and the stack trace raises single-method bug localization from 27.8% to 49.3%, and no single artifact is universally better than the others.",
     "date_prefix": "Aired",
-    "date_iso": "2026-11-05",
-    "duration": "24:47",
+    "date_iso": "2026-11-12",
+    "duration": "29:04",
     "cta": "Watch the episode",
     "video_label": "Play featured episode",
-    "video_url": "https://youtu.be/eD7nbIhkRQ8"
+    "video_url": "https://youtu.be/np3TjkqV2JQ"
   },
   "episodes": {
     "eyebrow": "Recent episodes",
@@ -28,6 +28,7 @@
     "empty": "No episodes in this category yet.",
     "filters_label": "Filter by topic",
     "items": [
+      { "no": "EP. 7", "topic": "ai", "tagVariant": "teal", "tag": "AI", "title": "Can an AI really debug like a developer?", "date_iso": "2026-11-12", "duration": "29:04", "video_url": "https://youtu.be/np3TjkqV2JQ" },
       { "no": "EP. 6", "topic": "cloud", "tagVariant": "teal", "tag": "Cloud computing", "title": "AI generates your cloud infrastructure: can you trust it?", "date_iso": "2026-11-05", "duration": "24:47", "video_url": "https://youtu.be/eD7nbIhkRQ8" },
       { "no": "EP. 5", "topic": "sec", "tagVariant": "default", "tag": "Cybersecurity", "title": "When a simple prompt can attack your database", "date_iso": "2026-10-29", "duration": "31:27", "video_url": "https://youtu.be/fc_XkwO7kCk" },
       { "no": "EP. 4", "topic": "rai", "tagVariant": "default", "tag": "Responsible AI", "title": "How do you build a responsible AI system?", "date_iso": "2026-10-22", "duration": "30:55", "video_url": "https://youtu.be/yX2MjNb4Nbk" },
