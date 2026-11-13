@@ -350,6 +350,7 @@ Any other tool, preferably free, works too. AI can help you design a figure or w
 
 #### Rules
 
+- **Legible, large figures.** Insert each figure in high resolution (at least 1,600 pixels wide) and at full width, without shrinking it. Text, numbers and axis labels must stay readable without zooming, including on a phone; a simple, large figure is better than a dense, small one.
 - Give each visual a short caption that explains it.
 - Label invented examples as _illustrative_. Preserve the meaning and context of any results you present.
 - If you reuse or adapt an existing visual, credit its source and check its reuse conditions.
@@ -482,6 +483,7 @@ These publicly shared contributions can help you develop a research portfolio an
 - My Research Summary is in English and contains a table of contents; multi-paper comparisons are meaningful where used.
 - If I wrote a tutorial, it demonstrably implements or adapts an identifiable research technique and the code is tested.
 - If I prepared a WeekPaper, I speak French, use English slides, and provide my own authentic recording.
+- My figures are legible and large: their text reads without zooming.
 - I cite and license source material appropriately and distinguish research findings from my own interpretations.
 - I included the contributor bio and profile materials, all required submission assets, and an AI-use disclosure.
 - I proofread the contribution and can explain and defend it to an editor.

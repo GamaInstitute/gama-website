@@ -350,6 +350,7 @@ Tout autre outil, de préférence libre, convient aussi. L'IA peut vous aider à
 
 #### Règles
 
+- **Des figures lisibles et de grande taille.** Insérez chaque figure en haute résolution (au moins 1 600 pixels de large) et pleine largeur, sans la réduire. Le texte, les chiffres et les légendes d'axes doivent rester lisibles sans zoomer, y compris sur un téléphone ; mieux vaut une figure simple et grande qu'une figure dense et petite.
 - Ajoutez à chaque visuel une courte légende qui l'explique.
 - Précisez que les exemples inventés sont _illustratifs_. Préservez le sens et le contexte des résultats présentés.
 - Si vous réutilisez ou adaptez un visuel existant, indiquez sa source et vérifiez ses conditions de réutilisation.
@@ -482,6 +483,7 @@ Ces contributions publiques peuvent vous aider à constituer un portfolio de rec
 - Mon Research Summary est rédigé en anglais et comporte une table des matières ; les comparaisons entre plusieurs articles, le cas échéant, sont pertinentes.
 - Si j'ai rédigé un tutoriel, il met en œuvre ou adapte de façon démontrable une technique de recherche identifiable, et le code a été testé.
 - Si j'ai préparé un WeekPaper, je présente en français, mes diapositives sont en anglais et l'enregistrement est authentique et réalisé par moi.
+- Mes figures sont lisibles et de grande taille : leur texte se lit sans zoomer.
 - Je cite les sources et respecte leurs licences, et je distingue les résultats de recherche de mes propres interprétations.
 - J'ai joint ma biographie et mes éléments de profil, tous les fichiers requis pour la soumission et une déclaration d'utilisation de l'IA.
 - J'ai relu ma contribution et je peux l'expliquer et la défendre devant un réviseur.
