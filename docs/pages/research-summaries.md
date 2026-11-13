@@ -31,7 +31,7 @@ Custom padding (not `PageHero`, there's no `NetworkArt`). Left column: eyebrow, 
 
 Two columns (list + 320px sidebar). Below 960px they stack and the sidebar boxes flow into an auto-fit grid. On desktop the sidebar is `sticky`.
 
-Each entry of `items[]` renders as one article: title, then the date (`date_iso`, formatted with `formatEpisodeDate`) and the axis as a tag beside it (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), then (no image) "Research Summary by **author**", "Original paper by" the authors of each entry of `papers` ("Original papers by" when there are several, `list.orig_by_many`), and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
+Each entry of `items[]` renders as one article: title, then its number (`no`, e.g. `RS. 1`) as a solid dark badge (`NumberBadge`), the axis as a tag (a button that filters the list by that axis, like the sidebar chips; label `list.filter_axis`), then the date (`date_iso`, formatted with `formatEpisodeDate`), then (no image) "Research Summary by **author**", "Original paper by" the authors of each entry of `papers` ("Original papers by" when there are several, `list.orig_by_many`), and a "Read the research summary" link (`list.read_summary`). The title and that link open the summary page, `/research-summaries/<id>`.
 
 - **Search** filters on title, author, bio, the authors in `papers` and the axis label (case-insensitive substring).
 - **Axes** chips come from the `axes` object, one per research axis on the Home page (AI, software engineering, cloud computing, cybersecurity, responsible AI). Its keys must match each item's `axis` (`all` is the reset).
@@ -43,7 +43,7 @@ Each entry of `items[]` renders as one article: title, then the date (`date_iso`
 
 [ResearchSummaryPage.tsx](../../src/pages/ResearchSummaryPage.tsx) finds the entry of `items[]` whose `id` matches the URL and renders:
 
-- **Header**, modelled on the Montreal AI Ethics Institute's research summaries: back link (`article.back`), date and axis tag, the title as h1, then:
+- **Header**, modelled on the Montreal AI Ethics Institute's research summaries: back link (`article.back`), the number badge (`no`), axis tag and date, the title as h1, then:
   - **Contributor:** round photo (`photo`, initials if absent), "Research Summary by **author**", a LinkedIn icon link when `linkedin` is set (`article.linkedin`), and `bio` · `institution` below. These come from the submission form.
   - **Original paper** box (`article.orig`, or `article.orig_many` for several): for each entry of `papers`, its `title` linked to `url`, `authors`, and `venue` in italics. The browser tab title is the summary title; the meta description is the item's `description`.
 - **Table of contents:** built from the text's `##` and `###` headings (`article.toc`). The guidelines make a table of contents mandatory for every summary, so contributors don't write one in the file.
@@ -65,7 +65,7 @@ Left: heading, body, CTA, and a "Guide" box with one `ResourceList` card (`contr
 1. Text fields are validated with `makeResearchSummarySchema` from [src/types/researchSummary.ts](../../src/types/researchSummary.ts) (react-hook-form + Zod, localized messages). Files are checked against `SUMMARY_FILE` / `PHOTO_FILE` from the same module.
 2. An invisible Turnstile token is solved (`useTurnstileToken`).
 3. Everything is posted as `multipart/form-data` to `/api/research-summary`.
-4. The function re-validates all of it, verifies Turnstile, and emails the submission to `CONTACT_EMAIL_TO` through Resend, with the files as attachments and `replyTo` set to the contributor. No new env vars. Why email instead of storage: [D-15](../../DECISIONS.md).
+4. The function re-validates all of it, verifies Turnstile, and emails the submission to `EDITORIAL_EMAIL_TO` (editoriale@gamainstitute.ca, falling back to `CONTACT_EMAIL_TO` if unset) through Resend, with the files as attachments and `replyTo` set to the contributor. Why email instead of storage: [D-15](../../DECISIONS.md).
 
 Like the contact form, this only works on Cloudflare Pages (production, or `npm run dev:cf` locally), not on the GitHub Pages staging build.
 
@@ -76,7 +76,7 @@ Like the contact form, this only works on Cloudflare Pages (production, or `npm 
 1. Pick an `id` (lowercase, hyphens: it becomes the URL, `/research-summaries/<id>`).
 2. Save the text as `src/content/research-summaries/<id>/en.md`: the five parts of the guidelines as `##` headings (Overview, Why it matters, Key findings, Discussion and implications, Moving forward), then `## References`; a research-based tutorial uses its own headings. No title, byline or table of contents in the file, the page adds them. Supported syntax: [publication-guidelines.md](publication-guidelines.md#file-format). Optionally add a French translation as `fr.md`.
 3. Add an object at the **top** of `items[]` in both `fr/research.json` and `en/research.json` with:
-   - the same `id`, `axis`, `date_iso`, `initials`, `color` in both files;
+   - the same `id`, `no`, `axis`, `date_iso`, `initials`, `color` in both files. `no` is the next number, `RS. <previous + 1>`, like WeekPaper's `EP. 7`; numbers are never reused or renumbered, even if a summary is removed;
    - a translated `title` and `description` (one sentence, used as the page's meta description);
    - the contributor, from the submission form: `author` (name), `bio` (translated), and optionally `institution`, `linkedin` (full URL) and `photo`. Save the photo as `public/research-summaries/contributors/<name>.webp` (square, about 200×200) and set `photo` to `/research-summaries/contributors/<name>.webp`;
    - the original paper, as one entry of `papers`: `title`, `authors` (shorten long lists to "First, Second et al."), `venue` (venue, pages, date; translated) and `url` (the form's paper link). A summary that covers several papers lists each one;

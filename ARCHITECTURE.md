@@ -13,7 +13,7 @@ A bilingual (FR default / EN toggle) static marketing website for Gama Institute
 | Build / SSG | Vite 5, vite-react-ssg 0.9, React 18 | Pre-renders all routes to static HTML at build time |
 | UI | React 18, TypeScript, Tailwind CSS v3 | Pure Tailwind utilities + CSS custom properties; no component library |
 | Routing | React Router v6 | `RootLayout` wraps all pages via `<Outlet>`; defined in `src/routes.tsx` |
-| i18n | react-i18next, i18next-browser-languagedetector | FR default; EN toggled client-side; stored in `localStorage` (`gama-lang`) |
+| i18n | react-i18next | FR default (pages are prerendered in French); EN toggled client-side, stored in `localStorage` (`gama-lang`) and re-applied after hydration ([D-22](DECISIONS.md)) |
 | Animation | Framer Motion | `whileInView` reveals, NetworkArt entrance, card hover |
 | Forms | react-hook-form + Zod | Shared Zod schemas in `src/types/` (`contact.ts`, `researchSummary.ts`, `weekpaperSubmission.ts`) |
 | Fonts | @fontsource-variable/sora, @fontsource-variable/inter | Self-hosted; `@import` must precede `@tailwind` directives in `base.css` |
@@ -54,7 +54,7 @@ develop ──► GitHub Actions ──► GitHub Pages (staging — static only
 main    ──► GitHub Actions ──► Cloudflare Pages (production — static + CF Functions)
 ```
 
-`VITE_TURNSTILE_SITE_KEY` is injected at build time via GitHub Actions secrets. Runtime secrets (`TURNSTILE_SECRET_KEY`, `CONTACT_EMAIL_TO`, `CONTACT_EMAIL_FROM`, `RESEND_API_KEY`) are set in the Cloudflare Pages dashboard.
+`VITE_TURNSTILE_SITE_KEY` is injected at build time via GitHub Actions secrets. Runtime secrets (`TURNSTILE_SECRET_KEY`, `CONTACT_EMAIL_TO`, `EDITORIAL_EMAIL_TO`, `CONTACT_EMAIL_FROM`, `RESEND_API_KEY`) are set in the Cloudflare Pages dashboard.
 
 This is the quick map. For the full picture, including how domain registration (Namecheap), DNS, and TLS fit in ahead of this pipeline, CI/CD detail, and every known gap versus the original SRS, see [docs/arc42/07-deployment-view.md](docs/arc42/07-deployment-view.md).
 

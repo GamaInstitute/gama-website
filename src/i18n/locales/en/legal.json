@@ -82,7 +82,7 @@
         "list": [
           "**Cloudflare, Inc.** (United States): site hosting, form processing and Turnstile bot protection.",
           "**Resend** (United States): delivering form submissions to our inbox and managing the newsletter list.",
-          "**Our email provider**, which hosts the contact@gamainstitute.ca inbox where messages and attachments arrive.",
+          "**Our email provider**, which hosts the contact@gamainstitute.ca (contact form) and editoriale@gamainstitute.ca (WeekPaper and Research Summary proposals) inboxes where messages and attachments arrive.",
           "**YouTube (Google)**: streaming WeekPaper episodes. The embedded player only loads when you click Play, in privacy-enhanced mode.",
           "**LinkedIn**: sharing episodes, if you chose it.",
           "**Google Drive, Wikimedia Commons and partner websites**: some images (team photos, logos) load from their servers; your browser then sends them your IP address, as with any image online."

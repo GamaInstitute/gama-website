@@ -136,7 +136,7 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 
 ## D-15. Research Summary and WeekPaper submissions are emailed as Resend attachments, not stored
 
-**Why:** The submission form on `/research-summaries` collects a Word/PDF summary and an optional photo. Every submission is reviewed by a person before anything is published, so the file only has to reach the team's inbox. `POST /api/research-summary` reuses the contact form's Turnstile + Resend setup and attaches the files to an email to `CONTACT_EMAIL_TO`. That adds no new binding, bucket, secret or retention policy. Limits (10MB summary, 5MB photo) live in `src/types/researchSummary.ts`, are checked on both client and server, and stay well under Resend's 40MB per-email cap.
+**Why:** The submission form on `/research-summaries` collects a Word/PDF summary and an optional photo. Every submission is reviewed by a person before anything is published, so the file only has to reach the team's inbox. `POST /api/research-summary` reuses the contact form's Turnstile + Resend setup and attaches the files to an email to `CONTACT_EMAIL_TO`. That adds no new binding, bucket, secret or retention policy. _Update 2026-11-12:_ WeekPaper and Research Summary submissions now go to the editorial inbox, `EDITORIAL_EMAIL_TO` (editoriale@gamainstitute.ca), falling back to `CONTACT_EMAIL_TO` when unset so no submission is lost before the variable is configured. Limits (10MB summary, 5MB photo) live in `src/types/researchSummary.ts`, are checked on both client and server, and stay well under Resend's 40MB per-email cap.
 
 **Alternative considered:** Uploading to an R2 bucket and emailing a link. That's more robust for large files and keeps attachments out of mailboxes, but it needs a bucket binding, access control on the stored files and a cleanup policy, all for a low-volume, human-reviewed flow.
 
@@ -193,3 +193,11 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 **Alternative considered:** one neutral style for every topic tag, relying on the text alone. Calmer, but visitors lose the at-a-glance cue, and the brand palette has exactly five colours for the five topics.
 
 **Revisit when:** a sixth topic is added; the palette then needs a sixth colour that stays distinct from the others in both themes.
+
+## D-22. Browser-only state (saved language, theme, today's date) is applied after hydration, not during the first render
+
+**Why:** Pages are prerendered once at build time, in French, light theme, with that day's date. React requires the first browser render to match that HTML. Reading `localStorage` or `prefers-color-scheme` in the first render (the theme toggle did) or computing "3 days ago" from today's date made it differ, so React threw away the prerendered page on every load and re-rendered it from scratch, swallowing clicks made meanwhile. Reading the saved language through i18next's language detector didn't work either: the fixed `lng: 'fr'` needed for the prerender made the detector skip the lookup and overwrite the saved choice with `fr`. Now the first render always uses the build-time values; `useHydrated()` and the effects in `useTheme` and `RootLayout` switch to the visitor's values right after hydration. The anti-FOUC script (D-4) still applies the theme's colours before paint.
+
+**Alternative considered:** prerender each page twice (`/en/...`) and pick the language by URL. No flash of French for English visitors and better SEO for English, but it doubles the pages and changes every URL; out of scope for a bug fix.
+
+**Revisit when:** English visitors notice the brief French flash on load, or English SEO matters: then move to per-language URLs.

@@ -6,6 +6,13 @@
   "get_in_touch": "Get in touch",
   "close": "Close",
   "video_placeholder": "Coming soon",
+  "not_found": {
+    "meta_title": "Page not found | Gama Institute",
+    "h1": "This page can't be found",
+    "body": "The link may be wrong, or the page may have been moved or removed.",
+    "home": "Back to the home page",
+    "contact": "Contact us"
+  },
   "nav": {
     "home": "Home",
     "about": "About",

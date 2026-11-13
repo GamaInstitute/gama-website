@@ -6,6 +6,8 @@ import type { Topic } from '@/constants'
 
 export type SummaryItem = {
   id: string
+  // Display number, like WeekPaper's "EP. 7": "RS. 1", "RS. 2"… Never reused or renumbered
+  no: string
   axis: Topic
   title: string
   // Meta description of the summary page

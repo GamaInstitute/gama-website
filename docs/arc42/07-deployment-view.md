@@ -40,7 +40,7 @@ flowchart TB
 
 - **Trigger:** push to `main`.
 - **What it deploys:** the static build *and* the two Pages Functions together, via `wrangler pages deploy dist --project-name=gamainstitute --branch=main`. This is the only environment where the full stack — including the contact form and newsletter backend — actually runs end-to-end.
-- **Runtime env vars/secrets**, set in the Cloudflare Pages dashboard (not in the repo): `TURNSTILE_SECRET_KEY`, `CONTACT_EMAIL_TO`, `CONTACT_EMAIL_FROM`, `RESEND_API_KEY`. The authoritative, currently-accurate table of every environment variable (what it's for, where it's set) lives in [CLAUDE.md](../../CLAUDE.md#environment-and-secrets) — this document doesn't duplicate it to avoid the two drifting apart.
+- **Runtime env vars/secrets**, set in the Cloudflare Pages dashboard (not in the repo): `TURNSTILE_SECRET_KEY`, `CONTACT_EMAIL_TO`, `EDITORIAL_EMAIL_TO`, `CONTACT_EMAIL_FROM`, `RESEND_API_KEY`. The authoritative, currently-accurate table of every environment variable (what it's for, where it's set) lives in [CLAUDE.md](../../CLAUDE.md#environment-and-secrets) — this document doesn't duplicate it to avoid the two drifting apart.
 - **Build-time secret:** `VITE_TURNSTILE_SITE_KEY`, injected via a GitHub Actions secret at build time (it ends up baked into the static JS bundle — this is expected, since Turnstile's *site key* is meant to be public; only the *secret key* used server-side is sensitive).
 
 ## What's notably absent from this deployment picture

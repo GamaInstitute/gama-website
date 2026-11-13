@@ -12,7 +12,7 @@ import { SummaryForm }    from '@/components/research/SummaryForm'
 import { formatEpisodeDate } from '@/lib/formatDate'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import type { SummaryItem } from '@/content/research-summaries'
-import { topicTagCls }    from '@/components/ui/Tag'
+import { topicTagCls, NumberBadge } from '@/components/ui/Tag'
 
 
 
@@ -63,7 +63,7 @@ export default function ResearchSummariesPage() {
     const q = query.trim().toLocaleLowerCase()
     return items.filter(it =>
       (axis === 'all' || it.axis === axis) &&
-      (!q || [it.title, it.author, it.bio ?? '', ...it.papers.map(p => p.authors), axes[it.axis] ?? '']
+      (!q || [it.no, it.title, it.author, it.bio ?? '', ...it.papers.map(p => p.authors), axes[it.axis] ?? '']
         .some(s => s.toLocaleLowerCase().includes(q)))
     )
   }, [items, axes, axis, query])
@@ -147,7 +147,7 @@ export default function ResearchSummariesPage() {
                         <Link to={`/research-summaries/${it.id}`} className="hover:text-[var(--accent-ink)] transition-colors">{it.title}</Link>
                       </h3>
                       <p className="mt-2 mb-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.84rem] font-semibold text-ink-muted tracking-[0.02em]">
-                        <time dateTime={it.date_iso}>{formatEpisodeDate(it.date_iso, i18n.language)}</time>
+                        <NumberBadge>{it.no}</NumberBadge>
                         <span aria-hidden="true">·</span>
                         {/* Axis tag: filters the list by this axis, same as the sidebar chips */}
                         <button
@@ -158,6 +158,8 @@ export default function ResearchSummariesPage() {
                         >
                           {axes[it.axis]}
                         </button>
+                        <span aria-hidden="true">·</span>
+                        <time dateTime={it.date_iso}>{formatEpisodeDate(it.date_iso, i18n.language)}</time>
                       </p>
                       <p className="m-0 mt-4 text-[0.95rem] text-ink-soft leading-[1.6]">
                         <b className="text-ink font-semibold">{t('list.by')} {it.author}</b>

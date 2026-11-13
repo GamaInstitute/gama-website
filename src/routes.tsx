@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { RouteRecord } from 'vite-react-ssg'
 import { Outlet, useLocation } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
@@ -7,9 +8,22 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import research from '@/i18n/locales/fr/research.json'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
+import { LS_KEYS } from '@/constants'
 
 function RootLayout() {
   const { pathname } = useLocation()
+
+  // Pages are prerendered in French (see src/i18n/index.ts). Once hydrated, switch to the
+  // visitor's saved language. A passive effect on purpose: effects run children first, so
+  // every useTranslation below is already subscribed and re-renders on the change.
+  useEffect(() => {
+    let saved: string | null = null
+    try { saved = localStorage.getItem(LS_KEYS.lang) } catch (_) {}
+    if (saved === 'en' || saved === 'fr') {
+      if (i18n.language !== saved) i18n.changeLanguage(saved)
+      document.documentElement.setAttribute('lang', saved)
+    }
+  }, [])
 
   return (
     <HelmetProvider>
@@ -61,6 +75,12 @@ export const routes: RouteRecord[] = [
       { path: 'terms',      lazy: () => import('@/pages/TermsPage').then(m => ({ Component: m.default })) },
       { path: 'open-access', lazy: () => import('@/pages/OpenAccessPage').then(m => ({ Component: m.default })) },
       { path: 'contact',    lazy: () => import('@/pages/ContactPage').then(m => ({ Component: m.default })) },
+      // Unknown URLs. '404' is prerendered as dist/404.html, which Cloudflare Pages and
+      // GitHub Pages both serve (status 404) for any path with no file; the router then
+      // matches the visited URL against '*' and renders the same page. vite-react-ssg
+      // doesn't prerender '*' routes, hence the two entries.
+      { path: '404',        lazy: () => import('@/pages/NotFoundPage').then(m => ({ Component: m.default })) },
+      { path: '*',          lazy: () => import('@/pages/NotFoundPage').then(m => ({ Component: m.default })) },
     ],
   },
 ]

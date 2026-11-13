@@ -49,6 +49,7 @@
   "items": [
     {
       "id": "ai-teammates-se3",
+      "no": "RS. 1",
       "axis": "se",
       "title": "From AI coding assistants to AI teammates: is software engineering 3.0 already here?",
       "description": "Research Summary of two papers: the vision of AI-native software engineering 3.0, and AIDev, 456,535 pull requests opened by autonomous coding agents on GitHub.",

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 
 import { Button }         from '@/components/ui/Button'
-import { TopicTag }       from '@/components/ui/Tag'
+import { TopicTag, NumberBadge } from '@/components/ui/Tag'
 import { LinkedInIcon }   from '@/components/ui/icons'
 import { Avatar }         from '@/components/team/Avatar'
 import { Markdown, headings } from '@/components/guides/Markdown'
@@ -50,9 +50,11 @@ export default function ResearchSummaryPage() {
           <div className="wrap"><div className="max-w-[820px]">
             {back}
             <p className="mt-8 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.84rem] font-semibold text-ink-muted tracking-[0.02em]">
-              <time dateTime={item.date_iso}>{formatEpisodeDate(item.date_iso, i18n.language)}</time>
+              <NumberBadge>{item.no}</NumberBadge>
               <span aria-hidden="true">·</span>
               <TopicTag topic={item.axis}>{axes[item.axis]}</TopicTag>
+              <span aria-hidden="true">·</span>
+              <time dateTime={item.date_iso}>{formatEpisodeDate(item.date_iso, i18n.language)}</time>
             </p>
             <h1 className="font-display font-semibold text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-[-0.025em] text-ink mt-4">
               {item.title}

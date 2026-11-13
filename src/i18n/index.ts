@@ -1,5 +1,4 @@
 import i18next from 'i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 import frCommon     from './locales/fr/common.json'
@@ -19,22 +18,19 @@ import enWeekpaper  from './locales/en/weekpaper.json'
 import enResearch   from './locales/en/research.json'
 
 i18next
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources: {
       fr: { common: frCommon, training: frTraining, home: frHome, about: frAbout, team: frTeam, weekpaper: frWeekpaper, research: frResearch },
       en: { common: enCommon, training: enTraining, home: enHome, about: enAbout, team: enTeam, weekpaper: enWeekpaper, research: enResearch },
     },
+    // Always French here: pages are prerendered in French, and the first browser render
+    // must match that HTML. The saved choice (localStorage 'gama-lang', written by the
+    // header toggle) is applied right after hydration, in RootLayout (routes.tsx).
     lng: 'fr',
     fallbackLng: 'fr',
     defaultNS: 'common',
     ns: ['common', 'training', 'home', 'about', 'team', 'weekpaper', 'research'],
-    detection: {
-      order: ['localStorage'],
-      lookupLocalStorage: 'gama-lang',
-      caches: ['localStorage'],
-    },
     interpolation: {
       escapeValue: false,
     },

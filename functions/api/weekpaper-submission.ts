@@ -13,6 +13,8 @@ import { esc, json, textField, filePart, toAttachment, row, link, mailto, emailL
 interface Env {
   TURNSTILE_SECRET_KEY: string
   CONTACT_EMAIL_TO: string
+  // Editorial inbox for submissions (editoriale@gamainstitute.ca); falls back to CONTACT_EMAIL_TO if unset
+  EDITORIAL_EMAIL_TO?: string
   CONTACT_EMAIL_FROM: string
   RESEND_API_KEY: string
 }
@@ -104,7 +106,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const resend = new Resend(env.RESEND_API_KEY)
   const { error } = await resend.emails.send({
     from: env.CONTACT_EMAIL_FROM,
-    to: [env.CONTACT_EMAIL_TO],
+    to: [env.EDITORIAL_EMAIL_TO || env.CONTACT_EMAIL_TO],
     replyTo: d.email,
     subject: `[Gama Institute] WeekPaper | ${d.name} | ${d.paperTitle}`.slice(0, 200),
     html: emailLayout('Nouvelle présentation WeekPaper soumise', rows, d.name),

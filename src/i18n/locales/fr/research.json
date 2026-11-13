@@ -49,6 +49,7 @@
   "items": [
     {
       "id": "ai-teammates-se3",
+      "no": "RS. 1",
       "axis": "se",
       "title": "Des assistants de codage IA aux coéquipiers IA : le génie logiciel 3.0 est-il déjà là ?",
       "description": "Research Summary de deux articles : la vision du génie logiciel 3.0 natif de l'IA, et AIDev, 456 535 pull requests ouvertes par des agents de codage autonomes sur GitHub.",

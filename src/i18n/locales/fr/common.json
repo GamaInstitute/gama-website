@@ -6,6 +6,13 @@
   "get_in_touch": "Nous écrire",
   "close": "Fermer",
   "video_placeholder": "Bientôt disponible",
+  "not_found": {
+    "meta_title": "Page introuvable | Gama Institute",
+    "h1": "Cette page est introuvable",
+    "body": "Le lien est peut-être incorrect, ou la page a été déplacée ou retirée.",
+    "home": "Retour à l'accueil",
+    "contact": "Nous écrire"
+  },
   "nav": {
     "home": "Accueil",
     "about": "À propos",

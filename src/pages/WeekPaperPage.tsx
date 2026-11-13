@@ -18,6 +18,7 @@ import { PresentationForm } from '@/components/weekpaper/PresentationForm'
 import { SOCIAL_LINKS, publicUrl } from '@/constants'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
+import { useHydrated } from '@/hooks/useHydrated'
 import type { Topic } from '@/constants'
 
 type EpisodeItem = {
@@ -43,6 +44,10 @@ type PlaylistItem = {
 
 export default function WeekPaperPage() {
   const { t, i18n } = useTranslation('weekpaper')
+  // "il y a 3 jours" depends on today's date: the prerendered HTML (and so the hydration
+  // render) shows the fixed date, the relative one replaces it right after (useHydrated).
+  const hydrated = useHydrated()
+  const airDate = (iso: string) => hydrated ? formatRelativeEpisodeDate(iso, i18n.language) : formatEpisodeDate(iso, i18n.language)
   const { t: tCommon } = useTranslation('common')
   const [newsletterOpen, setNewsletterOpen] = useState(false)
   const [submitOpen, setSubmitOpen] = useState(false)
@@ -105,7 +110,7 @@ export default function WeekPaperPage() {
                   full={formatEpisodeDate(t('featured.date_iso'), i18n.language)}
                   className="text-ink-muted text-[0.85rem] self-start"
                 >
-                  {t('featured.date_prefix')} {formatRelativeEpisodeDate(t('featured.date_iso'), i18n.language)}
+                  {t('featured.date_prefix')} {airDate(t('featured.date_iso'))}
                 </DateWithTooltip>
                 <div className="pt-1">
                   <Button as="a" href={t('featured.video_url')} target="_blank" rel="noopener noreferrer" variant="accent">
@@ -163,7 +168,7 @@ export default function WeekPaperPage() {
                       tag={ep.tag}
                       topic={ep.topic}
                       title={ep.title}
-                      date={formatRelativeEpisodeDate(ep.date_iso, i18n.language)}
+                      date={airDate(ep.date_iso)}
                       dateIso={ep.date_iso}
                       dateFull={formatEpisodeDate(ep.date_iso, i18n.language)}
                       duration={ep.duration}

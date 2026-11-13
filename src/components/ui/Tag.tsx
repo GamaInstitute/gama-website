@@ -35,6 +35,15 @@ export function Tag({ variant = 'default', children, className = '' }: TagProps)
   return <span className={`${BASE_CLS} ${variantCls[variant]} ${className}`}>{children}</span>
 }
 
+/** A Research Summary's number ("RS. 1"): solid ink, so it never reads as a topic tag. */
+export function NumberBadge({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={`flex w-fit items-center font-mono text-[0.8rem] font-bold tracking-[0.04em] py-[0.3em] px-[0.75em] rounded-sm bg-ink text-bg ${className}`}>
+      {children}
+    </span>
+  )
+}
+
 /** A research topic (ai, se, cloud, rai, sec), always in that topic's colour. */
 export function TopicTag({ topic, children, className = '' }: { topic: Topic; children: React.ReactNode; className?: string }) {
   return <span className={`${topicTagCls(topic)} ${className}`}>{children}</span>

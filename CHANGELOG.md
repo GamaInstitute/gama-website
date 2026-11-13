@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Fixed
 
+- Mistyped or outdated links (any address that doesn't exist on the site) no longer reload the page endlessly. They now show a "Page not found" page, in the site's layout, with links back to the home page and the contact page
+- The English version is remembered again: visitors who switch to English no longer get the French site back on every new page or reload
+- Pages no longer rebuild themselves right after loading, which sometimes swallowed a first click (for example on a WeekPaper topic filter) and briefly showed the wrong light/dark icon
 - Category icons on the Home, About and WeekPaper pages (news cards, strategic pillars, playlists) were showing as broken images. They're now served from the site itself instead of an external icon service, so they can't break the same way again
 - On the staging site (GitHub Pages), those icons, the Team photos and the Research Summary photos and figures were broken images, because their paths ignored the site's sub-folder
 
@@ -19,6 +22,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 - Open Access Policy (`/open-access`), in French and English, linked from the footer: the site's original content, Research Summaries, WeekPaper episodes and downloadable guides and templates are published under Creative Commons Attribution 4.0 (CC BY 4.0), with how to credit them, an attribution example and what the licence does not cover. The Terms of Use and both submission forms' consent boxes now state that accepted contributions are published under CC BY 4.0
 - Research Summaries page (`/research-summaries`): community-written summaries of scientific papers, with search, topic filters and downloadable FR/EN writing templates. Students and early-career researchers can submit their own summary (Word or PDF, optional photo) through a form; submissions are emailed to the team for review. Listed in the main navigation and footer. Each published summary is read on its own page on the site (`/research-summaries/<id>`); the first one covers the move from AI coding assistants to AI teammates (the SE 3.0 vision of AI-native software engineering and AIDev, a study of 456,000 pull requests opened by AI coding agents on GitHub, in one summary with figures)
 - Team page: Dr. Dmytro Humeniuk added as instructor (Formateur), with photo and LinkedIn link
+- Research Summaries are now numbered (RS. 1, RS. 2…), like WeekPaper episodes: the number shows as a badge before the topic and date in the list and on each summary's page
 - WeekPaper page now lists every published episode ("Browse the series" / "Parcourir la série"), with topic filters; clicking an episode title opens it on YouTube
 
 ### Security
@@ -31,6 +35,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
+- WeekPaper presentation and Research Summary proposals are now sent to the editorial team's inbox, editoriale@gamainstitute.ca, instead of contact@gamainstitute.ca. The Privacy Policy names both inboxes
 - Topic tags now have one colour per research topic, the same on every page: AI, software engineering, cloud computing, responsible AI and cybersecurity are no longer shown in shared or mismatched colours, and the tags are easier to read in dark mode
 - The contributor guides are now a single page, "GAMA Institute Publication Guidelines" (`/publication-guidelines`), in French and English, instead of Word downloads: how to write a Research Summary, how to present on WeekPaper, how GAMA reviews and publishes contributions, and how to find a paper (ACM and arXiv, with screenshots and query examples for each research axis). The Research Summaries and WeekPaper pages link to their section. The only download left is the PowerPoint slide template for WeekPaper
 - Publication Guidelines updated to version 1.1 (November 2026): research-based tutorials accepted as Research Summaries, a mandatory table of contents, renamed research axes (AI4SE, SE4AI, Cloud Computing and MLOps, Cybersecurity, Responsible and Trustworthy AI), a requirement that every paper summarized or presented be published in an international peer-reviewed journal or conference (with a peer-review check for arXiv papers and advice on using AI to find papers from leading venues), and a policy on the responsible use of generative AI with its review process and consequences. Research Summary pages now show a table of contents, and, as on the Montreal AI Ethics Institute's summaries, the contributor's photo, bio and LinkedIn, and the original paper's title, authors and venue (or each paper's, when a summary covers several)
@@ -62,7 +67,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 - Newsletter signups (`POST /api/newsletter`) now register the subscriber as a Resend Contact instead of being discarded — no separate CRM added, reuses the same Resend account as the contact form (see [D-3](DECISIONS.md))
 - Team member photos: `team.json` (fr/en) carries a per-member `photo` URL field (Google Drive-hosted in production), rendered via the new `Avatar` component; falls back to a generated initials avatar on a solid accent background when no photo is set. Currently populated with `randomuser.me` stock placeholder headshots pending real photos
 - Contact form now sends email via Resend (`POST /api/contact`) — requires `RESEND_API_KEY`, `CONTACT_EMAIL_TO`, and `CONTACT_EMAIL_FROM` in Cloudflare Pages env vars
-- Favicon: SVG + PNG + Apple Touch Icon (`logo-icon.svg` / `logo-icon.png`)
+- Favicon: PNG + Apple Touch Icon (`logo-icon.png`)
 - Five-page website: Home, About, WeekPaper, Team, Contact (Training page is built but held back for a later release)
 - Bilingual support (French / English) with client-side language toggle via react-i18next; persisted in `localStorage`
 - Dark mode with system-preference detection and manual toggle; persisted in `localStorage`

@@ -37,7 +37,7 @@ const PAGES = [
   { path: '/privacy',    label: 'Privacy' },
   { path: '/open-access', label: 'Open access' },
   { path: '/publication-guidelines', label: 'Publication guidelines' },
-  { path: '/research-summaries/financial-fraud-knowledge-graphs', label: 'Research summary' },
+  { path: '/research-summaries/ai-teammates-se3', label: 'Research summary' },
 ]
 
 // Deterministic — the main eager chunk was 340KB before the framer-motion

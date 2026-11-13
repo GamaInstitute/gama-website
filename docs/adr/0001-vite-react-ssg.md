@@ -24,4 +24,4 @@ Use [vite-react-ssg](https://github.com/yunsii/vite-react-ssg) (v0.9) to statica
 - All six pages are pre-rendered; routing uses React Router v6 inside vite-react-ssg's wrapper.
 - `src/main.tsx` exports `createRoot = ViteReactSSG({ routes })` — this is the SSG entry point.
 - `react-helmet-async` must be listed in `ssr.noExternal` in `vite.config.ts`; without it the SSG build fails because the package loads as CJS in Node and named exports are not found.
-- A `public/_redirects` rule (`/* /index.html 200`) is required for client-side navigation fallback on Cloudflare Pages.
+- ~~A `public/_redirects` rule (`/* /index.html 200`) is required for client-side navigation fallback on Cloudflare Pages.~~ _Superseded 2026-11-12:_ Cloudflare Pages ignored that rule (it loops onto itself), and a `public/404.html` written for GitHub Pages sent every unknown URL into a redirect loop. Unknown URLs are now handled by a prerendered `404.html` (the `404` and `*` routes in `src/routes.tsx`), which both hosts serve with a 404 status; client-side navigation needs no fallback because every real page is prerendered.
