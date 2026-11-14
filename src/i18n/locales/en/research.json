@@ -77,6 +77,9 @@
     }
   ],
   "article": {
+    "subscribe_h": "Get the next summaries",
+    "subscribe_body": "New Research Summaries and the new WeekPaper episode every week, by email. Unsubscribe in one click.",
+    "subscribe_btn": "Subscribe to the newsletter",
     "back": "All Research Summaries",
     "orig": "Original paper",
     "orig_many": "Original papers",

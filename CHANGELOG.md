@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Added
 
-- Newsletter emails. Every Thursday, subscribers get the new WeekPaper episode by email (French and English in one email) about an hour after it goes live on the site. New subscribers get a welcome email right after signing up, and people who subscribed before the newsletter existed get a one-time email explaining what they'll receive. Every newsletter has an unsubscribe link
+- More ways to subscribe to the newsletter, so visitors no longer have to scroll to the bottom of the home page: a "Recevoir WeekPaper chaque semaine" button in the home page hero, a one-line sign-up under the home page video, a "Recevez les prochains résumés" box at the end of each Research Summary, and the footer's "Newsletter" link on every page now opens the sign-up window
+- Newsletter emails. Every week, subscribers get the new WeekPaper episode by email (French and English in one email) about an hour after it goes live on the site. New subscribers get a welcome email right after signing up, and people who subscribed before the newsletter existed get a one-time email explaining what they'll receive. Every newsletter has an unsubscribe link
 - Team page: a "Technical staff" section introducing Jordy Nouala (Operations Coordinator), Armand Meppa (Web Lead) and Christian Ngatchou (Editorial Lead)
 - WeekPaper page: new "Present a paper on WeekPaper" section with the presentation format, the 6-part GAMA structure and downloadable guides and slide template, plus a form to submit a presentation (video link, slides, photo, YouTube title and description, YouTube-only or YouTube + LinkedIn). Submissions are emailed to the team for review
 - Privacy Policy (`/privacy`) and Terms of Use (`/terms`) pages, in French and English, linked from the footer
@@ -18,7 +19,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
-- The newsletter sign-up now says what subscribers actually receive (the WeekPaper episode every Thursday, new Research Summaries, workshops and calls for contributions) instead of a monthly newsletter. The Privacy Policy now says Resend sends the newsletter and that its emails load the episode thumbnail from YouTube
+- The newsletter sign-up now says what subscribers actually receive (the new WeekPaper episode every week, new Research Summaries, workshops and calls for contributions) instead of a monthly newsletter. The Privacy Policy now says Resend sends the newsletter and that its emails load the episode thumbnail from YouTube
 - WeekPaper presentation and Research Summary proposals are now sent to the editorial team's inbox, editoriale@gamainstitute.ca, instead of contact@gamainstitute.ca. The Privacy Policy names both inboxes
 - Topic tags now have one colour per research topic, the same on every page: AI, software engineering, cloud computing, responsible AI and cybersecurity are no longer shown in shared or mismatched colours, and the tags are easier to read in dark mode
 - The contributor guides are now a single page, "GAMA Institute Publication Guidelines" (`/publication-guidelines`), in French and English, instead of Word downloads: how to write a Research Summary, how to present on WeekPaper, how GAMA reviews and publishes contributions, and how to find a paper (ACM and arXiv, with screenshots and query examples for each research axis). The Research Summaries and WeekPaper pages link to their section. The only download left is the PowerPoint slide template for WeekPaper
@@ -28,6 +29,9 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Fixed
 
+- The footer's "Newsletter" link led to the Contact page, which has no sign-up form
+- A newsletter sign-up that failed showed nothing; it now says so and asks to try again
+- In the dark newsletter card, the email address being typed was dark text on a dark background
 - Mistyped or outdated links (any address that doesn't exist on the site) no longer reload the page endlessly. They now show a "Page not found" page, in the site's layout, with links back to the home page and the contact page
 - The English version is remembered again: visitors who switch to English no longer get the French site back on every new page or reload
 - Pages no longer rebuild themselves right after loading, which sometimes swallowed a first click (for example on a WeekPaper topic filter) and briefly showed the wrong light/dark icon

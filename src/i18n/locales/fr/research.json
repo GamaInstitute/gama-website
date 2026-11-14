@@ -77,6 +77,9 @@
     }
   ],
   "article": {
+    "subscribe_h": "Recevez les prochains résumés",
+    "subscribe_body": "Les nouveaux Research Summaries et le nouvel épisode WeekPaper chaque semaine, par courriel. Désabonnement en un clic.",
+    "subscribe_btn": "S'abonner à l'infolettre",
     "back": "Tous les Research Summaries",
     "orig": "Publication originale",
     "orig_many": "Publications originales",

@@ -18,7 +18,7 @@ WeekPaper is Gama Institute's video series. This page is the one place on the si
 | 3 | Playlists | — | inline cards | `playlists.items[]` |
 | 4 | Contribute | `#contribute` | inline JSX + opens the submission `Modal` | `contribute.*` |
 | 5 | Subscribe | `#subscribe` | inline + opens the newsletter `Modal` | `subscribe.*` |
-| — | Newsletter modal | — | `Modal` + `NewsletterPerks` + `NewsletterForm` | reuses `subscribe.h2` as the modal title |
+| — | Newsletter modal | — | site-wide, opened with `useOpenNewsletter()` | `common.json → newsletter.modal_title` |
 | — | Submission modal | — | `Modal tone="light"` + `PresentationForm` | `submit.*` |
 
 ### 1. Featured hero
@@ -48,25 +48,16 @@ Plain `SectionWrapper`. Cards are built inline (no dedicated `PlaylistCard` comp
 `SectionWrapper spacing="tight" id="subscribe"`. Dark card with two buttons: one external link to the YouTube channel, and one (`variant="ghost-dark"`) that's a real `onClick` handler:
 
 ```
-<Button as="button" onClick={() => setNewsletterOpen(true)} variant="ghost-dark">
+<Button as="button" onClick={openNewsletter} variant="ghost-dark">
   {t('subscribe.btn_email')}
 </Button>
 ```
 
-`newsletterOpen` is local `useState` on the page, initialized `false`. This is the entire wire-up for the modal below — there's no routing or URL state involved, just a boolean flag.
+`openNewsletter` comes from `useOpenNewsletter()`: it opens the site-wide subscribe window mounted in `RootLayout` (see [README.md](README.md#newsletter)), the same one the Home hero, the footer and Research Summary pages open.
 
 ### Newsletter modal
 
-Rendered unconditionally at the bottom of the page's `<main>` (the `Modal` component itself decides whether it's visually/DOM-mounted based on `isOpen`, via `AnimatePresence` — see [README.md](README.md#modal)):
-
-```
-<Modal isOpen={newsletterOpen} onClose={() => setNewsletterOpen(false)} closeLabel={tCommon('close')} title={t('subscribe.h2')}>
-  <NewsletterPerks />
-  <NewsletterForm />
-</Modal>
-```
-
-Note the modal's `title` reuses `subscribe.h2` — the same heading text shown in the Subscribe section itself — rather than having its own separate copy. `NewsletterPerks` and `NewsletterForm` are the *exact same components and copy* as Home's own newsletter section (`NewsletterPerks` always reads from `home.json`, regardless of which page renders it — see [home.md](home.md)).
+No longer part of this page: the subscribe window is shared site-wide (`NewsletterProvider`, title `common.json → newsletter.modal_title`). Its content is `NewsletterPerks` + `NewsletterForm`, the *exact same components and copy* as Home's own newsletter section (`NewsletterPerks` always reads from `home.json` — see [home.md](home.md)).
 
 ## Contribute + submission form
 

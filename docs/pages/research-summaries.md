@@ -48,6 +48,7 @@ Each entry of `items[]` renders as one article: title, then its number (`no`, e.
   - **Original paper** box (`article.orig`, or `article.orig_many` for several): for each entry of `papers`, its `title` linked to `url`, `authors`, and `venue` in italics. The browser tab title is the summary title; the meta description is the item's `description`.
 - **Table of contents:** built from the text's `##` and `###` headings (`article.toc`). The guidelines make a table of contents mandatory for every summary, so contributors don't write one in the file.
 - **Text:** the Markdown file `src/content/research-summaries/<id>/en.md`, rendered by the same `Markdown` component as the Publication Guidelines (`compact` mode: lighter `##` headings). If a `fr.md` exists it is used on the French site; otherwise the English text shows on both, with a note on the French site (`article.lang_note`) that summaries are written in English, as the guidelines require.
+- **Subscribe box:** "Recevez les prochains résumés" (`article.subscribe_h/body/btn`); its button opens the site-wide subscribe window (`useOpenNewsletter()`). Readers who reach the end are the likeliest subscribers.
 - **Closing box:** `article.cta_*`, linking to the submission form and the guidelines.
 
 Each summary page is prerendered at build time: `getStaticPaths` on the route in `src/routes.tsx` lists the ids from `fr/research.json`. An id with no entry or no text shows `article.not_found`.

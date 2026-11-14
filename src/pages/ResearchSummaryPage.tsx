@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 
 import { Button }         from '@/components/ui/Button'
+import { useOpenNewsletter } from '@/components/newsletter/NewsletterProvider'
 import { TopicTag, NumberBadge } from '@/components/ui/Tag'
 import { LinkedInIcon }   from '@/components/ui/icons'
 import { Avatar }         from '@/components/team/Avatar'
@@ -16,6 +17,7 @@ const BACK_CLS = 'inline-flex items-center gap-1.5 text-[0.88rem] font-semibold 
 export default function ResearchSummaryPage() {
   const { id = '' } = useParams()
   const { t, i18n } = useTranslation('research')
+  const openNewsletter = useOpenNewsletter()
   const lang = i18n.language?.startsWith('en') ? 'en' : 'fr'
 
   const items = t('items', { returnObjects: true }) as SummaryItem[]
@@ -135,7 +137,16 @@ export default function ResearchSummaryPage() {
               <Markdown source={text.source} compact />
             </article>
 
-            <div className="mt-16 p-[22px] rounded-lg border bg-ink border-ink dark:bg-surface-2 dark:border-hairline-2">
+            {/* Readers who reach the end are the likeliest subscribers */}
+            <div className="mt-16 p-[22px] rounded-lg border border-hairline bg-surface flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+              <div className="min-w-0 max-w-[46ch]">
+                <p className="m-0 font-display font-semibold text-[1.15rem] text-ink">{t('article.subscribe_h')}</p>
+                <p className="mt-1.5 mb-0 text-[0.92rem] text-ink-soft">{t('article.subscribe_body')}</p>
+              </div>
+              <Button as="button" variant="accent" size="sm" onClick={openNewsletter}>{t('article.subscribe_btn')}</Button>
+            </div>
+
+            <div className="mt-6 p-[22px] rounded-lg border bg-ink border-ink dark:bg-surface-2 dark:border-hairline-2">
               <p className="m-0 font-display font-semibold text-[1.15rem] text-white dark:text-ink">{t('article.cta_h')}</p>
               <p className="mt-2 text-[0.92rem] text-white/75 dark:text-ink-soft">{t('article.cta_body')}</p>
               <div className="flex flex-wrap gap-2.5 mt-4">

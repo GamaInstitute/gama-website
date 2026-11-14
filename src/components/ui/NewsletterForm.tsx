@@ -5,12 +5,30 @@ import { LegalText } from '@/components/forms/LegalNotice'
 
 type State = 'idle' | 'loading' | 'success' | 'error'
 
-export function NewsletterForm() {
+// `dark`: on the dark newsletter card and in the subscribe window. `light`: on a page
+// background (the strip under the Home vision video).
+const TONE = {
+  dark: {
+    input: 'text-white bg-white/10 border-white/20 placeholder:text-white/50 focus:border-white/60',
+    notice: 'text-white/60',
+    noticeLink: 'font-semibold text-white/85 underline underline-offset-2 hover:text-white',
+    success: 'text-white/90',
+  },
+  light: {
+    input: 'text-ink bg-surface border-hairline-2 placeholder:text-ink-muted focus:border-[var(--teal)] focus:shadow-[var(--ring)]',
+    notice: 'text-ink-muted',
+    noticeLink: 'font-semibold text-ink-soft underline underline-offset-2 hover:text-ink',
+    success: 'text-ink',
+  },
+} as const
+
+export function NewsletterForm({ tone = 'dark' }: { tone?: keyof typeof TONE }) {
   const { t } = useTranslation('common')
   const [email, setEmail] = useState('')
   const [state, setState] = useState<State>('idle')
   const turnstileRef = useRef<HTMLDivElement>(null)
   const getToken = useTurnstileToken(turnstileRef)
+  const c = TONE[tone]
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -30,7 +48,7 @@ export function NewsletterForm() {
   }
 
   if (state === 'success') {
-    return <p className="text-white/90 text-[0.95rem]">{t('newsletter.success')}</p>
+    return <p className={`${c.success} text-[0.95rem]`} role="status">{t('newsletter.success')}</p>
   }
 
   return (
@@ -42,7 +60,8 @@ export function NewsletterForm() {
         onChange={e => setEmail(e.target.value)}
         placeholder={t('newsletter.email_placeholder')}
         aria-label={t('newsletter.email_placeholder')}
-        className="flex-1 min-w-[200px] font-sans text-[0.97rem] text-ink bg-white/10 border border-white/20 rounded-pill px-[1.1em] py-[0.75em] placeholder:text-white/50 focus:outline-none focus:border-white/60 transition-colors"
+        autoComplete="email"
+        className={`flex-1 min-w-[200px] font-sans text-[0.97rem] border rounded-pill px-[1.1em] py-[0.75em] focus:outline-none transition-colors ${c.input}`}
       />
       <button
         type="submit"
@@ -52,8 +71,12 @@ export function NewsletterForm() {
         {state === 'loading' ? '…' : t('newsletter.subscribe')}
       </button>
 
-      <p className="basis-full text-[0.78rem] leading-[1.5] text-white/60 m-0">
-        <LegalText i18nKey="forms.newsletter_notice" linkClassName="font-semibold text-white/85 underline underline-offset-2 hover:text-white" />
+      {state === 'error' && (
+        <p className="basis-full text-[0.85rem] m-0 text-red-500" role="alert">{t('newsletter.error')}</p>
+      )}
+
+      <p className={`basis-full text-[0.78rem] leading-[1.5] m-0 ${c.notice}`}>
+        <LegalText i18nKey="forms.newsletter_notice" linkClassName={c.noticeLink} />
       </p>
 
       {/* Invisible Turnstile container */}

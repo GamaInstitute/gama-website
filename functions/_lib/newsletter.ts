@@ -82,14 +82,14 @@ const STR = {
       introOld: "Vous vous êtes inscrit·e à l'infolettre de Gama Institute sur notre site, et nous ne vous avions encore rien envoyé. Merci de votre patience : voici ce que vous recevrez désormais. Si ce n'est plus pour vous, un clic en bas de ce courriel suffit pour vous désabonner.",
       what: 'Ce que vous recevrez',
       items: [
-        ['Chaque jeudi', ' : le nouvel épisode WeekPaper, un article de recherche décortiqué en vidéo.'],
+        ['Chaque semaine', ' : le nouvel épisode WeekPaper, un article de recherche décortiqué en vidéo.'],
         ['Dès leur parution', ' : les nouveaux Research Summaries, des résumés accessibles écrits par la relève.'],
         ['De temps en temps', ' : nos ateliers et les appels à contributions.'],
       ],
       start: 'Pour commencer',
       latest: 'Le dernier épisode',
       cta: 'Découvrir WeekPaper',
-      sign: ['À jeudi,', "L'équipe Gama Institute"],
+      sign: ['À la semaine prochaine,', "L'équipe Gama Institute"],
       kicker: 'Infolettre',
     },
   },
@@ -112,14 +112,14 @@ const STR = {
       introOld: "You signed up for the Gama Institute newsletter on our website, and we hadn't sent you anything yet. Thank you for your patience: here is what you will receive from now on. If it's no longer for you, one click at the bottom of this email unsubscribes you.",
       what: "What you'll receive",
       items: [
-        ['Every Thursday', ': the new WeekPaper episode, one research paper broken down on video.'],
+        ['Every week', ': the new WeekPaper episode, one research paper broken down on video.'],
         ['As soon as they are published', ': new Research Summaries, accessible summaries written by early-career researchers.'],
         ['From time to time', ': our workshops and calls for contributions.'],
       ],
       start: 'Where to start',
       latest: 'The latest episode',
       cta: 'Explore WeekPaper',
-      sign: ['See you Thursday,', 'The Gama Institute team'],
+      sign: ['See you next week,', 'The Gama Institute team'],
       kicker: 'Newsletter',
     },
   },
@@ -343,7 +343,7 @@ export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: st
   const subject = o.existing ? fr.subjectOld : fr.subjectNew
   const previewText = o.existing
     ? 'Ce que vous recevrez désormais · English version below.'
-    : 'Chaque jeudi, un article décortiqué en vidéo · English version below.'
+    : 'Chaque semaine, un article décortiqué en vidéo · English version below.'
   const html = layout({
     previewText, kicker: fr.kicker, siteUrl: o.siteUrl,
     fr: half('fr', false), en: half('en', true), unsubscribe: o.unsubscribe,

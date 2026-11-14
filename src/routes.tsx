@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/Footer'
 import research from '@/i18n/locales/fr/research.json'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 import { LS_KEYS } from '@/constants'
+import { NewsletterProvider } from '@/components/newsletter/NewsletterProvider'
 
 function RootLayout() {
   const { pathname } = useLocation()
@@ -28,6 +29,7 @@ function RootLayout() {
   return (
     <HelmetProvider>
       <I18nextProvider i18n={i18n}>
+       <NewsletterProvider>
         <a className="skip" href="#main">
           {i18n.t('skip_to_content', { ns: 'common' })}
         </a>
@@ -43,6 +45,7 @@ function RootLayout() {
           <Outlet />
         </div>
         <Footer />
+       </NewsletterProvider>
       </I18nextProvider>
     </HelmetProvider>
   )

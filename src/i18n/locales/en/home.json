@@ -110,9 +110,10 @@
   "newsletter": {
     "eyebrow": "Newsletter",
     "h2": "Join the GAMA community",
+    "strip": "One research paper broken down on video, every week in your inbox.",
     "perks_intro": "Receive by email:",
     "perks": [
-      "every Thursday, the new WeekPaper episode",
+      "every week, the new WeekPaper episode",
       "new Research Summaries",
       "our upcoming workshops",
       "calls for contributions"

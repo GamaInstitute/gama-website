@@ -40,6 +40,9 @@
     "copyright": "© 2026 Gama Institute · Montréal, Québec"
   },
   "newsletter": {
+    "modal_title": "Get WeekPaper every week",
+    "cta_weekly": "Get WeekPaper every week",
+    "error": "The sign-up didn't go through. Please try again in a moment.",
     "email_placeholder": "Your email address",
     "subscribe": "Subscribe",
     "success": "Thank you! You're subscribed."

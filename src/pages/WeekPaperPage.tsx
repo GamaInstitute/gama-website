@@ -12,8 +12,7 @@ import { VideoPlayer }    from '@/components/ui/VideoPlayer'
 import { DateWithTooltip } from '@/components/ui/DateWithTooltip'
 import { EpisodeCard }    from '@/components/weekpaper/EpisodeCard'
 import { Modal }          from '@/components/ui/Modal'
-import { NewsletterForm } from '@/components/ui/NewsletterForm'
-import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
+import { useOpenNewsletter } from '@/components/newsletter/NewsletterProvider'
 import { PresentationForm } from '@/components/weekpaper/PresentationForm'
 import { SOCIAL_LINKS, publicUrl } from '@/constants'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
@@ -49,7 +48,7 @@ export default function WeekPaperPage() {
   const hydrated = useHydrated()
   const airDate = (iso: string) => hydrated ? formatRelativeEpisodeDate(iso, i18n.language) : formatEpisodeDate(iso, i18n.language)
   const { t: tCommon } = useTranslation('common')
-  const [newsletterOpen, setNewsletterOpen] = useState(false)
+  const openNewsletter = useOpenNewsletter()
   const [submitOpen, setSubmitOpen] = useState(false)
   // Stable identity: Modal's focus-trap effect depends on onClose
   const closeSubmit = useCallback(() => setSubmitOpen(false), [])
@@ -300,7 +299,7 @@ export default function WeekPaperPage() {
                     <Button as="a" href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" variant="accent">
                       {t('subscribe.btn_youtube')}
                     </Button>
-                    <Button as="button" onClick={() => setNewsletterOpen(true)} variant="ghost-dark">
+                    <Button as="button" onClick={openNewsletter} variant="ghost-dark">
                       {t('subscribe.btn_email')}
                     </Button>
                   </div>
@@ -309,16 +308,6 @@ export default function WeekPaperPage() {
             </Reveal>
           </div>
         </SectionWrapper>
-
-        <Modal
-          isOpen={newsletterOpen}
-          onClose={() => setNewsletterOpen(false)}
-          closeLabel={tCommon('close')}
-          title={t('subscribe.h2')}
-        >
-          <NewsletterPerks />
-          <NewsletterForm />
-        </Modal>
 
         <Modal
           isOpen={submitOpen}
