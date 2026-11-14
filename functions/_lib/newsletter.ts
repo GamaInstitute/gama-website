@@ -46,6 +46,13 @@ type Lang = 'fr' | 'en'
 
 const UNSUBSCRIBE_PLACEHOLDER = '{{{RESEND_UNSUBSCRIBE_URL}}}'
 
+// Same addresses as SOCIAL_LINKS in src/constants/index.ts (copied: this file can't import)
+const SOCIAL: [string, string][] = [
+  ['YouTube', 'https://www.youtube.com/@gamainstitut'],
+  ['LinkedIn', 'https://www.linkedin.com/company/gamainstitute'],
+  ['Facebook', 'https://www.facebook.com/profile.php?id=61592239571013'],
+]
+
 const C = {
   ink: '#0E2230', soft: '#3A4B57', muted: '#5A6B76', line: '#E2E2DC', band: '#F6F4EF',
   page: '#EEF0EE', copper: '#B56418', copperInk: '#8E4D11', teal: '#165C71',
@@ -270,7 +277,7 @@ ${section(o.fr, 'fr')}
 ${languageDivider()}
 ${section(o.en, 'en')}
 <tr><td class="px" style="padding:22px 32px 26px;background:${C.band};border-radius:0 0 4px 4px;font-family:${FONT_BODY};font-size:13px;line-height:1.6;color:${C.muted};">
-<p style="margin:0 0 10px;font-weight:600;"><a href="https://www.youtube.com/@gamainstitut" style="color:${C.soft};">YouTube</a> &nbsp; <a href="https://www.linkedin.com/company/gamainstitute" style="color:${C.soft};">LinkedIn</a> &nbsp; <a href="${o.siteUrl}" style="color:${C.soft};">gamainstitute.ca</a></p>
+<p style="margin:0 0 10px;font-weight:600;">${SOCIAL.map(([label, href]) => `<a href="${href}" style="color:${C.soft};">${label}</a>`).join(' &nbsp; ')} &nbsp; <a href="${o.siteUrl}" style="color:${C.soft};">gamainstitute.ca</a></p>
 <p style="margin:0 0 8px;">${esc(fr.why)}<br><span lang="en">${esc(en.why)}</span></p>
 <p style="margin:0 0 8px;">${unsub}<a href="${o.siteUrl}/privacy" style="color:${C.soft};">${fr.privacy} / ${en.privacy}</a></p>
 <p style="margin:0;">Gama Institute</p>
