@@ -81,9 +81,9 @@
         ],
         "list": [
           "**Cloudflare, Inc.** (États-Unis) : hébergement du site, traitement des formulaires et protection anti-robots Turnstile.",
-          "**Resend** (États-Unis) : acheminement des formulaires vers notre boîte courriel et gestion de la liste de l'infolettre.",
+          "**Resend** (États-Unis) : acheminement des formulaires vers notre boîte courriel, gestion de la liste de l'infolettre et envoi de l'infolettre.",
           "**Notre fournisseur de messagerie**, qui héberge les boîtes contact@gamainstitute.ca (formulaire de contact) et editoriale@gamainstitute.ca (propositions WeekPaper et Research Summaries) où arrivent les messages et les pièces jointes.",
-          "**YouTube (Google)** : diffusion des épisodes WeekPaper. Le lecteur intégré ne se charge que lorsque vous cliquez sur Lecture, en mode de confidentialité renforcée.",
+          "**YouTube (Google)** : diffusion des épisodes WeekPaper. Le lecteur intégré ne se charge que lorsque vous cliquez sur Lecture, en mode de confidentialité renforcée. Dans l'infolettre, la miniature de l'épisode est chargée depuis les serveurs de YouTube à l'ouverture du courriel, comme toute image en ligne.",
           "**LinkedIn** : partage des épisodes, si vous l'avez choisi.",
           "**Google Drive, Wikimedia Commons et sites de partenaires** : certaines images (photos de l'équipe, logos) sont chargées depuis leurs serveurs ; votre navigateur leur transmet alors votre adresse IP, comme pour toute image en ligne."
         ],

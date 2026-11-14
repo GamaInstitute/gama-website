@@ -28,6 +28,8 @@ See [docs/adr/](docs/adr/) for decisions that are expensive to reverse and would
 
 **Gotcha:** the `RESEND_API_KEY` used for `/api/contact` may be scoped to **Sending access only** (Resend lets you restrict a key's permissions at creation). That key will 401 with `restricted_api_key` on `resend.contacts.create` even though `resend.emails.send` works fine with it. The newsletter endpoint needs a key with **Full access** (or at minimum, Contacts write permission) — check this in the Resend dashboard under API Keys before assuming a "not working" report is a code bug.
 
+**Verified (2026-11-12):** contacts created this way, with no `segments`, do land in the account's existing audience: recent site signups are listed in it. Newsletter sends (Resend Broadcasts) can target that audience as-is; don't add a `segments` parameter to fix a problem that doesn't exist.
+
 **Revisit when:** Subscribers need to be organized into segments for targeted sends (e.g. WeekPaper-only vs. general newsletter) — at that point, create the relevant segment(s) in the Resend dashboard and pass `segments: [{ id }]` in the `contacts.create` call.
 
 ---
@@ -201,3 +203,12 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 **Alternative considered:** prerender each page twice (`/en/...`) and pick the language by URL. No flash of French for English visitors and better SEO for English, but it doubles the pages and changes every URL; out of scope for a bug fix.
 
 **Revisit when:** English visitors notice the brief French flash on load, or English SEO matters: then move to per-language URLs.
+
+## D-23. Newsletter emails are Resend Broadcasts sent from the production deploy workflow, bilingual, 1 hour after the episode goes live
+
+**Why:** A WeekPaper episode is published every Thursday by deploying a new `featured` episode to `main`, so the alert hangs off that deploy: the `weekpaper-alert` job in `deploy-production.yml` runs after a successful deploy (links in the email then work) and schedules a Resend Broadcast to the newsletter audience. Broadcasts handle the per-contact unsubscribe link and the unsubscribed list, which a loop of single emails wouldn't. Safeguards: the Broadcast is named after the episode (`weekpaper-ep-07`) and never created twice, so unrelated deploys send nothing; an episode more than 3 days old is ignored, so a release that still features last week's episode doesn't email it; and it is scheduled 1 hour ahead (`SEND_AT`), leaving the team time to cancel it in the Resend dashboard. Subscribers' language isn't recorded, so every email is bilingual, French first, English below (the English half skips the thumbnail). The markup lives in `functions/_lib/newsletter.ts`, built from the locale JSON so nothing is written twice; the signup Function uses the same file for the welcome email, and `scripts/newsletter.mjs` runs it directly with Node's TypeScript support, which is why that file has no imports. The welcome email is a single email, not a Broadcast, so it has no per-contact unsubscribe link and asks people to reply instead. The same audience that site signups already land in is used as-is (D-3).
+
+**Alternative considered:** a GitHub Actions cron every Thursday (decoupled from the deploy, but GitHub cron runs late and would fire even when no episode was published); a Cloudflare Worker cron (a second deployable just for this); pressing "Send" in the Resend dashboard each week (no code, but easy to forget and to get wrong). Per-language emails would need the language recorded at signup, which existing subscribers don't have.
+
+**Revisit when:** the signup form records each subscriber's language (then send one language per contact), or more than one email a week goes out (then a digest or a schedule may beat per-episode Broadcasts).
+

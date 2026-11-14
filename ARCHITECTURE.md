@@ -38,7 +38,8 @@ For how each page is actually put together — section-by-section breakdown, whi
 2. Turnstile token obtained silently (invisible mode)
 3. `POST /api/contact` with JSON payload + token
 4. CF Function verifies token with Cloudflare siteverify, re-validates body, sends the message via Resend (`CONTACT_EMAIL_TO`/`CONTACT_EMAIL_FROM`/`RESEND_API_KEY`), returns `{ ok: true }`
-5. The same Turnstile-then-Resend pattern is shared with `POST /api/newsletter` (`resend.contacts.create`) via `functions/_lib/turnstile.ts` — see [DECISIONS.md D-3](DECISIONS.md)
+5. The same Turnstile-then-Resend pattern is shared with `POST /api/newsletter` (`resend.contacts.create`, then a welcome email sent after the response) via `functions/_lib/turnstile.ts` — see [DECISIONS.md D-3](DECISIONS.md)
+6. Newsletter sends: after each production deploy, the `weekpaper-alert` job runs `scripts/newsletter.mjs`, which schedules a Resend Broadcast to the newsletter audience when the featured WeekPaper episode is new. Email markup lives in `functions/_lib/newsletter.ts`, shared with the welcome email — see [DECISIONS.md D-23](DECISIONS.md)
 
 **Language toggle:**
 1. User clicks FR / EN in header → `i18n.changeLanguage()` updates react-i18next state

@@ -17,6 +17,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the system map.
 | `npm run build` | SSG build — outputs to `dist/` |
 | `npm run preview` | Serve `dist/` locally |
 | `npm run type-check` | TypeScript check for `src/` **and** `functions/` |
+| `node scripts/newsletter.mjs alert --dry-run` | Renders the Thursday WeekPaper alert for the featured episode into `newsletter-out/` without sending (also `welcome-existing`; `--test=<email>` sends one copy) |
 | `npm run test:perf` | Builds then checks main-bundle size + per-page cold-load timing against budgets in `scripts/perf-test.mjs` — run after touching routing, bundling, or page-level dependencies |
 
 ## Pre-commit checks
@@ -39,6 +40,10 @@ npm run type-check   # must pass; covers tsconfig.json + tsconfig.functions.json
 | `RESEND_API_KEY` | Cloudflare Pages dashboard | CF Function — Resend API key for email delivery **and** newsletter contacts; must have **Full access** (Sending-only keys 401 on the Contacts API) |
 | `CLOUDFLARE_API_TOKEN` | GitHub Actions secret | Production deploy via Wrangler |
 | `CLOUDFLARE_ACCOUNT_ID` | GitHub Actions secret | Production deploy via Wrangler |
+| `RESEND_API_KEY` | GitHub Actions secret (as well as Cloudflare) | Newsletter Broadcasts from `deploy-production.yml` / `newsletter.yml`; Full access |
+| `RESEND_AUDIENCE_ID` | GitHub Actions secret | The Resend audience (segment) the newsletter is sent to |
+| `NEWSLETTER_FROM` | GitHub Actions secret **and** Cloudflare Pages dashboard | Newsletter sender, e.g. `Gama Institute <infolettre@news.gamainstitute.ca>` (domain verified in Resend); in Cloudflare it falls back to `CONTACT_EMAIL_FROM` for the welcome email |
+| `NEWSLETTER_REPLY_TO` | GitHub Actions secret + Cloudflare (optional) | Where replies to newsletters go; the welcome email asks people to reply to unsubscribe. Cloudflare falls back to `EDITORIAL_EMAIL_TO` |
 
 Create a `.env` file at the project root (gitignored) for local dev:
 
@@ -68,6 +73,8 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 - **Submissions are emailed, not stored.** `POST /api/research-summary` and `POST /api/weekpaper-submission` take `multipart/form-data` and send the uploaded files as Resend attachments to `EDITORIAL_EMAIL_TO` (the editorial inbox, falling back to `CONTACT_EMAIL_TO`) (shared helpers in `functions/_lib/email.ts`). File size/type limits live in `src/types/researchSummary.ts` / `src/types/weekpaperSubmission.ts` and are enforced on both sides; keep the totals under Resend's 40MB per-email cap. See [D-15](DECISIONS.md).
 - **Every form that sends personal data shows `PrivacyNotice`; forms that grant publication rights also require `ConsentCheckbox`** (enforced server-side via `consentField()`). The Privacy Policy describes the site's actual data flows (no analytics, which providers, `localStorage` keys, `youtube-nocookie` embeds). Adding a form field, a third-party service, analytics or a storage key means updating `legal.json` in the same change. See [docs/pages/legal.md](docs/pages/legal.md).
 - **The staging build (GitHub Pages) lives under `/gama-website/`, not `/`.** Site paths written in content files (`"/icons/x.svg"`, `"/team/x.webp"`) must go through `publicUrl()` from `src/constants/index.ts` before reaching an `<img src>`; `Avatar` and `Markdown` already do. A bare `/…` path works on Cloudflare and in dev, and only breaks on staging.
+- **Publishing a WeekPaper episode emails every subscriber.** Deploying a new `featured` episode to `main` makes the `weekpaper-alert` job schedule a bilingual Resend Broadcast, 1 hour later. Only for an episode at most 3 days old, never twice. A wrong `featured.body` goes out by email, so proofread before merging, or cancel the Broadcast in Resend within the hour. See [D-23](DECISIONS.md).
+- **`functions/_lib/newsletter.ts` is also run directly by Node** (`scripts/newsletter.mjs`, no bundler): keep it free of imports and of non-erasable TypeScript (enums, namespaces, parameter properties). Email markup is tables with inline styles; mail clients drop stylesheets, flexbox, CSS variables and positioning.
 - **Newsletter registers Resend Contacts** — `POST /api/newsletter` calls `resend.contacts.create({ email })`, no separate CRM. Needs `RESEND_API_KEY` with Full access. See [D-3](DECISIONS.md).
 - **`backdrop-filter` (or `filter`/`transform`) on an ancestor creates a new containing block for `position: fixed` descendants.** `Header.tsx`'s blur effect lives on its own inner layer, not on `<header>` itself, specifically so the mobile nav panel and its scrim stay fixed to the viewport. If you ever add `filter`/`backdrop-filter`/`transform` directly to `<header>` (or any ancestor of a `position: fixed` element), any such descendant will silently anchor to that ancestor's box instead of the viewport — no error, just wrong positioning that only shows up when you actually open the affected UI.
 
@@ -102,7 +109,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 - [docs/pages/](docs/pages/README.md) — one file per page: section-by-section anatomy, which component renders what, exact i18n/data-file sources, and how-to recipes for common changes. Update the matching page doc whenever you add/remove/restructure a section, not just when you add a whole new page.
 - [docs/guides/content-editing.md](docs/guides/content-editing.md) — the existing `docs/guides/` entry: everyday content changes (text, photos, courses) with no code required. See the rule below for when to add another.
 - [CHANGELOG.md](CHANGELOG.md) — user- and contributor-facing changes; Keep a Changelog 1.1.0
-- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-22)
+- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-23)
 - [docs/adr/](docs/adr/) — full ADRs for the three heaviest architectural choices
 - [docs/sessions/](docs/sessions/) — session logs (write only when warranted; see rule below)
 

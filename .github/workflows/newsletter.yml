@@ -1,0 +1,73 @@
+name: Newsletter
+
+# Manual runs (Actions tab → Newsletter → Run workflow):
+# - test: sends one copy of an email to the address you enter, nothing goes to subscribers
+# - send: schedules a Broadcast to the whole newsletter audience (never twice for the same email)
+# The Thursday alert itself is sent automatically by the production deploy; use "send alert"
+# here only to retry it. See DECISIONS.md D-23.
+
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: Which email
+        type: choice
+        options:
+          - alert
+          - welcome-existing
+        default: alert
+      mode:
+        description: test = one copy to the address below; send = everyone in the audience
+        type: choice
+        options:
+          - test
+          - send
+        default: test
+      test_to:
+        description: Address for test mode
+        type: string
+        required: false
+      force:
+        description: Alert only, send mode - send even if the featured episode is more than 3 days old
+        type: boolean
+        default: false
+
+concurrency:
+  group: newsletter
+  cancel-in-progress: false
+
+jobs:
+  newsletter:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+
+      - run: npm ci
+
+      - name: Send
+        run: |
+          set -euo pipefail
+          ARGS=("$EMAIL")
+          if [ "$MODE" = "test" ]; then
+            if [ -z "$TEST_TO" ]; then echo "Test mode needs an address in 'test_to'." >&2; exit 1; fi
+            ARGS+=("--test=$TEST_TO")
+          elif [ "$FORCE" = "true" ]; then
+            ARGS+=("--force")
+          fi
+          node scripts/newsletter.mjs "${ARGS[@]}"
+        env:
+          EMAIL: ${{ inputs.email }}
+          MODE: ${{ inputs.mode }}
+          TEST_TO: ${{ inputs.test_to }}
+          FORCE: ${{ inputs.force }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          NEWSLETTER_FROM: ${{ secrets.NEWSLETTER_FROM }}
+          NEWSLETTER_REPLY_TO: ${{ secrets.NEWSLETTER_REPLY_TO }}

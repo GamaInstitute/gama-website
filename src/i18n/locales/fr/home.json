@@ -110,13 +110,12 @@
   "newsletter": {
     "eyebrow": "Infolettre",
     "h2": "Rejoignez la communauté GAMA",
-    "perks_intro": "Recevez chaque mois :",
+    "perks_intro": "Recevez par courriel :",
     "perks": [
-      "les meilleures publications scientifiques",
-      "nos nouvelles recherches",
-      "les prochains ateliers",
-      "les épisodes WeekPaper",
-      "des opportunités de collaboration"
+      "chaque jeudi, le nouvel épisode WeekPaper",
+      "les nouveaux Research Summaries",
+      "nos prochains ateliers",
+      "les appels à contributions"
     ]
   }
 }

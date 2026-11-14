@@ -110,13 +110,12 @@
   "newsletter": {
     "eyebrow": "Newsletter",
     "h2": "Join the GAMA community",
-    "perks_intro": "Every month, receive:",
+    "perks_intro": "Receive by email:",
     "perks": [
-      "the best scientific publications",
-      "our latest research",
-      "upcoming workshops",
-      "WeekPaper episodes",
-      "collaboration opportunities"
+      "every Thursday, the new WeekPaper episode",
+      "new Research Summaries",
+      "our upcoming workshops",
+      "calls for contributions"
     ]
   }
 }

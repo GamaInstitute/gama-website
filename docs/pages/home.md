@@ -85,4 +85,4 @@ Three sections exist as complete, working JSX in `HomePage.tsx`, just wrapped in
 
 **Add a research area row:** add `{ no, title, desc }` to `research.areas[]` in both locale files. Remember every row currently links to the YouTube channel (see above) unless you also change the hardcoded `href` in `HomePage.tsx` to something per-row.
 
-**Edit the newsletter perks list:** edit `newsletter.perks_intro` / `newsletter.perks` in `home.json` (both languages) — this simultaneously updates the WeekPaper newsletter modal, since it renders the same `NewsletterPerks` component reading the same keys.
+**Edit the newsletter perks list** (keep it true to what the emails actually deliver: the Thursday WeekPaper alert, new Research Summaries, occasional workshops and calls, see [D-23](../../DECISIONS.md)): edit `newsletter.perks_intro` / `newsletter.perks` in `home.json` (both languages) — this simultaneously updates the WeekPaper newsletter modal, since it renders the same `NewsletterPerks` component reading the same keys.
