@@ -76,7 +76,22 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUnti
   }
 
   const resend = new Resend(env.RESEND_API_KEY)
-  const { error } = await resend.contacts.create({ email: parsed.data.email })
+  const email = parsed.data.email
+
+  // Every case answers the same `{ ok: true }`, so the form never reveals whether an
+  // address is already on the list. Behind it:
+  // - already subscribed: nothing to do, and no second welcome email;
+  // - had unsubscribed: this form is a new, explicit request, so subscribe them again;
+  // - unknown (or the lookup failed): create the contact, as before.
+  const { data: existing } = await resend.contacts.get({ email })
+
+  if (existing && !existing.unsubscribed) {
+    return json({ ok: true })
+  }
+
+  const { error } = existing
+    ? await resend.contacts.update({ email, unsubscribed: false })
+    : await resend.contacts.create({ email })
 
   if (error) {
     console.error('[newsletter] Resend error', error)
@@ -84,7 +99,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUnti
   }
 
   // After the response: a slow or failed welcome email never fails the signup
-  waitUntil(sendWelcome(resend, env, parsed.data.email))
+  waitUntil(sendWelcome(resend, env, email))
 
   return json({ ok: true })
 }

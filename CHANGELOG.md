@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Fixed
 
+- Signing up to the newsletter again after unsubscribing now subscribes you again; before, the sign-up said "thank you" but you stayed unsubscribed. Signing up with an address that is already subscribed no longer sends a second welcome email
 - The footer's "Newsletter" link led to the Contact page, which has no sign-up form
 - A newsletter sign-up that failed showed nothing; it now says so and asks to try again
 - In the dark newsletter card, the email address being typed was dark text on a dark background

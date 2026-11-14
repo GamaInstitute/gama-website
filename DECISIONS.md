@@ -30,6 +30,8 @@ See [docs/adr/](docs/adr/) for decisions that are expensive to reverse and would
 
 **Verified (2026-11-12):** contacts created this way, with no `segments`, do land in the account's existing audience: recent site signups are listed in it. Newsletter sends (Resend Broadcasts) can target that audience as-is; don't add a `segments` parameter to fix a problem that doesn't exist.
 
+**Signing up twice (2026-11-13):** the endpoint looks the address up first (`contacts.get`). Already subscribed: nothing happens and no second welcome email. Had unsubscribed: the form is a new explicit request, so `contacts.update({ unsubscribed: false })` and a welcome email. The visitor gets the same `{ ok: true }` in every case, so the form never reveals whether an address is on the list.
+
 **Revisit when:** Subscribers need to be organized into segments for targeted sends (e.g. WeekPaper-only vs. general newsletter) — at that point, create the relevant segment(s) in the Resend dashboard and pass `segments: [{ id }]` in the `contacts.create` call.
 
 ---
