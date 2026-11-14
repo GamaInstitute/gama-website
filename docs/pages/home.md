@@ -22,7 +22,7 @@ Three more sections exist as **fully-written, commented-out JSX** in the file, e
 
 ### 1. Hero
 
-Plain `<section>` (not `SectionWrapper` — Home's hero has bespoke sizing, unlike the shared `PageHero` used by every other page). Two-column grid: left column is `Eyebrow` + `<h1>` + lead paragraph + two buttons: the main CTA (`Button as="a" href="#research"`, anchors down to the Research section) and a lighter `variant="ghost"` one, "Recevoir WeekPaper chaque semaine" (`common.json → newsletter.cta_weekly`), which opens the site-wide subscribe window (`useOpenNewsletter()`, see [README.md](README.md#newsletter)); right column is `<NetworkArt />` with no props. A second hero CTA (for Training) is commented out at the spot marked `{/* TODO: restore training CTA once the page ships */}` — restore it once [training.md](training.md)'s page ships.
+Plain `<section>` (not `SectionWrapper` — Home's hero has bespoke sizing, unlike the shared `PageHero` used by every other page). Two-column grid: left column is `Eyebrow` + `<h1>` + lead paragraph + two buttons: the main CTA (`Button as="a" href="#research"`, anchors down to the Research section) and a filled `variant="teal"` one with a mail icon (`MailIcon`), "S'abonner à l'infolettre" (filled so it isn't skipped; the teal and the icon keep it distinct from the copper main CTA) (`common.json → newsletter.cta`), which opens the site-wide subscribe window (`useOpenNewsletter()`, see [README.md](README.md#newsletter)); right column is `<NetworkArt />` with no props. A second hero CTA (for Training) is commented out at the spot marked `{/* TODO: restore training CTA once the page ships */}` — restore it once [training.md](training.md)'s page ships.
 
 ### 2. Metrics bar
 

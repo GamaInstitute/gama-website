@@ -14,6 +14,7 @@ import {
 import { useTurnstileToken } from '@/hooks/useTurnstileToken'
 import { FormField } from '@/components/forms/FormField'
 import { FileField } from '@/components/forms/FileField'
+import { AiDisclosureField } from '@/components/forms/AiDisclosureField'
 import { ConsentCheckbox, LegalText, PrivacyNotice } from '@/components/forms/LegalNotice'
 import { Button } from '@/components/ui/Button'
 
@@ -51,6 +52,7 @@ export function PresentationForm({ onClose }: { onClose: () => void }) {
 
   const {
     register,
+    setValue,
     handleSubmit,
     trigger,
     formState: { errors, isSubmitted },
@@ -181,6 +183,13 @@ export function PresentationForm({ onClose }: { onClose: () => void }) {
             </label>
           ))}
         </div>
+
+        <AiDisclosureField
+          id="wp-ai"
+          registration={register('aiDisclosure')}
+          error={errors.aiDisclosure?.message}
+          onDeclareNone={s => setValue('aiDisclosure', s, { shouldValidate: isSubmitted, shouldDirty: true })}
+        />
 
         <ConsentCheckbox id="wp-consent" required error={errors.consent?.message} {...register('consent')}>
           <LegalText ns="weekpaper" i18nKey="submit.consent" />

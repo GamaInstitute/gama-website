@@ -40,8 +40,8 @@
     "copyright": "© 2026 Gama Institute · Montréal, Québec"
   },
   "newsletter": {
-    "modal_title": "Get WeekPaper every week",
-    "cta_weekly": "Get WeekPaper every week",
+    "modal_title": "Subscribe to the GAMA newsletter",
+    "cta": "Subscribe to the newsletter",
     "error": "The sign-up didn't go through. Please try again in a moment.",
     "email_placeholder": "Your email address",
     "subscribe": "Subscribe",
@@ -50,6 +50,12 @@
   "enroll": "Enroll",
   "arrow": "→",
   "forms": {
+    "ai_label": "AI-use disclosure",
+    "ai_placeholder": "E.g. \"I used [tool name] to explore unfamiliar concepts and improve English grammar. I read the original paper, developed the analysis, and verified all claims and references myself.\"",
+    "ai_hint": "State whether and how you used AI.",
+    "ai_hint_link": "See section 6.4 of the guidelines",
+    "ai_none_btn": "I didn't use any AI tool",
+    "ai_none_sentence": "No generative AI tools were used in preparing this contribution.",
     "choose_file": "Choose a file",
     "no_file": "No file selected",
     "consent_required": "You must accept to submit",

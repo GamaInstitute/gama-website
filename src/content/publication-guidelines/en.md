@@ -31,11 +31,9 @@ Through GAMA Institute, you can:
 
 ### Take this opportunity seriously {#take-it-seriously}
 
-Your contribution is more than an article or a video. It is an early public demonstration of your potential as a researcher.
+Your contribution is more than an article or a video: it is an early public demonstration of your potential as a researcher. Published under your name, it will show not only what you know, but also how you think, analyze evidence, and question existing approaches.
 
-Every Research Summary or GAMA WeekPaper published under your name becomes part of your visible intellectual portfolio. It can demonstrate not only what you know, but also how you think, analyze evidence, question existing approaches, and communicate scientific ideas. Your work may be read or watched by people who could one day become your research supervisors, collaborators, colleagues or employers.
-
-That is why we strongly encourage you to prioritize quality over quantity, develop your own analysis, verify your sources, and take ownership of every contribution you submit. You do not need to be an expert to begin. You need curiosity, discipline, intellectual honesty, and the willingness to do meaningful work.
+That is why we strongly encourage you to prioritize quality over quantity, develop your own analysis, verify your sources, and take ownership of every contribution you submit.
 
 **Your research journey can start here.**
 
@@ -429,7 +427,7 @@ You may present with or without showing your face. Standard recording and editin
 
 ### 6.4 Disclosure of AI assistance {#ai-disclosure}
 
-Include a brief statement with every submission describing whether and how you used AI.
+Every submission includes a brief statement describing whether and how you used AI. You write it directly in the submission form, in the "AI-use disclosure" field.
 
 > [!example] **Example:** "I used [tool name] to explore unfamiliar concepts and improve English grammar. I read the original paper, developed the analysis, and verified all claims and references myself."
 >
@@ -485,7 +483,7 @@ These publicly shared contributions can help you develop a research portfolio an
 - If I prepared a WeekPaper, I speak French, use English slides, and provide my own authentic recording.
 - My figures are legible and large: their text reads without zooming.
 - I cite and license source material appropriately and distinguish research findings from my own interpretations.
-- I included the contributor bio and profile materials, all required submission assets, and an AI-use disclosure.
+- I included the contributor bio and profile materials, all required submission assets, and filled in the AI-use disclosure in the form.
 - I proofread the contribution and can explain and defend it to an editor.
 
 A question about these guidelines? [Write to us](mailto:contact@gamainstitute.ca).

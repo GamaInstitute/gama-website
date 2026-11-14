@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { httpsUrl, consentField, hasGenericType, type FieldMessages } from './researchSummary'
+import { httpsUrl, consentField, aiDisclosureField, hasGenericType, type FieldMessages } from './researchSummary'
 
 export { PHOTO_FILE, isAllowedPhotoFile } from './researchSummary'
 
@@ -30,6 +30,7 @@ export function makeWeekpaperSubmissionSchema(m: FieldMessages) {
     ytTitle:       z.string().trim().min(1, m.required).max(100),
     ytDescription: z.string().trim().min(1, m.required).max(5000),
     publish:       z.enum(PUBLISH_OPTIONS),
+    aiDisclosure:  aiDisclosureField(m.required),
     consent:       consentField(m.consent),
   })
 }

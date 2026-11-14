@@ -49,6 +49,11 @@
   --gutter: clamp(20px, 5vw, 64px);
 
   --ring: 0 0 0 3px rgba(22,92,113,.30);
+
+  /* Secondary filled button (Button variant="teal"): the brand's second colour */
+  --btn-teal-bg:       var(--teal);
+  --btn-teal-bg-hover: #114B5C;
+  --btn-teal-fg:       #FFFFFF;
 }
 
 /* ---------- Tokens : Dark ---------- */
@@ -75,6 +80,11 @@
   --sh-3: 0 22px 60px rgba(0,0,0,.55);
 
   --ring: 0 0 0 3px rgba(89,184,201,.40);
+
+  /* Deep teal disappears on the dark background: use the light teal, with dark text */
+  --btn-teal-bg:       #59B8C9;
+  --btn-teal-bg-hover: #7CCAD8;
+  --btn-teal-fg:       #071826;
 }
 
 /* ---------- Base ---------- */

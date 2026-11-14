@@ -13,6 +13,7 @@ import { formatEpisodeDate } from '@/lib/formatDate'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import type { SummaryItem } from '@/content/research-summaries'
 import { topicTagCls, NumberBadge } from '@/components/ui/Tag'
+import { Pagination }     from '@/components/ui/Pagination'
 
 
 
@@ -180,33 +181,13 @@ export default function ResearchSummariesPage() {
                   <p className="text-ink-muted py-7" role="status">{t('list.empty')}</p>
                 )}
 
-                {pageCount > 1 && (
-                  <nav aria-label={t('list.pagination_label')} className="flex gap-2 items-center flex-wrap mt-[30px] text-[0.92rem] font-semibold">
-                    {current > 1 && (
-                      <button type="button" onClick={() => goToPage(current - 1)} className="h-[38px] px-3 rounded-pill grid place-items-center border border-hairline-2 text-ink-soft transition-colors hover:border-ink hover:text-ink">
-                        {t('list.prev')}
-                      </button>
-                    )}
-                    {Array.from({ length: pageCount }, (_, i) => i + 1).map(n => (
-                      <button
-                        key={n}
-                        type="button"
-                        onClick={() => goToPage(n)}
-                        aria-current={n === current ? 'page' : undefined}
-                        className={`min-w-[38px] h-[38px] px-3 rounded-pill grid place-items-center border transition-colors ${
-                          n === current ? 'bg-ink text-bg border-ink' : 'border-hairline-2 text-ink-soft hover:border-ink hover:text-ink'
-                        }`}
-                      >
-                        {n}
-                      </button>
-                    ))}
-                    {current < pageCount && (
-                      <button type="button" onClick={() => goToPage(current + 1)} className="h-[38px] px-3 rounded-pill grid place-items-center border border-hairline-2 text-ink-soft transition-colors hover:border-ink hover:text-ink">
-                        {t('list.next')}
-                      </button>
-                    )}
-                  </nav>
-                )}
+                <Pagination
+                  page={current}
+                  pageCount={pageCount}
+                  onChange={goToPage}
+                  labels={{ nav: t('list.pagination_label'), prev: t('list.prev'), next: t('list.next') }}
+                  className="mt-[30px]"
+                />
               </div>
 
               {/* Sidebar */}

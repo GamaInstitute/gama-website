@@ -34,8 +34,8 @@
         "list": [
           "**Contact form**: first name, last name, email, subject and message.",
           "**Newsletter**: email address.",
-          "**Research Summary submission**: name, email, institution, LinkedIn profile (optional), short bio, photo (optional), paper title and link, your summary file.",
-          "**WeekPaper submission**: name, email, institution, LinkedIn profile (optional), bio, photo, paper details, link to your video (which contains your voice and, if you choose, your image), slides, YouTube title and description, publication preference.",
+          "**Research Summary submission**: name, email, institution, LinkedIn profile (optional), short bio, photo (optional), paper title and link, your summary file, AI-use disclosure.",
+          "**WeekPaper submission**: name, email, institution, LinkedIn profile (optional), bio, photo, paper details, link to your video (which contains your voice and, if you choose, your image), slides, YouTube title and description, publication preference, AI-use disclosure.",
           "**Technical data**: IP address, browser type and technical signals processed by Cloudflare to host the site and detect bots (Turnstile). We do not use them to identify or profile you."
         ],
         "p_after": [

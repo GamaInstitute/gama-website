@@ -61,7 +61,7 @@ Left: heading, body, CTA, and a "Guide" box with one `ResourceList` card (`contr
 
 ## Submission flow
 
-`SummaryForm` collects name, email, institution, optional LinkedIn, short bio (≤300 chars), optional photo (JPG/PNG ≤5MB), original paper title and URL, the summary file (Word/PDF ≤10MB), and a required consent box (accepts the Terms and Privacy Policy, confirms authorship, authorizes publication). The server rejects a submission without `consent=true`. A privacy notice (`PrivacyNotice`) sits under the form.
+`SummaryForm` collects name, email, institution, optional LinkedIn, short bio (≤300 chars), optional photo (JPG/PNG ≤5MB), original paper title and URL, the summary file (Word/PDF ≤10MB), the AI-use disclosure required by section 6.4 of the Publication Guidelines (`AiDisclosureField`, `src/components/forms/`: required, ≤1000 chars, with a button that fills in the standard "no AI used" sentence; checked server-side and shown on its own row of the email to the editorial inbox), and a required consent box (accepts the Terms and Privacy Policy, confirms authorship, authorizes publication). The server rejects a submission without `consent=true`. A privacy notice (`PrivacyNotice`) sits under the form.
 
 1. Text fields are validated with `makeResearchSummarySchema` from [src/types/researchSummary.ts](../../src/types/researchSummary.ts) (react-hook-form + Zod, localized messages). Files are checked against `SUMMARY_FILE` / `PHOTO_FILE` from the same module.
 2. An invisible Turnstile token is solved (`useTurnstileToken`).

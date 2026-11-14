@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Added
 
-- More ways to subscribe to the newsletter, so visitors no longer have to scroll to the bottom of the home page: a "Recevoir WeekPaper chaque semaine" button in the home page hero, a one-line sign-up under the home page video, a "Recevez les prochains résumés" box at the end of each Research Summary, and the footer's "Newsletter" link on every page now opens the sign-up window
+- Research Summary and WeekPaper submission forms: a required "AI-use disclosure" field, as the Publication Guidelines (section 6.4) require, with a one-click "I didn't use any AI tool" option. The editorial team sees it directly in the submission email
+- More ways to subscribe to the newsletter, so visitors no longer have to scroll to the bottom of the home page: a "S'abonner à l'infolettre" button in the home page hero, a one-line sign-up under the home page video, a "Recevez les prochains résumés" box at the end of each Research Summary, and the footer's "Newsletter" link on every page now opens the sign-up window
 - Newsletter emails. Every week, subscribers get the new WeekPaper episode by email (French and English in one email) about an hour after it goes live on the site. New subscribers get a welcome email right after signing up, and people who subscribed before the newsletter existed get a one-time email explaining what they'll receive. Every newsletter has an unsubscribe link
 - Team page: a "Technical staff" section introducing Jordy Nouala (Operations Coordinator), Armand Meppa (Web Lead) and Christian Ngatchou (Editorial Lead)
 - WeekPaper page: new "Present a paper on WeekPaper" section with the presentation format, the 6-part GAMA structure and downloadable guides and slide template, plus a form to submit a presentation (video link, slides, photo, YouTube title and description, YouTube-only or YouTube + LinkedIn). Submissions are emailed to the team for review
@@ -19,6 +20,8 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
+- WeekPaper page: the episode list shows two rows at a time, with page buttons below, so the page stays short as the series grows
+- Publication Guidelines: contributors now write the AI-use disclosure in the submission form instead of attaching it, and "Take this opportunity seriously" is shorter, no longer repeating "Why contribute"
 - The newsletter sign-up now says what subscribers actually receive (the new WeekPaper episode every week, new Research Summaries, workshops and calls for contributions) instead of a monthly newsletter. The Privacy Policy now says Resend sends the newsletter and that its emails load the episode thumbnail from YouTube
 - WeekPaper presentation and Research Summary proposals are now sent to the editorial team's inbox, editoriale@gamainstitute.ca, instead of contact@gamainstitute.ca. The Privacy Policy names both inboxes
 - Topic tags now have one colour per research topic, the same on every page: AI, software engineering, cloud computing, responsible AI and cybersecurity are no longer shown in shared or mismatched colours, and the tags are easier to read in dark mode

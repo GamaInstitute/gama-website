@@ -52,6 +52,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     ytTitle:       textField(form, 'ytTitle'),
     ytDescription: textField(form, 'ytDescription'),
     publish:       textField(form, 'publish'),
+    aiDisclosure:  textField(form, 'aiDisclosure'),
     consent:       textField(form, 'consent'),
   })
   if (!parsed.success) {
@@ -99,6 +100,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     row('Titre YouTube', esc(d.ytTitle)),
     row('Description YouTube', esc(d.ytDescription)),
     row('Publication', esc(PUBLISH_LABEL[d.publish] ?? d.publish)),
+    row('Déclaration IA', esc(d.aiDisclosure)),
     row('Pièces jointes', attachments.map(a => esc(a.filename)).join('<br>')),
     row('Consentement', `Conditions et publication acceptées le ${new Date().toISOString()}`),
   ].join('')

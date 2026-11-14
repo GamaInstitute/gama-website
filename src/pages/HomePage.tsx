@@ -12,6 +12,7 @@ import { VideoPlayer }    from '@/components/ui/VideoPlayer'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
 import { useOpenNewsletter } from '@/components/newsletter/NewsletterProvider'
+import { MailIcon } from '@/components/ui/icons'
 import { Reveal, revealContainer, revealItem } from '@/components/ui/Reveal'
 import { SOCIAL_LINKS, publicUrl } from '@/constants'
 import type { TagVariant }  from '@/types/course'
@@ -75,9 +76,9 @@ export default function HomePage() {
                 <Button as="a" href="#research" variant="accent">
                   {t('hero.cta_research')} <span aria-hidden="true">→</span>
                 </Button>
-                {/* Secondary on purpose: opens the site-wide subscribe window */}
-                <Button as="button" variant="ghost" onClick={openNewsletter}>
-                  {tCommon('newsletter.cta_weekly')}
+                {/* Filled so it isn't skipped; teal + mail icon keep it distinct from the main copper CTA */}
+                <Button as="button" variant="teal" onClick={openNewsletter}>
+                  <MailIcon /> {tCommon('newsletter.cta')}
                 </Button>
                 {/* TODO: restore training CTA once the page ships */}
               </div>

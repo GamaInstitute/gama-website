@@ -26,6 +26,9 @@
     "h2": "Parcourir la série",
     "play_label": "Lire",
     "empty": "Aucun épisode dans cette catégorie pour l'instant.",
+    "pagination_label": "Pages d'épisodes",
+    "prev": "« Épisodes plus récents",
+    "next": "Épisodes plus anciens »",
     "filters_label": "Filtres par thème",
     "items": [
       {

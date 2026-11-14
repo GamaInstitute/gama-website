@@ -26,6 +26,9 @@
     "h2": "Browse the series",
     "play_label": "Play",
     "empty": "No episodes in this category yet.",
+    "pagination_label": "Episode pages",
+    "prev": "« Newer episodes",
+    "next": "Older episodes »",
     "filters_label": "Filter by topic",
     "items": [
       {

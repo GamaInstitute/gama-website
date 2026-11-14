@@ -34,8 +34,8 @@
         "list": [
           "**Formulaire de contact** : prénom, nom, courriel, sujet et message.",
           "**Infolettre** : adresse courriel.",
-          "**Proposition de Research Summary** : nom, courriel, établissement, profil LinkedIn (facultatif), courte biographie, photo (facultative), titre et lien de l'article, fichier de votre résumé.",
-          "**Proposition WeekPaper** : nom, courriel, établissement, profil LinkedIn (facultatif), biographie, photo, informations sur l'article, lien vers votre vidéo (qui contient votre voix et, si vous le choisissez, votre image), diapositives, titre et description YouTube, préférence de publication.",
+          "**Proposition de Research Summary** : nom, courriel, établissement, profil LinkedIn (facultatif), courte biographie, photo (facultative), titre et lien de l'article, fichier de votre résumé, déclaration d'utilisation de l'IA.",
+          "**Proposition WeekPaper** : nom, courriel, établissement, profil LinkedIn (facultatif), biographie, photo, informations sur l'article, lien vers votre vidéo (qui contient votre voix et, si vous le choisissez, votre image), diapositives, titre et description YouTube, préférence de publication, déclaration d'utilisation de l'IA.",
           "**Données techniques** : adresse IP, type de navigateur et signaux techniques traités par Cloudflare pour héberger le site et détecter les robots (Turnstile). Nous ne les utilisons pas pour vous identifier ni pour vous profiler."
         ],
         "p_after": [

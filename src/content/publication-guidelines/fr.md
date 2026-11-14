@@ -31,11 +31,9 @@ Avec GAMA Institute, vous pouvez :
 
 ### Prenez cette occasion au sérieux {#take-it-seriously}
 
-Votre contribution est plus qu'un article ou une vidéo. C'est une première démonstration publique de votre potentiel de chercheur.
+Votre contribution est plus qu'un article ou une vidéo : c'est une première démonstration publique de votre potentiel de chercheur. Publiée sous votre nom, elle montrera non seulement ce que vous savez, mais aussi votre façon de penser, d'analyser des données probantes et de remettre en question les approches existantes.
 
-Chaque Research Summary ou GAMA WeekPaper publié sous votre nom fait partie de votre portfolio intellectuel visible. Il peut montrer non seulement ce que vous savez, mais aussi votre façon de penser, d'analyser des données probantes, de remettre en question les approches existantes et de communiquer des idées scientifiques. Votre travail peut être lu ou regardé par des personnes qui deviendront peut-être un jour vos directeurs de recherche, vos collaborateurs, vos collègues ou vos employeurs.
-
-C'est pourquoi nous vous encourageons fortement à privilégier la qualité plutôt que la quantité, à développer votre propre analyse, à vérifier vos sources et à assumer pleinement chaque contribution que vous soumettez. Pas besoin d'être expert pour commencer. Il vous faut de la curiosité, de la discipline, de l'honnêteté intellectuelle et la volonté de faire un travail qui a du sens.
+C'est pourquoi nous vous encourageons fortement à privilégier la qualité plutôt que la quantité, à développer votre propre analyse, à vérifier vos sources et à assumer pleinement chaque contribution que vous soumettez.
 
 **Votre parcours de recherche peut commencer ici.**
 
@@ -429,7 +427,7 @@ Vous pouvez présenter en montrant votre visage ou non. Les outils courants d'en
 
 ### 6.4 Déclaration de l'aide de l'IA {#ai-disclosure}
 
-Joignez à chaque soumission une courte déclaration indiquant si vous avez utilisé l'IA et de quelle façon.
+Chaque soumission comprend une courte déclaration indiquant si vous avez utilisé l'IA et de quelle façon. Vous la rédigez directement dans le formulaire de soumission, au champ « Déclaration d'utilisation de l'IA ».
 
 > [!example] **Exemple :** « J'ai utilisé [nom de l'outil] pour explorer des concepts peu familiers et améliorer la grammaire anglaise. J'ai lu l'article original, développé l'analyse et vérifié moi-même toutes les affirmations et les références. »
 >
@@ -485,7 +483,7 @@ Ces contributions publiques peuvent vous aider à constituer un portfolio de rec
 - Si j'ai préparé un WeekPaper, je présente en français, mes diapositives sont en anglais et l'enregistrement est authentique et réalisé par moi.
 - Mes figures sont lisibles et de grande taille : leur texte se lit sans zoomer.
 - Je cite les sources et respecte leurs licences, et je distingue les résultats de recherche de mes propres interprétations.
-- J'ai joint ma biographie et mes éléments de profil, tous les fichiers requis pour la soumission et une déclaration d'utilisation de l'IA.
+- J'ai joint ma biographie et mes éléments de profil, tous les fichiers requis pour la soumission, et j'ai rempli la déclaration d'utilisation de l'IA dans le formulaire.
 - J'ai relu ma contribution et je peux l'expliquer et la défendre devant un réviseur.
 
 Une question sur ces lignes directrices ? [Écrivez-nous](mailto:contact@gamainstitute.ca).

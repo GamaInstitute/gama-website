@@ -26,6 +26,9 @@ export const httpsUrl = (msg: string) =>
 export const consentField = (msg: string) =>
   z.preprocess(v => v === true || v === 'true', z.literal(true, { errorMap: () => ({ message: msg }) }))
 
+// Required AI-use declaration (Publication Guidelines, section 6.4), in both submission forms
+export const aiDisclosureField = (msg: string) => z.string().trim().min(1, msg).max(1000)
+
 export type FieldMessages = { required: string; email: string; url: string; consent: string }
 
 // Text fields + consent only — the two files travel alongside as multipart parts and are
@@ -39,6 +42,8 @@ export function makeResearchSummarySchema(m: FieldMessages) {
     bio:         z.string().trim().min(1, m.required).max(300),
     paperTitle:  z.string().trim().min(1, m.required).max(300),
     paperUrl:    httpsUrl(m.url),
+    // Section 6.4 of the Publication Guidelines
+    aiDisclosure: aiDisclosureField(m.required),
     consent:     consentField(m.consent),
   })
 }

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Helmet }         from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { motion }         from 'framer-motion'
@@ -18,6 +18,7 @@ import { SOCIAL_LINKS, publicUrl } from '@/constants'
 import { ResourceList, type ResourceItem } from '@/components/guides/ResourceList'
 import { formatEpisodeDate, formatRelativeEpisodeDate } from '@/lib/formatDate'
 import { useHydrated } from '@/hooks/useHydrated'
+import { Pagination }     from '@/components/ui/Pagination'
 import type { Topic } from '@/constants'
 
 type EpisodeItem = {
@@ -41,6 +42,25 @@ type PlaylistItem = {
   icon: string
 }
 
+// Columns of the episode grid at each width; keep in sync with its grid-cols classes below
+const EPISODE_COLUMNS: [query: string, columns: number][] = [['(max-width: 560px)', 1], ['(max-width: 900px)', 2]]
+
+/** Columns the episode grid shows right now. 3 during prerender and hydration (see useHydrated). */
+function useEpisodeColumns(): number {
+  const hydrated = useHydrated()
+  const read = () => EPISODE_COLUMNS.find(([q]) => window.matchMedia(q).matches)?.[1] ?? 3
+  const [columns, setColumns] = useState(3)
+  useEffect(() => {
+    if (!hydrated) return
+    setColumns(read())
+    const mqls = EPISODE_COLUMNS.map(([q]) => window.matchMedia(q))
+    const onChange = () => setColumns(read())
+    mqls.forEach(m => m.addEventListener('change', onChange))
+    return () => mqls.forEach(m => m.removeEventListener('change', onChange))
+  }, [hydrated])
+  return columns
+}
+
 export default function WeekPaperPage() {
   const { t, i18n } = useTranslation('weekpaper')
   // "il y a 3 jours" depends on today's date: the prerendered HTML (and so the hydration
@@ -55,9 +75,19 @@ export default function WeekPaperPage() {
 
   // Filter keys come from `filters` in weekpaper.json ('all' plus one per episode topic)
   const [filter, setFilter] = useState('all')
+  const [page, setPage] = useState(1)
   const episodes  = t('episodes.items',   { returnObjects: true }) as EpisodeItem[]
   const filters   = t('filters',          { returnObjects: true }) as Record<string, string>
   const visible = episodes.filter(ep => filter === 'all' || ep.topic === filter)
+  // Two rows of the grid per page: 3 columns → 6 episodes, 2 → 4, 1 → 2 (see EPISODE_COLUMNS)
+  const pageSize = useEpisodeColumns() * 2
+  const pageCount = Math.max(1, Math.ceil(visible.length / pageSize))
+  const current = Math.min(page, pageCount)
+  const pageEpisodes = visible.slice((current - 1) * pageSize, current * pageSize)
+  function goToPage(n: number) {
+    setPage(n)
+    document.getElementById('episodes')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
   const playlists = t('playlists.items',  { returnObjects: true }) as PlaylistItem[]
   const format    = t('contribute.format',    { returnObjects: true }) as FormatItem[]
   const structure = t('contribute.structure', { returnObjects: true }) as StepItem[]
@@ -137,7 +167,7 @@ export default function WeekPaperPage() {
                 {Object.keys(filters).map(key => (
                   <button
                     key={key}
-                    onClick={() => setFilter(key)}
+                    onClick={() => { setFilter(key); setPage(1) }}
                     aria-pressed={filter === key}
                     className={`px-[0.9em] py-[0.45em] rounded-pill text-[0.85rem] font-medium border transition-colors ${
                       filter === key
@@ -153,14 +183,14 @@ export default function WeekPaperPage() {
 
             {visible.length > 0 ? (
               <motion.div
-                key={filter}
+                key={`${filter}-${current}`}
                 className="grid grid-cols-3 auto-rows-fr gap-[clamp(18px,2.5vw,32px)] max-[900px]:grid-cols-2 max-[560px]:grid-cols-1"
                 variants={revealContainer}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-8% 0px' }}
               >
-                {visible.map(ep => (
+                {pageEpisodes.map(ep => (
                   <motion.div key={ep.no} variants={revealItem} className="h-full">
                     <EpisodeCard
                       no={ep.no}
@@ -181,6 +211,14 @@ export default function WeekPaperPage() {
             ) : (
               <p className="text-ink-muted mt-6">{t('episodes.empty')}</p>
             )}
+
+            <Pagination
+              page={current}
+              pageCount={pageCount}
+              onChange={goToPage}
+              labels={{ nav: t('episodes.pagination_label'), prev: t('episodes.prev'), next: t('episodes.next') }}
+              className="mt-[clamp(28px,3vw,40px)]"
+            />
           </div>
         </SectionWrapper>
 

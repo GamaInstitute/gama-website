@@ -72,7 +72,9 @@ The small logo mark shown in the Header and Footer. **This is currently just a s
 ### Buttons, tags, labels
 
 **`Button`** — [src/components/ui/Button.tsx](../../src/components/ui/Button.tsx)
-Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal React Router navigation (no full reload), `as="a"` + `href=` for external links, or the default `as="button"` for form/click actions. TypeScript enforces you can't mix `to`/`href` on the wrong variant. `variant`: `accent | ghost | ghost-dark | ink`. `size`: `md | sm`.
+Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal React Router navigation (no full reload), `as="a"` + `href=` for external links, or the default `as="button"` for form/click actions. TypeScript enforces you can't mix `to`/`href` on the wrong variant. `variant`: `accent | teal | ghost | ghost-dark | ink`. `teal` is the filled secondary button (brand teal, light teal with dark text in dark mode; colours are the `--btn-teal-*` tokens in `base.css`), for a second action that must not be overlooked, like the Home hero's subscribe button. `size`: `md | sm`.
+
+**`Pagination`** — [src/components/ui/Pagination.tsx](../../src/components/ui/Pagination.tsx) — « previous · 1 2 3 · next » buttons; renders nothing for a single page. Used by the Research Summaries list and WeekPaper's episode grid; the caller owns the page state and passes the three labels.
 
 **`Eyebrow`** — [src/components/ui/Eyebrow.tsx](../../src/components/ui/Eyebrow.tsx) — small uppercase label with a short rule before it (`noRule` to omit). Purely presentational.
 

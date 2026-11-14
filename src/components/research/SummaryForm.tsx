@@ -13,6 +13,7 @@ import {
 import { useTurnstileToken } from '@/hooks/useTurnstileToken'
 import { FormField } from '@/components/forms/FormField'
 import { FileField } from '@/components/forms/FileField'
+import { AiDisclosureField } from '@/components/forms/AiDisclosureField'
 import { ConsentCheckbox, LegalText, PrivacyNotice } from '@/components/forms/LegalNotice'
 import { Button } from '@/components/ui/Button'
 
@@ -41,6 +42,7 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
     register,
     handleSubmit,
     trigger,
+    setValue,
     formState: { errors, isSubmitted },
   } = useForm<Fields>({ resolver: zodResolver(schema) })
 
@@ -155,6 +157,13 @@ export function SummaryForm({ onClose }: { onClose: () => void }) {
               </a>.
             </>
           }
+        />
+
+        <AiDisclosureField
+          id="rs-ai"
+          registration={register('aiDisclosure')}
+          error={errors.aiDisclosure?.message}
+          onDeclareNone={s => setValue('aiDisclosure', s, { shouldValidate: isSubmitted, shouldDirty: true })}
         />
 
         <ConsentCheckbox id="rs-consent" required error={errors.consent?.message} {...register('consent')}>

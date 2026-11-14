@@ -1,7 +1,7 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react'
 import { Link } from 'react-router-dom'
 
-type Variant = 'accent' | 'ghost' | 'ghost-dark' | 'ink'
+type Variant = 'accent' | 'teal' | 'ghost' | 'ghost-dark' | 'ink'
 type Size = 'md' | 'sm'
 
 interface BaseProps {
@@ -34,6 +34,8 @@ type Props = ButtonProps | AnchorProps | LinkProps
 function variantClasses(variant: Variant): string {
   switch (variant) {
     case 'accent': return 'bg-[var(--copper)] text-white border-[var(--copper)] hover:bg-[#9d5515] hover:border-[#9d5515]'
+    // Secondary but filled: as visible as `accent`, set apart by colour (tokens in base.css)
+    case 'teal':   return 'bg-[var(--btn-teal-bg)] text-[var(--btn-teal-fg)] border-[var(--btn-teal-bg)] hover:bg-[var(--btn-teal-bg-hover)] hover:border-[var(--btn-teal-bg-hover)]'
     case 'ghost':  return 'bg-transparent text-ink border-hairline-2 hover:border-ink'
     case 'ghost-dark': return 'bg-transparent text-white border-white/30 hover:border-white'
     case 'ink':    return 'bg-ink text-surface border-ink'

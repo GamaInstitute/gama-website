@@ -43,6 +43,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     bio:         textField(form, 'bio'),
     paperTitle:  textField(form, 'paperTitle'),
     paperUrl:    textField(form, 'paperUrl'),
+    aiDisclosure: textField(form, 'aiDisclosure'),
     consent:     textField(form, 'consent'),
   })
   if (!parsed.success) {
@@ -83,6 +84,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     row('Biographie', esc(d.bio)),
     row('Papier original', esc(d.paperTitle)),
     row('Lien du papier', link(d.paperUrl)),
+    row('Déclaration IA', esc(d.aiDisclosure)),
     row('Pièces jointes', attachments.map(a => esc(a.filename)).join('<br>')),
     row('Consentement', `Conditions et publication acceptées le ${new Date().toISOString()}`),
   ].join('')

@@ -7,7 +7,7 @@
     "eyebrow": "Institut de recherche, de formation et d'innovation",
     "h1_before": "La recherche qui rapproche le Québec et l'Afrique francophone.",
     "lead": "Nous formons la prochaine génération de jeunes chercheurs du Québec et de l'Afrique francophone et rendons accessible une recherche innovante en intelligence artificielle et en génie logiciel.",
-    "cta_research": "Découvrir nos axes de recherches",
+    "cta_research": "Découvrir nos axes de recherche",
     "cta_training": "Explorer les formations"
   },
   "metrics": [
@@ -110,7 +110,7 @@
   "newsletter": {
     "eyebrow": "Infolettre",
     "h2": "Rejoignez la communauté GAMA",
-    "strip": "Un article de recherche décortiqué en vidéo, chaque semaine dans votre boîte courriel.",
+    "strip": "Chaque semaine dans votre boîte courriel, un article de recherche décortiqué en vidéo et des résumés d'articles scientifiques.",
     "perks_intro": "Recevez par courriel :",
     "perks": [
       "chaque semaine, le nouvel épisode WeekPaper",
