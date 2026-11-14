@@ -46,6 +46,30 @@ type Lang = 'fr' | 'en'
 
 const UNSUBSCRIBE_PLACEHOLDER = '{{{RESEND_UNSUBSCRIBE_URL}}}'
 
+// Every link and image in an email points to the environment that sent it.
+export const SITE_URLS = {
+  production: 'https://gamainstitute.ca',
+  // GitHub Pages build of `develop` (static only, but every page and image is there)
+  staging: 'https://gamainstitute.github.io/gama-website',
+} as const
+
+/**
+ * Site address for emails sent by a Function: SITE_URL if set, else the site that received
+ * the request (production, or a Cloudflare preview deploy). A local `npm run dev:cf` request
+ * (http://localhost) can't be opened from an inbox, so it falls back to staging.
+ */
+export function siteUrlFor(requestUrl: string, override?: string): string {
+  if (override) return override.replace(/\/$/, '')
+  const { protocol, hostname, origin } = new URL(requestUrl)
+  const local = protocol !== 'https:' || hostname === 'localhost' || hostname === '127.0.0.1'
+  return local ? SITE_URLS.staging : origin
+}
+
+/** One episode on the site: its card on the WeekPaper page (anchor handled by WeekPaperPage.tsx). */
+export function episodeUrl(siteUrl: string, f: Featured): string {
+  return `${siteUrl}/week-paper#ep-${episodeNumber(f)}`
+}
+
 // Same addresses as SOCIAL_LINKS in src/constants/index.ts (copied: this file can't import)
 const SOCIAL: [string, string][] = [
   ['YouTube', 'https://www.youtube.com/@gamainstitut'],
@@ -75,6 +99,7 @@ const STR = {
     watch: "Regarder l'épisode",
     present: ['Vous avez étudié un article récemment ?', 'Présentez-le sur WeekPaper : 20 à 30 minutes, en français, sur un des cinq axes de recherche de GAMA.', 'Soumettre une présentation'],
     by: 'Par',
+    readRs: 'Lire le Research Summary',
     why: "Vous recevez ce courriel parce que vous vous êtes abonné·e à l'infolettre sur gamainstitute.ca.",
     unsub: 'Se désabonner',
     unsubReply: 'Pour vous désabonner, répondez simplement à ce courriel.',
@@ -105,6 +130,7 @@ const STR = {
     watch: 'Watch the episode',
     present: ['Studied a paper recently?', "Present it on WeekPaper: 20 to 30 minutes, in French, on one of GAMA's five research areas.", 'Submit a presentation'],
     by: 'By',
+    readRs: 'Read the Research Summary',
     why: 'You are receiving this email because you subscribed to the newsletter on gamainstitute.ca.',
     unsub: 'Unsubscribe',
     unsubReply: 'To unsubscribe, simply reply to this email.',
@@ -191,8 +217,9 @@ export function recentSummary(c: Content, episodeIso: string): string | null {
 
 const p = (html: string, extra = '') =>
   `<p style="margin:0 0 16px;font-family:${FONT_BODY};font-size:16px;line-height:1.6;color:${C.soft};${extra}">${html}</p>`
-const h1 = (text: string) =>
-  `<h1 style="margin:0 0 14px;font-family:${FONT_DISPLAY};font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-0.3px;color:${C.ink};">${esc(text)}</h1>`
+const h1 = (text: string, href?: string) =>
+  `<h1 style="margin:0 0 14px;font-family:${FONT_DISPLAY};font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-0.3px;color:${C.ink};">${
+    href ? `<a href="${esc(href)}" style="color:${C.ink};text-decoration:none;">${esc(text)}</a>` : esc(text)}</h1>`
 const h2 = (text: string) =>
   `<h2 style="margin:0 0 12px;font-family:${FONT_DISPLAY};font-size:18px;line-height:1.3;font-weight:600;color:${C.ink};">${esc(text)}</h2>`
 const eyebrow = (text: string) =>
@@ -221,8 +248,9 @@ function summaryCard(item: SummaryItem, axes: Record<string, string>, lang: Lang
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;border:1px solid ${C.line};border-radius:6px;"><tr><td style="padding:16px 18px;">
 <span style="display:inline-block;font-family:Menlo,Consolas,monospace;font-size:12px;font-weight:700;background:${C.ink};color:#F8F8F6;padding:2px 8px;border-radius:3px;">${esc(item.no)}</span>&nbsp; ${tag(item.axis, axes[item.axis] ?? item.axis)}
 <p style="margin:10px 0 6px;font-family:${FONT_DISPLAY};font-size:16px;line-height:1.35;font-weight:600;"><a href="${esc(href)}" style="color:${C.ink};text-decoration:none;">${esc(item.title)}</a></p>
-<p style="margin:0;font-family:${FONT_BODY};font-size:14px;line-height:1.55;color:${C.soft};">${esc(item.description)}</p>
+<p style="margin:0;font-family:${FONT_BODY};font-size:14px;line-height:1.55;"><a href="${esc(href)}" style="color:${C.soft};text-decoration:none;">${esc(item.description)}</a></p>
 <p style="margin:8px 0 0;font-family:${FONT_BODY};font-size:13px;color:${C.muted};">${STR[lang].by} ${esc(item.author)} · ${esc(longDate(item.date_iso, lang))}</p>
+<p style="margin:12px 0 0;font-family:${FONT_BODY};font-size:14px;font-weight:600;"><a href="${esc(href)}" style="color:${C.teal};">${esc(STR[lang].readRs)}&nbsp;&rarr;</a></p>
 </td></tr></table>`
 }
 
@@ -297,13 +325,14 @@ export function renderWeekpaperAlert(c: Content, o: { siteUrl: string; thumbnail
   const half = (lang: Lang, second: boolean) => {
     const f = c[lang].weekpaper.featured, s = STR[lang]
     const rs = summaryId ? c[lang].research.items.find(it => it.id === summaryId) : undefined
+    const href = episodeUrl(o.siteUrl, f)
     return eyebrow(`WeekPaper · ${f.ep}`)
-      + h1(f.title)
+      + h1(f.title, href)
       + `<p style="margin:0 0 14px;">${tag(f.topic, f.tag)} <span style="font-family:${FONT_BODY};font-size:14px;color:${C.muted};">&nbsp;${minutes(f.duration)}</span></p>`
       // The English half doesn't repeat the thumbnail: same video, shorter email
-      + (second ? '' : thumbnail(f.video_url, o.thumbnailUrl, f.title, f.duration))
+      + (second ? '' : thumbnail(href, o.thumbnailUrl, f.title, f.duration))
       + p(esc(f.body))
-      + button(f.video_url, s.watch)
+      + button(href, s.watch)
       + (rs ? rule() + h2(s.alsoNew) + summaryCard(rs, c[lang].research.axes, lang, o.siteUrl) : rule())
       + presentBox(lang, o.siteUrl)
   }
@@ -317,7 +346,7 @@ export function renderWeekpaperAlert(c: Content, o: { siteUrl: string; thumbnail
 
   const textHalf = (lang: Lang) => {
     const f = c[lang].weekpaper.featured
-    return `WeekPaper · ${f.ep} · ${f.tag} · ${minutes(f.duration)}\n\n${f.title}\n\n${f.body}\n\n${STR[lang].watch}: ${f.video_url}`
+    return `WeekPaper · ${f.ep} · ${f.tag} · ${minutes(f.duration)}\n\n${f.title}\n\n${f.body}\n\n${STR[lang].watch}: ${episodeUrl(o.siteUrl, f)}`
   }
   const text = `${textHalf('fr')}\n\n----- English version -----\n\n${textHalf('en')}\n\n--\n${STR.fr.why}\n${STR.en.why}\n${
     o.unsubscribe === 'broadcast' ? `${STR.fr.unsub} / ${STR.en.unsub}: ${UNSUBSCRIBE_PLACEHOLDER}` : `${STR.fr.unsubReply}\n${STR.en.unsubReply}`}\nGama Institute`
@@ -331,6 +360,7 @@ export function renderWeekpaperAlert(c: Content, o: { siteUrl: string; thumbnail
 export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: string; unsubscribe: Unsubscribe; existing: boolean }): RenderedEmail {
   const half = (lang: Lang, second: boolean) => {
     const w = STR[lang].welcome, f = c[lang].weekpaper.featured, rs = c[lang].research.items[0]
+    const href = episodeUrl(o.siteUrl, f)
     return h1(o.existing ? w.h1Old : w.h1New)
       + p(w.hello)
       + p(esc(o.existing ? w.introOld : w.introNew))
@@ -339,8 +369,9 @@ export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: st
       + '<div style="height:8px;line-height:8px;font-size:0;">&nbsp;</div>' + rule()
       + h2(w.start)
       + eyebrow(`${w.latest} · ${f.ep}`)
-      + (second ? '' : thumbnail(f.video_url, o.thumbnailUrl, f.title, f.duration))
-      + `<p style="margin:0 0 18px;font-family:${FONT_DISPLAY};font-size:17px;line-height:1.35;font-weight:600;"><a href="${esc(f.video_url)}" style="color:${C.ink};text-decoration:none;">${esc(f.title)}</a></p>`
+      + (second ? '' : thumbnail(href, o.thumbnailUrl, f.title, f.duration))
+      + `<p style="margin:0 0 6px;font-family:${FONT_DISPLAY};font-size:17px;line-height:1.35;font-weight:600;"><a href="${esc(href)}" style="color:${C.ink};text-decoration:none;">${esc(f.title)}</a></p>`
+      + `<p style="margin:0 0 20px;font-family:${FONT_BODY};font-size:14px;font-weight:600;"><a href="${esc(href)}" style="color:${C.teal};">${esc(STR[lang].watch)} (${minutes(f.duration)})&nbsp;&rarr;</a></p>`
       + (rs ? summaryCard(rs, c[lang].research.axes, lang, o.siteUrl) : '')
       + button(`${o.siteUrl}/week-paper`, w.cta)
       + p(`${esc(w.sign[0])}<br>${esc(w.sign[1])}`, 'margin-bottom:26px;')

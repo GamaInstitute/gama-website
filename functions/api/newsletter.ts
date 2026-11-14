@@ -2,7 +2,7 @@ import { Resend } from 'resend'
 import type { PagesFunction } from '@cloudflare/workers-types'
 import { z } from 'zod'
 import { verifyTurnstile } from '../_lib/turnstile'
-import { renderWelcome, pickThumbnail, type Content } from '../_lib/newsletter'
+import { renderWelcome, pickThumbnail, siteUrlFor, type Content } from '../_lib/newsletter'
 import frWeekpaper from '../../src/i18n/locales/fr/weekpaper.json'
 import enWeekpaper from '../../src/i18n/locales/en/weekpaper.json'
 import frResearch  from '../../src/i18n/locales/fr/research.json'
@@ -18,6 +18,8 @@ interface Env {
   // Where replies go (the welcome email says "reply to unsubscribe"); falls back to EDITORIAL_EMAIL_TO
   NEWSLETTER_REPLY_TO?: string
   EDITORIAL_EMAIL_TO?: string
+  // Site the email's links and images point to; by default the one that received the request
+  // (see siteUrlFor in functions/_lib/newsletter.ts)
   SITE_URL?: string
 }
 
@@ -40,8 +42,7 @@ function json(data: unknown, status = 200) {
 
 // The welcome email is a single email, not a Broadcast, so it has no per-contact
 // unsubscribe link: it asks people to reply instead (unsubscribe: 'reply').
-async function sendWelcome(resend: Resend, env: Env, to: string) {
-  const siteUrl = (env.SITE_URL || 'https://gamainstitute.ca').replace(/\/$/, '')
+async function sendWelcome(resend: Resend, env: Env, to: string, siteUrl: string) {
   const thumbnailUrl = await pickThumbnail(content.fr.weekpaper.featured.video_url)
   const email = renderWelcome(content, { siteUrl, thumbnailUrl, unsubscribe: 'reply', existing: false })
   const replyTo = env.NEWSLETTER_REPLY_TO || env.EDITORIAL_EMAIL_TO
@@ -99,7 +100,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUnti
   }
 
   // After the response: a slow or failed welcome email never fails the signup
-  waitUntil(sendWelcome(resend, env, email))
+  waitUntil(sendWelcome(resend, env, email, siteUrlFor(request.url, env.SITE_URL)))
 
   return json({ ok: true })
 }

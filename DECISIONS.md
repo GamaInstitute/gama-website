@@ -212,5 +212,7 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 
 **Alternative considered:** a GitHub Actions cron every Thursday (decoupled from the deploy, but GitHub cron runs late and would fire even when no episode was published); a Cloudflare Worker cron (a second deployable just for this); pressing "Send" in the Resend dashboard each week (no code, but easy to forget and to get wrong). Per-language emails would need the language recorded at signup, which existing subscribers don't have.
 
+**Links (2026-11-13):** every link and image in these emails points to the site, never straight to YouTube: an episode is `/week-paper#ep-N` (its card in the paginated grid, outlined), a summary `/research-summaries/<id>`. Links follow the environment that sends the email (`siteUrlFor`, `--env`); subscribers only ever get production links. The site has no page per episode; the anchor keeps old emails pointing at the right episode after it stops being featured.
+
 **Revisit when:** the signup form records each subscriber's language (then send one language per contact), or more than one email a week goes out (then a digest or a schedule may beat per-episode Broadcasts).
 

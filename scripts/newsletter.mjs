@@ -8,9 +8,11 @@
 //   --test=<email>         send one copy to that address now (subject prefixed [TEST]), no Broadcast
 //   --force                alert: send even if the featured episode is more than 3 days old
 //   --skip-if-unconfigured exit quietly when the Resend secrets aren't set (used by the deploy job)
+//   --env=production|staging  site the links and images point to (default production); staging
+//                          only with --test or --dry-run, subscribers always get production links
 //
 // Env: RESEND_API_KEY, RESEND_AUDIENCE_ID, NEWSLETTER_FROM ("Gama Institute <infolettre@…>"),
-//      optional NEWSLETTER_REPLY_TO, SITE_URL (default https://gamainstitute.ca),
+//      optional NEWSLETTER_REPLY_TO, SITE_URL (overrides --env),
 //      SEND_AT (Resend schedule, default "in 1 hour" for alerts, "in 10 minutes" otherwise).
 //
 // Safe to re-run: each Broadcast is named after its content (weekpaper-ep-07,
@@ -19,7 +21,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resend } from 'resend'
-import { renderWeekpaperAlert, renderWelcome, pickThumbnail } from '../functions/_lib/newsletter.ts'
+import { renderWeekpaperAlert, renderWelcome, pickThumbnail, SITE_URLS } from '../functions/_lib/newsletter.ts'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const MAX_EPISODE_AGE_DAYS = 3
@@ -30,9 +32,17 @@ const flag = name => args.some(a => a === `--${name}`)
 const option = name => args.find(a => a.startsWith(`--${name}=`))?.split('=').slice(1).join('=')
 
 const env = process.env
-const SITE_URL = (env.SITE_URL || 'https://gamainstitute.ca').replace(/\/$/, '')
 const testTo = option('test')
 const dryRun = flag('dry-run')
+// Environment the email's links and images point to: production (default) or staging
+const siteEnv = option('env') || 'production'
+if (!(siteEnv in SITE_URLS)) fail(`--env must be one of: ${Object.keys(SITE_URLS).join(', ')}`)
+const SITE_URL = (env.SITE_URL || SITE_URLS[siteEnv]).replace(/\/$/, '')
+// Subscribers only ever get production links: staging is for test emails and dry runs
+if (SITE_URL !== SITE_URLS.production && !testTo && !dryRun) {
+  fail(`A send to subscribers must use production links (got ${SITE_URL}). Use --test=<email> or --dry-run to try another environment.`)
+}
+console.log(`• Links and images: ${SITE_URL}`)
 
 function fail(msg) { console.error(`✗ ${msg}`); process.exit(1) }
 function readJson(rel) { return JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8')) }
@@ -60,6 +70,23 @@ if (command === 'alert') {
   email = renderWelcome(content, { siteUrl: SITE_URL, thumbnailUrl, unsubscribe, existing: true })
 }
 console.log(`• ${email.name}: "${email.subject}"`)
+
+// The images are loaded from the live site and YouTube when the email is opened. Check they
+// exist before sending: e.g. public/email/logo.png only exists once the release that added
+// it is deployed. A real send refuses; a test or dry run only warns.
+const images = [`${SITE_URL}/email/logo.png`, thumbnailUrl]
+const missingImages = []
+for (const url of images) {
+  try {
+    const res = await fetch(url, { method: 'HEAD' })
+    if (!res.ok || !(res.headers.get('content-type') ?? '').startsWith('image/')) missingImages.push(`${url} (${res.status})`)
+  } catch (e) { missingImages.push(`${url} (${e.message})`) }
+}
+if (missingImages.length) {
+  const msg = `Image(s) not reachable, they would show as broken in the email:\n  ${missingImages.join('\n  ')}`
+  if (dryRun || testTo) console.warn(`! ${msg}`)
+  else fail(`${msg}\nDeploy the site first (or set SITE_URL), then send again.`)
+}
 
 if (dryRun) {
   const out = path.join(ROOT, 'newsletter-out')

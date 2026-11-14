@@ -23,6 +23,13 @@ on:
           - test
           - send
         default: test
+      site:
+        description: Links and images point to (staging only for test mode; subscribers always get production)
+        type: choice
+        options:
+          - production
+          - staging
+        default: production
       test_to:
         description: Address for test mode
         type: string
@@ -54,7 +61,7 @@ jobs:
       - name: Send
         run: |
           set -euo pipefail
-          ARGS=("$EMAIL")
+          ARGS=("$EMAIL" "--env=$SITE")
           if [ "$MODE" = "test" ]; then
             if [ -z "$TEST_TO" ]; then echo "Test mode needs an address in 'test_to'." >&2; exit 1; fi
             ARGS+=("--test=$TEST_TO")
@@ -65,6 +72,7 @@ jobs:
         env:
           EMAIL: ${{ inputs.email }}
           MODE: ${{ inputs.mode }}
+          SITE: ${{ inputs.site }}
           TEST_TO: ${{ inputs.test_to }}
           FORCE: ${{ inputs.force }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

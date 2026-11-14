@@ -26,6 +26,8 @@
     "h2": "Browse the series",
     "play_label": "Play",
     "empty": "No episodes in this category yet.",
+    "archive_label": "From the archive",
+    "archive_back": "See recent episodes",
     "pagination_label": "Episode pages",
     "prev": "« Newer episodes",
     "next": "Older episodes »",

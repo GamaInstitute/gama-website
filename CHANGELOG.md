@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Added
 
+- Each WeekPaper episode has its own address on the site (for example `/week-paper#ep-7`): it opens the page of the episode list that contains it and highlights it. Newsletter emails link there, so every link in an email leads to the exact episode or Research Summary on the site
 - Research Summary and WeekPaper submission forms: a required "AI-use disclosure" field, as the Publication Guidelines (section 6.4) require, with a one-click "I didn't use any AI tool" option. The editorial team sees it directly in the submission email
 - More ways to subscribe to the newsletter, so visitors no longer have to scroll to the bottom of the home page: a "S'abonner à l'infolettre" button in the home page hero, a one-line sign-up under the home page video, a "Recevez les prochains résumés" box at the end of each Research Summary, and the footer's "Newsletter" link on every page now opens the sign-up window
 - Newsletter emails. Every week, subscribers get the new WeekPaper episode by email (French and English in one email) about an hour after it goes live on the site. New subscribers get a welcome email right after signing up, and people who subscribed before the newsletter existed get a one-time email explaining what they'll receive. Every newsletter has an unsubscribe link
@@ -20,6 +21,7 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ### Changed
 
+- WeekPaper page: only the 10 most recent episodes are listed, and only topics with a listed episode get a filter. Older episodes stay reachable from their links (in past newsletters, for example) and open in an "Épisode des archives" box
 - WeekPaper page: the episode list shows two rows at a time, with page buttons below, so the page stays short as the series grows
 - Publication Guidelines: contributors now write the AI-use disclosure in the submission form instead of attaching it, and "Take this opportunity seriously" is shorter, no longer repeating "Why contribute"
 - The newsletter sign-up now says what subscribers actually receive (the new WeekPaper episode every week, new Research Summaries, workshops and calls for contributions) instead of a monthly newsletter. The Privacy Policy now says Resend sends the newsletter and that its emails load the episode thumbnail from YouTube
