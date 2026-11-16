@@ -28,6 +28,10 @@ See [docs/adr/](docs/adr/) for decisions that are expensive to reverse and would
 
 **Gotcha:** the `RESEND_API_KEY` used for `/api/contact` may be scoped to **Sending access only** (Resend lets you restrict a key's permissions at creation). That key will 401 with `restricted_api_key` on `resend.contacts.create` even though `resend.emails.send` works fine with it. The newsletter endpoint needs a key with **Full access** (or at minimum, Contacts write permission) — check this in the Resend dashboard under API Keys before assuming a "not working" report is a code bug.
 
+**Verified (2026-11-12):** contacts created this way, with no `segments`, do land in the account's existing audience: recent site signups are listed in it. Newsletter sends (Resend Broadcasts) can target that audience as-is; don't add a `segments` parameter to fix a problem that doesn't exist.
+
+**Signing up twice (2026-11-13):** the endpoint looks the address up first (`contacts.get`). Already subscribed: nothing happens and no second welcome email. Had unsubscribed: the form is a new explicit request, so `contacts.update({ unsubscribed: false })` and a welcome email. The visitor gets the same `{ ok: true }` in every case, so the form never reveals whether an address is on the list.
+
 **Revisit when:** Subscribers need to be organized into segments for targeted sends (e.g. WeekPaper-only vs. general newsletter) — at that point, create the relevant segment(s) in the Resend dashboard and pass `segments: [{ id }]` in the `contacts.create` call.
 
 ---
@@ -133,3 +137,82 @@ When a supplied photo doesn't meet spec (e.g. a tall full-body portrait instead 
 **Why:** Category/pillar icons on Home, About and WeekPaper used to be `<img>` URLs pointing at `api.iconify.design/mdi:<name>.svg?color=...`. In October 2026 Iconify stopped serving that URL form (404, only `mdi/<name>.svg` still works), and every icon on the site went blank at once with no deploy on our side. The icons are now downloaded once with the brand color baked in (`public/icons/<name>-<hex>.svg`) and served same-origin, so a third-party API change can't break them, and `api.iconify.design` was dropped from the CSP `img-src`.
 
 **Alternative considered:** Switching to the `mdi/<name>.svg` URL form. A one-line fix, but it keeps a runtime dependency on a free API that has already changed under us once. Bundling an icon library (e.g. `@mdi/js`) was also possible, but the icon is chosen per item in i18n JSON, so a plain path fits the existing content model with no code change.
+
+## D-15. Research Summary and WeekPaper submissions are emailed as Resend attachments, not stored
+
+**Why:** The submission form on `/research-summaries` collects a Word/PDF summary and an optional photo. Every submission is reviewed by a person before anything is published, so the file only has to reach the team's inbox. `POST /api/research-summary` reuses the contact form's Turnstile + Resend setup and attaches the files to an email to `CONTACT_EMAIL_TO`. That adds no new binding, bucket, secret or retention policy. _Update 2026-11-12:_ WeekPaper and Research Summary submissions now go to the editorial inbox, `EDITORIAL_EMAIL_TO` (editoriale@gamainstitute.ca), falling back to `CONTACT_EMAIL_TO` when unset so no submission is lost before the variable is configured. Limits (10MB summary, 5MB photo) live in `src/types/researchSummary.ts`, are checked on both client and server, and stay well under Resend's 40MB per-email cap.
+
+**Alternative considered:** Uploading to an R2 bucket and emailing a link. That's more robust for large files and keeps attachments out of mailboxes, but it needs a bucket binding, access control on the stored files and a cleanup policy, all for a low-volume, human-reviewed flow.
+
+**Revisit when:** submissions regularly hit the size limits, volume grows enough that inbox triage becomes the bottleneck, or published summaries need to be served from the site itself (at that point the files need a real home anyway).
+
+**Note (2026-10-31):** the WeekPaper presentation form (`POST /api/weekpaper-submission`) follows the same pattern. Its video is collected as a share link (Drive, Dropbox…), not an upload, since talk-length videos are far over any email limit. Only the slides (≤15MB) and photo (≤5MB) are attached.
+
+## D-16. The `legal` i18n namespace is registered lazily by the legal page chunk
+
+**Why:** `src/i18n/index.ts` imports every namespace eagerly, so its JSON ships in the main bundle on every page (see the gotcha in docs/pages/README.md). The Privacy Policy and Terms are several KB of text per language and are only needed on `/privacy` and `/terms`. `LegalDocument.tsx` calls `i18n.addResourceBundle(lang, 'legal', …)` when its module loads, so the text lands only in the lazily loaded legal chunk while still living in `src/i18n/locales/{fr,en}/legal.json` like all other copy.
+
+**Alternative considered:** Registering it in `src/i18n/index.ts` like every other namespace. Simpler and consistent, but it adds the legal text to every page's initial download for no benefit.
+
+**Revisit when:** another large, single-page namespace appears. At that point, generalize this into a small per-page namespace loader rather than repeating the pattern.
+
+## D-17. Original content and published contributions are licensed CC BY 4.0
+
+**Why:** The Open Access Policy (`/open-access`, modelled on the [Montreal AI Ethics Institute's](https://montrealethics.ai/our-open-access-policy/)) puts the site's original content, Research Summaries, WeekPaper episodes and the downloadable guides and templates under Creative Commons Attribution 4.0. The Institute's goal is reach, including translations, and CC BY allows any reuse with credit without anyone having to ask. Contributors keep their copyright and agree to CC BY publication through the submission consent box and the Terms' Contributions section, so every published item can carry the same licence. Brand elements, photos of people, partner logos, third-party figures, the summarized papers and course materials are excluded.
+
+**Alternative considered:** CC BY-NC 4.0 (or the previous "personal, educational, non-commercial" wording in the Terms). It keeps control over commercial reuse, but makes translations and reuse by companies, publishers and some open platforms ambiguous, and NC is not considered an open licence under most open access definitions.
+
+**Revisit when:** a contributor or partner needs different terms for a specific item (mark it "unless otherwise noted" on that item), or before anything is published under CC BY if the Institute wants to restrict commercial use. A CC licence cannot be withdrawn for copies already made, so a switch only applies to content published afterwards.
+
+## D-18. Downloadable Word guides and templates are served from Google Drive, not `public/downloads/`
+
+**Why:** The team maintains these documents in a shared Google Drive folder and edits them there. Linking each file's direct-download URL (`drive.google.com/uc?export=download&id=…`, collected in `DOWNLOADS` in `src/constants/index.ts`) means a new version uploaded to the same Drive file ("Manage versions") is live immediately, with no commit or deploy, and the site never ships a stale copy. Before the switch, 5 of the 6 self-hosted copies had already drifted from the Drive versions.
+
+**Alternative considered:** Keeping the files in `public/downloads/`. Same-origin, no dependency on Drive sharing settings, and versioned in git, but every document edit needs a developer and a deploy.
+
+**Revisit when:** a file's sharing is changed and the link breaks (visitors land on a Google sign-in page), Drive starts interposing a warning page (it does for files over ~100MB), or the team stops using Drive. The `.pptx` slide template is not in the Drive folder yet and is still self-hosted.
+
+**Note (2026-11-02):** superseded. The guides are now web pages (D-19), and the Word research summary templates were dropped too: the writing guide page replaces them. Nothing is served from Drive any more; the only download left is the self-hosted `.pptx` slide template.
+
+## D-19. The Publication Guidelines are Markdown files rendered by a small in-house renderer
+
+**Why:** The contributor guides (research summary, WeekPaper, finding papers) were Word downloads; they are now a single page, "GAMA Institute Publication Guidelines" (`/publication-guidelines`), on the model of freeCodeCamp's publication style guide: about 3,000 words per language with tables, code blocks, screenshots and checklists. Locale JSON, the convention for all other copy, is impractical for that: every paragraph becomes an escaped string and tables become nested arrays. The text instead lives in `src/content/publication-guidelines/{fr,en}.md`, imported with `?raw`, and is rendered by `src/components/guides/Markdown.tsx` (about 150 lines). It supports only the syntax the guides use, adds no dependency, resolves internal links to router `Link`s and `download:<key>` to `DOWNLOADS`, and adds the deploy base path to images.
+
+**Alternative considered:** `react-markdown` + `remark-gfm` (or `marked`). Full CommonMark/GFM support, but tens of KB more in the guide chunk, plus extra wiring for router links and base paths. Also considered: keeping the guidelines as JSON blocks like the legal pages (D-16), which works for prose sections but not for tables, code and figures.
+
+**Revisit when:** the guides need syntax the renderer doesn't handle (nested lists, footnotes), or the site gets more long-form content (blog). At that point a Markdown library or a content collection is worth its weight. (2026-11-03: the Research Summary pages now use the same renderer, see D-20.)
+
+## D-20. Each published Research Summary is a page on the site, its text in Markdown, its listing data in locale JSON
+
+**Why:** Validated summaries are read on the site itself (`/research-summaries/:id`), like articles on freeCodeCamp, rather than linked elsewhere. The listing data (title, author, axis, date, original publication) stays in `items[]` of `research.json`, which the list page already reads and which needs a translated title; the text, several hundred words with headings and tables, is Markdown in `src/content/research-summaries/<id>/en.md`, rendered by the D-19 renderer. Summaries are written in English (Publication Guidelines), so `fr.md` is optional and the French site falls back to the English text with a note. Pages are prerendered via vite-react-ssg's `getStaticPaths`, with ids read from `research.json`.
+
+**Alternative considered:** one Markdown file per summary with all metadata in front matter, the list built from the files. One place per summary, but the list page would then have to load every text (or a build step would have to extract the front matter), and the French title would need its own field anyway.
+
+**Revisit when:** there are more than a few dozen summaries. The texts are imported eagerly into the summary page's chunk, so it grows with each one; switch to a non-eager `import.meta.glob` loaded in the route's `lazy`, or to a content collection.
+
+## D-21. Each research topic has one fixed colour, set in code, not per item in content
+
+**Why:** Topic tags (WeekPaper episodes, Research Summaries, Training courses) used to take a `tagVariant` chosen per item in the JSON, from only three colours for five topics. Unrelated topics shared a colour (AI and Cloud were both teal), and the same topic looked different from one page to the next. Now `TopicTag` maps each topic key to one of the five brand gradient stops (`TOPIC_COLORS`): AI copper, software engineering amber, cloud sage, responsible AI mid teal, cybersecurity teal. Content only gives the topic. Text shades are darker (light theme) or lighter (dark theme) variants of each colour, checked for at least 4.5:1 contrast.
+
+**Alternative considered:** one neutral style for every topic tag, relying on the text alone. Calmer, but visitors lose the at-a-glance cue, and the brand palette has exactly five colours for the five topics.
+
+**Revisit when:** a sixth topic is added; the palette then needs a sixth colour that stays distinct from the others in both themes.
+
+## D-22. Browser-only state (saved language, theme, today's date) is applied after hydration, not during the first render
+
+**Why:** Pages are prerendered once at build time, in French, light theme, with that day's date. React requires the first browser render to match that HTML. Reading `localStorage` or `prefers-color-scheme` in the first render (the theme toggle did) or computing "3 days ago" from today's date made it differ, so React threw away the prerendered page on every load and re-rendered it from scratch, swallowing clicks made meanwhile. Reading the saved language through i18next's language detector didn't work either: the fixed `lng: 'fr'` needed for the prerender made the detector skip the lookup and overwrite the saved choice with `fr`. Now the first render always uses the build-time values; `useHydrated()` and the effects in `useTheme` and `RootLayout` switch to the visitor's values right after hydration. The anti-FOUC script (D-4) still applies the theme's colours before paint.
+
+**Alternative considered:** prerender each page twice (`/en/...`) and pick the language by URL. No flash of French for English visitors and better SEO for English, but it doubles the pages and changes every URL; out of scope for a bug fix.
+
+**Revisit when:** English visitors notice the brief French flash on load, or English SEO matters: then move to per-language URLs.
+
+## D-23. Newsletter emails are Resend Broadcasts sent from the production deploy workflow, bilingual, 1 hour after the episode goes live
+
+**Why:** A WeekPaper episode is published every Thursday by deploying a new `featured` episode to `main`, so the alert hangs off that deploy: the `weekpaper-alert` job in `deploy-production.yml` runs after a successful deploy (links in the email then work) and schedules a Resend Broadcast to the newsletter audience. Broadcasts handle the per-contact unsubscribe link and the unsubscribed list, which a loop of single emails wouldn't. Safeguards: the Broadcast is named after the episode (`weekpaper-ep-07`) and never created twice, so unrelated deploys send nothing; an episode more than 3 days old is ignored, so a release that still features last week's episode doesn't email it; and it is scheduled 1 hour ahead (`SEND_AT`), leaving the team time to cancel it in the Resend dashboard. Subscribers' language isn't recorded, so every email is bilingual, French first, English below (the English half skips the thumbnail). The markup lives in `functions/_lib/newsletter.ts`, built from the locale JSON so nothing is written twice; the signup Function uses the same file for the welcome email, and `scripts/newsletter.mjs` runs it directly with Node's TypeScript support, which is why that file has no imports. The welcome email is a single email, not a Broadcast, so it has no per-contact unsubscribe link and asks people to reply instead. The same audience that site signups already land in is used as-is (D-3).
+
+**Alternative considered:** a GitHub Actions cron every Thursday (decoupled from the deploy, but GitHub cron runs late and would fire even when no episode was published); a Cloudflare Worker cron (a second deployable just for this); pressing "Send" in the Resend dashboard each week (no code, but easy to forget and to get wrong). Per-language emails would need the language recorded at signup, which existing subscribers don't have.
+
+**Links (2026-11-13):** every link and image in these emails points to the site, never straight to YouTube: an episode is `/week-paper#ep-N` (its card in the paginated grid, outlined), a summary `/research-summaries/<id>`. Links follow the environment that sends the email (`siteUrlFor`, `--env`); subscribers only ever get production links. The site has no page per episode; the anchor keeps old emails pointing at the right episode after it stops being featured.
+
+**Revisit when:** the signup form records each subscriber's language (then send one language per contact), or more than one email a week goes out (then a digest or a schedule may beat per-episode Broadcasts).
+

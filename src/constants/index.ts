@@ -1,3 +1,5 @@
+import type { Topic } from '@/types/topic'
+
 export const ANIM = {
   REVEAL_DURATION: 0.7,
   REVEAL_EASE: [0.22, 1, 0.36, 1] as const,
@@ -17,6 +19,17 @@ export const GRAD_STOPS = [
   { offset: 1,   hex: '#165C71' },
 ] as const
 
+// One colour per research topic, taken from the brand gradient, so a topic looks the same
+// on every page (WeekPaper, Research Summaries, Training). TopicTag holds the text shades.
+export type { Topic }
+export const TOPIC_COLORS: Record<Topic, string> = {
+  ai:    '#B56418',
+  se:    '#D8942A',
+  cloud: '#8EA57A',
+  rai:   '#2A8C8A',
+  sec:   '#165C71',
+}
+
 export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/company/gamainstitute',
   facebook: 'https://www.facebook.com/profile.php?id=61592239571013',
@@ -27,6 +40,20 @@ export const SOCIAL_LINKS = {
 export const CONTACT_EMAIL = {
   general: 'contact@gamainstitute.ca',
 } as const
+
+// Files offered for download. Only the PowerPoint slide template: the contributor
+// guidelines are a web page (src/content/publication-guidelines/), not documents.
+/** A site path from content files (e.g. "/team/x.webp") under the deploy base, which is
+ *  not "/" on GitHub Pages. External URLs pass through unchanged. */
+export function publicUrl(path: string) {
+  return path.startsWith('/') ? import.meta.env.BASE_URL + path.slice(1) : path
+}
+
+export const DOWNLOADS = {
+  slide_template: `${import.meta.env.BASE_URL}downloads/GAMA_Institute_Slide_Template.pptx?v=2026-11-06b`,
+} as const
+
+export type DownloadKey = keyof typeof DOWNLOADS
 
 export const LS_KEYS = {
   theme: 'gama-theme',

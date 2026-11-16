@@ -13,7 +13,7 @@ _Last verified: 2026-09-09_
 |---|---|---|---|---|
 | 1 | Hero | — | inline JSX + `NetworkArt` | `hero.eyebrow/h1_before/lead/cta_research` |
 | 2 | Metrics bar | — | raw `motion.div` + `revealContainer`/`revealItem` | `metrics[]` |
-| 3 | Vision video | `#vision` | `SectionWrapper alt` + `VideoPlayer` | `vision.*` |
+| 3 | Vision video + subscribe strip | `#vision` | `SectionWrapper alt` + `VideoPlayer` + `NewsletterForm tone="light"` | `vision.*`, `newsletter.strip` |
 | 4 | News & events | `#news` | `SectionWrapper` + inline cards | `news.items[]` |
 | 5 | Research | `#research` | `SectionWrapper` + inline rows | `research.areas[]` |
 | 6 | Newsletter | `#contact` | `SectionWrapper spacing="tight"` + `NewsletterPerks` + `NewsletterForm` | `newsletter.eyebrow/h2` (perks come from the same file, see below) |
@@ -22,7 +22,7 @@ Three more sections exist as **fully-written, commented-out JSX** in the file, e
 
 ### 1. Hero
 
-Plain `<section>` (not `SectionWrapper` — Home's hero has bespoke sizing, unlike the shared `PageHero` used by every other page). Two-column grid: left column is `Eyebrow` + `<h1>` + lead paragraph + one CTA button (`Button as="a" href="#research"`, anchors down to the Research section); right column is `<NetworkArt />` with no props. A second hero CTA (for Training) is commented out at the spot marked `{/* TODO: restore training CTA once the page ships */}` — restore it once [training.md](training.md)'s page ships.
+Plain `<section>` (not `SectionWrapper` — Home's hero has bespoke sizing, unlike the shared `PageHero` used by every other page). Two-column grid: left column is `Eyebrow` + `<h1>` + lead paragraph + two buttons: the main CTA (`Button as="a" href="#research"`, anchors down to the Research section) and a filled `variant="teal"` one with a mail icon (`MailIcon`), "S'abonner à l'infolettre" (filled so it isn't skipped; the teal and the icon keep it distinct from the copper main CTA) (`common.json → newsletter.cta`), which opens the site-wide subscribe window (`useOpenNewsletter()`, see [README.md](README.md#newsletter)); right column is `<NetworkArt />` with no props. A second hero CTA (for Training) is commented out at the spot marked `{/* TODO: restore training CTA once the page ships */}` — restore it once [training.md](training.md)'s page ships.
 
 ### 2. Metrics bar
 
@@ -42,6 +42,8 @@ Sits directly under the hero, inside the same `wrap` container but its own `moti
 ```
 
 `url` is a full YouTube link (any of the forms `VideoPlayer` recognizes — see [README.md](README.md#video)). Note `placeholder` is pulled from the **`common`** namespace, not `home` — that string is shared across every `VideoPlayer` instance on the site.
+
+Under the video, a **subscribe strip**: one line of text (`newsletter.strip` in `home.json`) beside `<NewsletterForm tone="light" />`, so visitors can subscribe about three screens down instead of only in the last section. The full Newsletter section (6) stays at the bottom as a last chance.
 
 ### 4. News & events
 
@@ -85,4 +87,4 @@ Three sections exist as complete, working JSX in `HomePage.tsx`, just wrapped in
 
 **Add a research area row:** add `{ no, title, desc }` to `research.areas[]` in both locale files. Remember every row currently links to the YouTube channel (see above) unless you also change the hardcoded `href` in `HomePage.tsx` to something per-row.
 
-**Edit the newsletter perks list:** edit `newsletter.perks_intro` / `newsletter.perks` in `home.json` (both languages) — this simultaneously updates the WeekPaper newsletter modal, since it renders the same `NewsletterPerks` component reading the same keys.
+**Edit the newsletter perks list** (keep it true to what the emails actually deliver: the Thursday WeekPaper alert, new Research Summaries, occasional workshops and calls, see [D-23](../../DECISIONS.md)): edit `newsletter.perks_intro` / `newsletter.perks` in `home.json` (both languages) — this simultaneously updates the WeekPaper newsletter modal, since it renders the same `NewsletterPerks` component reading the same keys.

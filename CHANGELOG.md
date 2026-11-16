@@ -6,6 +6,50 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Each WeekPaper episode has its own address on the site (for example `/week-paper#ep-7`): it opens the page of the episode list that contains it and highlights it. Newsletter emails link there, so every link in an email leads to the exact episode or Research Summary on the site
+- Research Summary and WeekPaper submission forms: a required "AI-use disclosure" field, as the Publication Guidelines (section 6.4) require, with a one-click "I didn't use any AI tool" option. The editorial team sees it directly in the submission email
+- More ways to subscribe to the newsletter, so visitors no longer have to scroll to the bottom of the home page: a "S'abonner à l'infolettre" button in the home page hero, a one-line sign-up under the home page video, a "Recevez les prochains résumés" box at the end of each Research Summary, and the footer's "Newsletter" link on every page now opens the sign-up window
+- Newsletter emails. Every week, subscribers get the new WeekPaper episode by email (French and English in one email) about an hour after it goes live on the site. New subscribers get a welcome email right after signing up, and people who subscribed before the newsletter existed get a one-time email explaining what they'll receive. Every newsletter has an unsubscribe link
+- Team page: a "Technical staff" section introducing Jordy Nouala (Operations Coordinator), Armand Meppa (Web Lead) and Christian Ngatchou (Editorial Lead)
+- WeekPaper page: new "Present a paper on WeekPaper" section with the presentation format, the 6-part GAMA structure and downloadable guides and slide template, plus a form to submit a presentation (video link, slides, photo, YouTube title and description, YouTube-only or YouTube + LinkedIn). Submissions are emailed to the team for review
+- Privacy Policy (`/privacy`) and Terms of Use (`/terms`) pages, in French and English, linked from the footer
+- Open Access Policy (`/open-access`), in French and English, linked from the footer: the site's original content, Research Summaries, WeekPaper episodes and downloadable guides and templates are published under Creative Commons Attribution 4.0 (CC BY 4.0), with how to credit them, an attribution example and what the licence does not cover. The Terms of Use and both submission forms' consent boxes now state that accepted contributions are published under CC BY 4.0
+- Research Summaries page (`/research-summaries`): community-written summaries of scientific papers, with search, topic filters and downloadable FR/EN writing templates. Students and early-career researchers can submit their own summary (Word or PDF, optional photo) through a form; submissions are emailed to the team for review. Listed in the main navigation and footer. Each published summary is read on its own page on the site (`/research-summaries/<id>`); the first one covers the move from AI coding assistants to AI teammates (the SE 3.0 vision of AI-native software engineering and AIDev, a study of 456,000 pull requests opened by AI coding agents on GitHub, in one summary with figures)
+- Research Summaries are now numbered (RS. 1, RS. 2…), like WeekPaper episodes: the number shows as a badge before the topic and date in the list and on each summary's page
+
+### Changed
+
+- WeekPaper page: only the 10 most recent episodes are listed, and only topics with a listed episode get a filter. Older episodes stay reachable from their links (in past newsletters, for example) and open in an "Épisode des archives" box
+- WeekPaper page: the episode list shows two rows at a time, with page buttons below, so the page stays short as the series grows
+- Publication Guidelines: contributors now write the AI-use disclosure in the submission form instead of attaching it, and "Take this opportunity seriously" is shorter, no longer repeating "Why contribute"
+- The newsletter sign-up now says what subscribers actually receive (the new WeekPaper episode every week, new Research Summaries, workshops and calls for contributions) instead of a monthly newsletter. The Privacy Policy now says Resend sends the newsletter and that its emails load the episode thumbnail from YouTube
+- WeekPaper presentation and Research Summary proposals are now sent to the editorial team's inbox, editoriale@gamainstitute.ca, instead of contact@gamainstitute.ca. The Privacy Policy names both inboxes
+- Topic tags now have one colour per research topic, the same on every page: AI, software engineering, cloud computing, responsible AI and cybersecurity are no longer shown in shared or mismatched colours, and the tags are easier to read in dark mode
+- The contributor guides are now a single page, "GAMA Institute Publication Guidelines" (`/publication-guidelines`), in French and English, instead of Word downloads: how to write a Research Summary, how to present on WeekPaper, how GAMA reviews and publishes contributions, and how to find a paper (ACM and arXiv, with screenshots and query examples for each research axis). The Research Summaries and WeekPaper pages link to their section. The only download left is the PowerPoint slide template for WeekPaper
+- Publication Guidelines updated to version 1.1 (November 2026): research-based tutorials accepted as Research Summaries, a mandatory table of contents, renamed research axes (AI4SE, SE4AI, Cloud Computing and MLOps, Cybersecurity, Responsible and Trustworthy AI), a requirement that every paper summarized or presented be published in an international peer-reviewed journal or conference (with a peer-review check for arXiv papers and advice on using AI to find papers from leading venues), and a policy on the responsible use of generative AI with its review process and consequences. Research Summary pages now show a table of contents, and, as on the Montreal AI Ethics Institute's summaries, the contributor's photo, bio and LinkedIn, and the original paper's title, authors and venue (or each paper's, when a summary covers several)
+- The Publication Guidelines page is easier to navigate: requirements, tips and examples now have distinct styles, the side table of contents highlights the section being read, a "Sommaire" button on phones leads back to the contents, and the final checklist is a plain list
+- WeekPaper: contributions must now relate to one of the Institute's five research axes (AI and machine learning, software engineering, cloud computing, cybersecurity, responsible AI), instead of "software engineering, AI or a related field"
+
+### Fixed
+
+- Signing up to the newsletter again after unsubscribing now subscribes you again; before, the sign-up said "thank you" but you stayed unsubscribed. Signing up with an address that is already subscribed no longer sends a second welcome email
+- The footer's "Newsletter" link led to the Contact page, which has no sign-up form
+- A newsletter sign-up that failed showed nothing; it now says so and asks to try again
+- In the dark newsletter card, the email address being typed was dark text on a dark background
+- Mistyped or outdated links (any address that doesn't exist on the site) no longer reload the page endlessly. They now show a "Page not found" page, in the site's layout, with links back to the home page and the contact page
+- The English version is remembered again: visitors who switch to English no longer get the French site back on every new page or reload
+- Pages no longer rebuild themselves right after loading, which sometimes swallowed a first click (for example on a WeekPaper topic filter) and briefly showed the wrong light/dark icon
+- On the staging site (GitHub Pages), those icons, the Team photos and the Research Summary photos and figures were broken images, because their paths ignored the site's sub-folder
+
+### Security
+
+- Every form now explains, at the point of collection, how the information is used and where it goes, with a link to the Privacy Policy. The Research Summary and WeekPaper submission forms require explicit consent (Terms, Privacy Policy and publication) before sending, and the server rejects submissions without it. The newsletter form states what subscribers will receive and that they can unsubscribe at any time
+- Embedded YouTube videos now use YouTube's privacy-enhanced mode (`youtube-nocookie.com`)
+
+## [1.0.0] - 2026-11-12
+
 ### Fixed
 
 - Category icons on the Home, About and WeekPaper pages (news cards, strategic pillars, playlists) were showing as broken images. They're now served from the site itself instead of an external icon service, so they can't break the same way again

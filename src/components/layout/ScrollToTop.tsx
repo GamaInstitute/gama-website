@@ -1,11 +1,10 @@
-import { useEffect, useLayoutEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useIsomorphicLayoutEffect } from '@/hooks/useHydrated'
 
 // useLayoutEffect on the client so the scroll reset lands before the browser
 // paints the new route (otherwise it can race the page-transition fade-in and
 // briefly flash the old scroll position) — plain useEffect on the server,
 // since useLayoutEffect is a no-op there and warns during SSG rendering.
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 export function ScrollToTop() {
   const { pathname, hash } = useLocation()

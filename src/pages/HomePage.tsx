@@ -11,8 +11,10 @@ import { Tag }            from '@/components/ui/Tag'
 import { VideoPlayer }    from '@/components/ui/VideoPlayer'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
 import { NewsletterPerks } from '@/components/ui/NewsletterPerks'
+import { useOpenNewsletter } from '@/components/newsletter/NewsletterProvider'
+import { MailIcon } from '@/components/ui/icons'
 import { Reveal, revealContainer, revealItem } from '@/components/ui/Reveal'
-import { SOCIAL_LINKS }   from '@/constants'
+import { SOCIAL_LINKS, publicUrl } from '@/constants'
 import type { TagVariant }  from '@/types/course'
 
 type Metric     = { value: string; label: string; caption: string; color: string }
@@ -40,6 +42,7 @@ function SectionHead({ children, className = '' }: { children: React.ReactNode; 
 export default function HomePage() {
   const { t } = useTranslation('home')
   const { t: tCommon } = useTranslation('common')
+  const openNewsletter = useOpenNewsletter()
 
   const metrics   = t('metrics', { returnObjects: true }) as Metric[]
   const newsItems = t('news.items', { returnObjects: true }) as NewsItem[]
@@ -72,6 +75,10 @@ export default function HomePage() {
               <div className="flex gap-[14px] flex-wrap mt-8">
                 <Button as="a" href="#research" variant="accent">
                   {t('hero.cta_research')} <span aria-hidden="true">→</span>
+                </Button>
+                {/* Filled so it isn't skipped; teal + mail icon keep it distinct from the main copper CTA */}
+                <Button as="button" variant="teal" onClick={openNewsletter}>
+                  <MailIcon /> {tCommon('newsletter.cta')}
                 </Button>
                 {/* TODO: restore training CTA once the page ships */}
               </div>
@@ -122,6 +129,13 @@ export default function HomePage() {
                 gradient
               />
             </Reveal>
+            {/* Subscribe strip: right after the video, where interest is highest */}
+            <Reveal className="mt-[clamp(28px,3vw,40px)] pt-[clamp(22px,2.5vw,32px)] border-t border-hairline grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-x-[clamp(20px,3vw,48px)] gap-y-3 items-start max-[860px]:grid-cols-1">
+              <p className="font-display font-semibold text-[clamp(1.15rem,1.8vw,1.4rem)] leading-[1.3] tracking-[-0.01em] text-ink m-0 mt-2 max-w-[30ch]">
+                {t('newsletter.strip')}
+              </p>
+              <NewsletterForm tone="light" />
+            </Reveal>
           </div>
         </SectionWrapper>
 
@@ -160,7 +174,7 @@ export default function HomePage() {
                     <div className="ph" style={{ position: 'absolute', inset: 0 }}>
                       {item.icon && (
                         <div className="w-16 h-16 rounded-full bg-white/92 grid place-items-center shadow-lg">
-                          <img src={item.icon} alt="" width={32} height={32} loading="lazy" />
+                          <img src={publicUrl(item.icon)} alt="" width={32} height={32} loading="lazy" />
                         </div>
                       )}
                     </div>

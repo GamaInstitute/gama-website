@@ -15,7 +15,7 @@
       {
         "name": "Dr. Patrick Loic Foalem",
         "role": "Founder and Principal Research Scientist",
-        "bio": "PhD candidate in software engineering at Polytechnique Montréal, specializing in machine learning systems engineering and AI software reliability.",
+        "bio": "PhD in software engineering from Polytechnique Montréal, specializing in machine learning systems engineering and AI software reliability.",
         "photo": "/team/patrick-foalem.jpg",
         "linkedin": "https://ca.linkedin.com/in/foalem"
       },
@@ -32,6 +32,15 @@
         "photo": "/team/dmytro-humeniuk.webp",
         "linkedin": "https://www.linkedin.com/in/dmytro-humeniuk-ai/"
       }
+    ]
+  },
+  "staff": {
+    "eyebrow": "Technical staff",
+    "h2": "The team behind the scenes",
+    "members": [
+      { "name": "Jordy Nouala",       "role": "Operations Coordinator",  "photo": "/team/jordy-nouala.webp", "linkedin": "https://www.linkedin.com/in/jordy-nouala-b33a4b14a/" },
+      { "name": "Armand Meppa",       "role": "Web Lead",                "photo": "/team/armand-meppa.webp", "linkedin": "https://www.linkedin.com/in/armand-meppa-482450216/" },
+      { "name": "Christian Ngatchou", "role": "Editorial Lead",          "photo": "/team/christian-ngatchou.webp", "linkedin": "https://www.linkedin.com/in/christian-ngatchou/" }
     ]
   },
   "researchers": {

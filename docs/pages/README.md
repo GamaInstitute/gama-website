@@ -10,8 +10,11 @@ Each page of the site has its own file here, written for someone who has never t
 | About | `/about` | [about.md](about.md) | Live |
 | Training | not routed | [training.md](training.md) | Built, held back — see doc |
 | WeekPaper | `/week-paper` | [weekpaper.md](weekpaper.md) | Live |
+| Research Summaries | `/research-summaries`, `/research-summaries/:id` | [research-summaries.md](research-summaries.md) | Live |
 | Team | `/team` | [team.md](team.md) | Live (some sections hidden — see doc) |
 | Contact | `/contact` | [contact.md](contact.md) | Live |
+| Publication Guidelines | `/publication-guidelines` | [publication-guidelines.md](publication-guidelines.md) | Live |
+| Privacy Policy / Terms of Use / Open Access Policy | `/privacy`, `/terms`, `/open-access` | [legal.md](legal.md) | Live, pending legal review |
 
 **If you only need to change text, a number, or an image URL** — not layout or behavior — go straight to [docs/guides/content-editing.md](../guides/content-editing.md) instead. It's the fast path for pure content edits. Come here when you need to understand *how* a section works, add a new kind of section, or wire up something that isn't pure copy.
 
@@ -19,7 +22,7 @@ Each page of the site has its own file here, written for someone who has never t
 
 ## How every page is put together
 
-All six pages share the same skeleton, defined once in [src/routes.tsx](../../src/routes.tsx):
+All pages share the same skeleton, defined once in [src/routes.tsx](../../src/routes.tsx):
 
 ```
 RootLayout (eager, not code-split)
@@ -69,11 +72,13 @@ The small logo mark shown in the Header and Footer. **This is currently just a s
 ### Buttons, tags, labels
 
 **`Button`** — [src/components/ui/Button.tsx](../../src/components/ui/Button.tsx)
-Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal React Router navigation (no full reload), `as="a"` + `href=` for external links, or the default `as="button"` for form/click actions. TypeScript enforces you can't mix `to`/`href` on the wrong variant. `variant`: `accent | ghost | ghost-dark | ink`. `size`: `md | sm`.
+Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal React Router navigation (no full reload), `as="a"` + `href=` for external links, or the default `as="button"` for form/click actions. TypeScript enforces you can't mix `to`/`href` on the wrong variant. `variant`: `accent | teal | ghost | ghost-dark | ink`. `teal` is the filled secondary button (brand teal, light teal with dark text in dark mode; colours are the `--btn-teal-*` tokens in `base.css`), for a second action that must not be overlooked, like the Home hero's subscribe button. `size`: `md | sm`.
+
+**`Pagination`** — [src/components/ui/Pagination.tsx](../../src/components/ui/Pagination.tsx) — « previous · 1 2 3 · next » buttons; renders nothing for a single page. Used by the Research Summaries list and WeekPaper's episode grid; the caller owns the page state and passes the three labels.
 
 **`Eyebrow`** — [src/components/ui/Eyebrow.tsx](../../src/components/ui/Eyebrow.tsx) — small uppercase label with a short rule before it (`noRule` to omit). Purely presentational.
 
-**`Tag`** — [src/components/ui/Tag.tsx](../../src/components/ui/Tag.tsx) — pill badge. `variant` is one of exactly three values: `default | copper | teal` — there is no mechanism to add a fourth without editing `Tag.tsx` itself, so when content-editing a `tagVariant` field in JSON, only reuse these three.
+**`Tag`** — [src/components/ui/Tag.tsx](../../src/components/ui/Tag.tsx) — pill badge. `variant` is one of exactly three values: `default | copper | teal` — there is no mechanism to add a fourth without editing `Tag.tsx` itself, so when content-editing a `tagVariant` field in JSON, only reuse these three. `Tag` is for non-topic labels (Home news and papers, episode numbers). **Research topics use `TopicTag`** (same file) with `topic` = `ai | se | cloud | rai | sec`: each topic always has the same colour from the brand gradient (`TOPIC_COLORS` in `src/constants/index.ts`, [D-21](../../DECISIONS.md)), on WeekPaper, Research Summaries and Training. Content never picks a topic colour; it only sets the topic. `topicTagCls(topic)` gives the same classes for a non-span element, like the clickable axis tag on the Research Summaries list.
 
 **`DarkCTA`** — [src/components/ui/DarkCTA.tsx](../../src/components/ui/DarkCTA.tsx) — the dark card used for bottom-of-page calls to action (`eyebrow`, `heading`, `body`, `children` — typically a `Button`). Self-wraps in `Reveal`, so don't wrap it again. Flips to a light bordered card in dark mode rather than staying dark-on-dark.
 
@@ -82,7 +87,7 @@ Polymorphic via a discriminated `as` prop: `as="link"` + `to=` for internal Reac
 ### Modal
 
 **`Modal`** — [src/components/ui/Modal.tsx](../../src/components/ui/Modal.tsx)
-Used by WeekPaper's newsletter dialog (see [weekpaper.md](weekpaper.md)); reusable for any future modal. Props: `isOpen`, `onClose`, `closeLabel` (required — drives the close button's `aria-label`), `title?`, `children`.
+Used by WeekPaper's newsletter dialog (see [weekpaper.md](weekpaper.md)) and the Research Summaries submission form; reusable for any future modal. Props: `isOpen`, `onClose`, `closeLabel` (required — drives the close button's `aria-label`), `title?`, `tone?` (`dark` default: compact 440px newsletter card; `light`: 640px surface card for longer forms), `children`. The panel scrolls internally when its content is taller than the viewport. Pass a stable `onClose` (e.g. `useCallback`): the focus-trap effect depends on it and re-runs, refocusing the dialog, whenever its identity changes.
 - **Portal + SSR safety:** renders via `createPortal(..., document.body)`, but only after a `mounted` state flips true in a `useEffect` — this avoids a server/client hydration mismatch under `vite-react-ssg`'s prerendering, since the portal target doesn't exist during SSR.
 - **Focus trap:** on open, remembers `document.activeElement`, focuses the dialog, and manually cycles Tab/Shift+Tab between the dialog's focusable descendants (queried live, not a fixed list) — closes on `Escape` and on backdrop click, and restores focus to whatever was focused before opening, when it closes.
 - **Reduced motion:** zeroes transition duration and disables the scale/slide transform when `prefers-reduced-motion` is set (`useReducedMotion()` from framer-motion).
@@ -96,13 +101,27 @@ YouTube-only embed with a click-to-play thumbnail. Props: `label` (required — 
 - `autoplay=true` skips the thumbnail entirely and renders the iframe immediately, muted + looped (`autoplay=1&mute=1&loop=1&playlist={videoId}`) — per the component's own doc comment, this mode is meant for temporary "coming soon" placeholder loops, not real published content, which should omit `autoplay` and use the normal click-to-play flow.
 - Always passes `modestbranding=1&rel=0` to reduce YouTube's own branding/related-video suggestions, and deliberately leaves YouTube's native controls visible on autoplay so the user retains a way to pause it (WCAG 2.2.2 — auto-playing content must be stoppable).
 
+### Forms and legal notices
+
+**`FileField`**: [src/components/forms/FileField.tsx](../../src/components/forms/FileField.tsx). Styled file picker used by both submission forms (label, chosen file name, hint, error). It doesn't validate anything itself; the form checks the file against the limits in `src/types/*`.
+
+**Required fields.** Pass `required` to `FormField`, `FileField` or `ConsentCheckbox` to show a `*` after the label and mark the input as required for screen readers. Forms use `noValidate`, so the attribute never blocks submission; Zod stays the source of truth, so keep the `required` props in line with the schema. The WeekPaper form shows a "* Required field" note under its intro (`weekpaper:submit.required_note`).
+
+**`LegalNotice`**: [src/components/forms/LegalNotice.tsx](../../src/components/forms/LegalNotice.tsx). Three exports:
+- `LegalText` renders an i18n string where `<privacy>…</privacy>`, `<terms>…</terms>` and `<openaccess>…</openaccess>` become links to `/privacy`, `/terms` and `/open-access`, opening in a new tab so a half-filled form isn't lost. Pass `linkClassName` on dark backgrounds.
+- `PrivacyNotice` is the collection notice (`common:forms.privacy_notice`). **Put it under every form that sends personal information.** Quebec's Law 25 requires telling people, at collection, why, through whom and where their data goes.
+- `ConsentCheckbox` is the required, unticked consent box used when someone grants publication rights (both submission forms). Pair it with `consentField()` from `src/types/researchSummary.ts`, so the server enforces it too.
+
 ### Newsletter
 
 **`NewsletterForm`** — [src/components/ui/NewsletterForm.tsx](../../src/components/ui/NewsletterForm.tsx)
-Self-contained form: email input + submit button, internal `idle | loading | success | error` state. On submit, solves an invisible Cloudflare Turnstile challenge via the `useTurnstileToken` hook, then `POST /api/newsletter` with `{ email, turnstileToken }`. On success, replaces itself with a thank-you message (`common.json → newsletter.success`). **Gotcha:** the `error` state has no visible message anywhere in the component — the form just silently stays on the idle layout; if you need the user to see *why* it failed, that UI doesn't exist yet.
+Self-contained form: email input + submit button, internal `idle | loading | success | error` state. On submit, solves an invisible Cloudflare Turnstile challenge via the `useTurnstileToken` hook, then `POST /api/newsletter` with `{ email, turnstileToken }`. On success, replaces itself with a thank-you message (`common.json → newsletter.success`); on failure it shows `newsletter.error` under the field. Always includes the privacy notice (`forms.newsletter_notice`). `tone="dark"` (default) for the dark newsletter card and the subscribe window, `tone="light"` on a page background (Home's strip under the vision video).
+
+**`NewsletterProvider` / `useOpenNewsletter()`** — [src/components/newsletter/NewsletterProvider.tsx](../../src/components/newsletter/NewsletterProvider.tsx)
+The site-wide subscribe window (`NewsletterModal`: `Modal` + `NewsletterPerks` + `NewsletterForm`, title `common.json → newsletter.modal_title`). Mounted once in `RootLayout` (`src/routes.tsx`); any component calls `const open = useOpenNewsletter()` and `onClick={open}`. Used by the Home hero button, the footer's "Newsletter" entry, WeekPaper's "Alerte courriel" button and the end of each Research Summary. The window is lazy-loaded on first open, so it adds nothing to the eager bundle (it pulls in framer-motion via `Modal`). **Add a new subscribe button with this hook, not another `Modal` + form.**
 
 **`NewsletterPerks`** — [src/components/ui/NewsletterPerks.tsx](../../src/components/ui/NewsletterPerks.tsx)
-Pure presentational checklist. Reads `newsletter.perks_intro` / `newsletter.perks` (string array) from the **`home`** namespace (`home.json`) regardless of which page renders it — both Home's own newsletter section and WeekPaper's newsletter `Modal` render this component, so editing the perks list in `home.json` updates it in both places at once. There's no separate WeekPaper-specific perks copy.
+Pure presentational checklist. Reads `newsletter.perks_intro` / `newsletter.perks` (string array) from the **`home`** namespace (`home.json`) regardless of which page renders it — both Home's own newsletter section and the site-wide subscribe window render this component, so editing the perks list in `home.json` updates it in both places at once. There's no separate WeekPaper-specific perks copy.
 
 **`useTurnstileToken`** — [src/hooks/useTurnstileToken.ts](../../src/hooks/useTurnstileToken.ts)
 Shared hook behind both `NewsletterForm` and `ContactForm`'s bot protection. Takes a `RefObject<HTMLDivElement>` (an empty `<div>` you render as the widget's mount point) and returns a function that, when called, renders an invisible ("interaction-only") Turnstile widget into that container, executes it, and resolves with the solved token — removing the widget again once solved. Requires `window.turnstile` to be loaded (the `<script src="https://challenges.cloudflare.com/turnstile/v0/api.js">` tag in `index.html`) and `VITE_TURNSTILE_SITE_KEY` set at build time. See [ARCHITECTURE.md](../../ARCHITECTURE.md) and [CLAUDE.md](../../CLAUDE.md) for the full env var picture, and `functions/_lib/turnstile.ts` for the server-side verification shared by both `functions/api/contact.ts` and `functions/api/newsletter.ts`.

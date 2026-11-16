@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "title": "Research Summaries | Gama Institute",
+    "description": "Research Summaries : la recherche expliquée par la prochaine génération de chercheurs."
+  },
+  "hero": {
+    "eyebrow": "Communauté · Research Summaries",
+    "h1": "La recherche expliquée par la prochaine génération de chercheurs",
+    "lead": "Les étudiants et jeunes chercheurs proposent un résumé accessible d'une publication scientifique qu'ils ont étudiée.",
+    "cta_submit": "Proposer un résumé",
+    "cta_read": "Lire les résumés",
+    "how_label": "Comment ça marche",
+    "steps": [
+      "Soumission",
+      "Révision GAMA",
+      "Publication"
+    ],
+    "note": "Il n'est pas nécessaire d'être Research Fellow pour contribuer."
+  },
+  "list": {
+    "h2": "Research Summaries",
+    "by": "Research Summary par",
+    "orig_by": "Publication originale de",
+    "orig_by_many": "Publications originales de",
+    "read_summary": "Lire le résumé de recherche",
+    "filter_axis": "Afficher les résumés de l'axe {{axis}}",
+    "empty": "Aucun résumé ne correspond à votre recherche pour l'instant.",
+    "pagination_label": "Pagination",
+    "prev": "« Page précédente",
+    "next": "Page suivante »"
+  },
+  "sidebar": {
+    "cta_h": "Proposer un résumé",
+    "cta_body": "Vous avez étudié un article ? Expliquez-le simplement. GAMA révise avant publication.",
+    "guide": "Lire les Publication Guidelines",
+    "search_h": "Rechercher",
+    "search_ph": "Titre, auteur, sujet…",
+    "axes_h": "Axes",
+    "contributors_h": "Contributeurs récents"
+  },
+  "axes": {
+    "all": "Tous les axes",
+    "ai": "IA",
+    "se": "Génie logiciel",
+    "cloud": "Infonuagique",
+    "sec": "Cybersécurité",
+    "rai": "IA responsable"
+  },
+  "items": [
+    {
+      "id": "ai-teammates-se3",
+      "no": "RS. 1",
+      "axis": "se",
+      "title": "Des assistants de codage IA aux coéquipiers IA : le génie logiciel 3.0 est-il déjà là ?",
+      "description": "Research Summary de deux articles : la vision du génie logiciel 3.0 natif de l'IA, et AIDev, 456 535 pull requests ouvertes par des agents de codage autonomes sur GitHub.",
+      "date_iso": "2026-11-06",
+      "author": "Patrick Loic Foalem",
+      "initials": "PF",
+      "color": "c1",
+      "bio": "Fondateur et chercheur principal de GAMA Institute. Docteur en génie logiciel et intelligence artificielle de Polytechnique Montréal, spécialiste de l'ingénierie des systèmes d'apprentissage automatique et de la fiabilité des logiciels basés sur l'IA.",
+      "photo": "/team/patrick-foalem.jpg",
+      "linkedin": "https://ca.linkedin.com/in/foalem",
+      "papers": [
+        {
+          "title": "Towards AI-Native Software Engineering (SE 3.0): A Vision and a Challenge Roadmap",
+          "authors": "Ahmed E. Hassan, Gustavo A. Oliva, Dayi Lin, Boyuan Chen, Zhen Ming (Jack) Jiang",
+          "venue": "Prépublication arXiv:2410.06107 [cs.SE], 2024",
+          "url": "https://arxiv.org/abs/2410.06107"
+        },
+        {
+          "title": "The Rise of AI Teammates in Software Engineering (SE) 3.0: How Autonomous Coding Agents Are Reshaping Software Engineering",
+          "authors": "Hao Li, Haoxiang Zhang, Ahmed E. Hassan (Université Queen's)",
+          "venue": "Prépublication arXiv:2507.15003 [cs.SE], 2025",
+          "url": "https://arxiv.org/abs/2507.15003"
+        }
+      ]
+    }
+  ],
+  "article": {
+    "subscribe_h": "Recevez les prochains résumés",
+    "subscribe_body": "Les nouveaux Research Summaries et le nouvel épisode WeekPaper chaque semaine, par courriel. Désabonnement en un clic.",
+    "subscribe_btn": "S'abonner à l'infolettre",
+    "back": "Tous les Research Summaries",
+    "orig": "Publication originale",
+    "orig_many": "Publications originales",
+    "linkedin": "Profil LinkedIn de {{name}}",
+    "toc": "Table des matières",
+    "lang_note": "Comme tous les Research Summaries, ce résumé est rédigé en anglais.",
+    "not_found": "Ce résumé n'existe pas ou n'est plus disponible.",
+    "cta_h": "Vous avez étudié un article ?",
+    "cta_body": "Expliquez-le simplement dans un Research Summary. GAMA le révise avec vous avant publication.",
+    "cta_btn": "Proposer un résumé"
+  },
+  "contribute": {
+    "eyebrow": "Contribuer",
+    "h2": "Proposer un Research Summary",
+    "body": "Vous avez étudié un article et vous voulez l'expliquer simplement ? Envoyez-nous votre résumé. L'équipe GAMA le révise avec vous avant publication.",
+    "tpl_label": "Guide",
+    "tpl_body": "Structure en 5 parties, 500 à 900 mots, règles de rédaction et conseils pour les visuels : tout est dans nos lignes directrices de publication.",
+    "files": [
+      {
+        "label": "GAMA Institute Publication Guidelines",
+        "meta": "Guide · Section Research Summaries",
+        "to": "/publication-guidelines#research-summaries"
+      }
+    ],
+    "includes_label": "Chaque résumé présente",
+    "includes": [
+      "Le titre du papier original",
+      "Un résumé accessible",
+      "L'auteur du résumé et son établissement",
+      "La date de publication",
+      "La référence vers la publication originale",
+      "Le profil du contributeur"
+    ]
+  },
+  "form": {
+    "title": "Proposer un Research Summary",
+    "sub": "Votre résumé sera révisé par GAMA avant publication.",
+    "required_note": "Champ obligatoire",
+    "name": "Nom complet",
+    "email": "Courriel",
+    "institution": "Établissement",
+    "linkedin": "Profil LinkedIn (facultatif)",
+    "bio": "Courte biographie",
+    "bio_ph": "Ex. : étudiante à la maîtrise en informatique à l'Université de Montréal, s'intéresse aux systèmes RAG.",
+    "bio_hint": "Une ou deux phrases, affichées avec votre résumé.",
+    "photo": "Photo (facultative)",
+    "photo_hint": "JPG ou PNG, 5 Mo max. Affichée avec votre résumé.",
+    "paper_title": "Titre du papier original",
+    "paper_url": "Lien vers le papier original",
+    "summary": "Votre résumé",
+    "summary_hint": "Document Word ou PDF, 10 Mo max, rédigé selon les",
+    "summary_guide": "Publication Guidelines",
+    "consent": "J'accepte les <terms>Conditions d'utilisation</terms> et la <privacy>Politique de confidentialité</privacy>. Je confirme être l'auteur·e de ce résumé et, s'il est retenu, j'autorise Gama Institute à le publier avec mon nom, ma biographie, mon établissement et ma photo, sous licence CC BY 4.0 (<openaccess>Politique de libre accès</openaccess>).",
+    "cancel": "Annuler",
+    "submit": "Soumettre",
+    "submitting": "Envoi…",
+    "error": "Une erreur est survenue. Réessayez.",
+    "ok_title": "Merci pour votre résumé",
+    "ok_body": "L'équipe GAMA vous écrira après la révision.",
+    "close": "Fermer",
+    "errors": {
+      "required": "Requis",
+      "email": "Courriel invalide",
+      "url": "Lien invalide (commencez par https://)",
+      "summary_type": "Envoyez un document Word (.doc, .docx) ou PDF",
+      "summary_size": "Le fichier dépasse 10 Mo",
+      "photo_type": "Envoyez une image JPG ou PNG",
+      "photo_size": "L'image dépasse 5 Mo"
+    }
+  }
+}

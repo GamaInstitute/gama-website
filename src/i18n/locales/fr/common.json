@@ -6,35 +6,73 @@
   "get_in_touch": "Nous écrire",
   "close": "Fermer",
   "video_placeholder": "Bientôt disponible",
+  "not_found": {
+    "meta_title": "Page introuvable | Gama Institute",
+    "h1": "Cette page est introuvable",
+    "body": "Le lien est peut-être incorrect, ou la page a été déplacée ou retirée.",
+    "home": "Retour à l'accueil",
+    "contact": "Nous écrire"
+  },
   "nav": {
-    "home":      "Accueil",
-    "about":     "À propos",
-    "training":  "Formations",
+    "home": "Accueil",
+    "about": "À propos",
+    "training": "Formations",
     "weekpaper": "WeekPaper",
-    "team":      "Équipe",
-    "contact":   "Contact"
+    "research": "Research Summaries",
+    "team": "Équipe",
+    "contact": "Contact"
   },
   "footer": {
     "tagline": "Quand les talents francophones se rencontrent, la recherche franchit les frontières.",
     "explore": "Explorer",
     "institute": "Institut",
     "follow": "Suivre",
-    "about":    "À propos",
+    "about": "À propos",
     "research": "Recherche",
     "training": "Formations",
     "weekpaper": "WeekPaper",
-    "team":     "Équipe",
-    "careers":  "Carrières",
+    "research_summaries": "Research Summaries",
+    "team": "Équipe",
+    "careers": "Carrières",
     "partners": "Partenaires",
-    "contact":  "Contact",
+    "contact": "Contact",
     "newsletter": "Infolettre",
     "copyright": "© 2026 Gama Institute · Montréal, Québec"
   },
   "newsletter": {
+    "modal_title": "Abonnez-vous à l'infolettre GAMA",
+    "cta": "S'abonner à l'infolettre",
+    "error": "L'inscription n'a pas fonctionné. Réessayez dans un instant.",
     "email_placeholder": "Votre adresse courriel",
     "subscribe": "S'abonner",
     "success": "Merci ! Vous êtes abonné."
   },
   "enroll": "S'inscrire",
-  "arrow": "→"
+  "arrow": "→",
+  "forms": {
+    "ai_label": "Déclaration d'utilisation de l'IA",
+    "ai_placeholder": "Ex. : « J'ai utilisé [nom de l'outil] pour explorer des concepts peu familiers et améliorer la grammaire anglaise. J'ai lu l'article original, développé l'analyse et vérifié moi-même toutes les affirmations et les références. »",
+    "ai_hint": "Indiquez si vous avez utilisé l'IA et de quelle façon.",
+    "ai_hint_link": "Voir la section 6.4 des lignes directrices",
+    "ai_none_btn": "Je n'ai utilisé aucun outil d'IA",
+    "ai_none_sentence": "Aucun outil d'IA générative n'a été utilisé pour préparer cette contribution.",
+    "choose_file": "Choisir un fichier",
+    "no_file": "Aucun fichier sélectionné",
+    "consent_required": "Vous devez accepter pour soumettre",
+    "privacy_notice": "Nous utilisons ces renseignements uniquement pour traiter votre demande. Ils sont transmis par nos prestataires Cloudflare et Resend, qui peuvent les héberger hors du Québec. Détails et droits d'accès : <privacy>Politique de confidentialité</privacy>.",
+    "newsletter_notice": "En vous abonnant, vous acceptez de recevoir les courriels de Gama Institute (nouveaux épisodes et nouvelles de l'Institut). Désabonnement en tout temps. <privacy>Politique de confidentialité</privacy>."
+  },
+  "legal": {
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "open_access": "Libre accès"
+  },
+  "guides": {
+    "eyebrow": "Contribuer",
+    "toc": "Sur cette page",
+    "ready": "Prêt·e à contribuer ?",
+    "cta_summary": "Proposer un Research Summary",
+    "cta_weekpaper": "Présenter dans WeekPaper",
+    "back_to_toc": "Sommaire"
+  }
 }

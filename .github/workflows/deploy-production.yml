@@ -39,3 +39,30 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=gamainstitute --branch=main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+  # Thursday WeekPaper alert. Runs after every successful production deploy, but only sends
+  # when the featured episode is new (at most 3 days old) and hasn't been sent before: other
+  # deploys do nothing. The Broadcast is scheduled 1 hour ahead, so the team can still cancel
+  # it in the Resend dashboard. Skipped until the Resend secrets exist. See DECISIONS.md D-23.
+  weekpaper-alert:
+    needs: build-and-deploy-cloudflare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+
+      - run: npm ci
+
+      - name: Schedule the WeekPaper alert
+        run: node scripts/newsletter.mjs alert --skip-if-unconfigured
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          NEWSLETTER_FROM: ${{ secrets.NEWSLETTER_FROM }}
+          NEWSLETTER_REPLY_TO: ${{ secrets.NEWSLETTER_REPLY_TO }}

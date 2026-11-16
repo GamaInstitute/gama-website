@@ -1,3 +1,5 @@
+import { publicUrl } from '@/constants'
+
 function getInitials(name: string): string {
   const parts = name
     .split(' ')
@@ -21,7 +23,7 @@ export function Avatar({ name, photo, photoPosition, shape, className = '' }: Av
   if (photo) {
     return (
       <img
-        src={photo}
+        src={publicUrl(photo)}
         alt={name}
         loading="lazy"
         style={photoPosition ? { objectPosition: photoPosition } : undefined}

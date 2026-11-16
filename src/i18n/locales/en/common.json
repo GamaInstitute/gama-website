@@ -6,35 +6,73 @@
   "get_in_touch": "Get in touch",
   "close": "Close",
   "video_placeholder": "Coming soon",
+  "not_found": {
+    "meta_title": "Page not found | Gama Institute",
+    "h1": "This page can't be found",
+    "body": "The link may be wrong, or the page may have been moved or removed.",
+    "home": "Back to the home page",
+    "contact": "Contact us"
+  },
   "nav": {
-    "home":      "Home",
-    "about":     "About",
-    "training":  "Training",
+    "home": "Home",
+    "about": "About",
+    "training": "Training",
     "weekpaper": "WeekPaper",
-    "team":      "Team",
-    "contact":   "Contact"
+    "research": "Research Summaries",
+    "team": "Team",
+    "contact": "Contact"
   },
   "footer": {
     "tagline": "When francophone talent meets, research crosses borders.",
     "explore": "Explore",
     "institute": "Institute",
     "follow": "Follow",
-    "about":    "About",
+    "about": "About",
     "research": "Research",
     "training": "Training",
     "weekpaper": "WeekPaper",
-    "team":     "Team",
-    "careers":  "Careers",
+    "research_summaries": "Research Summaries",
+    "team": "Team",
+    "careers": "Careers",
     "partners": "Partners",
-    "contact":  "Contact",
+    "contact": "Contact",
     "newsletter": "Newsletter",
     "copyright": "© 2026 Gama Institute · Montréal, Québec"
   },
   "newsletter": {
+    "modal_title": "Subscribe to the GAMA newsletter",
+    "cta": "Subscribe to the newsletter",
+    "error": "The sign-up didn't go through. Please try again in a moment.",
     "email_placeholder": "Your email address",
     "subscribe": "Subscribe",
     "success": "Thank you! You're subscribed."
   },
   "enroll": "Enroll",
-  "arrow": "→"
+  "arrow": "→",
+  "forms": {
+    "ai_label": "AI-use disclosure",
+    "ai_placeholder": "E.g. \"I used [tool name] to explore unfamiliar concepts and improve English grammar. I read the original paper, developed the analysis, and verified all claims and references myself.\"",
+    "ai_hint": "State whether and how you used AI.",
+    "ai_hint_link": "See section 6.4 of the guidelines",
+    "ai_none_btn": "I didn't use any AI tool",
+    "ai_none_sentence": "No generative AI tools were used in preparing this contribution.",
+    "choose_file": "Choose a file",
+    "no_file": "No file selected",
+    "consent_required": "You must accept to submit",
+    "privacy_notice": "We use this information only to handle your request. It passes through our service providers Cloudflare and Resend, which may store it outside Quebec. Details and access rights: <privacy>Privacy Policy</privacy>.",
+    "newsletter_notice": "By subscribing, you agree to receive emails from Gama Institute (new episodes and Institute news). Unsubscribe at any time. <privacy>Privacy Policy</privacy>."
+  },
+  "legal": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "open_access": "Open access"
+  },
+  "guides": {
+    "eyebrow": "Contribute",
+    "toc": "On this page",
+    "ready": "Ready to contribute?",
+    "cta_summary": "Submit a Research Summary",
+    "cta_weekpaper": "Present on WeekPaper",
+    "back_to_toc": "Contents"
+  }
 }

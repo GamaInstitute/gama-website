@@ -4,7 +4,7 @@ _Last updated: 2026-07-03_
 
 ## Overview
 
-Marketing and information website for Gama Institute, a bilingual (FR/EN) research and training institute at the intersection of software engineering and AI. Six pages: Home, About, Training, WeekPaper, Team, Contact. Statically generated (SSG), deployed to Cloudflare Pages with two serverless Functions handling the contact form and newsletter stub.
+Marketing and information website for Gama Institute, a bilingual (FR/EN) research and training institute at the intersection of software engineering and AI. Pages: Home, About, Training, WeekPaper, Research Summaries, Team, Contact, plus the Publication Guidelines (`/publication-guidelines`), Privacy Policy, Terms of Use and Open Access Policy. Statically generated (SSG), deployed to Cloudflare Pages with four serverless Functions handling the contact form, newsletter stub, Research Summary submissions and WeekPaper presentation submissions.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the system map.
 
@@ -17,6 +17,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the system map.
 | `npm run build` | SSG build — outputs to `dist/` |
 | `npm run preview` | Serve `dist/` locally |
 | `npm run type-check` | TypeScript check for `src/` **and** `functions/` |
+| `node scripts/newsletter.mjs alert --dry-run` | Renders the Thursday WeekPaper alert for the featured episode into `newsletter-out/` without sending (also `welcome-existing`; `--test=<email>` sends one copy; `--env=staging` for staging links) |
 | `npm run test:perf` | Builds then checks main-bundle size + per-page cold-load timing against budgets in `scripts/perf-test.mjs` — run after touching routing, bundling, or page-level dependencies |
 
 ## Pre-commit checks
@@ -34,10 +35,16 @@ npm run type-check   # must pass; covers tsconfig.json + tsconfig.functions.json
 | `VITE_TURNSTILE_SITE_KEY` | GitHub Actions secret + local `.env` | Contact form — build-time Turnstile site key |
 | `TURNSTILE_SECRET_KEY` | Cloudflare Pages dashboard | CF Function — server-side Turnstile verification |
 | `CONTACT_EMAIL_TO` | Cloudflare Pages dashboard | CF Function — recipient address (`contact@gamainstitute.ca`) |
+| `EDITORIAL_EMAIL_TO` | Cloudflare Pages dashboard | CF Functions — recipient of WeekPaper and Research Summary submissions (`editoriale@gamainstitute.ca`); falls back to `CONTACT_EMAIL_TO` if unset |
 | `CONTACT_EMAIL_FROM` | Cloudflare Pages dashboard | CF Function — verified Resend sender, e.g. `Gama Institute <noreply@gama.institute>` |
 | `RESEND_API_KEY` | Cloudflare Pages dashboard | CF Function — Resend API key for email delivery **and** newsletter contacts; must have **Full access** (Sending-only keys 401 on the Contacts API) |
 | `CLOUDFLARE_API_TOKEN` | GitHub Actions secret | Production deploy via Wrangler |
 | `CLOUDFLARE_ACCOUNT_ID` | GitHub Actions secret | Production deploy via Wrangler |
+| `RESEND_API_KEY` | GitHub Actions secret (as well as Cloudflare) | Newsletter Broadcasts from `deploy-production.yml` / `newsletter.yml`; Full access |
+| `RESEND_AUDIENCE_ID` | GitHub Actions secret | The Resend audience (segment) the newsletter is sent to |
+| `NEWSLETTER_FROM` | GitHub Actions secret **and** Cloudflare Pages dashboard | Newsletter sender, e.g. `Gama Institute <infolettre@news.gamainstitute.ca>` (domain verified in Resend); in Cloudflare it falls back to `CONTACT_EMAIL_FROM` for the welcome email |
+| `SITE_URL` | Cloudflare Pages (optional) | Site the welcome email's links and images point to; by default the one that received the request (staging when local) |
+| `NEWSLETTER_REPLY_TO` | GitHub Actions secret + Cloudflare (optional) | Where replies to newsletters go; the welcome email asks people to reply to unsubscribe. Cloudflare falls back to `EDITORIAL_EMAIL_TO` |
 
 Create a `.env` file at the project root (gitignored) for local dev:
 
@@ -48,19 +55,28 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 ## Conventions
 
 - **CSS:** Pure Tailwind v3 utilities + CSS custom properties (`--bg`, `--ink`, `--accent`, etc.). No DaisyUI. Token system lives in `src/styles/base.css`.
-- **i18n:** All user-facing copy lives in `src/i18n/locales/{fr,en}/<namespace>.json`. Namespaces: `common`, `home`, `about`, `training`, `weekpaper`, `team`. Default language is French; English toggled client-side via `localStorage` (`gama-lang`).
-- **Components:** UI primitives in `src/components/ui/`, layout in `src/components/layout/`, brand assets in `src/components/brand/`, page-specific in `src/components/<page>/`.
+- **i18n:** All user-facing copy lives in `src/i18n/locales/{fr,en}/<namespace>.json`. Namespaces: `common`, `home`, `about`, `training`, `weekpaper`, `research`, `team`, plus `legal`, which is registered lazily by `LegalDocument.tsx` instead of in `src/i18n/index.ts` ([D-16](DECISIONS.md)). Default language is French; English toggled client-side via `localStorage` (`gama-lang`), applied after hydration in `RootLayout` (`src/routes.tsx`), never in the i18next init ([D-22](DECISIONS.md)). **Exception:** the long-form Publication Guidelines are Markdown files in `src/content/publication-guidelines/{fr,en}.md`, rendered by `src/components/guides/Markdown.tsx` ([D-19](DECISIONS.md), [docs/pages/publication-guidelines.md](docs/pages/publication-guidelines.md)). Same for the text of each published Research Summary, `src/content/research-summaries/<id>/en.md`; its listing data stays in `research.json` `items[]` ([D-20](DECISIONS.md)).
+- **Components:** UI primitives in `src/components/ui/`, layout in `src/components/layout/`, brand assets in `src/components/brand/`, page-specific in `src/components/<page>/`. Any "subscribe" button opens the one site-wide window with `useOpenNewsletter()` (`src/components/newsletter/`), never its own `Modal` + form.
 - **Animation constants:** Use `ANIM.*` from `src/constants/index.ts` — not ad-hoc numbers.
 - **Brand gradient:** `GRAD_STOPS` in `src/constants/index.ts` — copper (#B56418) → teal (#165C71). Used by both `NetworkArt` and `BrandMark`.
+- **Topic colours:** research-topic tags use `TopicTag` (`src/components/ui/Tag.tsx`) with a `topic` key (`ai | se | cloud | rai | sec`); each topic always has the same colour (`TOPIC_COLORS`, [D-21](DECISIONS.md)). Never pick a colour per item in content.
 - **No em dashes:** Use `,` for mid-sentence pauses, `|` for page-title separators (`Page | Gama Institute`).
 
 ## Gotchas
 
+- **Never read browser-only state while rendering.** Every page is prerendered once at build time (French, light theme, build date), and the first browser render must produce the same HTML, or React discards the whole page and re-renders it (production errors #418/#423, lost clicks). Anything that depends on `localStorage`, `matchMedia`, `window` or today's date renders the build-time value until `useHydrated()` (`src/hooks/useHydrated.ts`) returns true. To check, build with `NODE_ENV=development npx vite-react-ssg build --mode development` and serve `dist/`: React then names the mismatching element in the console. See [D-22](DECISIONS.md).
+- **Unknown URLs get the prerendered `404.html`** (`NotFoundPage`, routes `404` and `*` in `src/routes.tsx`); there is no `_redirects` SPA fallback. Don't add a `public/404.html`: it would replace the generated one.
 - **Two tsconfigs are intentional.** `tsconfig.json` covers `src/` with DOM types; `tsconfig.functions.json` covers `functions/` with `@cloudflare/workers-types`. Merging them causes `Response` type conflicts. See [D-5](DECISIONS.md).
 - **Font `@import` must precede `@tailwind` directives** in `src/styles/base.css`. Reordering them breaks the Vite CSS pipeline.
 - **Anti-FOUC inline script in `index.html` must not be removed.** It reads `gama-theme` and `gama-lang` from `localStorage` before React hydrates, preventing a flash of wrong theme/language on return visits. See [D-4](DECISIONS.md).
 - **`react-helmet-async` must be in `ssr.noExternal`** in `vite.config.ts`. Without it the SSG build fails — the package loads as CJS in Node and its named exports are not found.
 - **`BrandMark` is a static `<img>` of `public/logo-icon.png`, not an SVG.** Only `NetworkArt` reads the node/edge data in `src/data/network.ts` — `BrandMark` used to render an inline network SVG but was simplified to a plain logo image; don't go looking for shared graph data between the two.
+- **Submissions are emailed, not stored.** `POST /api/research-summary` and `POST /api/weekpaper-submission` take `multipart/form-data` and send the uploaded files as Resend attachments to `EDITORIAL_EMAIL_TO` (the editorial inbox, falling back to `CONTACT_EMAIL_TO`) (shared helpers in `functions/_lib/email.ts`). File size/type limits live in `src/types/researchSummary.ts` / `src/types/weekpaperSubmission.ts` and are enforced on both sides; keep the totals under Resend's 40MB per-email cap. See [D-15](DECISIONS.md).
+- **Every form that sends personal data shows `PrivacyNotice`; forms that grant publication rights also require `ConsentCheckbox`** (enforced server-side via `consentField()`). The Privacy Policy describes the site's actual data flows (no analytics, which providers, `localStorage` keys, `youtube-nocookie` embeds). Adding a form field, a third-party service, analytics or a storage key means updating `legal.json` in the same change. See [docs/pages/legal.md](docs/pages/legal.md).
+- **The staging build (GitHub Pages) lives under `/gama-website/`, not `/`.** Site paths written in content files (`"/icons/x.svg"`, `"/team/x.webp"`) must go through `publicUrl()` from `src/constants/index.ts` before reaching an `<img src>`; `Avatar` and `Markdown` already do. A bare `/…` path works on Cloudflare and in dev, and only breaks on staging.
+- **Publishing a WeekPaper episode emails every subscriber.** Deploying a new `featured` episode to `main` makes the `weekpaper-alert` job schedule a bilingual Resend Broadcast, 1 hour later. Only for an episode at most 3 days old, never twice. A wrong `featured.body` goes out by email, so proofread before merging, or cancel the Broadcast in Resend within the hour. See [D-23](DECISIONS.md).
+- **Every link and image in a newsletter email points to the site of the environment that sent it, never to YouTube directly** (episodes: `/week-paper#ep-N`, which opens the right page of the episode grid and highlights the card; summaries: `/research-summaries/<id>`). Signup Function: `SITE_URL`, else the site that received the request (production or a Cloudflare preview), else staging for a local `npm run dev:cf`. `scripts/newsletter.mjs`: `--env=production` (default) or `--env=staging`; a send to subscribers is refused with anything but production links, and when an image (e.g. `public/email/logo.png`) isn't online yet. See `siteUrlFor` / `SITE_URLS` in `functions/_lib/newsletter.ts`.
+- **`functions/_lib/newsletter.ts` is also run directly by Node** (`scripts/newsletter.mjs`, no bundler): keep it free of imports and of non-erasable TypeScript (enums, namespaces, parameter properties). Email markup is tables with inline styles; mail clients drop stylesheets, flexbox, CSS variables and positioning.
 - **Newsletter registers Resend Contacts** — `POST /api/newsletter` calls `resend.contacts.create({ email })`, no separate CRM. Needs `RESEND_API_KEY` with Full access. See [D-3](DECISIONS.md).
 - **`backdrop-filter` (or `filter`/`transform`) on an ancestor creates a new containing block for `position: fixed` descendants.** `Header.tsx`'s blur effect lives on its own inner layer, not on `<header>` itself, specifically so the mobile nav panel and its scrim stay fixed to the viewport. If you ever add `filter`/`backdrop-filter`/`transform` directly to `<header>` (or any ancestor of a `position: fixed` element), any such descendant will silently anchor to that ancestor's box instead of the viewport — no error, just wrong positioning that only shows up when you actually open the affected UI.
 
@@ -79,6 +95,11 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 | CSS (tokens, base, utilities) | `src/styles/base.css` |
 | CF Functions | `functions/api/` |
 | Shared Zod schema (contact) | `src/types/contact.ts` |
+| Shared Zod schemas + file limits (submissions) | `src/types/researchSummary.ts`, `src/types/weekpaperSubmission.ts` |
+| Legal pages text (Privacy Policy, Terms, Open Access Policy) | `src/i18n/locales/{fr,en}/legal.json` |
+| Research Summary texts (one page each, `/research-summaries/:id`) | `src/content/research-summaries/<id>/en.md` (optional `fr.md`); listing data in `items[]` of `research.json` |
+| Publication Guidelines (contributor guide, one web page) | `src/content/publication-guidelines/{fr,en}.md`, images in `public/publication-guidelines/` |
+| Downloadable files | `DOWNLOADS` in `src/constants/index.ts`: only the WeekPaper `.pptx` slide template (`public/downloads/`). Guidelines are a web page, never `.docx` downloads |
 | CI workflows | `.github/workflows/` |
 | Public assets (CSP headers, redirects) | `public/` |
 
@@ -90,7 +111,7 @@ VITE_TURNSTILE_SITE_KEY=your_site_key_here
 - [docs/pages/](docs/pages/README.md) — one file per page: section-by-section anatomy, which component renders what, exact i18n/data-file sources, and how-to recipes for common changes. Update the matching page doc whenever you add/remove/restructure a section, not just when you add a whole new page.
 - [docs/guides/content-editing.md](docs/guides/content-editing.md) — the existing `docs/guides/` entry: everyday content changes (text, photos, courses) with no code required. See the rule below for when to add another.
 - [CHANGELOG.md](CHANGELOG.md) — user- and contributor-facing changes; Keep a Changelog 1.1.0
-- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-14)
+- [DECISIONS.md](DECISIONS.md) — short-form rationale for non-obvious choices (D-1 through D-23)
 - [docs/adr/](docs/adr/) — full ADRs for the three heaviest architectural choices
 - [docs/sessions/](docs/sessions/) — session logs (write only when warranted; see rule below)
 

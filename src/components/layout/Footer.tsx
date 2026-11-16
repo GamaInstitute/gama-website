@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { BrandMark } from '@/components/brand/BrandMark'
 import { SOCIAL_LINKS } from '@/constants'
 import { LinkedInIcon } from '@/components/ui/icons'
+import { useOpenNewsletter } from '@/components/newsletter/NewsletterProvider'
 
 function FacebookIcon() {
   return (
@@ -42,15 +43,17 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
   )
 }
 
-function FooterLink({ to, href, children }: { to?: string; href?: string; children: React.ReactNode }) {
-  const cls = 'relative w-max block text-ink-soft text-[0.95rem] py-[0.28em] transition-colors duration-[180ms] hover:text-[var(--accent-ink)] after:absolute after:left-0 after:right-0 after:bottom-[0.14em] after:h-px after:bg-current after:opacity-55 after:scale-x-0 after:origin-left after:transition-transform after:duration-[260ms] hover:after:scale-x-100'
+const FOOTER_LINK_CLS = 'relative w-max block text-ink-soft text-[0.95rem] py-[0.28em] transition-colors duration-[180ms] hover:text-[var(--accent-ink)] after:absolute after:left-0 after:right-0 after:bottom-[0.14em] after:h-px after:bg-current after:opacity-55 after:scale-x-0 after:origin-left after:transition-transform after:duration-[260ms] hover:after:scale-x-100'
 
+function FooterLink({ to, href, children }: { to?: string; href?: string; children: React.ReactNode }) {
+  const cls = FOOTER_LINK_CLS
   if (to) return <Link to={to} className={cls}>{children}</Link>
   return <a href={href ?? '#'} target="_blank" rel="noopener noreferrer" className={cls}>{children}</a>
 }
 
 export function Footer() {
   const { t } = useTranslation('common')
+  const openNewsletter = useOpenNewsletter()
 
   return (
     <footer className="bg-bg-alt border-t border-hairline pt-[clamp(48px,6vw,80px)] pb-9">
@@ -75,7 +78,8 @@ export function Footer() {
             <FooterLink to="/#research">{t('footer.research')}</FooterLink>
             {/* TODO: restore training footer link once the page ships */}
             <FooterLink to="/week-paper">{t('footer.weekpaper')}</FooterLink>
-            <FooterLink to="/contact">{t('footer.newsletter')}</FooterLink>
+            <FooterLink to="/research-summaries">{t('footer.research_summaries')}</FooterLink>
+            <button type="button" onClick={openNewsletter} className={`${FOOTER_LINK_CLS} text-left`}>{t('footer.newsletter')}</button>
           </div>
 
           {/* Institute */}
@@ -99,7 +103,12 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex justify-between items-center gap-4 flex-wrap mt-12 pt-6 border-t border-hairline text-[0.85rem] text-ink-muted">
-          <span>{t('footer.copyright')}</span>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 items-center">
+            <span>{t('footer.copyright')}</span>
+            <Link to="/privacy" className="hover:text-ink transition-colors">{t('legal.privacy')}</Link>
+            <Link to="/terms" className="hover:text-ink transition-colors">{t('legal.terms')}</Link>
+            <Link to="/open-access" className="hover:text-ink transition-colors">{t('legal.open_access')}</Link>
+          </div>
           <div className="flex gap-2.5">
             <SocialLink href={SOCIAL_LINKS.linkedin} label="LinkedIn"><LinkedInIcon /></SocialLink>
             <SocialLink href={SOCIAL_LINKS.facebook} label="Facebook"><FacebookIcon /></SocialLink>

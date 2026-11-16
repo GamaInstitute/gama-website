@@ -4,7 +4,7 @@ _Last updated: 2026-09-09_
 
 ## Summary
 
-A bilingual (FR default / EN toggle) static marketing website for Gama Institute. Built with Vite + React 18 + TypeScript and pre-rendered at build time by vite-react-ssg. Deployed to Cloudflare Pages; two serverless CF Functions handle the contact form and newsletter subscription. No database, no auth.
+A bilingual (FR default / EN toggle) static marketing website for Gama Institute. Built with Vite + React 18 + TypeScript and pre-rendered at build time by vite-react-ssg. Deployed to Cloudflare Pages; four serverless CF Functions handle the contact form, newsletter subscription, Research Summary submissions and WeekPaper presentation submissions. No database, no auth.
 
 ## Components
 
@@ -13,12 +13,12 @@ A bilingual (FR default / EN toggle) static marketing website for Gama Institute
 | Build / SSG | Vite 5, vite-react-ssg 0.9, React 18 | Pre-renders all routes to static HTML at build time |
 | UI | React 18, TypeScript, Tailwind CSS v3 | Pure Tailwind utilities + CSS custom properties; no component library |
 | Routing | React Router v6 | `RootLayout` wraps all pages via `<Outlet>`; defined in `src/routes.tsx` |
-| i18n | react-i18next, i18next-browser-languagedetector | FR default; EN toggled client-side; stored in `localStorage` (`gama-lang`) |
+| i18n | react-i18next | FR default (pages are prerendered in French); EN toggled client-side, stored in `localStorage` (`gama-lang`) and re-applied after hydration ([D-22](DECISIONS.md)) |
 | Animation | Framer Motion | `whileInView` reveals, NetworkArt entrance, card hover |
-| Forms | react-hook-form + Zod | Shared Zod schema in `src/types/contact.ts` |
+| Forms | react-hook-form + Zod | Shared Zod schemas in `src/types/` (`contact.ts`, `researchSummary.ts`, `weekpaperSubmission.ts`) |
 | Fonts | @fontsource-variable/sora, @fontsource-variable/inter | Self-hosted; `@import` must precede `@tailwind` directives in `base.css` |
 | Meta / SEO | react-helmet-async | Per-page `<title>` and `<meta>`; must be in `ssr.noExternal` in vite.config.ts |
-| Server-side | Cloudflare Pages Functions | `POST /api/contact` and `POST /api/newsletter`, both Turnstile-verified; shared verification helper in `functions/_lib/turnstile.ts` |
+| Server-side | Cloudflare Pages Functions | `POST /api/contact`, `POST /api/newsletter`, `POST /api/research-summary` and `POST /api/weekpaper-submission` (the last two multipart, emailing the uploaded files as attachments via `functions/_lib/email.ts`), all Turnstile-verified; shared verification helper in `functions/_lib/turnstile.ts` |
 | Bot protection | Cloudflare Turnstile — invisible mode | Token obtained client-side on submit for both the contact form and newsletter signup; verified server-side in each CF Function |
 | Hosting — production | Cloudflare Pages | Triggered by push to `main`; serves static files + CF Functions |
 | Hosting — staging | GitHub Pages | Triggered by push to `develop`; static files only (no CF Functions) |
@@ -38,7 +38,8 @@ For how each page is actually put together — section-by-section breakdown, whi
 2. Turnstile token obtained silently (invisible mode)
 3. `POST /api/contact` with JSON payload + token
 4. CF Function verifies token with Cloudflare siteverify, re-validates body, sends the message via Resend (`CONTACT_EMAIL_TO`/`CONTACT_EMAIL_FROM`/`RESEND_API_KEY`), returns `{ ok: true }`
-5. The same Turnstile-then-Resend pattern is shared with `POST /api/newsletter` (`resend.contacts.create`) via `functions/_lib/turnstile.ts` — see [DECISIONS.md D-3](DECISIONS.md)
+5. The same Turnstile-then-Resend pattern is shared with `POST /api/newsletter` (`resend.contacts.create`, then a welcome email sent after the response) via `functions/_lib/turnstile.ts` — see [DECISIONS.md D-3](DECISIONS.md)
+6. Newsletter sends: after each production deploy, the `weekpaper-alert` job runs `scripts/newsletter.mjs`, which schedules a Resend Broadcast to the newsletter audience when the featured WeekPaper episode is new. Email markup lives in `functions/_lib/newsletter.ts`, shared with the welcome email — see [DECISIONS.md D-23](DECISIONS.md)
 
 **Language toggle:**
 1. User clicks FR / EN in header → `i18n.changeLanguage()` updates react-i18next state
@@ -54,7 +55,7 @@ develop ──► GitHub Actions ──► GitHub Pages (staging — static only
 main    ──► GitHub Actions ──► Cloudflare Pages (production — static + CF Functions)
 ```
 
-`VITE_TURNSTILE_SITE_KEY` is injected at build time via GitHub Actions secrets. Runtime secrets (`TURNSTILE_SECRET_KEY`, `CONTACT_EMAIL_TO`, `CONTACT_EMAIL_FROM`, `RESEND_API_KEY`) are set in the Cloudflare Pages dashboard.
+`VITE_TURNSTILE_SITE_KEY` is injected at build time via GitHub Actions secrets. Runtime secrets (`TURNSTILE_SECRET_KEY`, `CONTACT_EMAIL_TO`, `EDITORIAL_EMAIL_TO`, `CONTACT_EMAIL_FROM`, `RESEND_API_KEY`) are set in the Cloudflare Pages dashboard.
 
 This is the quick map. For the full picture, including how domain registration (Namecheap), DNS, and TLS fit in ahead of this pipeline, CI/CD detail, and every known gap versus the original SRS, see [docs/arc42/07-deployment-view.md](docs/arc42/07-deployment-view.md).
 

@@ -83,6 +83,16 @@ To edit an existing course's text (title, description, etc.), you only need `tra
 
 Team photos and partner logos are plain URLs (`photo` / `logo` fields) pointing at external hosts (e.g. Wikimedia, randomuser.me placeholders). To swap an image, replace the URL string, there's no local image pipeline to run. If you want to use a locally-hosted image instead, drop the file in `public/` and reference it as `/your-file.png`.
 
+## Publication guidelines and slide template
+
+The contributor guide ("GAMA Institute Publication Guidelines", `/publication-guidelines`) is a single web page. Its text is a plain Markdown file per language: `src/content/publication-guidelines/fr.md` and `en.md`. Edit both, like any other text. The supported formatting is listed in [docs/pages/publication-guidelines.md](../pages/publication-guidelines.md).
+
+The only downloadable file is the PowerPoint slide template for WeekPaper, in `public/downloads/`. To update it, overwrite the file under the same name.
+
+## Publishing a Research Summary
+
+Only validated summaries go on the site. Each one needs a Markdown file with its text (`src/content/research-summaries/<id>/en.md`) and an entry in `items[]` of both `research.json` files. Step-by-step: [docs/pages/research-summaries.md](../pages/research-summaries.md#recipes).
+
 ## Navigation, footer, and site-wide labels
 
 Header nav links, footer text, the language toggle labels, and the "get in touch" button all live in `src/i18n/locales/{fr,en}/common.json` under `nav`, `footer`, and similar top-level keys. Same rule applies: edit both languages.
