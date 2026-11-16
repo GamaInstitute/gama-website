@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-11-15
+
+### Fixed
+
+- The Research Summary and WeekPaper submission forms accepted links starting with `http://` although they ask for `https://`. Paper, video and LinkedIn links must now start with `https://`
+
+## [1.1.0] - 2026-11-15
+
 ### Added
 
 - Each WeekPaper episode has its own address on the site (for example `/week-paper#ep-7`): it opens the page of the episode list that contains it and highlights it. Newsletter emails link there, so every link in an email leads to the exact episode or Research Summary on the site

@@ -18,8 +18,9 @@ export const PHOTO_FILE = {
   accept: 'image/jpeg,image/png',
 } as const
 
+// Links the editorial team will open: https only, as the error message says
 export const httpsUrl = (msg: string) =>
-  z.string().max(500).url(msg).refine(v => /^https?:\/\//i.test(v), msg)
+  z.string().max(500).url(msg).refine(v => /^https:\/\//i.test(v), msg)
 
 // Checkbox on the client (boolean), multipart string on the server ('true').
 // Must be ticked: the submitter grants publication rights (see /terms).
