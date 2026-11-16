@@ -38,6 +38,10 @@ on:
         description: Alert only, send mode - send even if the featured episode is more than 3 days old
         type: boolean
         default: false
+      recap:
+        description: welcome-existing only - add a month's recap, e.g. 2026-10 (images in public/email/recap/). Leave empty for none
+        type: string
+        required: false
 
 concurrency:
   group: newsletter
@@ -68,6 +72,7 @@ jobs:
           elif [ "$FORCE" = "true" ]; then
             ARGS+=("--force")
           fi
+          if [ -n "$RECAP" ]; then ARGS+=("--recap=$RECAP"); fi
           node scripts/newsletter.mjs "${ARGS[@]}"
         env:
           EMAIL: ${{ inputs.email }}
@@ -75,6 +80,7 @@ jobs:
           SITE: ${{ inputs.site }}
           TEST_TO: ${{ inputs.test_to }}
           FORCE: ${{ inputs.force }}
+          RECAP: ${{ inputs.recap }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
           NEWSLETTER_FROM: ${{ secrets.NEWSLETTER_FROM }}

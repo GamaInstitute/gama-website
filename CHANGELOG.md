@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-15
+
+### Added
+
+- Newsletter: the one-time email to people who subscribed before the newsletter existed can include a monthly recap, "Le mois en recherche" / "The Month in Research": the month's infographic (French or English) and links to each of that month's WeekPaper episodes on the site
+
 ## [1.1.1] - 2026-11-15
 
 ### Fixed

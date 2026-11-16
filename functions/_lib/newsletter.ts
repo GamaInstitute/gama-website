@@ -28,8 +28,15 @@ export type SummaryItem = {
   author: string
   date_iso: string
 }
+export type EpisodeItem = {
+  no: string
+  topic: string
+  tag: string
+  title: string
+  date_iso: string
+}
 export type LocaleContent = {
-  weekpaper: { featured: Featured }
+  weekpaper: { featured: Featured; episodes: { items: EpisodeItem[] } }
   research: { items: SummaryItem[]; axes: Record<string, string> }
 }
 export type Content = { fr: LocaleContent; en: LocaleContent }
@@ -124,6 +131,11 @@ const STR = {
       sign: ['À la semaine prochaine,', "L'équipe Gama Institute"],
       kicker: 'Infolettre',
     },
+    recap: {
+      title: 'Le mois en recherche',
+      episodes: (n: number) => `Les ${n} épisodes du mois`,
+      alt: (month: string, n: number) => `Le mois en recherche, ${month} : le récapitulatif des ${n} épisodes WeekPaper du mois.`,
+    },
   },
   en: {
     alsoNew: 'Also new on the site',
@@ -154,6 +166,11 @@ const STR = {
       cta: 'Explore WeekPaper',
       sign: ['See you next week,', 'The Gama Institute team'],
       kicker: 'Newsletter',
+    },
+    recap: {
+      title: 'The Month in Research',
+      episodes: (n: number) => `This month's ${n} episodes`,
+      alt: (month: string, n: number) => `The Month in Research, ${month}: a recap of the month's ${n} WeekPaper episodes.`,
     },
   },
 } as const
@@ -262,6 +279,38 @@ function presentBox(lang: Lang, siteUrl: string): string {
 </td></tr></table>`
 }
 
+// ── Monthly recap ───────────────────────────────────────────────────
+
+/** A month's recap: its infographic (public/email/recap/<month>-<lang>.jpg) and that month's episodes. */
+export type Recap = { month: string }
+
+export const recapImageUrl = (siteUrl: string, r: Recap, lang: Lang) => `${siteUrl}/email/recap/${r.month}-${lang}.jpg`
+
+/** "2026-10" → "octobre 2026" / "October 2026" */
+function monthLabel(month: string, lang: Lang): string {
+  const [y, m] = month.split('-').map(Number)
+  return new Intl.DateTimeFormat(LOCALE[lang], { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(Date.UTC(y, m - 1, 1)))
+}
+
+/** Episodes published that month, oldest first (the infographic's order). */
+export function recapEpisodes(c: Content, r: Recap, lang: Lang): EpisodeItem[] {
+  return c[lang].weekpaper.episodes.items.filter(e => e.date_iso.startsWith(`${r.month}-`)).reverse()
+}
+
+const itemEpisodeUrl = (siteUrl: string, e: EpisodeItem) => `${siteUrl}/week-paper#ep-${Number(e.no.match(/\d+/)?.[0])}`
+
+function recapBlock(c: Content, r: Recap, lang: Lang, siteUrl: string): string {
+  const s = STR[lang].recap, month = monthLabel(r.month, lang), eps = recapEpisodes(c, r, lang)
+  // Under the image, the same episodes as links: readable when images are blocked, and each opens its card
+  const list = eps.map(e => `<tr><td style="padding:0 0 8px;font-family:${FONT_BODY};font-size:14px;line-height:1.45;">
+<span style="font-family:Menlo,Consolas,monospace;font-size:12px;font-weight:700;color:${C.muted};">${esc(e.no)}</span>&nbsp;&nbsp;<a href="${esc(itemEpisodeUrl(siteUrl, e))}" style="color:${C.ink};text-decoration:none;font-weight:600;">${esc(e.title)}</a></td></tr>`).join('')
+  return rule()
+    + eyebrow(`${s.title} · ${month}`)
+    + `<a href="${siteUrl}/week-paper" style="display:block;text-decoration:none;margin:0 0 18px;"><img src="${esc(recapImageUrl(siteUrl, r, lang))}" width="536" alt="${esc(s.alt(month, eps.length))}" style="display:block;width:100%;max-width:536px;height:auto;border:0;border-radius:6px;"></a>`
+    + h2(s.episodes(eps.length))
+    + `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 18px;">${list}</table>`
+}
+
 const section = (inner: string, lang: Lang) =>
   `<tr><td class="px" lang="${lang}" style="padding:28px 32px 4px;">${inner}</td></tr>`
 
@@ -356,8 +405,11 @@ export function renderWeekpaperAlert(c: Content, o: { siteUrl: string; thumbnail
 
 // ── Welcome email ────────────────────────────────────────────────────
 
-/** `existing`: the one-time email to people who signed up before any newsletter went out. */
-export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: string; unsubscribe: Unsubscribe; existing: boolean }): RenderedEmail {
+/**
+ * `existing`: the one-time email to people who signed up before any newsletter went out.
+ * `recap`: adds that month's recap (infographic + episode list) after the latest episode.
+ */
+export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: string; unsubscribe: Unsubscribe; existing: boolean; recap?: Recap }): RenderedEmail {
   const half = (lang: Lang, second: boolean) => {
     const w = STR[lang].welcome, f = c[lang].weekpaper.featured, rs = c[lang].research.items[0]
     const href = episodeUrl(o.siteUrl, f)
@@ -373,6 +425,7 @@ export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: st
       + `<p style="margin:0 0 6px;font-family:${FONT_DISPLAY};font-size:17px;line-height:1.35;font-weight:600;"><a href="${esc(href)}" style="color:${C.ink};text-decoration:none;">${esc(f.title)}</a></p>`
       + `<p style="margin:0 0 20px;font-family:${FONT_BODY};font-size:14px;font-weight:600;"><a href="${esc(href)}" style="color:${C.teal};">${esc(STR[lang].watch)} (${minutes(f.duration)})&nbsp;&rarr;</a></p>`
       + (rs ? summaryCard(rs, c[lang].research.axes, lang, o.siteUrl) : '')
+      + (o.recap ? recapBlock(c, o.recap, lang, o.siteUrl) : '')
       + button(`${o.siteUrl}/week-paper`, w.cta)
       + p(`${esc(w.sign[0])}<br>${esc(w.sign[1])}`, 'margin-bottom:26px;')
   }
@@ -380,7 +433,9 @@ export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: st
   const fr = STR.fr.welcome
   const subject = o.existing ? fr.subjectOld : fr.subjectNew
   const previewText = o.existing
-    ? 'Ce que vous recevrez désormais · English version below.'
+    ? (o.recap
+        ? `Ce que vous recevrez désormais, et le mois en recherche : ${monthLabel(o.recap.month, 'fr')} · English version below.`
+        : 'Ce que vous recevrez désormais · English version below.')
     : 'Chaque semaine, un article décortiqué en vidéo · English version below.'
   const html = layout({
     previewText, kicker: fr.kicker, siteUrl: o.siteUrl,
@@ -388,8 +443,14 @@ export function renderWelcome(c: Content, o: { siteUrl: string; thumbnailUrl: st
   })
 
   const textHalf = (lang: Lang) => {
-    const w = STR[lang].welcome
-    return [w.hello, o.existing ? w.introOld : w.introNew, '', w.what, ...w.items.map(([b, r]) => `- ${b}${r}`), '', `${w.cta}: ${o.siteUrl}/week-paper`, '', ...w.sign].join('\n')
+    const w = STR[lang].welcome, f = c[lang].weekpaper.featured
+    const recap = o.recap
+      ? ['', `${STR[lang].recap.title} · ${monthLabel(o.recap.month, lang)}`,
+         ...recapEpisodes(c, o.recap, lang).map(e => `- ${e.no} ${e.title}: ${itemEpisodeUrl(o.siteUrl, e)}`)]
+      : []
+    return [w.hello, o.existing ? w.introOld : w.introNew, '', w.what, ...w.items.map(([b, r]) => `- ${b}${r}`), '',
+      `${w.latest} · ${f.ep}: ${f.title}`, `${STR[lang].watch}: ${episodeUrl(o.siteUrl, f)}`, ...recap, '',
+      `${w.cta}: ${o.siteUrl}/week-paper`, '', ...w.sign].join('\n')
   }
   const text = `${textHalf('fr')}\n\n----- English version -----\n\n${textHalf('en')}\n\n--\n${
     o.unsubscribe === 'broadcast' ? `${STR.fr.unsub} / ${STR.en.unsub}: ${UNSUBSCRIBE_PLACEHOLDER}` : `${STR.fr.unsubReply}\n${STR.en.unsubReply}`}\nGama Institute`

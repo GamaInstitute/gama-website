@@ -10,6 +10,8 @@
 //   --skip-if-unconfigured exit quietly when the Resend secrets aren't set (used by the deploy job)
 //   --env=production|staging  site the links and images point to (default production); staging
 //                          only with --test or --dry-run, subscribers always get production links
+//   --recap=YYYY-MM        welcome-existing: add that month's recap (public/email/recap/YYYY-MM-{fr,en}.jpg
+//                          and the month's episodes) after the latest episode
 //
 // Env: RESEND_API_KEY, RESEND_AUDIENCE_ID, NEWSLETTER_FROM ("Gama Institute <infolettre@…>"),
 //      optional NEWSLETTER_REPLY_TO, SITE_URL (overrides --env),
@@ -21,7 +23,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resend } from 'resend'
-import { renderWeekpaperAlert, renderWelcome, pickThumbnail, SITE_URLS } from '../functions/_lib/newsletter.ts'
+import { renderWeekpaperAlert, renderWelcome, pickThumbnail, recapEpisodes, recapImageUrl, SITE_URLS } from '../functions/_lib/newsletter.ts'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const MAX_EPISODE_AGE_DAYS = 3
@@ -54,6 +56,19 @@ const content = Object.fromEntries(['fr', 'en'].map(lang => [lang, {
 
 if (!['alert', 'welcome-existing'].includes(command)) fail('Usage: node scripts/newsletter.mjs <alert|welcome-existing> [--dry-run] [--test=<email>] [--force]')
 
+// Monthly recap (welcome-existing only): the images must be in public/email/recap/ and the month must have episodes
+const recapMonth = option('recap')
+let recap
+if (recapMonth) {
+  if (command !== 'welcome-existing') fail('--recap only applies to welcome-existing')
+  if (!/^\d{4}-\d{2}$/.test(recapMonth)) fail('--recap must look like 2026-10')
+  recap = { month: recapMonth }
+  for (const lang of ['fr', 'en']) {
+    if (!fs.existsSync(path.join(ROOT, `public/email/recap/${recapMonth}-${lang}.jpg`))) fail(`Missing public/email/recap/${recapMonth}-${lang}.jpg`)
+  }
+  if (recapEpisodes(content, recap, 'fr').length === 0) fail(`No WeekPaper episode dated ${recapMonth} in weekpaper.json`)
+}
+
 // ── Render ──────────────────────────────────────────────────────────
 const featured = content.fr.weekpaper.featured
 const thumbnailUrl = await pickThumbnail(featured.video_url)
@@ -67,14 +82,15 @@ if (command === 'alert') {
   }
   email = renderWeekpaperAlert(content, { siteUrl: SITE_URL, thumbnailUrl, unsubscribe })
 } else {
-  email = renderWelcome(content, { siteUrl: SITE_URL, thumbnailUrl, unsubscribe, existing: true })
+  email = renderWelcome(content, { siteUrl: SITE_URL, thumbnailUrl, unsubscribe, existing: true, recap })
 }
 console.log(`• ${email.name}: "${email.subject}"`)
+if (recap) console.log(`• Recap ${recap.month}: ${recapEpisodes(content, recap, 'fr').map(e => e.no).join(', ')}`)
 
 // The images are loaded from the live site and YouTube when the email is opened. Check they
 // exist before sending: e.g. public/email/logo.png only exists once the release that added
 // it is deployed. A real send refuses; a test or dry run only warns.
-const images = [`${SITE_URL}/email/logo.png`, thumbnailUrl]
+const images = [`${SITE_URL}/email/logo.png`, thumbnailUrl, ...(recap ? ['fr', 'en'].map(l => recapImageUrl(SITE_URL, recap, l)) : [])]
 const missingImages = []
 for (const url of images) {
   try {
