@@ -9,17 +9,17 @@
     "link_youtube": "Watch on YouTube"
   },
   "featured": {
-    "ep": "Episode 7",
-    "tag": "AI",
-    "topic": "ai",
-    "title": "Can an AI really debug like a developer?",
-    "body": "We look at DEVLoRe, an approach that gives an LLM the same clues a developer uses to locate and fix a bug: issue content, stack trace and runtime debugging information. On Defects4J, adding the issue and the stack trace raises single-method bug localization from 27.8% to 49.3%, and no single artifact is universally better than the others.",
+    "ep": "Episode 8",
+    "tag": "Responsible AI",
+    "topic": "rai",
+    "title": "Can an AI spot what's missing from a GDPR contract?",
+    "body": "We look at DERECHA, an approach that automatically checks data processing agreements (DPAs) against the GDPR. Instead of searching for keywords, it breaks legal requirements and contract clauses down into semantic frames (actor, action, object, conditions). On 30 real DPAs it detects violations with 89.1% precision and 82.4% recall, and a manual review of about 6% of the clauses raises recall to 93.9%.",
     "date_prefix": "Aired",
-    "date_iso": "2026-11-12",
-    "duration": "29:04",
+    "date_iso": "2026-11-19",
+    "duration": "23:05",
     "cta": "Watch the episode",
     "video_label": "Play featured episode",
-    "video_url": "https://youtu.be/np3TjkqV2JQ"
+    "video_url": "https://youtu.be/LzBXFDzQXUg"
   },
   "episodes": {
     "eyebrow": "Recent episodes",
@@ -33,6 +33,15 @@
     "next": "Older episodes »",
     "filters_label": "Filter by topic",
     "items": [
+      {
+        "no": "EP. 8",
+        "topic": "rai",
+        "tag": "Responsible AI",
+        "title": "Can an AI spot what's missing from a GDPR contract?",
+        "date_iso": "2026-11-19",
+        "duration": "23:05",
+        "video_url": "https://youtu.be/LzBXFDzQXUg"
+      },
       {
         "no": "EP. 7",
         "topic": "ai",
