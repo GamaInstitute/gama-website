@@ -9,17 +9,17 @@
     "link_youtube": "Voir sur YouTube"
   },
   "featured": {
-    "ep": "Épisode 7",
-    "tag": "IA",
-    "topic": "ai",
-    "title": "Une IA peut-elle vraiment déboguer comme un développeur ?",
-    "body": "Nous analysons DEVLoRe, une approche qui donne à un LLM les mêmes indices qu'un développeur pour localiser et réparer un bug : contenu du ticket, stack trace et informations de débogage à l'exécution. Sur Defects4J, ajouter le ticket et la stack trace fait passer la localisation des bugs d'une seule méthode de 27,8 % à 49,3 %, et aucun artefact n'est universellement meilleur que les autres.",
+    "ep": "Épisode 8",
+    "tag": "IA responsable",
+    "topic": "rai",
+    "title": "Une IA peut-elle détecter ce qui manque dans un contrat RGPD ?",
+    "body": "Nous analysons DERECHA, une approche qui vérifie automatiquement les accords de traitement des données (DPA) au regard du RGPD. Plutôt que de chercher des mots-clés, elle décompose exigences juridiques et clauses contractuelles en cadres sémantiques (acteur, action, objet, conditions). Sur 30 DPA réels, elle détecte les violations avec 89,1 % de précision et 82,4 % de rappel, et une révision manuelle d'environ 6 % des clauses fait passer le rappel à 93,9 %.",
     "date_prefix": "Diffusé",
-    "date_iso": "2026-11-12",
-    "duration": "29:04",
+    "date_iso": "2026-11-19",
+    "duration": "23:05",
     "cta": "Regarder l'épisode",
     "video_label": "Lire la vidéo, épisode vedette",
-    "video_url": "https://youtu.be/np3TjkqV2JQ"
+    "video_url": "https://youtu.be/LzBXFDzQXUg"
   },
   "episodes": {
     "eyebrow": "Épisodes récents",
@@ -33,6 +33,15 @@
     "next": "Épisodes plus anciens »",
     "filters_label": "Filtres par thème",
     "items": [
+      {
+        "no": "EP. 8",
+        "topic": "rai",
+        "tag": "IA responsable",
+        "title": "Une IA peut-elle détecter ce qui manque dans un contrat RGPD ?",
+        "date_iso": "2026-11-19",
+        "duration": "23:05",
+        "video_url": "https://youtu.be/LzBXFDzQXUg"
+      },
       {
         "no": "EP. 7",
         "topic": "ai",
